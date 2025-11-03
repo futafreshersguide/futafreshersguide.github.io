@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTA Freshers' Survival Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #990000;
+            --accent: #FFCC00;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), var(--primary) center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .welcome-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+        
+        .btn-email {
+            background: #EA4335;
+        }
+        
+        .btn-email:hover {
+            background: #D14836;
+        }
+        
+        .btn-drive {
+            background: #4285F4;
+        }
+        
+        .btn-drive:hover {
+            background: #3367D6;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .toc-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .toc-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .toc-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .course-card ul {
+            list-style-type: none;
+        }
+        
+        .course-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .course-card li:before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* User Info */
+        .user-info {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Sidebar Menu */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--primary);
+            color: white;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .sidebar-links {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .sidebar-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-links a:hover, .sidebar-links a.active {
+            background: rgba(255,255,255,0.2);
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Message Styles */
+        .message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Feedback Section */
+        .feedback-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .feedback-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        /* Page Navigation */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .page-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Content Sections */
+        .content-page {
+            display: none;
+        }
+        
+        .content-page.active {
+            display: block;
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #555;
+        }
+        
+        .inspirational-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .drive-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .drive-link:hover {
+            background: var(--secondary);
+        }
+        
+        /* Materials Section */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .course-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .course-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+        
+        .course-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .course-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .access-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary);
+        }
+        
+        /* Departmental Courses Section */
+        .department-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .department-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .dept-course {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Course Battle Plan */
+        .battle-plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .battle-plan-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .battle-plan-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .exam-type {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        /* Exam Strategy */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .strategy-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .strategy-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Benefits of Attending Classes */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Registration Section */
+        .registration-timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .registration-timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--accent);
+        }
+        
+        .timeline-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .signature-list {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .signature-list ol {
+            margin-left: 1.5rem;
+        }
+        
+        .signature-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .money-breakdown {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .money-breakdown h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+        
+        /* Documents Section */
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .document-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .document-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .document-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .document-requirement {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+        
+        .document-requirement.online {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .document-requirement.physical {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .document-requirement.both {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+         /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0 0.5rem;
+            }
+            
+            .feedback-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .materials-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .department-list {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .battle-plan-grid, .documents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .user-info {
+                position: static;
+                margin-top: 1rem;
+                text-align: center;
+            }
+        }
+        
+        /* Hidden class for content sections */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Section -->
+    <section id="welcome" class="welcome-section">
+        <div class="container">
+            <h1>FUTA Freshers' Survival Guide</h1>
+            <p>Your First-Semester Roadmap to Conquering FUTA</p>
+            
+            <div class="form-container">
+                <h2>Welcome, Class of 2025/2026!</h2>
+                <p>Please provide your details to access the guide</p>
+                
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <input type="tel" id="whatsapp" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="submitBtn">Access Guide</button>
+                </form>
+                
+                <div id="formMessage"></div>
+            </div>
+            
+            <p class="prepared-by">Prepared by: Abideen Yakub Opeyemi (O'yemi)</p>
+        </div>
+    </section>
+    
+    <!-- Navigation -->
+    <nav class="navbar hidden" id="navbar">
+        <div class="container nav-container">
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">FUTA Survival Guide</div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="message">Message</a></li>
+                <li><a href="#" data-page="toc">Contents</a></li>
+                <li><a href="#" data-page="registration">Registration</a></li>
+                <li><a href="#" data-page="documents">Documents</a></li>
+                <li><a href="#" data-page="great-shift">The Great Shift</a></li>
+                <li><a href="#" data-page="academic-playbook">Academic Playbook</a></li>
+                <li><a href="#" data-page="beyond-books">Beyond Books</a></li>
+                <li><a href="#" data-page="navigating-storms">Navigating Storms</a></li>
+                <li><a href="#" data-page="anchor">The Anchor</a></li>
+                <li><a href="#" data-page="course-synopsis">Courses</a></li>
+                <li><a href="#" data-page="materials">Materials</a></li>
+                <li><a href="#" data-page="departmental">Departmental</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+            <div class="user-info hidden" id="userInfo">
+                <!-- User info will be inserted here -->
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="sidebarClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3>FUTA Survival Guide</h3>
+        <ul class="sidebar-links">
+            <li><a href="#" data-page="home" class="active">Home</a></li>
+            <li><a href="#" data-page="message">Message</a></li>
+            <li><a href="#" data-page="toc">Table of Contents</a></li>
+            <li><a href="#" data-page="registration">Registration Guide</a></li>
+            <li><a href="#" data-page="documents">Required Documents</a></li>
+            <li><a href="#" data-page="great-shift">The Great Shift</a></li>
+            <li><a href="#" data-page="academic-playbook">Academic Playbook</a></li>
+            <li><a href="#" data-page="beyond-books">Beyond Books</a></li>
+            <li><a href="#" data-page="navigating-storms">Navigating Storms</a></li>
+            <li><a href="#" data-page="anchor">The Anchor</a></li>
+            <li><a href="#" data-page="course-synopsis">Course Synopsis</a></li>
+            <li><a href="#" data-page="materials">Course Materials</a></li>
+            <li><a href="#" data-page="departmental">Departmental Courses</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Main Content (Hidden Initially) -->
+    <main id="main-content" class="hidden">
+        <!-- Home Page -->
+        <section id="home" class="content-section content-page active">
+            <div class="container">
+                <h2 class="section-title">Welcome to Your FUTA Journey</h2>
+                <div class="card">
+                    <p>Congratulations on securing your admission to the Federal University of Technology, Akure! You are now part of a legacy of excellence and innovation. You are a FUTArian.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🎯 Your Mission Starts Here</h3>
+                        <p>This isn't just about earning a degree - it's about building the foundation for your future self. The next few years will shape your character, expand your mind, and connect you with lifelong friends and mentors.</p>
+                        <p class="quote">"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</p>
+                    </div>
+                    
+                    <h3>What This Guide Offers</h3>
+                    <ul>
+                        <li>Academic strategies for first-class performance</li>
+                        <li>Personal development insights</li>
+                        <li>Course-by-course battle plans</li>
+                        <li>Mental and spiritual wellness guidance</li>
+                        <li>Networking and campus life tips</li>
+                        <li>Access to all course materials</li>
+                        <li>Guidance on departmental courses</li>
+                        <li>Complete registration guide</li>
+                        <li>Document requirements checklist</li>
+                    </ul>
+                    
+                    <div class="page-nav">
+                        <div></div>
+                        <a href="#" class="page-btn" data-page="message">Next: Welcome Message →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <!-- Message Page -->
+        <section id="message" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">A Message to FUTA Class of 2025/2026</h2>
+                <div class="card">
+                    <p>To the brilliant minds who have earned their place here, welcome to the Federal University of Technology, Akure (FUTA)! This achievement is a testament to your dedication, and you should be immensely proud.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🏆 You Are Architects of Your Future</h3>
+                        <p>The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.</p>
+                        <p class="quote">"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
+                    </div>
+                    
+                    <h3>Your FUTA Legacy Awaits</h3>
+                    <p>FUTA isn't just an institution - it's an ecosystem of innovation, excellence, and transformation. Here, you'll:</p>
+                    <ul>
+                        <li>Develop critical thinking and problem-solving skills</li>
+                        <li>Connect with future industry leaders</li>
+                        <li>Discover your passions and purpose</li>
+                        <li>Build resilience and character</li>
+                        <li>Create memories that will last a lifetime</li>
+                    </ul>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="home">← Previous</a>
+                        <a href="#" class="page-btn" data-page="toc">Next: Table of Contents →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Table of Contents -->
+        <section id="toc" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">Table of Contents</h2>
+                <div class="toc">
+                    <div class="toc-item" data-page="registration">
+                        <h3>1. Registration Guide</h3>
+                        <p>Complete Step-by-Step Registration Process</p>
+                    </div>
+                    <div class="toc-item" data-page="documents">
+                        <h3>2. Required Documents</h3>
+                        <p>All Documents Needed for Registration</p>
+                    </div>
+                    <div class="toc-item" data-page="great-shift">
+                        <h3>3. The Great Shift</h3>
+                        <p>Embracing University Autonomy</p>
+                    </div>
+                    <div class="toc-item" data-page="academic-playbook">
+                        <h3>4. Your Academic Playbook</h3>
+                        <p>For a First-Class Journey</p>
+                    </div>
+                    <div class="toc-item" data-page="beyond-books">
+                        <h3>5. Beyond the Books</h3>
+                        <p>Building a Complete Life</p>
+                    </div>
+                    <div class="toc-item" data-page="navigating-storms">
+                        <h3>6. Navigating the Storms</h3>
+                        <p>You Are Not Alone</p>
+                    </div>
+                    <div class="toc-item" data-page="anchor">
+                        <h3>7. The Anchor</h3>
+                        <p>The Power of Prayer</p>
+                    </div>
+                    <div class="toc-item" data-page="course-synopsis">
+                        <h3>8. Course Synopsis</h3>
+                        <p>All Your First Semester Courses</p>
+                    </div>
+                    <div class="toc-item" data-page="materials">
+                        <h3>9. Course Materials</h3>
+                        <p>Access All Study Materials</p>
+                    </div>
+                    <div class="toc-item" data-page="departmental">
+                        <h3>10. Departmental Courses</h3>
+                        <p>Know Your Specific Courses</p>
+                    </div>
+                    <div class="toc-item" data-page="contact">
+                        <h3>11. Contact</h3>
+                        <p>Get in Touch</p>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#" class="page-btn" data-page="message">← Previous</a>
+                    <a href="#" class="page-btn" data-page="registration">Next: Registration Guide →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Registration Section -->
+        <section id="registration" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">1. Complete Registration Guide</h2>
+                <div class="card">
+                    <h3>Your Registration Journey Begins November 24, 2025</h3>
+                    <p>On this date, your FUTA journey officially begins. The registration process is your first major challenge, and this guide will help you navigate it successfully.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>📅 Important Registration Timeline</h3>
+                        <p><strong>November 17, 2025:</strong> Undergraduate portal opens for BIO-DATA FORM download</p>
+                        <p><strong>November 24, 2025:</strong> Physical registration begins</p>
+                        <p class="quote">"Proper preparation prevents poor performance. Start your registration process early!"</p>
+                    </div>
+                    
+                    <h3>The BIO-DATA Form - Your First Challenge</h3>
+                    <p>The BIO-DATA form is the most tedious part of your registration. On the back page, you'll find six names with spaces for signatures:</p>
+                    
+                    <div class="signature-list">
+                        <ol>
+                            <li><strong>Your School Officer</strong> - General officer who signs for all students</li>
+                            <li><strong>Your Registration Officer</strong> - Department-specific officer</li>
+                            <li><strong>Your Head of Department (HOD)</strong> - Head of your department</li>
+                            <li><strong>Your Dean of School</strong> - Head of your faculty</li>
+                            <li><strong>Dean of Students' Affairs Division</strong></li>
+                            <li><strong>The School Registrar</strong></li>
+                        </ol>
+                    </div>
+                    
+                    <p><strong>Location Guide:</strong> The first four signatures are from your faculty building, while the last two are outside your faculty.</p>
+                    
+                    <h3>Registration Rules & Etiquette</h3>
+                    <div class="battle-plan-grid">
+                        <div class="battle-plan-card">
+                            <h4>👔 Dress Code</h4>
+                            <ul>
+                                <li>Dress as neatly as possible</li>
+                                <li>Have a good haircut or hairdo</li>
+                                <li>No need to overdress</li>
+                                <li>When going to Students' Affairs, dress formally</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>🗣️ Communication</h4>
+                            <ul>
+                                <li>Speak "most-politely" to all officials</li>
+                                <li>Listen to instructions carefully</li>
+                                <li>Ask questions respectfully when confused</li>
+                                <li>Be patient and understanding</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h3>Step-by-Step Registration Process</h3>
+                    <div class="registration-timeline">
+                        <div class="timeline-item">
+                            <h4>Step 1: School Officer</h4>
+                            <p>Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Step 2: Registration Officer</h4>
+                            <p>Every department has its own registration officer. This person handles registration for your department specifically.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Step 3: Head of Department (HOD)</h4>
+                            <p>You should already know your HOD's name by now. If you don't, find out immediately! This is the head of your department.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Step 4: Dean of School</h4>
+                            <p>The Dean is the highest authority in your faculty. You won't see them physically during registration. Submit your form and return later (next day or whenever ready) to collect.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Step 5: Students' Affairs Division</h4>
+                            <p>Once you have the Dean's signature, proceed to Students' Affairs. <strong>Dress formally for this step!</strong> After conquering this part, you can wear whatever you like.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Step 6: Final Submission</h4>
+                            <p>Return to your faculty for final submission. You'll submit your file for the School Registrar.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Financial Preparation</h3>
+                    <div class="money-breakdown">
+                        <h4>💰 Bring ₦20,000 Cash</h4>
+                        <p><em>Note: Some faculties may cost less, some may cost more. Engineering and Medical students typically pay more.</em></p>
+                        <ul>
+                            <li><strong>Faculty Dues</strong> - Payment to your faculty</li>
+                            <li><strong>Departmental Dues</strong> - Payment to your department</li>
+                            <li><strong>Engineering Students:</strong> Blue Lab Coat</li>
+                            <li><strong>Faculty File</strong> - Official file for your faculty</li>
+                            <li><strong>Departmental File</strong> - Official file for your department</li>
+                        </ul>
+                        <p><strong>Important:</strong> Bring cash! Nobody will accept transfers during physical registration.</p>
+                    </div>
+                    
+                    <h3>Document Preparation</h3>
+                    <p>During physical registration, all your documents will be screened. If you're missing any required documents, you'll be sent back. Prepare all necessary documents in advance!</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>💡 Pro Tips for Successful Registration</h3>
+                        <ul>
+                            <li><strong>Start early</strong> - Avoid the last-minute rush</li>
+                            <li><strong>Ask a senior</strong> - They know the process and can guide you</li>
+                            <li><strong>Be patient</strong> - Registration can take time, especially at busy offices</li>
+                            <li><strong>Double-check everything</strong> - Ensure all documents are complete</li>
+                            <li><strong>Network with coursemates</strong> - Share information and help each other</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="toc">← Previous</a>
+                        <a href="#" class="page-btn" data-page="documents">Next: Required Documents →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Documents Section -->
+        <section id="documents" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">2. Required Documents for Registration</h2>
+                <div class="card">
+                    <h3>Complete Document Checklist</h3>
+                    <p>Prepare these documents in advance to ensure a smooth registration process. Make at least 5 photocopies of each document.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>📋 Document Preparation Guide</h3>
+                        <p><strong>Online Registration First:</strong> Upload clear scans of all documents to the FUTA portal</p>
+                        <p><strong>Physical Registration Second:</strong> Bring originals and photocopies for verification</p>
+                        <p><strong>Important:</strong> Originals will be returned after inspection</p>
+                    </div>
+                    
+                    <h3>Essential Registration Documents</h3>
+                    <div class="documents-grid">
+                        <div class="document-card">
+                            <h4><i class="fas fa-file-alt document-icon"></i> FUTA Admission Letter</h4>
+                            <p>Official admission letter from FUTA with your department and course details</p>
+                            <div class="document-requirement physical">Physical Registration</div>
+                            <ul>
+                                <li><strong>How to get:</strong> Download from student portal after paying acceptance fee</li>
+                                <li><strong>Cost of acceptance fee:</strong> ₦50,000(previous session)</li>
+                                <li><strong>Copies needed:</strong> 5 copies</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-university document-icon"></i> JAMB Admission Letter</h4>
+                            <p>Official JAMB approval of your admission into FUTA</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>How to get:</strong> Print from JAMB portal</li>
+                                <li><strong>Format:</strong> 2-page document (Original & Duplicate)</li>
+                                <li><strong>Use:</strong> Duplicate for registration, Original for scholarships</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-graduation-cap document-icon"></i> Testimonial</h4>
+                            <p>Secondary school leaving certificate verifying your conduct and attendance</p>
+                            <div class="document-requirement physical">Physical Registration</div>
+                            <ul>
+                                <li><strong>How to get:</strong> From your secondary school</li>
+                                <li><strong>Availability:</strong> Depends on your former school</li>
+                                <li>Provides secondary verification of your academic history</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-chart-bar document-icon"></i> UTME Result Slip</h4>
+                            <p>Original JAMB score slip proving you met the cutoff mark</p>
+                            <div class="document-requirement physical">Physical Registration</div>
+                            <ul>
+                                <li><strong>How to get:</strong> Print from JAMB portal</li>
+                                <li>Primary evidence of meeting academic requirements</li>
+                                <li>Required for physical registration verification</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-award document-icon"></i> WAEC Certificate</h4>
+                            <p>Original O'Level certificate (not result slip)</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>How to get:</strong> From your exam center/school</li>
+                                <li><strong>If unavailable:</strong> Use Statement of Result</li>
+                                <li><strong>For two sittings:</strong> Get both certificates but if the two are not available, get one certificate and statement of result for the second</li>
+                                <li>Ultimate proof of basic qualifications</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-user-check document-icon"></i> Attestation Letter</h4>
+                            <p>Character reference letter from authority figure</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>How to get:</strong> From principal, religious leader, or community leader</li>
+                                <li><strong>Format:</strong> Must be on letter-headed paper</li>
+                                <li>Provides extra verification of your character</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-gavel document-icon"></i> Court Affidavit</h4>
+                            <p>Sworn declaration against secret cult membership</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>How to get:</strong> Inside FUTA or any High Court</li>
+                                <li><strong>Process:</strong> Fill information, get signature and red seal</li>
+                                <li>Legal safeguard for the university</li>
+                            </ul>
+                        </div>
+                        
+          <div class="document-card">
+                            <h4><i class="fas fa-birthday-cake document-icon"></i> Birth Certificate</h4>
+                            <p>Official document declaring your date of birth</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>How to get:</strong> From birth registry or declaration center</li>
+                                <li>Confirms minimum age requirement</li>
+                                <li>Key data for permanent student record</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-id-card document-icon"></i> Passport Photographs</h4>
+                            <p>Recent standardized passport photos</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>Specifications:</strong> White or red background</li>
+                                <li><strong>Copies needed:</strong> 20 recommended</li>
+                                <li><strong>Use:</strong> Faculty/department records, library card, health center</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-file-contract document-icon"></i> Bio-Data Form</h4>
+                            <p>4-page form with personal details filled online</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>Process:</strong> Fill online during registration</li>
+                                <li><strong>Important:</strong> Page 4 must have signatures</li>
+                                <li><strong>Timeline:</strong> Takes 2-5 days to complete</li>
+                                <li>Creates official student file and digital record</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="document-card">
+                            <h4><i class="fas fa-id-card-alt document-icon"></i> Local Government ID</h4>
+                            <p>Certificate of identification from your LGA</p>
+                            <div class="document-requirement both">Online & Physical</div>
+                            <ul>
+                                <li><strong>Cruciality:</strong> Highly important</li>
+                                <li><strong>Copies needed:</strong> 5 copies sufficient</li>
+                                <li>Required for both online and physical registration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="inspirational-box">
+                        <h3>💡 Document Assistance Available</h3>
+                        <p>I can help you obtain JAMB Admission Letter, UTME Result Slip, and WAEC Certificate at an affordable fee. Send me a DM for quick and reliable service.</p>
+                        <p><strong>Abideen Yakub Opeyemi (O'yemi) - 07050376975</strong></p>
+                    </div>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="registration">← Previous</a>
+                        <a href="#" class="page-btn" data-page="great-shift">Next: The Great Shift →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- The Great Shift -->
+        <section id="great-shift" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">3. The Great Shift: Embracing University Autonomy</h2>
+                <div class="card">
+                    <p>The first lesson of university life is self-leadership. You are now the CEO of your education and your future.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🚀 From Passenger to Pilot</h3>
+                        <p>In secondary school, you were following a set path. At FUTA, you're charting your own course. This shift from dependence to independence is your first and most important lesson.</p>
+                        <p class="quote">"The greatest day in your life is when you take total responsibility for yourself." - Denis Waitley</p>
+                    </div>
+                    
+                    <h3>Key Principles for Success</h3>
+                    <ul>
+                        <li><strong>You Are in Charge:</strong> Your lecturers are guides, not taskmasters. The drive to attend lectures, complete assignments, and delve deeper into topics must come from within.</li>
+                        <li><strong>Master Your Time:</strong> The freedom you now have is your greatest tool, or your biggest trap. Create a realistic schedule that balances academics, personal growth, and rest.</li>
+                        <li><strong>Own Your Decisions:</strong> Every choice - from which lectures to attend to how you spend your evenings - shapes your FUTA experience and your future.</li>
+                    </ul>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="documents">← Previous</a>
+                        <a href="#" class="page-btn" data-page="academic-playbook">Next: Academic Playbook →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Academic Playbook -->
+        <section id="academic-playbook" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">4. Your Academic Playbook for a First-Class Journey</h2>
+                <div class="card">
+                    <p>Your number one goal is academic excellence. To achieve this, you need a strategy.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🎓 P5 Principle: Proper Preparation Prevents Poor Performance</h3>
+                        <p>Success in FUTA isn't about being the smartest - it's about being the most prepared, consistent, and resilient. Your daily habits determine your semester results.</p>
+                        <p class="quote">"The will to win is nothing without the will to prepare." - Juma Ikangaa</p>
+                    </div>
+                    
+                    <h3>Course-by-Course Battle Plan</h3>
+                    <div class="battle-plan-grid">
+                        <div class="battle-plan-card">
+                            <h4>BIO 101: General Biology I <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all classes regularly</li>
+                                <li>Complete all assignments and class works</li>
+                                <li>Read course materials thoroughly</li>
+                                <li>Prepare for CBT and CBE examinations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>BIO 103: General Biology Practical <span class="exam-type">CBE</span></h4>
+                            <ul>
+                                <li>Attend all practical classes</li>
+                                <li>Complete lab reports very well</li>
+                                <li>Buy practical manuals</li>
+                                <li>No test, but CBE exam at the end</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>MTS 101: Introductory Mathematics I <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all classes and tutorial sessions</li>
+                                <li>Buy and study the tutorial manual thoroughly</li>
+                                <li>Complete all assignments (online and physical)</li>
+                                <li>Practice class works regularly</li>
+                                <li>Develop speed and accuracy for time-limited CBT exams</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>MEE 101: Engineering Drawing I <span class="exam-type">Written</span></h4>
+                            <ul>
+                                <li>Attend all classes without missing any</li>
+                                <li>Buy the practical manual</li>
+                                <li>Complete class exercises as the lecturer draws</li>
+                                <li>Submit drawings immediately after class (even if incomplete)</li>
+                                <li>Ensure border lines and title blocks are properly done</li>
+                                <li>Complete all assignments on time</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>GNS 101: Use of English I <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all classes regularly</li>
+                                <li>Complete all online assignments (forum posts)</li>
+                                <li>Stay active and organized on your Telegram group</li>
+                                <li>Focus on application and understanding of coursework</li>
+                                <li>Complete all class works diligently</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>GNS 103: Use of Library <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all classes without fail</li>
+                                <li>Complete all class works and assignments</li>
+                                <li>Make sure you attend the library tour (easy marks)</li>
+                                <li>Exam is straightforward - focus on basic concepts</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>CSC 101: Introduction to Computer Science <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all theoretical and practical classes</li>
+                                <li>Buy and study practical manuals</li>
+                                <li>Perform well in practical tests</li>
+                                <li>Complete all assignments thoroughly</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>CVE 105: Introduction to Science & Technology <span class="exam-type">CBT/CBE(fill in the gaps and MCQS)</span></h4>
+                            <ul>
+                                <li>Attend classes regularly</li>
+                                <li>Read recommended materials thoroughly</li>
+                                <li>Focus on exact content from materials (no paraphrasing)</li>
+                                <li>Pay attention to spelling and exact wording</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>PHY 101 & 103: General Physics <span class="exam-type">CBT/CBE</span></h4>
+                            <ul>
+                                <li>Attend all classes without missing</li>
+                                <li>Buy manuals and complete assignments at the back</li>
+                                <li>Read your coursework very well</li>
+                                <li>Focus on objective questions preparation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>CHE 101: Basic General Chemistry I <span class="exam-type">CBE/CBT</span></h4>
+                            <ul>
+                                <li>Attend all classes regularly</li>
+                                <li>Buy tutorials manual</li>
+                                <li>Go to tutorial classes and complete all exercises</li>
+                                <li>Read your coursework thoroughly</li>
+                                <li>Focus on objective questions preparation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="battle-plan-card">
+                            <h4>CHE 103 & PHY 107: Practical Courses <span class="exam-type">CBE/Online Practicals</span></h4>
+                            <ul>
+                                <li>Buy practical manuals for both courses</li>
+                                <li>Attend all practical classes</li>
+                                <li>Submit all lab reports on time</li>
+                                <li>Complete all online practicals for PHY 107</li>
+                                <li>No test for PHY 107, but online practicals count</li>
+                                <li>CBE exam for CHE 103 - study your manuals well</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+            <h3>Benefits of Attending Classes</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Attendance Marks</h4>
+                            <p>Some courses award marks for class attendance, which contributes to your final grade</p>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Better Understanding</h4>
+                            <p>Lecturers explain concepts in ways that textbooks can't, helping you understand better</p>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <h4>Ask Questions</h4>
+                            <p>Get immediate clarification on confusing topics directly from the expert</p>
+                        </div>
+                        
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h4>Test Structure</h4>
+                            <p>Learn the exam format - whether it's objectives, MCQs, or German (fill-in-the-gaps)</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Exam and Test Strategy</h3>
+                    <div class="strategy-grid">
+                        <div class="strategy-card">
+                            <h4>📝 Before Tests/Exams</h4>
+                            <ul>
+                                <li>Start preparation early - don't wait till the last minute</li>
+                                <li>Create a study schedule and stick to it</li>
+                                <li>Practice with past questions</li>
+                                <li>Get enough sleep the night before</li>
+                                <li>Prepare all necessary materials in advance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="strategy-card">
+                            <h4>📅 On Test/Exam Day</h4>
+                            <ul>
+                                <li>Arrive early to the venue</li>
+                                <li>Stay calm and focused</li>
+                                <li>Read instructions carefully</li>
+                                <li>Manage your time effectively</li>
+                                <li>For CBT: Practice speed and accuracy</li>
+                                <li>For written: Write legibly and show your workings</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="strategy-card">
+                            <h4>📊 After Tests/Exams</h4>
+                            <ul>
+                                <li>Gather questions from friends immediately after</li>
+                                <li>These questions often reappear in final exams</li>
+                                <li>Don't make the same mistake twice</li>
+                                <li>Analyze your performance and learn from mistakes</li>
+                                <li>Start preparing for the next assessment immediately</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="inspirational-box">
+                        <h3>💡 Important Reminder</h3>
+                        <p>For both computer-based and written exams, immediately after your test, gather questions from your friends that you remember. These are likely to come out in the final exam. Don't miss this opportunity twice!</p>
+                    </div>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="great-shift">← Previous</a>
+                        <a href="#" class="page-btn" data-page="beyond-books">Next: Beyond Books →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Beyond Books -->
+        <section id="beyond-books" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">4. Beyond the Books: Building a Complete Life</h2>
+                <div class="card">
+                    <p>FUTA offers more than a certificate. It offers an experience that will shape your character and future.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🌟 Your Education Extends Beyond the Classroom</h3>
+                        <p>The most valuable lessons often happen outside lecture halls - in student organizations, late-night discussions with roommates, and challenges you overcome together.</p>
+                        <p class="quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</p>
+                    </div>
+                    
+                    <h3>Building Your Complete FUTA Experience</h3>
+                    <ul>
+                        <li><strong>Network Intentionally:</strong> The friends you make here will be your professional network for life. Connect with people who challenge and inspire you.</li>
+                        <li><strong>Get Involved:</strong> Join a club, society, or sports team. It builds character, leadership, and lifelong friendships.</li>
+                        <li><strong>Prioritize Your Well-being:</strong> Your mental and physical health are critical. Eat well, exercise, sleep, and seek help when needed.</li>
+                        <li><strong>Develop Soft Skills:</strong> Communication, teamwork, and time management are as important as your technical knowledge.</li>
+                    </ul>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="academic-playbook">← Previous</a>
+                        <a href="#" class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Navigating Storms -->
+        <section id="navigating-storms" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">5. Navigating the Storms: You Are Not Alone</h2>
+                <div class="card">
+                    <p>There will be difficult days. Challenging courses, overwhelming workloads, and personal struggles are part of the journey.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>⚡ Storms Make Better Sailors</h3>
+                        <p>Every successful FUTA graduate has faced challenges. What separates them is not the absence of storms, but their ability to navigate through them.</p>
+                        <p class="quote">"The oak fought the wind and was broken, the willow bent when it must and survived." - Robert Jordan</p>
+                    </div>
+                    
+                    <h3>Your Support System</h3>
+                    <ul>
+                        <li><strong>FUTA Student Union Govt (FUTASUG):</strong> Your representatives are here to help with academic and welfare issues.</li>
+                        <li><strong>Departmental Associations:</strong> Connect with seniors who've walked your path.</li>
+                        <li><strong>Understanding Lecturers:</strong> Most are willing to help students who show genuine interest.</li>
+                        <li><strong>Religious Groups:</strong> The heads in your religious bodies are also there to help you.</li>
+                        <li><strong>Senior Colleagues:</strong> Don't hesitate to ask for guidance from those ahead of you.</li>
+                        <li><strong>University Counseling:</strong> Your course advisor and Student Affairs division. Professional help is available when you need it.</li>
+                    </ul>
+                    
+                    <h3>Turning Setbacks into Comebacks</h3>
+                    <p><strong>Failure is Feedback:</strong> A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something - what matters is what they learned from it.</p>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="beyond-books">← Previous</a>
+                        <a href="#" class="page-btn" data-page="anchor">Next: The Anchor →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- The Anchor -->
+        <section id="anchor" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">6. The Anchor: The Power of Prayer</h2>
+                <div class="card">
+                    <p>In the midst of the pressure, never underestimate the power of faith and prayer. Let it be your source of strength, peace, and guidance.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🙏 Your Spiritual "P" - The Ultimate Game Changer</h3>
+                        <p>While you're studying hard and preparing thoroughly, remember that some battles are won on your knees. Your spiritual foundation will sustain you when everything else feels unstable.</p>
+                        <p class="quote">"You can't do without having Problems, but Prayer is a solution to Problem, and you'll be Passed."</p>
+                    </div>
+                    
+                    <h3>Integrating Faith into Your FUTA Journey</h3>
+                    <ul>
+                        <li><strong>Start Your Day Right:</strong> Begin each day with prayer and meditation to set the right tone.</li>
+                        <li><strong>Faith During Challenges:</strong> When facing difficult courses or personal struggles, turn to prayer for strength and guidance.</li>
+                        <li><strong>Gratitude Practice:</strong> Regularly give thanks for the opportunity to study at FUTA.</li>
+                        <li><strong>Campus Fellowship:</strong> Join one of the many religious groups on campus for community and support.</li>
+                        <li><strong>Balance:</strong> Remember that "faith without works is dead" - pray like it depends on God, work like it depends on you.</li>
+                    </ul>
+                    
+                    <h3>Your Final Charge, Class of 2025/26</h3>
+                    <p>You are the architects of the future. The world is waiting for the solutions you will design, the technologies you will build, and the leadership you will provide. It all starts here, at FUTA.</p>
+                    <p>Take relentless <strong>ACTION</strong>. Be an unstoppable <strong>FORCE</strong>. Apply the <strong>P5</strong> principle daily. And anchor it all in Prayer.</p>
+                    <p><strong>Your time is now. Make it legendary.</strong></p>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="navigating-storms">← Previous</a>
+                        <a href="#" class="page-btn" data-page="course-synopsis">Next: Course Synopsis →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Course Synopsis -->
+        <section id="course-synopsis" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">7. Course Synopsis</h2>
+                <div class="course-grid">
+                    <!-- Course cards will be dynamically generated -->
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#" class="page-btn" data-page="anchor">← Previous</a>
+                    <a href="#" class="page-btn" data-page="materials">Next: Course Materials →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Materials Section -->
+        <section id="materials" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">8. Course Materials</h2>
+                <div class="card">
+                    <h3>Access All Your Course Materials</h3>
+                    <p>Click on any course below to access its specific materials on Google Drive.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>📚 Direct Access to Course Resources</h3>
+                        <p>Each course has its own dedicated folder with organized materials. Click on any course to go directly to its specific resources.</p>
+                        <p class="quote">"Organization is the key to effective studying. Having materials properly sorted by course saves valuable time."</p>
+                    </div>
+                    
+                    <h3>Available Course Materials</h3>
+                    <p>Click on any course to access its materials:</p>
+                    
+                    <div class="materials-grid">
+                        <!-- Course items will be dynamically generated here -->
+                    </div>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ" class="btn btn-drive" target="_blank">
+                            📁 Access Main Materials Folder
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#" class="page-btn" data-page="course-synopsis">← Previous</a>
+                    <a href="#" class="page-btn" data-page="departmental">Next: Departmental Courses →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Departmental Courses Section -->
+        <section id="departmental" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">9. Departmental Courses Information</h2>
+                <div class="card">
+                    <h3>Understanding Your Course Structure</h3>
+                    <p>The courses listed in this guide are the <strong>general courses</strong> that almost all FUTA students take in their first year. However, depending on your department, you may also have specific departmental courses.</p>
+                    
+                    <div class="department-box">
+                        <h3>🎯 Important Notice About Your Courses</h3>
+                        <p><strong>Some departments start their specialized courses from 100 level!</strong> While the courses in this guide are essential for all students, you need to check your specific departmental requirements.</p>
+                    </div>
+                    
+                    <h3>Common Departmental Courses in First Year</h3>
+                    <p>Depending on your department, you might encounter courses like:</p>
+                    
+                    <div class="department-list">
+                      <div class="dept-course">EEE 101</div>
+                            <div class="dept-course">ARC 101</div>
+                            <div class="dept-course">BCH 101</div>
+                            <div class="dept-course">AGY 101</div>
+                            <div class="dept-course">CPE 101</div>
+                            <div class="dept-course">FST 101</div>
+                            <div class="dept-course">MET 101</div>
+                            <div class="dept-course">MEE 101</div>
+                            <div class="dept-course">MNE 101</div>
+                            <div class="dept-course">MTS 101</div>
+                            <div class="dept-course"><em>and many more...</em></div>
+                    </div>
+                    
+                    <h3>How to Know Your Exact Courses</h3>
+                    <ul>
+                        <li><strong>Check Your Course Form:</strong> During online registration, carefully review all courses assigned to you</li>
+                        <li><strong>Consult 200 Level Students:</strong> Reach out to seniors in your department - they've been through this before</li>
+                        <li><strong>Departmental Notice Boards:</strong> Check for course information posted by your department</li>
+                        <li><strong>Ask Your Course Adviser:</strong> Each department has course advisers for fresh students</li>
+                    </ul>
+                    
+                    <div class="inspirational-box">
+                        <h3>💡 Take Your Departmental Courses Seriously!</h3>
+                        <p>Your departmental courses form the foundation of your specialized knowledge. Don't make the mistake of focusing only on general courses while neglecting your core departmental subjects. These courses:</p>
+                        <ul>
+                            <li>Build your technical foundation</li>
+                            <li>Introduce you to your field of study</li>
+                            <li>Prepare you for advanced courses</li>
+                            <li>Often have higher credit units</li>
+                        </ul>
+                        <p class="quote">"The expert in anything was once a beginner. Start strong with your departmental courses!"</p>
+                    </div>
+                    
+                    <h3>Attend Classes to Know Your Exam Structure</h3>
+                    <p>Make sure to attend your departmental course classes regularly. This is how you'll discover:</p>
+                    <ul>
+                        <li>Whether you'll be taking tests or exams</li>
+                        <li>The type of examination (CBT, written, practical)</li>
+                        <li>The course requirements and expectations</li>
+                        <li>Important announcements about assessments</li>
+                    </ul>
+                    
+                    <h3>Need Help?</h3>
+                    <p>If you're unsure about your departmental courses or who to ask:</p>
+                    <ul>
+                        <li><strong>Check your course registration</strong> - Do not tick and sudmit your courses during online course registration, check their contents</li>
+                        <li><strong>Reach out to me directly</strong> - I can help connect you with the right people</li>
+                        <li><strong>Join your departmental WhatsApp group</strong> - this is where important information is shared</li>
+                        <li><strong>Visit your department office</strong> - the administrative staff can guide you</li>
+                        <li><strong>Attend departmental orientation</strong> - don't miss this important event</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <p><strong>Remember:</strong> Your first year sets the tone for your entire FUTA journey. Start strong, ask questions, and build good academic habits from day one!</p>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#" class="page-btn" data-page="materials">← Previous</a>
+                    <a href="#" class="page-btn" data-page="contact">Next: Contact →</a>
+                </div>
+            </div>
+        </section>
+        
+  <!-- Contact Section -->
+        <section id="contact" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">10. Contact</h2>
+                <div class="card">
+                    <h3>Your Senior Fellow FUTArian</h3>
+                    <p>Abideen Yakub Opeyemi (O'yemi)</p>
+                    <p>Phone: 07050376975</p>
+                    <p>Email: abideenyakub08@gmail.com</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>💬 I'm Here to Help!</h3>
+                        <p>Don't hesitate to reach out if you have questions, need clarification, or just want to connect with a senior who's been through what you're experiencing now.</p>
+                        <p class="quote">"Alone we can do so little; together we can do so much." - Helen Keller</p>
+                    </div>
+                </div>
+                
+                <!-- Feedback Section -->
+                <div id="feedback" class="feedback-section" style="background: transparent; color: var(--dark); padding: 2rem 0;">
+                    <div class="container">
+                        <h2 class="section-title">Found This Guide Helpful?</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Let me know! Your feedback helps me improve this resource for future students.</p>
+                        
+                        <div class="feedback-buttons">
+                            <button class="btn btn-whatsapp" id="whatsappBtn">
+                                📱 Send Appreciation via WhatsApp
+                            </button>
+                            <a href="mailto:abideenyakub08@gmail.com?subject=FUTA Survival Guide Feedback&body=Hello O'yemi, I found the FUTA Survival Guide very helpful!" class="btn btn-email">
+                                📧 Send Feedback via Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="page-nav">
+                    <a href="#" class="page-btn" data-page="departmental">← Previous</a>
+                    <a href="#" class="page-btn" data-page="home">Back to Home →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>Federal University of Technology, Akure</p>
+            <p>Welcome, Class of 2025/2026!</p>
+            <p>&copy; 2025 FUTA Freshers' Survival Guide. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+   // Course data with detailed topics
+        const courses = [
+            {
+                code: "BIO 101",
+                title: "General Biology I",
+                icon: "dna",
+                topics: [
+                    "Cell & Molecular Biology: Cell structure and organization, Functions of cellular organelles",
+                    "Genetics & Heredity: Interrelationship between plant and hereditary, Biological Variation",
+                    "Diversity & Classification: Classification of plants, Virus, fungi, algae and bacteria, Bryophytes and pteridophytes, Flowering plants, Angiosperms, Biodiversity",
+                    "Ecology & Reproduction: Ecology, Reproduction"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ"
+            },
+            {
+                code: "BIO 103",
+                title: "General Biology Practical",
+                icon: "microscope",
+                topics: [
+                    "Introduction to Biology practical use of the microscope",
+                    "Cell structure",
+                    "Staining starch in plant tissue",
+                    "Algae, fungi, bryophytamosses and liverwort",
+                    "Gymnosperms",
+                    "Angiosperms"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1ZtVc7RGT27-I_tNhxGtVUUxyA1zBys3L"
+            },
+            {
+                code: "CHE 101",
+                title: "Basic General Chemistry I",
+                icon: "flask",
+                topics: [
+                    "Atomic Structure & Theory: Atomic Theory, Atomic structure, Atomic spectra, Determination of ionization energy",
+                    "Nuclear & Kinetics: Radioactivity, Chemical kinetics, Order, molecularity of reactions and collision theory, Half-life equations",
+                    "Thermodynamics & Equilibrium: Thermochemistry/energetics, Chemical equilibrium",
+                    "Solutions & Electrochemistry: Solution and solubility, Electrochemistry, Acid base and salt"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1"
+            },
+            {
+                code: "CHE 103",
+                title: "Basic Chemistry Practical",
+                icon: "vial",
+                topics: [
+                    "Recording of laboratory data",
+                    "Calibration of basic laboratory equipment",
+                    "Preparation and standardization of common reagent",
+                    "Determination of atomic weight of metals"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1jr0eRfvjZsVOiXZIbMyZ6I1ulunuks0r"
+            },
+            {
+                code: "CSC 101",
+                title: "Introduction to Computer Science",
+                icon: "laptop-code",
+                topics: [
+                    "Computer Fundamentals: Introduction and history of computer, Components of computer, Functional units of computer, Classification of computer",
+                    "Applications & Impacts: Uses and impact of computers, Exploring Microsoft",
+                    "Programming Concepts: Programming methodology and algorithms, Problem solving strategies, Structured programming principles, Visual Basic programming language"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg"
+            },
+            {
+                code: "CVE 105",
+                title: "Introduction to Science & Technology",
+                icon: "cogs",
+                topics: [
+                    "Introduction to science and technology",
+                    "Science and technology in the society",
+                    "Man- his origin and nature",
+                    "Man and his cosmic environment",
+                    "Renewable and non-renewable resources",
+                    "Man and his energy"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/13MJ1qjBzcYwGx79s1BSATAMb5xjcqHuu"
+            },
+            {
+                code: "GNS 101",
+                title: "Use of English I",
+                icon: "language",
+                topics: [
+                    "Academic Skills: Time Management, Study Skills, Note taking and note making",
+                    "Language Fundamentals: Scientific Word Formation, Parts of Speech, Aspects of English grammar"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV"
+            },
+            {
+                code: "GNS 103",
+                title: "Use of Library",
+                icon: "book",
+                topics: [
+                    "History and types of library",
+                    "Library materials",
+                    "Study skills",
+                    "Classification of library",
+                    "Storage device and electronics device"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1sqeUsoS3B7J65vM8iIKzLQPISxfhrt5N"
+            },
+            {
+                code: "MEE 101",
+                title: "Engineering Drawing I",
+                icon: "ruler-combined",
+                topics: [
+                    "Drawing Fundamentals: Introduction to engineering drawing and materials used, Free hand sketching",
+                    "Geometrical Construction: Geometrical construction (bisection of lines, angles), Polygons, Tangency and loci",
+                    "Technical Drawing: Pictorial drawing, Free Hand Sketching"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1f6zvKIcxIcvcLMKNf2zLD4WFjC_3nuhS"
+            },
+            {
+                code: "MTS 101",
+                title: "Introductory Mathematics I",
+                icon: "calculator",
+                topics: [
+                    "Foundations: Set THEORY, Real numbers and mathematical induction",
+                    "Algebra & Sequences: Sequence and series, Quadratic equation and polynomials, Binomial theorem, Partial fractions",
+                    "Trigonometry: Circular measure, Trigonometry and trigonometric functions"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i"
+            },
+            {
+                code: "PHY 101",
+                title: "General Physics I",
+                icon: "atom",
+                topics: [
+                    "Fundamentals: Quantities, units and dimensions, Vector analysis",
+                    "Mechanics: Laws of mechanics, Rotational dynamics, Simple Harmonic Motion, Law of gravitation, Linear momentum, Kinematics, Projectile motion, Circular motion, Statics and dynamics, Universal gravitation, Work energy and power"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl"
+            },
+            {
+                code: "PHY 103",
+                title: "General Physics III",
+                icon: "fire",
+                topics: [
+                    "Molecular properties of matter",
+                    "Fluids at rest",
+                    "Surface tension",
+                    "Viscosity",
+                    "Hydrodynamics",
+                    "Gas laws",
+                    "Kinetic theory of gases",
+                    "Heat and temperature"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1n7X-ynKrJVyqkAUomIZwgcQQ7ekZ2_lB"
+            },
+            {
+                code: "PHY 107",
+                title: "Experimental Physics",
+                icon: "vials",
+                topics: [
+                    "Graph and error analysis",
+                    "The simple pendulum",
+                    "The bar pendulum",
+                    "Optics Experiments: Refraction through glass prism, Refractive index of triangular prism, Determination of focal length, Image characteristics of focal length"
+                ],
+                driveLink: "https://drive.google.com/drive/folders/1Oxzgz1X0dOjSpkgXp8ZN8s_wRZdwJiCR"
+            }
+        ];
+
+        // Store user data
+        let userData = {};
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            // Form submission handler
+            const userForm = document.getElementById('userForm');
+            if (userForm) {
+                userForm.addEventListener('submit', handleFormSubmit);
+            }
+
+            // Navigation functionality
+            setupNavigation();
+
+            // Sidebar functionality
+            setupSidebar();
+
+            // WhatsApp button
+            setupWhatsAppButton();
+
+            // Generate content
+            generateCourseCards();
+            generateMaterialsSection();
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            userData.name = document.getElementById('name').value;
+            userData.department = document.getElementById('department').value;
+            userData.whatsapp = document.getElementById('whatsapp').value;
+            
+            const formMessage = document.getElementById('formMessage');
+            
+            formMessage.innerHTML = '<div class="message success">Thank you! Now exploring the FUTA Survival Guide...</div>';
+            
+            // Show main content after a short delay
+            setTimeout(() => {
+                document.getElementById('welcome').classList.add('hidden');
+                document.getElementById('navbar').classList.remove('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                
+                // Update user info
+                const userInfo = document.getElementById('userInfo');
+                if (userInfo) {
+                    userInfo.classList.remove('hidden');
+                    userInfo.innerHTML = `${userData.name} | ${userData.department}`;
+                }
+            }, 1500);
+        }
+
+        function setupNavigation() {
+            const navElements = document.querySelectorAll('.nav-links a, .toc-item, .page-btn, .sidebar-links a');
+            navElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    if (targetPage) {
+                        showPage(targetPage);
+                    }
+                });
+            });
+        }
+
+        function setupSidebar() {
+            const menuBtn = document.getElementById('menuBtn');
+            const sidebarClose = document.getElementById('sidebarClose');
+            
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function() {
+                    document.getElementById('sidebar').classList.add('active');
+                });
+            }
+            
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', function() {
+                    document.getElementById('sidebar').classList.remove('active');
+                });
+            }
+        }
+
+        function setupWhatsAppButton() {
+            const whatsappBtn = document.getElementById('whatsappBtn');
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('click', function() {
+                    const message = `I have checked the orientation, kindly save my number. My name is ${userData.name || 'a FUTA fresher'} and my department is ${userData.department || 'not specified'}.`;
+                    const phoneNumber = '07050376975';
+                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(whatsappURL, '_blank');
+                });
+            }
+        }
+
+        // Function to show specific page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.content-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Update active link in sidebar
+            document.querySelectorAll('.sidebar-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar) {
+                    sidebar.classList.remove('active');
+                }
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Function to generate course cards for course synopsis
+        function generateCourseCards() {
+            const courseGrid = document.querySelector('.course-grid');
+            if (!courseGrid) return;
+            
+            // Clear existing content
+            courseGrid.innerHTML = '';
+            
+            courses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                
+                let topicsHTML = '';
+                if (course.topics && course.topics.length > 0) {
+                    topicsHTML = '<ul>';
+                    course.topics.forEach(topic => {
+                        topicsHTML += `<li>${topic}</li>`;
+                    });
+                    topicsHTML += '</ul>';
+                }
+                
+                courseCard.innerHTML = `
+                    <h3>${course.code}: ${course.title}</h3>
+                    ${topicsHTML}
+                `;
+                
+                courseGrid.appendChild(courseCard);
+            });
+        }
+
+        // Function to generate materials section with clickable courses
+        function generateMaterialsSection() {
+            const materialsGrid = document.querySelector('.materials-grid');
+            if (!materialsGrid) return;
+            
+            // Clear existing content
+            materialsGrid.innerHTML = '';
+            
+            courses.forEach(course => {
+                const courseItem = document.createElement('div');
+                courseItem.className = 'course-item';
+                courseItem.onclick = () => window.open(course.driveLink, '_blank');
+                
+                // Get appropriate icon class
+                const iconClass = getIconClass(course.icon);
+                
+                courseItem.innerHTML = `
+                    <div class="course-icon">
+                        <i class="fas fa-${iconClass}"></i>
+                    </div>
+                    <h4>${course.code}</h4>
+                    <p>${course.title}</p>
+                    <div class="access-link">
+                        Click to Access Materials <i class="fas fa-external-link-alt"></i>
+                    </div>
+                `;
+                
+                materialsGrid.appendChild(courseItem);
+            });
+        }
+
+        // Helper function to map icon names to FontAwesome classes
+        function getIconClass(iconName) {
+            const iconMap = {
+                'dna': 'dna',
+                'microscope': 'microscope',
+                'flask': 'flask',
+                'vial': 'vial',
+                'laptop-code': 'laptop-code',
+                'cogs': 'cogs',
+                'language': 'language',
+                'book': 'book',
+                'ruler-combined': 'ruler-combined',
+                'calculator': 'calculator',
+                'atom': 'atom',
+                'fire': 'fire',
+                'vials': 'vial'
+            };
+            
+            return iconMap[iconName] || 'file-alt';
+        }
+    </script>
+</body>
+</html>  
