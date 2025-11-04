@@ -1669,40 +1669,40 @@
             </div>
         </section>
         
-        <!-- Materials Section -->
-        <section id="materials" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">8. Course Materials</h2>
-                <div class="card">
-                    <h3>Access All Your Course Materials</h3>
-                    <p>Click on any course below to access its specific materials on Google Drive.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3>📚 Direct Access to Course Resources</h3>
-                        <p>Each course has its own dedicated folder with organized materials. Click on any course to go directly to its specific resources.</p>
-                        <p class="quote">"Organization is the key to effective studying. Having materials properly sorted by course saves valuable time."</p>
-                    </div>
-                    
-                    <h3>Available Course Materials</h3>
-                    <p>Click on any course to access its materials:</p>
-                    
-                    <div class="materials-grid">
-                        <!-- Course items will be dynamically generated here -->
-                    </div>
-                    
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <a href="https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ" class="btn btn-drive" target="_blank">
-                            📁 Access Main Materials Folder
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="page-nav">
-                    <a href="#" class="page-btn" data-page="course-synopsis">← Previous</a>
-                    <a href="#" class="page-btn" data-page="departmental">Next: Departmental Courses →</a>
-                </div>
+       <!-- Materials Section -->
+<section id="materials" class="content-section content-page">
+    <div class="container">
+        <h2 class="section-title">9. Course Materials</h2>
+        <div class="card">
+            <h3>Access All Your Course Materials</h3>
+            <p>Click on any course below to access its specific materials on Google Drive.</p>
+            
+            <div class="inspirational-box">
+                <h3>📚 Direct Access to Course Resources</h3>
+                <p>Each course has its own dedicated folder with organized materials. Click on any course to go directly to its specific resources.</p>
+                <p class="quote">"Organization is the key to effective studying. Having materials properly sorted by course saves valuable time."</p>
             </div>
-        </section>
+            
+            <h3>Available Course Materials</h3>
+            <p>Click on any course to access its materials:</p>
+            
+            <div class="materials-grid">
+                <!-- Course items will be dynamically generated here -->
+            </div>
+            
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="https://drive.google.com/drive/folders/1_qxqM7-NC2eDPOK0s5MWKTUCj91CeWsz?usp=drive_link" class="btn btn-drive" target="_blank">
+                    📁 Access All Materials Folder
+                </a>
+            </div>
+        </div>
+        
+        <div class="page-nav">
+            <a href="#" class="page-btn" data-page="course-synopsis">← Previous</a>
+            <a href="#" class="page-btn" data-page="departmental">Next: Departmental Courses →</a>
+        </div>
+    </div>
+</section>
         
         <!-- Departmental Courses Section -->
         <section id="departmental" class="content-section content-page">
@@ -2160,37 +2160,36 @@
             });
         }
 
-        // Function to generate materials section with clickable courses
-        function generateMaterialsSection() {
-            const materialsGrid = document.querySelector('.materials-grid');
-            if (!materialsGrid) return;
-            
-            // Clear existing content
-            materialsGrid.innerHTML = '';
-            
-            courses.forEach(course => {
-                const courseItem = document.createElement('div');
-                courseItem.className = 'course-item';
-                courseItem.onclick = () => window.open(course.driveLink, '_blank');
-                
-                // Get appropriate icon class
-                const iconClass = getIconClass(course.icon);
-                
-                courseItem.innerHTML = `
-                    <div class="course-icon">
-                        <i class="fas fa-${iconClass}"></i>
-                    </div>
-                    <h4>${course.code}</h4>
-                    <p>${course.title}</p>
-                    <div class="access-link">
-                        Click to Access Materials <i class="fas fa-external-link-alt"></i>
-                    </div>
-                `;
-                
-                materialsGrid.appendChild(courseItem);
-            });
-        }
-
+       // Function to generate materials section with clickable courses
+function generateMaterialsSection() {
+    const materialsGrid = document.querySelector('.materials-grid');
+    if (!materialsGrid) return;
+    
+    // Clear existing content
+    materialsGrid.innerHTML = '';
+    
+    courses.forEach(course => {
+        const courseItem = document.createElement('div');
+        courseItem.className = 'course-item';
+        courseItem.onclick = () => window.open('https://drive.google.com/drive/folders/1_qxqM7-NC2eDPOK0s5MWKTUCj91CeWsz?usp=drive_link', '_blank');
+        
+        // Get appropriate icon class
+        const iconClass = getIconClass(course.icon);
+        
+        courseItem.innerHTML = `
+            <div class="course-icon">
+                <i class="fas fa-${iconClass}"></i>
+            </div>
+            <h4>${course.code}</h4>
+            <p>${course.title}</p>
+            <div class="access-link">
+                Click to Access Materials <i class="fas fa-external-link-alt"></i>
+            </div>
+        `;
+        
+        materialsGrid.appendChild(courseItem);
+    });
+}
         // Helper function to map icon names to FontAwesome classes
         function getIconClass(iconName) {
             const iconMap = {
