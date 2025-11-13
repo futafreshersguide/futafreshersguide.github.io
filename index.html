@@ -86,7 +86,21 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-        
+        .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.3);
+}
         .btn {
             display: inline-block;
             background: var(--primary);
@@ -820,32 +834,52 @@
             <h1>FUTA Freshers' Survival Guide</h1>
             <p>Your First-Semester Roadmap to Conquering FUTA</p>
             
-            <div class="form-container">
-                <h2>Welcome, Class '29!</h2>
-                <p>Please provide your details to access the guide</p>
-                
-                <form id="userForm">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="department">Department</label>
-                        <input type="text" id="department" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="whatsapp">WhatsApp Number</label>
-                        <input type="tel" id="whatsapp" required>
-                    </div>
-                    
-                    <button type="submit" class="btn" id="submitBtn">Access Guide</button>
-                </form>
-                
-                <div id="formMessage"></div>
-            </div>
-            
+<div class="form-container">
+    <h2>Welcome to FUTA Survival Guide!</h2>
+    <p>Please provide your details to access the guide</p>
+    
+    <form id="userForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="status">Are you a fresher?</label>
+            <select id="status" required onchange="toggleLevelField()">
+                <option value="">Select</option>
+                <option value="fresher">Yes, I'm a fresher</option>
+                <option value="returning">No, I'm a returning student</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="levelField" style="display: none;">
+            <label for="level">Current Level</label>
+            <select id="level">
+                <option value="">Select Level</option>
+                <option value="100">100 Level</option>
+                <option value="200">200 Level</option>
+                <option value="300">300 Level</option>
+                <option value="400">400 Level</option>
+                <option value="500">500 Level</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" id="department" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="whatsapp">WhatsApp Number</label>
+            <input type="tel" id="whatsapp" required>
+        </div>
+        
+        <button type="submit" class="btn" id="submitBtn">Access Guide</button>
+    </form>
+    
+    <div id="formMessage"></div>
+</div>
             <p class="prepared-by">Prepared by: Abideen Yakub Opeyemi (O'yemi)</p>
         </div>
     </section>
@@ -2027,16 +2061,45 @@
             generateCourseCards();
             generateMaterialsSection();
         }
+function toggleLevelField() {
+    const status = document.getElementById('status').value;
+    const levelField = document.getElementById('levelField');
+    const levelSelect = document.getElementById('level');
+    
+    if (status === 'returning') {
+        levelField.style.display = 'block';
+        levelSelect.setAttribute('required', 'required');
+    } else {
+        levelField.style.display = 'none';
+        levelSelect.removeAttribute('required');
+        levelSelect.value = ''; // Clear the selection
+    }
+}
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            userData.name = document.getElementById('name').value;
-            userData.department = document.getElementById('department').value;
-            userData.whatsapp = document.getElementById('whatsapp').value;
-            
-            const formMessage = document.getElementById('formMessage');
-            
+function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    // Collect form data
+    const formData = {
+        name: document.getElementById('name').value,
+        status: document.getElementById('status').value,
+        level: document.getElementById('level').value || 'N/A',
+        department: document.getElementById('department').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        accessTime: new Date().toISOString()
+    };
+    
+    const formMessage = document.getElementById('formMessage');
+    
+    // Show loading message
+    formMessage.innerHTML = '<div class="message success">Processing your request...</div>';
+    
+    // Store in userData for later use
+    userData = formData;
+    
+    // Send data to PHP
+    sendToPHP(formData)
+        .then(() => {
             formMessage.innerHTML = '<div class="message success">Thank you! Now exploring the FUTA Survival Guide...</div>';
             
             // Show main content after a short delay
@@ -2046,14 +2109,48 @@
                 document.getElementById('main-content').classList.remove('hidden');
                 
                 // Update user info
-                const userInfo = document.getElementById('userInfo');
-                if (userInfo) {
-                    userInfo.classList.remove('hidden');
-                    userInfo.innerHTML = `${userData.name} | ${userData.department}`;
-                }
+                updateUserInfo();
             }, 1500);
-        }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            formMessage.innerHTML = '<div class="message error">Welcome! There was a minor issue, but you can still access the guide.</div>';
+            
+            // Still show the content even if saving fails
+            setTimeout(() => {
+                document.getElementById('welcome').classList.add('hidden');
+                document.getElementById('navbar').classList.remove('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                updateUserInfo();
+            }, 1500);
+        });
+}
 
+function sendToPHP(data) {
+    return fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            throw new Error(data.message);
+        }
+        return data;
+    });
+}
+
+function updateUserInfo() {
+    const userInfo = document.getElementById('userInfo');
+    if (userInfo && userData) {
+        const displayLevel = userData.status === 'fresher' ? 'Fresher' : `${userData.level} Level`;
+        userInfo.classList.remove('hidden');
+        userInfo.innerHTML = `${userData.name} | ${userData.department} | ${displayLevel}`;
+    }
+}
         function setupNavigation() {
             const navElements = document.querySelectorAll('.nav-links a, .toc-item, .page-btn, .sidebar-links a');
             navElements.forEach(element => {
