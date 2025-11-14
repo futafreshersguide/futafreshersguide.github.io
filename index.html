@@ -2097,8 +2097,8 @@ function handleFormSubmit(e) {
     // Store in userData for later use
     userData = formData;
     
-    // Send data to PHP
-    sendToPHP(formData)
+    // Send data to Google Sheets
+    sendToGoogleSheets(formData)
         .then(() => {
             formMessage.innerHTML = '<div class="message success">Thank you! Now exploring the FUTA Survival Guide...</div>';
             
@@ -2125,24 +2125,6 @@ function handleFormSubmit(e) {
             }, 1500);
         });
 }
-
-function sendToPHP(data) {
-    return fetch('save_data.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (!data.success) {
-            throw new Error(data.message);
-        }
-        return data;
-    });
-}
-
 function updateUserInfo() {
     const userInfo = document.getElementById('userInfo');
     if (userInfo && userData) {
