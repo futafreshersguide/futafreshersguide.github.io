@@ -2097,34 +2097,52 @@ function handleFormSubmit(e) {
     // Store in userData for later use
     userData = formData;
     
-    // Send data to Google Sheets
+    // Send data to Google Sheets (but don't wait for it to complete)
     sendToGoogleSheets(formData)
         .then(() => {
-            formMessage.innerHTML = '<div class="message success">Thank you! Now exploring the FUTA Survival Guide...</div>';
-            
-            // Show main content after a short delay
-            setTimeout(() => {
-                document.getElementById('welcome').classList.add('hidden');
-                document.getElementById('navbar').classList.remove('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                
-                // Update user info
-                updateUserInfo();
-            }, 1500);
+            console.log('Data sent to Google Sheets successfully');
         })
         .catch(error => {
-            console.error('Error:', error);
-            formMessage.innerHTML = '<div class="message error">Welcome! There was a minor issue, but you can still access the guide.</div>';
-            
-            // Still show the content even if saving fails
-            setTimeout(() => {
-                document.getElementById('welcome').classList.add('hidden');
-                document.getElementById('navbar').classList.remove('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                updateUserInfo();
-            }, 1500);
+            console.error('Failed to send data to Google Sheets:', error);
+            // Don't show error to user - just log it
         });
+    
+    // Show success message immediately (don't wait for Google Sheets)
+    formMessage.innerHTML = '<div class="message success">Thank you! Now exploring the FUTA Survival Guide...</div>';
+    
+    // Show main content after a short delay
+    setTimeout(() => {
+        document.getElementById('welcome').classList.add('hidden');
+        document.getElementById('navbar').classList.remove('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        
+        // Update user info
+        updateUserInfo();
+    }, 1500);
 }
+
+function sendToGoogleSheets(data) {
+  // Use your Web App URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwG8uZkMSPddt2lzYPfWqoo5U2sl3ZiXCWu9asTvwsLlxi-bnY79qgLBzi921ziA4zj/exec';
+  
+  return fetch(scriptURL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    // With 'no-cors' mode, we can't read the response, so we assume success
+    return { success: true };
+  })
+  .catch(error => {
+    console.error('Error sending to Google Sheets:', error);
+    throw new Error('Failed to save data');
+  });
+}
+
 function updateUserInfo() {
     const userInfo = document.getElementById('userInfo');
     if (userInfo && userData) {
@@ -2133,113 +2151,114 @@ function updateUserInfo() {
         userInfo.innerHTML = `${userData.name} | ${userData.department} | ${displayLevel}`;
     }
 }
-        function setupNavigation() {
-            const navElements = document.querySelectorAll('.nav-links a, .toc-item, .page-btn, .sidebar-links a');
-            navElements.forEach(element => {
-                element.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetPage = this.getAttribute('data-page');
-                    if (targetPage) {
-                        showPage(targetPage);
-                    }
-                });
-            });
-        }
 
-        function setupSidebar() {
-            const menuBtn = document.getElementById('menuBtn');
-            const sidebarClose = document.getElementById('sidebarClose');
-            
-            if (menuBtn) {
-                menuBtn.addEventListener('click', function() {
-                    document.getElementById('sidebar').classList.add('active');
-                });
-            }
-            
-            if (sidebarClose) {
-                sidebarClose.addEventListener('click', function() {
-                    document.getElementById('sidebar').classList.remove('active');
-                });
-            }
-        }
-
-        function setupWhatsAppButton() {
-            const whatsappBtn = document.getElementById('whatsappBtn');
-            if (whatsappBtn) {
-                whatsappBtn.addEventListener('click', function() {
-                    const message = `I have checked the orientation, kindly save my number. My name is ${userData.name || 'a FUTA fresher'} and my department is ${userData.department || 'not specified'}.`;
-                    const phoneNumber = '+2347050376975';
-                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                    
-                    window.open(whatsappURL, '_blank');
-                });
-            }
-        }
-
-        // Function to show specific page
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.content-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show target page
-            const targetPage = document.getElementById(pageId);
+function setupNavigation() {
+    const navElements = document.querySelectorAll('.nav-links a, .toc-item, .page-btn, .sidebar-links a');
+    navElements.forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
             if (targetPage) {
-                targetPage.classList.add('active');
+                showPage(targetPage);
             }
-            
-            // Update active link in sidebar
-            document.querySelectorAll('.sidebar-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageId) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Close sidebar on mobile
-            if (window.innerWidth <= 768) {
-                const sidebar = document.getElementById('sidebar');
-                if (sidebar) {
-                    sidebar.classList.remove('active');
-                }
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
+        });
+    });
+}
 
-        // Function to generate course cards for course synopsis
-        function generateCourseCards() {
-            const courseGrid = document.querySelector('.course-grid');
-            if (!courseGrid) return;
-            
-            // Clear existing content
-            courseGrid.innerHTML = '';
-            
-            courses.forEach(course => {
-                const courseCard = document.createElement('div');
-                courseCard.className = 'course-card';
-                
-                let topicsHTML = '';
-                if (course.topics && course.topics.length > 0) {
-                    topicsHTML = '<ul>';
-                    course.topics.forEach(topic => {
-                        topicsHTML += `<li>${topic}</li>`;
-                    });
-                    topicsHTML += '</ul>';
-                }
-                
-                courseCard.innerHTML = `
-                    <h3>${course.code}: ${course.title}</h3>
-                    ${topicsHTML}
-                `;
-                
-                courseGrid.appendChild(courseCard);
-            });
-        }
+function setupSidebar() {
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebarClose = document.getElementById('sidebarClose');
+    
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+        });
+    }
+    
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+        });
+    }
+}
 
-       // Function to generate materials section with clickable courses
+function setupWhatsAppButton() {
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            const message = `I have checked the orientation, kindly save my number. My name is ${userData.name || 'a FUTA fresher'} and my department is ${userData.department || 'not specified'}.`;
+            const phoneNumber = '+2347050376975';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappURL, '_blank');
+        });
+    }
+}
+
+// Function to show specific page
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.content-page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Show target page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+    
+    // Update active link in sidebar
+    document.querySelectorAll('.sidebar-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-page') === pageId) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Close sidebar on mobile
+    if (window.innerWidth <= 768) {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) {
+            sidebar.classList.remove('active');
+        }
+    }
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Function to generate course cards for course synopsis
+function generateCourseCards() {
+    const courseGrid = document.querySelector('.course-grid');
+    if (!courseGrid) return;
+    
+    // Clear existing content
+    courseGrid.innerHTML = '';
+    
+    courses.forEach(course => {
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        
+        let topicsHTML = '';
+        if (course.topics && course.topics.length > 0) {
+            topicsHTML = '<ul>';
+            course.topics.forEach(topic => {
+                topicsHTML += `<li>${topic}</li>`;
+            });
+            topicsHTML += '</ul>';
+        }
+        
+        courseCard.innerHTML = `
+            <h3>${course.code}: ${course.title}</h3>
+            ${topicsHTML}
+        `;
+        
+        courseGrid.appendChild(courseCard);
+    });
+}
+
+// Function to generate materials section with clickable courses
 function generateMaterialsSection() {
     const materialsGrid = document.querySelector('.materials-grid');
     if (!materialsGrid) return;
@@ -2269,26 +2288,27 @@ function generateMaterialsSection() {
         materialsGrid.appendChild(courseItem);
     });
 }
-        // Helper function to map icon names to FontAwesome classes
-        function getIconClass(iconName) {
-            const iconMap = {
-                'dna': 'dna',
-                'microscope': 'microscope',
-                'flask': 'flask',
-                'vial': 'vial',
-                'laptop-code': 'laptop-code',
-                'cogs': 'cogs',
-                'language': 'language',
-                'book': 'book',
-                'ruler-combined': 'ruler-combined',
-                'calculator': 'calculator',
-                'atom': 'atom',
-                'fire': 'fire',
-                'vials': 'vial'
-            };
-            
-            return iconMap[iconName] || 'file-alt';
-        }
+
+// Helper function to map icon names to FontAwesome classes
+function getIconClass(iconName) {
+    const iconMap = {
+        'dna': 'dna',
+        'microscope': 'microscope',
+        'flask': 'flask',
+        'vial': 'vial',
+        'laptop-code': 'laptop-code',
+        'cogs': 'cogs',
+        'language': 'language',
+        'book': 'book',
+        'ruler-combined': 'ruler-combined',
+        'calculator': 'calculator',
+        'atom': 'atom',
+        'fire': 'fire',
+        'vials': 'vial'
+    };
+    
+    return iconMap[iconName] || 'file-alt';
+}
     </script>
 </body>
 </html>  
