@@ -1101,6 +1101,35 @@
             margin-right: 20px;
         }
         
+        /* Admin Stats */
+        .admin-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .welcome-section h1 {
@@ -1533,7 +1562,7 @@
             </div>
         </section>
         
-        <!-- Registration Section - THIS SECTION REMAINS THE SAME -->
+        <!-- Registration Section -->
         <section id="registration" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">1. Complete Registration Guide</h2>
@@ -1662,7 +1691,7 @@
             </div>
         </section>
         
-        <!-- Documents Section - THIS SECTION REMAINS THE SAME -->
+        <!-- Documents Section -->
         <section id="documents" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">2. Required Documents for Registration</h2>
@@ -1817,7 +1846,7 @@
             </div>
         </section>
         
-        <!-- The Great Shift - THIS SECTION REMAINS THE SAME -->
+        <!-- The Great Shift -->
         <section id="great-shift" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">3. The Great Shift: Embracing University Autonomy</h2>
@@ -1845,7 +1874,7 @@
             </div>
         </section>
         
-        <!-- Academic Playbook - THIS SECTION REMAINS THE SAME -->
+        <!-- Academic Playbook -->
         <section id="academic-playbook" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">4. Your Academic Playbook for a First-Class Journey</h2>
@@ -2063,7 +2092,7 @@
             </div>
         </section>
         
-        <!-- Beyond Books - THIS SECTION REMAINS THE SAME -->
+        <!-- Beyond Books -->
         <section id="beyond-books" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">5. Beyond the Books: Building a Complete Life</h2>
@@ -2092,7 +2121,7 @@
             </div>
         </section>
         
-        <!-- Navigating Storms - THIS SECTION REMAINS THE SAME -->
+        <!-- Navigating Storms -->
         <section id="navigating-storms" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">6. Navigating the Storms: You Are Not Alone</h2>
@@ -2126,7 +2155,7 @@
             </div>
         </section>
         
-        <!-- The Anchor - THIS SECTION REMAINS THE SAME -->
+        <!-- The Anchor -->
         <section id="anchor" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">7. The Anchor: The Power of Prayer</h2>
@@ -2161,7 +2190,7 @@
             </div>
         </section>
         
-        <!-- Course Synopsis - THIS SECTION REMAINS THE SAME -->
+        <!-- Course Synopsis -->
         <section id="course-synopsis" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">8. Course Synopsis</h2>
@@ -2176,7 +2205,7 @@
             </div>
         </section>
         
-        <!-- Materials Section - THIS SECTION REMAINS THE SAME -->
+        <!-- Materials Section -->
         <section id="materials" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">9. Course Materials</h2>
@@ -2211,7 +2240,7 @@
             </div>
         </section>
         
-        <!-- Departmental Courses Section - THIS SECTION REMAINS THE SAME -->
+        <!-- Departmental Courses Section -->
         <section id="departmental" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">10. Departmental Courses Information</h2>
@@ -2292,7 +2321,7 @@
             </div>
         </section>
         
-        <!-- Marketing Section - UPDATED WITH ALL BUSINESSES -->
+        <!-- Marketing Section -->
         <section id="marketing" class="content-section content-page">
             <div class="container">
                 <div class="card">
@@ -2399,7 +2428,7 @@
                         <div id="marketingFormMessage" class="help" style="margin-top: 10px"></div>
                     </form>
                     
-                    <!-- Business Listings - UPDATED WITH ALL BUSINESSES -->
+                    <!-- Business Listings -->
                     <section id="business-listings" class="card" style="margin-top: 2rem;">
                         <h3>Available Services</h3>
                         <p>Browse through services offered by fellow FUTArians:</p>
@@ -2735,7 +2764,7 @@
             </div>
         </section>
         
-        <!-- Contact Section - UPDATED WITH GOOGLE SHEETS INTEGRATION -->
+        <!-- Contact Section -->
         <section id="contact" class="content-section content-page">
             <div class="container">
                 <h2 class="section-title">Contact</h2>
@@ -2749,6 +2778,28 @@
                         <h3>💬 I'm Here to Help!</h3>
                         <p>Don't hesitate to reach out if you have questions, need clarification, or just want to connect with a senior who's been through what you're experiencing now.</p>
                         <p class="quote">"Alone we can do so little; together we can do so much." - Helen Keller</p>
+                    </div>
+                </div>
+                
+                <!-- Admin Stats Section -->
+                <div id="adminStats" class="admin-stats hidden">
+                    <h3>📊 User Statistics (Admin)</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalUsers">0</div>
+                            <div>Total Unique Users</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="newToday">0</div>
+                            <div>New Users Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="returningUsers">0</div>
+                            <div>Returning Users</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-small" onclick="exportUserData()">📥 Export User Data</button>
                     </div>
                 </div>
                 
@@ -2978,11 +3029,69 @@
             }
         ];
 
-        // Your Google Apps Script Web App URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4adVMsmHU04xjaHHg5U5t12kk8aSL6CoQ9ZSleS1HBHwPEiNLn13FYIgg5sU6UDPb_A/exec';
-
         // Store user data
         let userData = {};
+
+        // User Management System
+        const UserManager = {
+            // Check if user already exists
+            userExists: function(whatsapp) {
+                const users = this.getAllUsers();
+                return users.some(user => user.whatsapp === whatsapp);
+            },
+            
+            // Save user to localStorage
+            saveUser: function(userData) {
+                const users = this.getAllUsers();
+                const today = new Date().toDateString();
+                
+                // Check if user exists and update, otherwise add new
+                const existingUserIndex = users.findIndex(user => user.whatsapp === userData.whatsapp);
+                
+                if (existingUserIndex !== -1) {
+                    // Update existing user
+                    users[existingUserIndex].lastAccess = new Date().toISOString();
+                    users[existingUserIndex].accessCount += 1;
+                    users[existingUserIndex].isReturning = true;
+                } else {
+                    // Add new user
+                    users.push({
+                        ...userData,
+                        id: Date.now(),
+                        accessCount: 1,
+                        firstAccess: new Date().toISOString(),
+                        lastAccess: new Date().toISOString(),
+                        isReturning: false
+                    });
+                }
+                
+                localStorage.setItem('futa_guide_users', JSON.stringify(users));
+                return users.length;
+            },
+            
+            // Get all users
+            getAllUsers: function() {
+                return JSON.parse(localStorage.getItem('futa_guide_users') || '[]');
+            },
+            
+            // Get user count
+            getUserCount: function() {
+                return this.getAllUsers().length;
+            },
+            
+            // Get new users today
+            getNewUsersToday: function() {
+                const today = new Date().toDateString();
+                return this.getAllUsers().filter(user => 
+                    new Date(user.firstAccess).toDateString() === today
+                ).length;
+            },
+            
+            // Get returning users
+            getReturningUsers: function() {
+                return this.getAllUsers().filter(user => user.isReturning).length;
+            }
+        };
 
         // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
@@ -3041,6 +3150,11 @@
             
             // Check if user is already onboarded
             checkOnboardingStatus();
+            
+            // Show admin stats if URL parameter exists
+            if (window.location.search.includes('admin=true')) {
+                showAdminStats();
+            }
         }
 
         function checkOnboardingStatus() {
@@ -3128,7 +3242,26 @@
             userData.isFresher = isFresher;
             userData.level = levelVal;
 
-            // persist to localStorage so marketing.html can prefill and mark onboarding complete
+            // Check for duplicate user
+            if (UserManager.userExists(userData.whatsapp)) {
+                // Update existing user access
+                UserManager.saveUser(userData);
+                formMessage.innerHTML = '<div class="message success">Welcome back! Redirecting to guide...</div>';
+                
+                // Show main content immediately for returning users
+                setTimeout(() => showMainContent(userData), 1000);
+                return;
+            }
+
+            // Show loading state for new users
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerHTML = 'Submitting...';
+            submitBtn.disabled = true;
+
+            // Save user locally first
+            const totalUsers = UserManager.saveUser(userData);
+            
+            // Persist to localStorage
             try {
                 localStorage.setItem('userName', userData.name);
                 localStorage.setItem('userDepartment', userData.department);
@@ -3136,58 +3269,97 @@
                 localStorage.setItem('userIsFresher', userData.isFresher);
                 localStorage.setItem('userLevel', userData.level);
                 localStorage.setItem('onboarded', 'true');
-            } catch (err) {}
+            } catch (err) {
+                console.error('Error saving to localStorage:', err);
+            }
 
-            // Show loading state
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerHTML = 'Submitting...';
-            submitBtn.disabled = true;
-
-            // Send to Google Sheets
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData)
+            // Submit to FormSubmit.io for NEW users only
+            submitToFormSubmit({
+                ...userData,
+                totalUsers: totalUsers,
+                userType: 'NEW_USER',
+                timestamp: new Date().toISOString()
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    formMessage.innerHTML = '<div class="message success">Thank you! Data saved successfully.</div>';
-                    
-                    // Show main content after successful submission
-                    setTimeout(() => {
-                        document.getElementById('welcome').classList.add('hidden');
-                        document.getElementById('navbar').classList.remove('hidden');
-                        document.getElementById('main-content').classList.remove('hidden');
-                        
-                        // Update user info
-                        const userInfo = document.getElementById('userInfo');
-                        if (userInfo) {
-                            userInfo.classList.remove('hidden');
-                            userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
-                        }
-                    }, 1500);
-                } else {
-                    throw new Error(data.message);
-                }
+            .then(() => {
+                formMessage.innerHTML = '<div class="message success">Thank you! Welcome to the FUTA Survival Guide.</div>';
+                
+                // Show main content after successful submission
+                setTimeout(() => showMainContent(userData), 1500);
             })
             .catch(error => {
-                console.error('Error:', error);
-                formMessage.innerHTML = '<div class="message error">Form submitted, but there was an issue saving data. You can still proceed.</div>';
+                console.error('FormSubmit error:', error);
+                formMessage.innerHTML = '<div class="message success">Welcome! You can now access the guide.</div>';
                 
-                // Still show main content even if save fails
-                setTimeout(() => {
-                    document.getElementById('welcome').classList.add('hidden');
-                    document.getElementById('navbar').classList.remove('hidden');
-                    document.getElementById('main-content').classList.remove('hidden');
-                }, 2000);
+                // Still show content even if FormSubmit fails
+                setTimeout(() => showMainContent(userData), 1000);
             })
             .finally(() => {
                 submitBtn.innerHTML = 'Access Guide';
                 submitBtn.disabled = false;
             });
+        }
+
+        // FormSubmit.io submission function
+        async function submitToFormSubmit(formData) {
+            return new Promise((resolve, reject) => {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://formsubmit.co/abideenyakub08@gmail.com';
+                form.style.display = 'none';
+                
+                // Add all form fields
+                const fields = {
+                    '_subject': `FUTA Guide Access - ${formData.name}`,
+                    '_template': 'table',
+                    '_captcha': 'false',
+                    'name': formData.name,
+                    'department': formData.department,
+                    'whatsapp': formData.whatsapp,
+                    'isFresher': formData.isFresher,
+                    'level': formData.level || 'N/A',
+                    'totalUsers': formData.totalUsers || 'N/A',
+                    'userType': formData.userType || 'RETURNING_USER',
+                    'timestamp': formData.timestamp || new Date().toISOString()
+                };
+                
+                Object.entries(fields).forEach(([name, value]) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = name;
+                    input.value = value;
+                    form.appendChild(input);
+                });
+                
+                // Create iframe for silent submission
+                const iframe = document.createElement('iframe');
+                iframe.name = 'formsubmit-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                form.target = 'formsubmit-iframe';
+                
+                document.body.appendChild(form);
+                form.submit();
+                
+                // Clean up and resolve
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function showMainContent(userData) {
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('navbar').classList.remove('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            
+            // Update user info
+            const userInfo = document.getElementById('userInfo');
+            if (userInfo) {
+                userInfo.classList.remove('hidden');
+                userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
+            }
         }
 
         function handleFeedbackSubmit(e) {
@@ -3205,31 +3377,25 @@
             submitBtn.disabled = true;
             
             const formData = {
-                feedbackName: feedbackName,
-                feedbackEmail: feedbackEmail,
-                feedbackMessage: feedbackMessage
+                name: feedbackName,
+                email: feedbackEmail,
+                message: feedbackMessage,
+                type: 'FEEDBACK',
+                timestamp: new Date().toISOString()
             };
             
-            // Send to Google Sheets
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
+            // Submit to FormSubmit.io
+            submitToFormSubmit({
+                ...formData,
+                '_subject': `FUTA Guide Feedback - ${feedbackName}`
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    feedbackMessageDiv.innerHTML = '<div class="message success">Thank you for your feedback! It has been saved.</div>';
-                    document.getElementById('feedbackForm').reset();
-                } else {
-                    throw new Error(data.message);
-                }
+            .then(() => {
+                feedbackMessageDiv.innerHTML = '<div class="message success">Thank you for your feedback! It has been submitted successfully.</div>';
+                document.getElementById('feedbackForm').reset();
             })
             .catch(error => {
-                console.error('Error:', error);
-                feedbackMessageDiv.innerHTML = '<div class="message error">Feedback submitted, but there was an issue saving it.</div>';
+                console.error('Feedback submission error:', error);
+                feedbackMessageDiv.innerHTML = '<div class="message error">There was an issue submitting your feedback. Please try again.</div>';
             })
             .finally(() => {
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
@@ -3356,10 +3522,12 @@
             
             // Collect form data
             const formData = {
-                marketingName: name,
-                marketingDepartment: department,
-                marketingWhatsapp: whatsapp,
-                purpose: purpose
+                name: name,
+                department: department,
+                whatsapp: whatsapp,
+                purpose: purpose,
+                type: 'MARKETPLACE_SUBMISSION',
+                timestamp: new Date().toISOString()
             };
             
             if (purpose === 'service') {
@@ -3375,26 +3543,18 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             submitBtn.disabled = true;
             
-            // Send to Google Sheets
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
+            // Submit to FormSubmit.io
+            submitToFormSubmit({
+                ...formData,
+                '_subject': `FUTA Marketplace - ${purpose === 'service' ? 'Service Request' : 'Business Advertisement'}`
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    formMessage.innerHTML = '<div class="message success">Thank you! Your submission has been received and saved.</div>';
-                    document.getElementById('marketingForm').reset();
-                } else {
-                    throw new Error(data.message);
-                }
+            .then(() => {
+                formMessage.innerHTML = '<div class="message success">Thank you! Your submission has been received successfully.</div>';
+                document.getElementById('marketingForm').reset();
             })
             .catch(error => {
-                console.error('Error:', error);
-                formMessage.innerHTML = '<div class="message error">Submission received, but there was an issue saving it.</div>';
+                console.error('Marketing form submission error:', error);
+                formMessage.innerHTML = '<div class="message error">There was an issue submitting your request. Please try again.</div>';
             })
             .finally(() => {
                 submitBtn.innerHTML = '📤 Submit Request';
@@ -3672,6 +3832,52 @@
             };
             
             return iconMap[iconName] || 'file-alt';
+        }
+
+        // Admin functions
+        function showAdminStats() {
+            const stats = document.getElementById('adminStats');
+            if (stats) {
+                stats.classList.remove('hidden');
+                updateStats();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalUsers').textContent = UserManager.getUserCount();
+            document.getElementById('newToday').textContent = UserManager.getNewUsersToday();
+            document.getElementById('returningUsers').textContent = UserManager.getReturningUsers();
+        }
+
+        function exportUserData() {
+            const users = UserManager.getAllUsers();
+            const csv = convertToCSV(users);
+            downloadCSV(csv, 'futa_guide_users.csv');
+        }
+
+        function convertToCSV(users) {
+            const headers = ['Name', 'Department', 'WhatsApp', 'First Access', 'Last Access', 'Access Count', 'User Type'];
+            const rows = users.map(user => [
+                `"${user.name}"`,
+                `"${user.department}"`,
+                `"${user.whatsapp}"`,
+                `"${user.firstAccess}"`,
+                `"${user.lastAccess}"`,
+                user.accessCount,
+                user.isReturning ? 'Returning' : 'New'
+            ]);
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
         }
     </script>
 </body>
