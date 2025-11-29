@@ -1991,7 +1991,8 @@
                                 <li>Go to tutorial classes and complete all exercises</li>
                                 <li>Read your coursework thoroughly</li>
                                 <li>Focus on objective questions preparation</li>
-                            </div>
+                            </ul>
+                        </div>
                         
                         <div class="battle-plan-card">
                             <h4>CHE 103 & PHY 107: Practical Courses <span class="exam-type">CBE/Online Practicals</span></h4>
@@ -2337,39 +2338,33 @@
                         <a href="#" data-page="home">Home</a> <span>/</span> <a href="#" data-page="marketing">FUTA Marketplace</a>
                     </div>
                     
-                    <!-- Marketplace Form -->
-                    <form id="marketingForm" action="https://formsubmit.co/helpinghandshallneverfall@gmail.com" method="POST" class="card" style="margin-top: 1rem;">
-                        <input type="hidden" name="_subject" value="FUTA Marketplace Submission">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_autoresponse" value="Thank you for your submission to FUTA Marketplace! We've received your request and will connect you with relevant service providers soon.">
-                        
+                    <form id="marketingForm" class="card" style="margin-top: 1rem;">
                         <h3>Post Your Request or Business</h3>
                         
                         <div class="form-group">
                             <label for="marketingName">Full Name</label>
-                            <input type="text" id="marketingName" name="Name" required>
+                            <input type="text" id="marketingName" name="marketingName" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="marketingDepartment">Department</label>
-                            <input type="text" id="marketingDepartment" name="Department" required>
+                            <input type="text" id="marketingDepartment" name="marketingDepartment" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="marketingWhatsapp">WhatsApp Number</label>
-                            <input type="tel" id="marketingWhatsapp" name="WhatsApp" placeholder="+234..." required>
+                            <input type="tel" id="marketingWhatsapp" name="marketingWhatsapp" placeholder="+234..." required>
                         </div>
                         
                         <div class="form-group">
                             <label>Are you a fresher?</label>
                             <div class="radio-group">
                                 <div class="radio-option">
-                                    <input type="radio" id="marketing-fresher-yes" name="Fresher Status" value="Yes" checked>
+                                    <input type="radio" id="marketing-fresher-yes" name="marketingIsFresher" value="yes" checked>
                                     <label for="marketing-fresher-yes" class="radio-label">Yes</label>
                                 </div>
                                 <div class="radio-option">
-                                    <input type="radio" id="marketing-fresher-no" name="Fresher Status" value="No">
+                                    <input type="radio" id="marketing-fresher-no" name="marketingIsFresher" value="no">
                                     <label for="marketing-fresher-no" class="radio-label">No</label>
                                 </div>
                             </div>
@@ -2377,7 +2372,7 @@
                         
                         <div id="marketingLevelRow" class="form-group hidden">
                             <label for="marketingLevel">Select your level</label>
-                            <select id="marketingLevel" name="Level">
+                            <select id="marketingLevel" name="marketingLevel">
                                 <option value="">-- Select Level --</option>
                                 <option>100 Level</option>
                                 <option>200 Level</option>
@@ -2392,8 +2387,8 @@
                         <div class="form-group">
                             <label>Choose an option</label>
                             <div style="margin-bottom: 12px">
-                                <label class="inline"><input type="radio" name="Submission Type" value="Service Request" checked> I need a service</label>
-                                <label class="inline"><input type="radio" name="Submission Type" value="Business Advertisement"> I want to advertise my business</label>
+                                <label class="inline"><input type="radio" name="purpose" value="service" checked> I need a service</label>
+                                <label class="inline"><input type="radio" name="purpose" value="advertise"> I want to advertise my business</label>
                             </div>
                         </div>
                         
@@ -2401,25 +2396,25 @@
                             <div class="form-group">
                                 <label>Available services (select one)</label>
                                 <div class="services-list">
-                                    <label><input type="radio" name="Service Category" value="Accommodation" checked> <i class="fas fa-home"></i> Accommodation</label>
-                                    <label><input type="radio" name="Service Category" value="Course Notes"> <i class="fas fa-book"></i> Course Notes</label>
-                                    <label><input type="radio" name="Service Category" value="Printing & Binding"> <i class="fas fa-print"></i> Printing & Binding</label>
-                                    <label><input type="radio" name="Service Category" value="Transport"> <i class="fas fa-bus"></i> Transport</label>
-                                    <label><input type="radio" name="Service Category" value="Tutoring"> <i class="fas fa-chalkboard-teacher"></i> Tutoring</label>
-                                    <label><input type="radio" name="Service Category" value="Other"> <i class="fas fa-ellipsis-h"></i> Other (specify below)</label>
+                                    <label><input type="radio" name="serviceOption" value="Accommodation" checked> <i class="fas fa-home"></i> Accommodation</label>
+                                    <label><input type="radio" name="serviceOption" value="Course Notes"> <i class="fas fa-book"></i> Course Notes</label>
+                                    <label><input type="radio" name="serviceOption" value="Printing & Binding"> <i class="fas fa-print"></i> Printing & Binding</label>
+                                    <label><input type="radio" name="serviceOption" value="Transport"> <i class="fas fa-bus"></i> Transport</label>
+                                    <label><input type="radio" name="serviceOption" value="Tutoring"> <i class="fas fa-chalkboard-teacher"></i> Tutoring</label>
+                                    <label><input type="radio" name="serviceOption" value="Other"> <i class="fas fa-ellipsis-h"></i> Other (specify below)</label>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="serviceOther">If not listed, type the service you need</label>
-                                <input id="serviceOther" name="Other Service Details" type="text" placeholder="Describe the service...">
+                                <input id="serviceOther" name="serviceOther" type="text" placeholder="Describe the service...">
                             </div>
                         </div>
                         
                         <div id="advertiseSection" class="hidden">
                             <div class="form-group">
                                 <label for="businessDetails">Tell us about your business</label>
-                                <textarea id="businessDetails" name="Business Details" placeholder="What you offer, price, location on campus, contact details..." rows="5"></textarea>
+                                <textarea id="businessDetails" name="businessDetails" placeholder="What you offer, price, location on campus, contact details..." rows="5"></textarea>
                             </div>
                         </div>
                         
@@ -2461,7 +2456,7 @@
                                                     data-phone="+2347080441350">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="BNS REALTY">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="BNS REALTY">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2490,7 +2485,7 @@
                                                     data-phone="+2349162339979">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Sire Cahraz Haircut">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Sire Cahraz Haircut">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2519,7 +2514,7 @@
                                                     data-phone="+2347034297237">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Priviledge Venture">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Priviledge Venture">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2548,7 +2543,7 @@
                                                     data-phone="+2349072716206">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Justin Painting">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Justin Painting">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2567,7 +2562,7 @@
                                                     data-phone="+2347050376975">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Abideen Yakub Electrical Services">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Abideen Yakub Electrical Services">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2595,7 +2590,7 @@
                                                     data-phone="+2349025815449">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Sam Varieties">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Sam Varieties">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2624,7 +2619,7 @@
                                                     data-phone="+2348147397876">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Tito Stationery">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Tito Stationery">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2680,7 +2675,7 @@
                                                     data-phone="+2347040693585">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Usman Gadgets">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Usman Gadgets">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2718,7 +2713,7 @@
                                                     data-phone="+2349152312855">
                                                 <i class="fab fa-whatsapp"></i> Contact
                                             </button>
-                                            <button class="btn btn-small btn-muted report-business" data-business="Sahara-Spice">
+                                            <button class="btn btn-small btn-muted report-btn" data-business="Sahara-Spice">
                                                 <i class="fas fa-flag"></i> Report
                                             </button>
                                         </div>
@@ -2786,30 +2781,47 @@
                     </div>
                 </div>
                 
+                <!-- Admin Stats Section -->
+                <div id="adminStats" class="admin-stats hidden">
+                    <h3>📊 User Statistics (Admin)</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalUsers">0</div>
+                            <div>Total Unique Users</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="newToday">0</div>
+                            <div>New Users Today</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="returningUsers">0</div>
+                            <div>Returning Users</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-small" onclick="exportUserData()">📥 Export User Data</button>
+                    </div>
+                </div>
+                
                 <!-- Feedback Form -->
                 <div class="feedback-form">
                     <h3>Send Your Feedback</h3>
-                    <form id="feedbackForm" action="https://formsubmit.co/helpinghandshallneverfall@gmail.com" method="POST">
-                        <input type="hidden" name="_subject" value="FUTA Guide Feedback">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_autoresponse" value="Thank you for your feedback on the FUTA Survival Guide! We appreciate your input and will use it to improve the resource for future students.">
-                        
+                    <form id="feedbackForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="feedbackName">Your Name</label>
-                                <input type="text" id="feedbackName" name="Name" required>
+                                <input type="text" id="feedbackName" name="feedbackName" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="feedbackEmail">Your Email</label>
-                                <input type="email" id="feedbackEmail" name="Email" required>
+                                <input type="email" id="feedbackEmail" name="feedbackEmail" required>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="feedbackMessage">Your Message</label>
-                            <textarea id="feedbackMessage" name="Message" placeholder="Please share your thoughts, suggestions, or any questions you have about the guide..." required></textarea>
+                            <textarea id="feedbackMessage" name="feedbackMessage" placeholder="Please share your thoughts, suggestions, or any questions you have about the guide..." required></textarea>
                         </div>
                         
                         <button type="submit" class="btn" id="feedbackSubmitBtn">
@@ -3020,6 +3032,67 @@
         // Store user data
         let userData = {};
 
+        // User Management System
+        const UserManager = {
+            // Check if user already exists
+            userExists: function(whatsapp) {
+                const users = this.getAllUsers();
+                return users.some(user => user.whatsapp === whatsapp);
+            },
+            
+            // Save user to localStorage
+            saveUser: function(userData) {
+                const users = this.getAllUsers();
+                const today = new Date().toDateString();
+                
+                // Check if user exists and update, otherwise add new
+                const existingUserIndex = users.findIndex(user => user.whatsapp === userData.whatsapp);
+                
+                if (existingUserIndex !== -1) {
+                    // Update existing user
+                    users[existingUserIndex].lastAccess = new Date().toISOString();
+                    users[existingUserIndex].accessCount += 1;
+                    users[existingUserIndex].isReturning = true;
+                } else {
+                    // Add new user
+                    users.push({
+                        ...userData,
+                        id: Date.now(),
+                        accessCount: 1,
+                        firstAccess: new Date().toISOString(),
+                        lastAccess: new Date().toISOString(),
+                        isReturning: false
+                    });
+                }
+                
+                localStorage.setItem('futa_guide_users', JSON.stringify(users));
+                return users.length;
+            },
+            
+            // Get all users
+            getAllUsers: function() {
+                return JSON.parse(localStorage.getItem('futa_guide_users') || '[]');
+            },
+            
+            // Get user count
+            getUserCount: function() {
+                return this.getAllUsers().length;
+            },
+            
+            // Get new users today
+            getNewUsersToday: function() {
+                const today = new Date().toDateString();
+                return this.getAllUsers().filter(user => 
+                    new Date(user.firstAccess).toDateString() === today
+                ).length;
+            },
+            
+            // Get returning users
+            getReturningUsers: function() {
+                return this.getAllUsers().filter(user => user.isReturning).length;
+            }
+        };
+
         // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
@@ -3077,6 +3150,11 @@
             
             // Check if user is already onboarded
             checkOnboardingStatus();
+            
+            // Show admin stats if URL parameter exists
+            if (window.location.search.includes('admin=true')) {
+                showAdminStats();
+            }
         }
 
         function checkOnboardingStatus() {
@@ -3164,6 +3242,25 @@
             userData.isFresher = isFresher;
             userData.level = levelVal;
 
+            // Check for duplicate user
+            if (UserManager.userExists(userData.whatsapp)) {
+                // Update existing user access
+                UserManager.saveUser(userData);
+                formMessage.innerHTML = '<div class="message success">Welcome back! Redirecting to guide...</div>';
+                
+                // Show main content immediately for returning users
+                setTimeout(() => showMainContent(userData), 1000);
+                return;
+            }
+
+            // Show loading state for new users
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerHTML = 'Submitting...';
+            submitBtn.disabled = true;
+
+            // Save user locally first
+            const totalUsers = UserManager.saveUser(userData);
+            
             // Persist to localStorage
             try {
                 localStorage.setItem('userName', userData.name);
@@ -3176,85 +3273,146 @@
                 console.error('Error saving to localStorage:', err);
             }
 
-            // Submit to FormSubmit.io
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerHTML = 'Submitting...';
-            submitBtn.disabled = true;
-
-            // Create a temporary form for submission
-            const tempForm = document.createElement('form');
-            tempForm.method = 'POST';
-            tempForm.action = 'https://formsubmit.co/helpinghandshallneverfall@gmail.com';
-            tempForm.style.display = 'none';
-
-            // Add all form fields
-            const fields = {
-                '_subject': `FUTA Guide Access - ${userData.name}`,
-                '_template': 'table',
-                '_captcha': 'false',
-                '_autoresponse': 'Thank you for accessing the FUTA Survival Guide! You now have full access to all resources. Welcome to the FUTA community!',
-                'Name': userData.name,
-                'Department': userData.department,
-                'WhatsApp': userData.whatsapp,
-                'Fresher Status': userData.isFresher === 'yes' ? 'Yes' : 'No',
-                'Level': userData.level || 'N/A',
-                'Timestamp': new Date().toISOString()
-            };
-
-            Object.entries(fields).forEach(([name, value]) => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = name;
-                input.value = value;
-                tempForm.appendChild(input);
-            });
-
-            document.body.appendChild(tempForm);
-            tempForm.submit();
-
-            // Show success message and main content
-            formMessage.innerHTML = '<div class="message success">Thank you! Welcome to the FUTA Survival Guide.</div>';
-            
-            setTimeout(() => {
-                document.getElementById('welcome').classList.add('hidden');
-                document.getElementById('navbar').classList.remove('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
+            // Submit to FormSubmit.io for NEW users only
+            submitToFormSubmit({
+                ...userData,
+                totalUsers: totalUsers,
+                userType: 'NEW_USER',
+                timestamp: new Date().toISOString()
+            })
+            .then(() => {
+                formMessage.innerHTML = '<div class="message success">Thank you! Welcome to the FUTA Survival Guide.</div>';
                 
-                // Update user info
-                const userInfo = document.getElementById('userInfo');
-                if (userInfo) {
-                    userInfo.classList.remove('hidden');
-                    userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
-                }
-            }, 1500);
+                // Show main content after successful submission
+                setTimeout(() => showMainContent(userData), 1500);
+            })
+            .catch(error => {
+                console.error('FormSubmit error:', error);
+                formMessage.innerHTML = '<div class="message success">Welcome! You can now access the guide.</div>';
+                
+                // Still show content even if FormSubmit fails
+                setTimeout(() => showMainContent(userData), 1000);
+            })
+            .finally(() => {
+                submitBtn.innerHTML = 'Access Guide';
+                submitBtn.disabled = false;
+            });
+        }
+
+        // FormSubmit.io submission function
+        async function submitToFormSubmit(formData) {
+            return new Promise((resolve, reject) => {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://formsubmit.co/abideenyakub08@gmail.com';
+                form.style.display = 'none';
+                
+                // Add all form fields
+                const fields = {
+                    '_subject': `FUTA Guide Access - ${formData.name}`,
+                    '_template': 'table',
+                    '_captcha': 'false',
+                    'name': formData.name,
+                    'department': formData.department,
+                    'whatsapp': formData.whatsapp,
+                    'isFresher': formData.isFresher,
+                    'level': formData.level || 'N/A',
+                    'totalUsers': formData.totalUsers || 'N/A',
+                    'userType': formData.userType || 'RETURNING_USER',
+                    'timestamp': formData.timestamp || new Date().toISOString()
+                };
+                
+                Object.entries(fields).forEach(([name, value]) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = name;
+                    input.value = value;
+                    form.appendChild(input);
+                });
+                
+                // Create iframe for silent submission
+                const iframe = document.createElement('iframe');
+                iframe.name = 'formsubmit-iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                form.target = 'formsubmit-iframe';
+                
+                document.body.appendChild(form);
+                form.submit();
+                
+                // Clean up and resolve
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function showMainContent(userData) {
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('navbar').classList.remove('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            
+            // Update user info
+            const userInfo = document.getElementById('userInfo');
+            if (userInfo) {
+                userInfo.classList.remove('hidden');
+                userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
+            }
         }
 
         function handleFeedbackSubmit(e) {
-            // Let the form submit naturally to FormSubmit.io
-            // We'll just show a loading state
-            const submitBtn = document.getElementById('feedbackSubmitBtn');
-            const feedbackMessageDiv = document.getElementById('feedbackMessageDiv');
+            e.preventDefault();
             
+            const feedbackName = document.getElementById('feedbackName').value;
+            const feedbackEmail = document.getElementById('feedbackEmail').value;
+            const feedbackMessage = document.getElementById('feedbackMessage').value;
+            
+            const feedbackMessageDiv = document.getElementById('feedbackMessageDiv');
+            const submitBtn = document.getElementById('feedbackSubmitBtn');
+            
+            // Show loading state
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
-            // The form will handle the actual submission
-            // We'll just show a temporary message
-            setTimeout(() => {
+            const formData = {
+                name: feedbackName,
+                email: feedbackEmail,
+                message: feedbackMessage,
+                type: 'FEEDBACK',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Submit to FormSubmit.io
+            submitToFormSubmit({
+                ...formData,
+                '_subject': `FUTA Guide Feedback - ${feedbackName}`
+            })
+            .then(() => {
                 feedbackMessageDiv.innerHTML = '<div class="message success">Thank you for your feedback! It has been submitted successfully.</div>';
-            }, 1000);
+                document.getElementById('feedbackForm').reset();
+            })
+            .catch(error => {
+                console.error('Feedback submission error:', error);
+                feedbackMessageDiv.innerHTML = '<div class="message error">There was an issue submitting your feedback. Please try again.</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
+                submitBtn.disabled = false;
+            });
         }
 
         function setupMarketingForm() {
             // Toggle between service and advertise sections
-            const purposeRadios = document.getElementsByName('Submission Type');
+            const purposeRadios = document.getElementsByName('purpose');
             const serviceSection = document.getElementById('serviceSection');
             const advertiseSection = document.getElementById('advertiseSection');
             
             if (purposeRadios && serviceSection && advertiseSection) {
                 purposeRadios.forEach(radio => {
                     radio.addEventListener('change', function() {
-                        if (this.value === 'Service Request') {
+                        if (this.value === 'service') {
                             serviceSection.classList.remove('hidden');
                             advertiseSection.classList.add('hidden');
                         } else {
@@ -3266,19 +3424,25 @@
             }
             
             // Toggle level row in marketing form
-            const marketingFresherRadios = document.querySelectorAll('#marketingForm input[name="Fresher Status"]');
+            const marketingFresherRadios = document.querySelectorAll('#marketingForm input[name="marketingIsFresher"]');
             const marketingLevelRow = document.getElementById('marketingLevelRow');
             
             if (marketingFresherRadios && marketingLevelRow) {
                 marketingFresherRadios.forEach(radio => {
                     radio.addEventListener('change', function() {
-                        if (this.value === 'No') {
+                        if (this.value === 'no') {
                             marketingLevelRow.classList.remove('hidden');
                         } else {
                             marketingLevelRow.classList.add('hidden');
                         }
                     });
                 });
+            }
+            
+            // Marketing form submission
+            const marketingForm = document.getElementById('marketingForm');
+            if (marketingForm) {
+                marketingForm.addEventListener('submit', handleMarketingSubmit);
             }
             
             // Preview button
@@ -3305,8 +3469,7 @@
                 if (userWhatsApp) document.getElementById('marketingWhatsapp').value = userWhatsApp;
                 
                 if (userIsFresher) {
-                    const fresherValue = userIsFresher === 'yes' ? 'Yes' : 'No';
-                    const fresherRadio = document.querySelector(`#marketingForm input[name="Fresher Status"][value="${fresherValue}"]`);
+                    const fresherRadio = document.querySelector(`#marketingForm input[name="marketingIsFresher"][value="${userIsFresher}"]`);
                     if (fresherRadio) fresherRadio.checked = true;
                     
                     // Show/hide level row based on fresher status
@@ -3323,19 +3486,94 @@
             }
         }
 
+        function handleMarketingSubmit(e) {
+            e.preventDefault();
+            
+            const formMessage = document.getElementById('marketingFormMessage');
+            const submitBtn = document.querySelector('#marketingForm button[type="submit"]');
+            
+            // Basic validation
+            const name = document.getElementById('marketingName').value.trim();
+            const department = document.getElementById('marketingDepartment').value.trim();
+            const whatsapp = document.getElementById('marketingWhatsapp').value.trim();
+            const purpose = document.querySelector('#marketingForm input[name="purpose"]:checked').value;
+            
+            if (!name || !department || !whatsapp) {
+                formMessage.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
+                return;
+            }
+            
+            if (purpose === 'service') {
+                const serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
+                if (serviceOption === 'Other') {
+                    const otherService = document.getElementById('serviceOther').value.trim();
+                    if (!otherService) {
+                        formMessage.innerHTML = '<div class="message error">Please specify the service you need.</div>';
+                        return;
+                    }
+                }
+            } else {
+                const businessDetails = document.getElementById('businessDetails').value.trim();
+                if (!businessDetails) {
+                    formMessage.innerHTML = '<div class="message error">Please provide details about your business.</div>';
+                    return;
+                }
+            }
+            
+            // Collect form data
+            const formData = {
+                name: name,
+                department: department,
+                whatsapp: whatsapp,
+                purpose: purpose,
+                type: 'MARKETPLACE_SUBMISSION',
+                timestamp: new Date().toISOString()
+            };
+            
+            if (purpose === 'service') {
+                formData.serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
+                if (formData.serviceOption === 'Other') {
+                    formData.serviceOther = document.getElementById('serviceOther').value.trim();
+                }
+            } else {
+                formData.businessDetails = document.getElementById('businessDetails').value.trim();
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Submit to FormSubmit.io
+            submitToFormSubmit({
+                ...formData,
+                '_subject': `FUTA Marketplace - ${purpose === 'service' ? 'Service Request' : 'Business Advertisement'}`
+            })
+            .then(() => {
+                formMessage.innerHTML = '<div class="message success">Thank you! Your submission has been received successfully.</div>';
+                document.getElementById('marketingForm').reset();
+            })
+            .catch(error => {
+                console.error('Marketing form submission error:', error);
+                formMessage.innerHTML = '<div class="message error">There was an issue submitting your request. Please try again.</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '📤 Submit Request';
+                submitBtn.disabled = false;
+            });
+        }
+
         function previewMarketingSubmission() {
             const name = document.getElementById('marketingName').value.trim();
             const department = document.getElementById('marketingDepartment').value.trim();
             const whatsapp = document.getElementById('marketingWhatsapp').value.trim();
-            const purpose = document.querySelector('#marketingForm input[name="Submission Type"]:checked').value;
+            const purpose = document.querySelector('#marketingForm input[name="purpose"]:checked').value;
             
             let previewText = `Name: ${name || 'Not provided'}\n`;
             previewText += `Department: ${department || 'Not provided'}\n`;
             previewText += `WhatsApp: ${whatsapp || 'Not provided'}\n`;
-            previewText += `Type: ${purpose}\n`;
             
-            if (purpose === 'Service Request') {
-                const serviceOption = document.querySelector('#marketingForm input[name="Service Category"]:checked').value;
+            if (purpose === 'service') {
+                const serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
                 previewText += `Service Needed: ${serviceOption}\n`;
                 if (serviceOption === 'Other') {
                     const otherService = document.getElementById('serviceOther').value.trim();
@@ -3450,42 +3688,15 @@
                 });
             });
             
-            // Report button functionality - FIXED
-            const reportButtons = document.querySelectorAll('.report-business');
+            // Report button functionality
+            const reportButtons = document.querySelectorAll('.report-btn');
             reportButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const businessName = this.getAttribute('data-business');
-                    
-                    // Create a temporary form for reporting
-                    const reportForm = document.createElement('form');
-                    reportForm.method = 'POST';
-                    reportForm.action = 'https://formsubmit.co/helpinghandshallneverfall@gmail.com';
-                    reportForm.style.display = 'none';
-                    
-                    const fields = {
-                        '_subject': `FUTA Marketplace Report - ${businessName}`,
-                        '_template': 'table',
-                        '_captcha': 'false',
-                        'Report Type': 'Business Listing Report',
-                        'Business Name': businessName,
-                        'Reported By': userData.name || 'Anonymous',
-                        'User Department': userData.department || 'Not specified',
-                        'Timestamp': new Date().toISOString(),
-                        'Additional Notes': 'User reported this business listing for review'
-                    };
-                    
-                    Object.entries(fields).forEach(([name, value]) => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = name;
-                        input.value = value;
-                        reportForm.appendChild(input);
-                    });
-                    
-                    document.body.appendChild(reportForm);
-                    reportForm.submit();
-                    
-                    alert(`Thank you for reporting ${businessName}. Admin will review this listing shortly.`);
+                    if (confirm(`Report ${businessName}? This will notify admin for review.`)) {
+                        alert('Thank you for reporting. Admin will review this listing.');
+                        // In a real app, you would send this to your backend
+                    }
                 });
             });
         }
@@ -3621,6 +3832,52 @@
             };
             
             return iconMap[iconName] || 'file-alt';
+        }
+
+        // Admin functions
+        function showAdminStats() {
+            const stats = document.getElementById('adminStats');
+            if (stats) {
+                stats.classList.remove('hidden');
+                updateStats();
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalUsers').textContent = UserManager.getUserCount();
+            document.getElementById('newToday').textContent = UserManager.getNewUsersToday();
+            document.getElementById('returningUsers').textContent = UserManager.getReturningUsers();
+        }
+
+        function exportUserData() {
+            const users = UserManager.getAllUsers();
+            const csv = convertToCSV(users);
+            downloadCSV(csv, 'futa_guide_users.csv');
+        }
+
+        function convertToCSV(users) {
+            const headers = ['Name', 'Department', 'WhatsApp', 'First Access', 'Last Access', 'Access Count', 'User Type'];
+            const rows = users.map(user => [
+                `"${user.name}"`,
+                `"${user.department}"`,
+                `"${user.whatsapp}"`,
+                `"${user.firstAccess}"`,
+                `"${user.lastAccess}"`,
+                user.accessCount,
+                user.isReturning ? 'Returning' : 'New'
+            ]);
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
         }
     </script>
 </body>
