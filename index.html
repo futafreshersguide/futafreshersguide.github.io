@@ -6,7 +6,6 @@
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Your existing CSS remains exactly the same */
         :root {
             --primary: #003366;
             --secondary: #990000;
@@ -1275,6 +1274,139 @@
             border-bottom: 2px solid var(--accent);
         }
         
+        /* NEW: Category-specific business form styles */
+        .category-form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--accent);
+            display: none;
+        }
+        
+        .category-form-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .category-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        
+        .category-form-title {
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .close-category-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-500);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-category-form:hover {
+            color: var(--danger);
+        }
+        
+        .add-business-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+        
+        .add-business-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-empty-state {
+            text-align: center;
+            color: var(--gray-600);
+            font-style: italic;
+            padding: 2rem;
+            background: var(--gray-100);
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px dashed var(--gray-300);
+        }
+        
+        .category-empty-state h4 {
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Business Form Styles */
+        .business-form-notice {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .business-form-notice ul {
+            margin: 10px 0 0 20px;
+        }
+        
+        .business-form-notice li {
+            margin-bottom: 5px;
+        }
+        
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+        
+        .submission-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .submission-success h4 {
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+        
+        .submission-success ul {
+            text-align: left;
+            max-width: 500px;
+            margin: 1rem auto;
+        }
+        
+        .submission-success li {
+            margin-bottom: 8px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .welcome-section h1 {
@@ -1364,6 +1496,16 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
+            }
+            
+            .category-form-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .close-category-form {
+                align-self: flex-end;
             }
         }
         
@@ -2429,8 +2571,7 @@
                     </div>
                     
                     <h3>How to Know Your Exact Courses</h3>
-                    <ul>
-                        <li><strong>Check Your Course Form:</strong> During online registration, carefully review all courses assigned to you</li>
+                    <ul><li><strong>Check your course form during course registration</strong> - Carefully review all courses assigned to you during online registration</li>
                         <li><strong>Consult 200 Level Students:</strong> Reach out to seniors in your department - they've been through this before</li>
                         <li><strong>Departmental Notice Boards:</strong> Check for course information posted by your department</li>
                         <li><strong>Ask Your Course Adviser:</strong> Each department has course advisers for fresh students</li>
@@ -2460,7 +2601,7 @@
                     <h3>Need Help?</h3>
                     <p>If you're unsure about your departmental courses or who to ask:</p>
                     <ul>
-                        <li><strong>Check your course registration</strong> - Do not tick and submit your courses during online course registration, check their contents</li>
+                        <li><strong>Check your course form during registration</strong> - Carefully review all courses assigned to you during online registration</li>
                         <li><strong>Reach out to me directly</strong> - I can help connect you with the right people</li>
                         <li><strong>Join your departmental WhatsApp group</strong> - this is where important information is shared</li>
                         <li><strong>Visit your department office</strong> - the administrative staff can guide you</li>
@@ -2479,7 +2620,7 @@
             </div>
         </section>
         
-        <!-- Marketing Section - IMPROVED -->
+        <!-- Marketing Section - ENHANCED WITH CATEGORY FORMS -->
         <section id="marketing" class="content-section content-page">
             <div class="container">
                 <div class="marketplace-header">
@@ -2582,96 +2723,101 @@
                     <a href="#" data-page="home">Home</a> <span>/</span> <a href="#" data-page="marketing">FUTA Marketplace</a>
                 </div>
                 
-                <form id="marketingForm" class="card" style="margin-top: 1rem;">
-                    <h3>Post Your Request or Business</h3>
+                <!-- Business Submission Form
+                <form id="businessSubmissionForm" class="card" style="margin-top: 1rem;">
+                    <h3>📝 Add Your Business to FUTA Marketplace</h3>
+                    <p>Fill out this form to submit your business for approval. Your business will be reviewed and published within 24 hours.</p>
                     
-                    <div class="form-group">
-                        <label for="marketingName">Full Name</label>
-                        <input type="text" id="marketingName" name="marketingName" required>
+                    <div class="business-form-notice">
+                        <h4>📋 Professional Presentation Matters!</h4>
+                        <p>Your business will be published exactly as you enter it. Please ensure:</p>
+                        <ul>
+                            <li>✅ Business name is clear and professional</li>
+                            <li>✅ Description is detailed and appealing</li>
+                            <li>✅ Contact information is correct</li>
+                            <li>✅ Pricing is clear and accurate</li>
+                        </ul>
+                        <p><em>Admin will review and approve before publishing</em></p>
                     </div>
                     
                     <div class="form-group">
-                        <label for="marketingDepartment">Department</label>
-                        <input type="text" id="marketingDepartment" name="marketingDepartment" required>
+                        <label for="businessName">Business Name *</label>
+                        <input type="text" id="businessName" name="businessName" placeholder="e.g., BNS REALTY" required>
+                        <small>Make it professional - this is how it will be published</small>
                     </div>
                     
                     <div class="form-group">
-                        <label for="marketingWhatsapp">WhatsApp Number</label>
-                        <input type="tel" id="marketingWhatsapp" name="marketingWhatsapp" placeholder="+234..." required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Are you a fresher?</label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="marketing-fresher-yes" name="marketingIsFresher" value="yes" checked>
-                                <label for="marketing-fresher-yes" class="radio-label">Yes</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="marketing-fresher-no" name="marketingIsFresher" value="no">
-                                <label for="marketing-fresher-no" class="radio-label">No</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="marketingLevelRow" class="form-group hidden">
-                        <label for="marketingLevel">Select your level</label>
-                        <select id="marketingLevel" name="marketingLevel">
-                            <option value="">-- Select Level --</option>
-                            <option>100 Level</option>
-                            <option>200 Level</option>
-                            <option>300 Level</option>
-                            <option>400 Level</option>
-                            <option>500 Level</option>
+                        <label for="businessCategory">Business Category *</label>
+                        <select id="businessCategory" name="businessCategory" required>
+                            <option value="">-- Select Category --</option>
+                            <option value="accommodation">🏠 Accommodation & Real Estate</option>
+                            <option value="grooming">💈 Personal Care & Grooming</option>
+                            <option value="printing">🖨️ Printing & Binding</option>
+                            <option value="home-services">🎨 Home Services & Decor</option>
+                            <option value="fashion">👗 Fashion & Accessories</option>
+                            <option value="academic">📚 Academic Supplies</option>
+                            <option value="tutoring">👨‍🏫 Tutoring & Education</option>
+                            <option value="gadgets">🔧 Gadgets & Electronics</option>
+                            <option value="transport">🚌 Transport Services</option>
+                            <option value="food">🍕 Food & Catering</option>
+                            <option value="tech">💻 Tech Services</option>
+                            <option value="events">🎉 Event Planning</option>
+                            <option value="other">🔍 Other Services</option>
                         </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessDescription">Business Description *</label>
+                        <textarea id="businessDescription" name="businessDescription" placeholder="Describe what you offer, your specialties, unique selling points..." rows="4" required></textarea>
+                        <small>Be detailed and professional - this builds trust with customers</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessLocation">Location/Address *</label>
+                        <input type="text" id="businessLocation" name="businessLocation" placeholder="e.g., FUTA South Gate, Northgate Area..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessPhone">Contact WhatsApp Number *</label>
+                        <input type="tel" id="businessPhone" name="businessPhone" placeholder="+234..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessPrice">Pricing Information</label>
+                        <input type="text" id="businessPrice" name="businessPrice" placeholder="e.g., ₦700 per cut, Contact for pricing...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessTags">Service Tags (comma separated)</label>
+                        <input type="text" id="businessTags" name="businessTags" placeholder="e.g., haircut, barbing, home service, delivery">
+                        <small>Help customers find your services easily</small>
                     </div>
                     
                     <hr>
                     
                     <div class="form-group">
-                        <label>Choose an option</label>
-                        <div style="margin-bottom: 12px">
-                            <label class="inline"><input type="radio" name="purpose" value="service" checked> I need a service</label>
-                            <label class="inline"><input type="radio" name="purpose" value="advertise"> I want to advertise my business</label>
-                        </div>
+                        <label for="submitterName">Your Name *</label>
+                        <input type="text" id="submitterName" name="submitterName" required>
                     </div>
                     
-                    <div id="serviceSection">
-                        <div class="form-group">
-                            <label>Available services (select one)</label>
-                            <div class="services-list">
-                                <label><input type="radio" name="serviceOption" value="Accommodation" checked> <i class="fas fa-home"></i> Accommodation</label>
-                                <label><input type="radio" name="serviceOption" value="Course Notes"> <i class="fas fa-book"></i> Course Notes</label>
-                                <label><input type="radio" name="serviceOption" value="Printing & Binding"> <i class="fas fa-print"></i> Printing & Binding</label>
-                                <label><input type="radio" name="serviceOption" value="Transport"> <i class="fas fa-bus"></i> Transport</label>
-                                <label><input type="radio" name="serviceOption" value="Tutoring"> <i class="fas fa-chalkboard-teacher"></i> Tutoring</label>
-                                <label><input type="radio" name="serviceOption" value="Other"> <i class="fas fa-ellipsis-h"></i> Other (specify below)</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="serviceOther">If not listed, type the service you need</label>
-                            <input id="serviceOther" name="serviceOther" type="text" placeholder="Describe the service...">
-                        </div>
+                    <div class="form-group">
+                        <label for="submitterDepartment">Your Department *</label>
+                        <input type="text" id="submitterDepartment" name="submitterDepartment" required>
                     </div>
                     
-                    <div id="advertiseSection" class="hidden">
-                        <div class="form-group">
-                            <label for="businessDetails">Tell us about your business</label>
-                            <textarea id="businessDetails" name="businessDetails" placeholder="What you offer, price, location on campus, contact details..." rows="5"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label for="submitterWhatsapp">Your WhatsApp Number *</label>
+                        <input type="tel" id="submitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
                     </div>
-                    
-                    <p class="help">After submission, interested students will contact you on WhatsApp. If the service you requested is not available, admin will forward your need and you'll be contacted soon.</p>
-                    
+
                     <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
-                        <button type="submit" class="btn">📤 Submit Request</button>
-                        <button type="button" id="previewBtn" class="btn btn-muted">🔍 Preview</button>
+                        <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                        <button type="button" id="businessPreviewBtn" class="btn btn-muted">🔍 Preview</button>
                     </div>
                     
-                    <div id="marketingFormMessage" class="help" style="margin-top: 10px"></div>
+                    <div id="businessFormMessage" class="help" style="margin-top: 10px"></div>
                 </form>
-                
+                --->
                 <!-- Business Listings -->
                 <section id="business-listings" class="card" style="margin-top: 2rem;">
                     <h3>Available Services Directory</h3>
@@ -2684,6 +2830,7 @@
                         </button>
                     </div>
 
+                    <!-- Accommodation Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🏠 Accommodation & Real Estate</h4>
@@ -2710,12 +2857,104 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other accommodation services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other accommodation services available yet</h4>
+                                <p>Be the first to list your accommodation business in this category!</p>
+                                <button class="add-business-btn" data-category="accommodation" data-category-name="Accommodation & Real Estate">
+                                    <i class="fas fa-plus-circle"></i> Add Your Accommodation Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Category-specific Business Form -->
+                    <div id="accommodationBusinessForm" class="category-form-container" data-category="accommodation">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🏠 Add Your Accommodation Business</h3>
+                            <button class="close-category-form" data-category="accommodation">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your accommodation business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your unique offerings</li>
+                                <li>✅ Location details are accurate and specific</li>
+                                <li>✅ Pricing is clear and competitive</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="accommodation">
+                            <input type="hidden" name="businessCategory" value="accommodation">
+                            <input type="hidden" name="businessCategoryName" value="Accommodation & Real Estate">
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessName">Business Name *</label>
+                                <input type="text" id="accommodationBusinessName" name="businessName" placeholder="e.g., BNS REALTY, Comfort Lodge, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessDescription">Business Description *</label>
+                                <textarea id="accommodationBusinessDescription" name="businessDescription" placeholder="Describe your accommodation services, types of rooms available, amenities, unique features..." rows="4" required></textarea>
+                                <small>Be detailed about room types, facilities, security, and location advantages</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessLocation">Location/Address *</label>
+                                <input type="text" id="accommodationBusinessLocation" name="businessLocation" placeholder="e.g., FUTA South Gate, Northgate Area, Awule Road..." required>
+                                <small>Be specific about the location and landmarks</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="accommodationBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessPrice">Pricing Information *</label>
+                                <input type="text" id="accommodationBusinessPrice" name="businessPrice" placeholder="e.g., ₦50,000 per room, ₦80,000 self-contained..." required>
+                                <small>Include different room types and their prices</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="accommodationBusinessTags" name="businessTags" placeholder="e.g., self-contained, room and parlor, hostel, lodge, accommodation">
+                                <small>Help students find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="accommodationSubmitterName">Your Name *</label>
+                                <input type="text" id="accommodationSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="accommodationSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="accommodationSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="accommodationSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="accommodation">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="accommodation" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Grooming Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>💈 Personal Care & Grooming</h4>
@@ -2742,12 +2981,103 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other grooming services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other grooming services available yet</h4>
+                                <p>Be the first to list your grooming business in this category!</p>
+                                <button class="add-business-btn" data-category="grooming" data-category-name="Personal Care & Grooming">
+                                    <i class="fas fa-plus-circle"></i> Add Your Grooming Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Grooming Category Business Form -->
+                    <div id="groomingBusinessForm" class="category-form-container" data-category="grooming">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">💈 Add Your Grooming Business</h3>
+                            <button class="close-category-form" data-category="grooming">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your grooming business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your specialties and expertise</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different services</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="grooming">
+                            <input type="hidden" name="businessCategory" value="grooming">
+                            <input type="hidden" name="businessCategoryName" value="Personal Care & Grooming">
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessName">Business Name *</label>
+                                <input type="text" id="groomingBusinessName" name="businessName" placeholder="e.g., Sire Cahraz Haircut, Elite Barbing Salon, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessDescription">Business Description *</label>
+                                <textarea id="groomingBusinessDescription" name="businessDescription" placeholder="Describe your grooming services, specialties, experience, unique offerings..." rows="4" required></textarea>
+                                <small>Include services like haircuts, beard trimming, home service availability, etc.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessLocation">Location/Address *</label>
+                                <input type="text" id="groomingBusinessLocation" name="businessLocation" placeholder="e.g., FUTA South Gate, Northgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="groomingBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessPrice">Pricing Information *</label>
+                                <input type="text" id="groomingBusinessPrice" name="businessPrice" placeholder="e.g., Low Cut: ₦700, Styles: ₦1,500, Home Service: ₦2,000..." required>
+                                <small>List prices for different services clearly</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="groomingBusinessTags" name="businessTags" placeholder="e.g., barbing, haircut, home service, styling">
+                                <small>Help customers find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="groomingSubmitterName">Your Name *</label>
+                                <input type="text" id="groomingSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="groomingSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="groomingSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="groomingSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="grooming">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="grooming" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Printing Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🖨️ Printing & Binding</h4>
@@ -2774,62 +3104,253 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other printing services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other printing services available yet</h4>
+                                <p>Be the first to list your printing business in this category!</p>
+                                <button class="add-business-btn" data-category="printing" data-category-name="Printing & Binding">
+                                    <i class="fas fa-plus-circle"></i> Add Your Printing Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="category">
-                        <div class="category-header">
-                            <h4>🎨 Home Services & Decor</h4>
-                            <span class="business-count">2 businesses</span>
+                    <!-- NEW: Printing Category Business Form -->
+                    <div id="printingBusinessForm" class="category-form-container" data-category="printing">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🖨️ Add Your Printing Business</h3>
+                            <button class="close-category-form" data-category="printing">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <div id="homeServicesList">
-                            <div class="business-listing">
-                                <h5>Justin Painting <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                                <p><strong>Service:</strong> Professional Decorative Painting</p>
-                                <p>Expert painting services for lodges, hostels, shops, offices. Specializing in wall screeding, skimming, putty designs, wallpaper installation, and custom designs</p>
-                                <p><strong>Location:</strong> FUTA Campus & Beyond</p>
-                                <div class="business-contact">
-                                    <div class="business-price">Depend on Service</div>
-                                    <div class="business-actions">
-                                        <button class="btn btn-small btn-whatsapp contact-business" 
-                                                data-business="Justin Painting" 
-                                                data-phone="+2349072716206">
-                                            <i class="fab fa-whatsapp"></i> Contact
-                                        </button>
-                                        <button class="btn btn-small btn-muted report-btn" data-business="Justin Painting">
-                                            <i class="fas fa-flag"></i> Report
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="business-listing">
-                                <h5>Abideen Yakub (O'yemi) Electrical Services <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                                <p><strong>Service:</strong> Professional Electrical Installations & Repairs</p>
-                                <p>Expert electrical services for lodges, hostels, shops, offices. Specializing in wiring, electrical panel upgrades, lighting design, smart home integration, fault finding, and safety compliance.</p>
-                                <p><strong>Location:</strong> FUTA Campus & Beyond</p>
-                                <div class="business-contact">
-                                    <div class="business-price">Depend on Service</div>
-                                    <div class="business-actions">
-                                        <button class="btn btn-small btn-whatsapp contact-business" 
-                                                data-business="Abideen Yakub Electrical Services" 
-                                                data-phone="+2347050376975">
-                                            <i class="fab fa-whatsapp"></i> Contact
-                                        </button>
-                                        <button class="btn btn-small btn-muted report-btn" data-business="Abideen Yakub Electrical Services">
-                                            <i class="fas fa-flag"></i> Report
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="empty-state">
-                                No other home services available yet. Check back later for updates!
-                            </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your printing business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your services and specialties</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different services</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
                         </div>
+                        
+                        <form class="category-business-form" data-category="printing">
+                            <input type="hidden" name="businessCategory" value="printing">
+                            <input type="hidden" name="businessCategoryName" value="Printing & Binding">
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessName">Business Name *</label>
+                                <input type="text" id="printingBusinessName" name="businessName" placeholder="e.g., Priviledge Venture, Quick Print, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessDescription">Business Description *</label>
+                                <textarea id="printingBusinessDescription" name="businessDescription" placeholder="Describe your printing services, types of printing, binding options, turnaround time..." rows="4" required></textarea>
+                                <small>Include services like printing, photocopy, binding, laminating, etc.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessLocation">Location/Address *</label>
+                                <input type="text" id="printingBusinessLocation" name="businessLocation" placeholder="e.g., FUTA South Gate, Northgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="printingBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessPrice">Pricing Information *</label>
+                                <input type="text" id="printingBusinessPrice" name="businessPrice" placeholder="e.g., ₦50 per page, Binding: ₦200-₦500, etc." required>
+                                <small>List prices for different services clearly</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="printingBusinessTags" name="businessTags" placeholder="e.g., printing, photocopy, binding, laminating">
+                                <small>Help customers find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="printingSubmitterName">Your Name *</label>
+                                <input type="text" id="printingSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="printingSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="printingSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="printingSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="printing">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="printing" style="margin-top: 10px"></div>
+                        </form>
                     </div>
                     
+                    <!-- Continue with other categories following the same pattern -->
+                    <!-- Home Services, Fashion, Academic, Tutoring, Gadgets, Transport, Food, Tech, Events -->
+                    
+                  <!-- Home Services Category -->
+<div class="category">
+    <div class="category-header">
+        <h4>🎨 Home Services & Decor</h4>
+        <span class="business-count">2 businesses</span>
+    </div>
+    <div id="homeServicesList">
+        <div class="business-listing">
+            <h5>Justin Painting <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
+            <p><strong>Service:</strong> Professional Decorative Painting</p>
+            <p>Expert painting services for lodges, hostels, shops, offices. Specializing in wall screeding, skimming, putty designs, wallpaper installation, and custom designs</p>
+            <p><strong>Location:</strong> FUTA Campus & Beyond</p>
+            <div class="business-contact">
+                <div class="business-price">Depend on Service</div>
+                <div class="business-actions">
+                    <button class="btn btn-small btn-whatsapp contact-business" 
+                            data-business="Justin Painting" 
+                            data-phone="+2349072716206">
+                        <i class="fab fa-whatsapp"></i> Contact
+                    </button>
+                    <button class="btn btn-small btn-muted report-btn" data-business="Justin Painting">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="business-listing">
+            <h5>Abideen Yakub (O'yemi) Electrical Services <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
+            <p><strong>Service:</strong> Professional Electrical Installations & Repairs</p>
+            <p>Expert electrical services for lodges, hostels, shops, offices. Specializing in wiring, electrical panel upgrades, lighting design, smart home integration, fault finding, and safety compliance.</p>
+            <p><strong>Location:</strong> FUTA Campus & Beyond</p>
+            <div class="business-contact">
+                <div class="business-price">Depend on Service</div>
+                <div class="business-actions">
+                    <button class="btn btn-small btn-whatsapp contact-business" 
+                            data-business="Abideen Yakub (O'yemi) Electrical Services" 
+                            data-phone="+2347050376975">
+                        <i class="fab fa-whatsapp"></i> Contact
+                    </button>
+                    <button class="btn btn-small btn-muted report-btn" data-business="Abideen Yakub (O'yemi) Electrical Services">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty state with Add Business button -->
+        <div class="category-empty-state">
+            <h4>No other home services available yet</h4>
+            <p>Be the first to list your home service business in this category!</p>
+           <button class="add-business-btn" 
+        data-category="home-services" 
+        data-category-name="Home Services & Decor"
+        onclick="document.getElementById('homeServicesBusinessForm').style.display='block'">
+    <i class="fas fa-plus-circle"></i> Add Your Home Service Business
+</button>
+        </div>
+    </div>
+</div>
+
+<!-- Home Services Category Business Form - ADD style="display: none;" -->
+<div id="homeServicesBusinessForm" class="category-form-container" data-category="home-services" style="display: none;">
+    <div class="category-form-header">
+        <h3 class="category-form-title">🎨 Add Your Home Service Business</h3>
+       <button class="close-category-form" 
+        data-category="home-services"
+        onclick="document.getElementById('homeServicesBusinessForm').style.display='none'">
+    <i class="fas fa-times"></i>
+</button>
+    </div>
+    
+    <div class="business-form-notice">
+        <h4>📋 Professional Presentation Matters!</h4>
+        <p>Your home service business will be published exactly as you enter it. Please ensure:</p>
+        <ul>
+            <li>✅ Business name is clear and professional</li>
+            <li>✅ Description highlights your services and expertise</li>
+            <li>✅ Location details are accurate</li>
+            <li>✅ Pricing is clear for different services</li>
+        </ul>
+        <p><em>Admin will review and approve before publishing</em></p>
+    </div>
+    
+    <form class="category-business-form" data-category="home-services">
+        <input type="hidden" name="businessCategory" value="home-services">
+        <input type="hidden" name="businessCategoryName" value="Home Services & Decor">
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessName">Business Name *</label>
+            <input type="text" id="homeServicesBusinessName" name="businessName" placeholder="e.g., Justin Painting, Elite Electrical Services, etc." required>
+            <small>Make it professional - this is how it will be published</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessDescription">Business Description *</label>
+            <textarea id="homeServicesBusinessDescription" name="businessDescription" placeholder="Describe your home services, specialties, experience, unique offerings..." rows="4" required></textarea>
+            <small>Include services like painting, electrical work, plumbing, carpentry, etc.</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessLocation">Location/Address *</label>
+            <input type="text" id="homeServicesBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Campus, Southgate Area..." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessPhone">Contact WhatsApp Number *</label>
+            <input type="tel" id="homeServicesBusinessPhone" name="businessPhone" placeholder="+234..." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessPrice">Pricing Information</label>
+            <input type="text" id="homeServicesBusinessPrice" name="businessPrice" placeholder="e.g., Depends on service, Contact for quote...">
+            <small>If pricing varies, mention that you provide quotes</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesBusinessTags">Service Tags (comma separated)</label>
+            <input type="text" id="homeServicesBusinessTags" name="businessTags" placeholder="e.g., painting, electrical, plumbing, carpentry, home repair">
+            <small>Help customers find your services easily</small>
+        </div>
+        
+        <hr>
+        
+        <div class="form-group">
+            <label for="homeServicesSubmitterName">Your Name *</label>
+            <input type="text" id="homeServicesSubmitterName" name="submitterName" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesSubmitterDepartment">Your Department *</label>
+            <input type="text" id="homeServicesSubmitterDepartment" name="submitterDepartment" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="homeServicesSubmitterWhatsapp">Your WhatsApp Number *</label>
+            <input type="tel" id="homeServicesSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+            <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+            <button type="button" class="btn btn-muted category-preview-btn" data-category="home-services">🔍 Preview</button>
+        </div>
+        
+        <div class="category-form-message" data-category="home-services" style="margin-top: 10px"></div>
+    </form>
+</div>
+                    
+                    <!-- Fashion Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>👗 Fashion & Accessories</h4>
@@ -2856,12 +3377,103 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other fashion services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other fashion services available yet</h4>
+                                <p>Be the first to list your fashion business in this category!</p>
+                                <button class="add-business-btn" data-category="fashion" data-category-name="Fashion & Accessories">
+                                    <i class="fas fa-plus-circle"></i> Add Your Fashion Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Fashion Category Business Form -->
+                    <div id="fashionBusinessForm" class="category-form-container" data-category="fashion">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">👗 Add Your Fashion Business</h3>
+                            <button class="close-category-form" data-category="fashion">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your fashion business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your products and style</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear or mention price ranges</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="fashion">
+                            <input type="hidden" name="businessCategory" value="fashion">
+                            <input type="hidden" name="businessCategoryName" value="Fashion & Accessories">
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessName">Business Name *</label>
+                                <input type="text" id="fashionBusinessName" name="businessName" placeholder="e.g., Sam Varieties, Trendy Styles, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessDescription">Business Description *</label>
+                                <textarea id="fashionBusinessDescription" name="businessDescription" placeholder="Describe your fashion products, styles available, sizes, delivery options..." rows="4" required></textarea>
+                                <small>Include types of clothing, accessories, styles, and any special services</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessLocation">Location/Address *</label>
+                                <input type="text" id="fashionBusinessLocation" name="businessLocation" placeholder="e.g., FUTA South Gate, Northgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="fashionBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessPrice">Pricing Information</label>
+                                <input type="text" id="fashionBusinessPrice" name="businessPrice" placeholder="e.g., Various prices, Contact for specific prices...">
+                                <small>If you have various products, mention price ranges or that prices vary</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="fashionBusinessTags" name="businessTags" placeholder="e.g., clothing, shoes, accessories, jewelry, fashion">
+                                <small>Help customers find your products easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="fashionSubmitterName">Your Name *</label>
+                                <input type="text" id="fashionSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="fashionSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fashionSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="fashionSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="fashion">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="fashion" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Academic Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>📚 Academic Supplies</h4>
@@ -2888,12 +3500,103 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other academic supplies available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other academic supplies available yet</h4>
+                                <p>Be the first to list your academic supplies business in this category!</p>
+                                <button class="add-business-btn" data-category="academic" data-category-name="Academic Supplies">
+                                    <i class="fas fa-plus-circle"></i> Add Your Academic Supplies Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Academic Category Business Form -->
+                    <div id="academicBusinessForm" class="category-form-container" data-category="academic">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">📚 Add Your Academic Supplies Business</h3>
+                            <button class="close-category-form" data-category="academic">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your academic supplies business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your products and specialties</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different items</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="academic">
+                            <input type="hidden" name="businessCategory" value="academic">
+                            <input type="hidden" name="businessCategoryName" value="Academic Supplies">
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessName">Business Name *</label>
+                                <input type="text" id="academicBusinessName" name="businessName" placeholder="e.g., Tito Stationery, Campus Supplies, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessDescription">Business Description *</label>
+                                <textarea id="academicBusinessDescription" name="businessDescription" placeholder="Describe your academic supplies, types of products, specialties, delivery options..." rows="4" required></textarea>
+                                <small>Include items like stationery, textbooks, MEE materials, calculators, etc.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessLocation">Location/Address *</label>
+                                <input type="text" id="academicBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Campus, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="academicBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessPrice">Pricing Information</label>
+                                <input type="text" id="academicBusinessPrice" name="businessPrice" placeholder="e.g., Budget-friendly, Various prices, Contact for specific prices...">
+                                <small>If you have various products, mention price ranges or that prices vary</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="academicBusinessTags" name="businessTags" placeholder="e.g., stationery, textbooks, MEE materials, calculators">
+                                <small>Help students find your products easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="academicSubmitterName">Your Name *</label>
+                                <input type="text" id="academicSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="academicSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="academicSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="academicSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="academic">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="academic" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Tutoring Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>👨‍🏫 Tutoring & Education</h4>
@@ -2918,12 +3621,103 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other tutoring services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other tutoring services available yet</h4>
+                                <p>Be the first to list your tutoring business in this category!</p>
+                                <button class="add-business-btn" data-category="tutoring" data-category-name="Tutoring & Education">
+                                    <i class="fas fa-plus-circle"></i> Add Your Tutoring Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Tutoring Category Business Form -->
+                    <div id="tutoringBusinessForm" class="category-form-container" data-category="tutoring">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">👨‍🏫 Add Your Tutoring Business</h3>
+                            <button class="close-category-form" data-category="tutoring">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your tutoring business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your expertise and courses</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different packages</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="tutoring">
+                            <input type="hidden" name="businessCategory" value="tutoring">
+                            <input type="hidden" name="businessCategoryName" value="Tutoring & Education">
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessName">Business Name *</label>
+                                <input type="text" id="tutoringBusinessName" name="businessName" placeholder="e.g., Genius Point Academy, Elite Tutors, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessDescription">Business Description *</label>
+                                <textarea id="tutoringBusinessDescription" name="businessDescription" placeholder="Describe your tutoring services, courses you teach, teaching approach, experience..." rows="4" required></textarea>
+                                <small>Include courses, levels, teaching methods, and any special programs</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessLocation">Location/Address *</label>
+                                <input type="text" id="tutoringBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Campus, Online, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="tutoringBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessPrice">Pricing Information</label>
+                                <input type="text" id="tutoringBusinessPrice" name="businessPrice" placeholder="e.g., Various packages, Contact for pricing...">
+                                <small>If you have different packages, mention them or that pricing varies</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="tutoringBusinessTags" name="businessTags" placeholder="e.g., tutoring, MTS, PHY, CHE, academic support">
+                                <small>Help students find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="tutoringSubmitterName">Your Name *</label>
+                                <input type="text" id="tutoringSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="tutoringSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tutoringSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="tutoringSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="tutoring">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="tutoring" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Gadgets Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🔧 Gadgets & Electronics</h4>
@@ -2950,24 +3744,206 @@
                                 </div>
                             </div>
                             
-                            <div class="empty-state">
-                                No other gadget services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other gadget services available yet</h4>
+                                <p>Be the first to list your gadget business in this category!</p>
+                                <button class="add-business-btn" data-category="gadgets" data-category-name="Gadgets & Electronics">
+                                    <i class="fas fa-plus-circle"></i> Add Your Gadget Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Gadgets Category Business Form -->
+                    <div id="gadgetsBusinessForm" class="category-form-container" data-category="gadgets">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🔧 Add Your Gadget Business</h3>
+                            <button class="close-category-form" data-category="gadgets">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your gadget business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your products and features</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different items</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="gadgets">
+                            <input type="hidden" name="businessCategory" value="gadgets">
+                            <input type="hidden" name="businessCategoryName" value="Gadgets & Electronics">
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessName">Business Name *</label>
+                                <input type="text" id="gadgetsBusinessName" name="businessName" placeholder="e.g., Usman Gadgets, Tech Solutions, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessDescription">Business Description *</label>
+                                <textarea id="gadgetsBusinessDescription" name="businessDescription" placeholder="Describe your gadget products, features, uses, warranty information..." rows="4" required></textarea>
+                                <small>Include types of gadgets, features, uses, and any special offers</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessLocation">Location/Address *</label>
+                                <input type="text" id="gadgetsBusinessLocation" name="businessLocation" placeholder="e.g., FUTA North Gate, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="gadgetsBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessPrice">Pricing Information</label>
+                                <input type="text" id="gadgetsBusinessPrice" name="businessPrice" placeholder="e.g., ₦1,000 per torchlight, Various prices...">
+                                <small>If you have various products, mention price ranges or specific prices</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="gadgetsBusinessTags" name="businessTags" placeholder="e.g., gadgets, electronics, torchlights, tech accessories">
+                                <small>Help customers find your products easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsSubmitterName">Your Name *</label>
+                                <input type="text" id="gadgetsSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="gadgetsSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gadgetsSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="gadgetsSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="gadgets">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="gadgets" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Transport Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🚌 Transport Services</h4>
                             <span class="business-count">0 businesses</span>
                         </div>
                         <div id="transportList">
-                            <div class="empty-state">
-                                No transport services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No transport services available yet</h4>
+                                <p>Be the first to list your transport business in this category!</p>
+                                <button class="add-business-btn" data-category="transport" data-category-name="Transport Services">
+                                    <i class="fas fa-plus-circle"></i> Add Your Transport Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Transport Category Business Form -->
+                    <div id="transportBusinessForm" class="category-form-container" data-category="transport">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🚌 Add Your Transport Business</h3>
+                            <button class="close-category-form" data-category="transport">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your transport business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your services and routes</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different routes</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="transport">
+                            <input type="hidden" name="businessCategory" value="transport">
+                            <input type="hidden" name="businessCategoryName" value="Transport Services">
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessName">Business Name *</label>
+                                <input type="text" id="transportBusinessName" name="businessName" placeholder="e.g., Campus Rides, FUTA Transport, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessDescription">Business Description *</label>
+                                <textarea id="transportBusinessDescription" name="businessDescription" placeholder="Describe your transport services, routes covered, vehicle types, schedule..." rows="4" required></textarea>
+                                <small>Include routes, vehicle types, schedule, and any special services</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessLocation">Location/Address *</label>
+                                <input type="text" id="transportBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Main Gate, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="transportBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessPrice">Pricing Information</label>
+                                <input type="text" id="transportBusinessPrice" name="businessPrice" placeholder="e.g., ₦100-₦300 depending on route, Various prices...">
+                                <small>Mention price ranges for different routes or services</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="transportBusinessTags" name="businessTags" placeholder="e.g., transport, rides, taxi, shuttle">
+                                <small>Help customers find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="transportSubmitterName">Your Name *</label>
+                                <input type="text" id="transportSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="transportSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transportSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="transportSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="transport">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="transport" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Food Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🍕 Food & Catering</h4>
@@ -2993,34 +3969,307 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="empty-state">
-                                No other food services available yet. Check back later for updates!
+                            
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No other food services available yet</h4>
+                                <p>Be the first to list your food business in this category!</p>
+                                <button class="add-business-btn" data-category="food" data-category-name="Food & Catering">
+                                    <i class="fas fa-plus-circle"></i> Add Your Food Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Food Category Business Form -->
+                    <div id="foodBusinessForm" class="category-form-container" data-category="food">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🍕 Add Your Food Business</h3>
+                            <button class="close-category-form" data-category="food">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your food business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your food offerings and specialties</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different items</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="food">
+                            <input type="hidden" name="businessCategory" value="food">
+                            <input type="hidden" name="businessCategoryName" value="Food & Catering">
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessName">Business Name *</label>
+                                <input type="text" id="foodBusinessName" name="businessName" placeholder="e.g., Sahara-Spice, Campus Delights, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessDescription">Business Description *</label>
+                                <textarea id="foodBusinessDescription" name="businessDescription" placeholder="Describe your food offerings, specialties, ingredients, delivery options..." rows="4" required></textarea>
+                                <small>Include types of food, specialties, ingredients, and any special offers</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessLocation">Location/Address *</label>
+                                <input type="text" id="foodBusinessLocation" name="businessLocation" placeholder="e.g., FUTA West Gate, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="foodBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessPrice">Pricing Information</label>
+                                <input type="text" id="foodBusinessPrice" name="businessPrice" placeholder="e.g., Based on quantity, Various prices, Contact for pricing...">
+                                <small>If you have various items, mention price ranges or that pricing varies</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="foodBusinessTags" name="businessTags" placeholder="e.g., food, snacks, catering, kilishi, chin chin">
+                                <small>Help customers find your food items easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="foodSubmitterName">Your Name *</label>
+                                <input type="text" id="foodSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="foodSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foodSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="foodSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="food">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="food" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Tech Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>💻 Tech Services</h4>
                             <span class="business-count">0 businesses</span>
                         </div>
                         <div id="techList">
-                            <div class="empty-state">
-                                No tech services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No tech services available yet</h4>
+                                <p>Be the first to list your tech business in this category!</p>
+                                <button class="add-business-btn" data-category="tech" data-category-name="Tech Services">
+                                    <i class="fas fa-plus-circle"></i> Add Your Tech Business
+                                </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- NEW: Tech Category Business Form -->
+                    <div id="techBusinessForm" class="category-form-container" data-category="tech">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">💻 Add Your Tech Business</h3>
+                            <button class="close-category-form" data-category="tech">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your tech business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your services and expertise</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different services</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="tech">
+                            <input type="hidden" name="businessCategory" value="tech">
+                            <input type="hidden" name="businessCategoryName" value="Tech Services">
+                            
+                            <div class="form-group">
+                                <label for="techBusinessName">Business Name *</label>
+                                <input type="text" id="techBusinessName" name="businessName" placeholder="e.g., Campus Tech Solutions, FUTA IT Services, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techBusinessDescription">Business Description *</label>
+                                <textarea id="techBusinessDescription" name="businessDescription" placeholder="Describe your tech services, specialties, experience, turnaround time..." rows="4" required></textarea>
+                                <small>Include services like software development, website design, IT support, etc.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techBusinessLocation">Location/Address *</label>
+                                <input type="text" id="techBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Campus, Online, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="techBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techBusinessPrice">Pricing Information</label>
+                                <input type="text" id="techBusinessPrice" name="businessPrice" placeholder="e.g., Depends on service, Various packages, Contact for quote...">
+                                <small>If pricing varies, mention that you provide quotes</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="techBusinessTags" name="businessTags" placeholder="e.g., tech, IT, software, website, programming">
+                                <small>Help customers find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="techSubmitterName">Your Name *</label>
+                                <input type="text" id="techSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="techSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="techSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="techSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="tech">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="tech" style="margin-top: 10px"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Events Category -->
                     <div class="category">
                         <div class="category-header">
                             <h4>🎉 Event Planning</h4>
                             <span class="business-count">0 businesses</span>
                         </div>
                         <div id="eventList">
-                            <div class="empty-state">
-                                No event planning services available yet. Check back later for updates!
+                            <!-- NEW: Empty state with Add Business button -->
+                            <div class="category-empty-state">
+                                <h4>No event planning services available yet</h4>
+                                <p>Be the first to list your event planning business in this category!</p>
+                                <button class="add-business-btn" data-category="events" data-category-name="Event Planning">
+                                    <i class="fas fa-plus-circle"></i> Add Your Event Planning Business
+                                </button>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- NEW: Events Category Business Form -->
+                    <div id="eventsBusinessForm" class="category-form-container" data-category="events">
+                        <div class="category-form-header">
+                            <h3 class="category-form-title">🎉 Add Your Event Planning Business</h3>
+                            <button class="close-category-form" data-category="events">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="business-form-notice">
+                            <h4>📋 Professional Presentation Matters!</h4>
+                            <p>Your event planning business will be published exactly as you enter it. Please ensure:</p>
+                            <ul>
+                                <li>✅ Business name is clear and professional</li>
+                                <li>✅ Description highlights your services and event types</li>
+                                <li>✅ Location details are accurate</li>
+                                <li>✅ Pricing is clear for different packages</li>
+                            </ul>
+                            <p><em>Admin will review and approve before publishing</em></p>
+                        </div>
+                        
+                        <form class="category-business-form" data-category="events">
+                            <input type="hidden" name="businessCategory" value="events">
+                            <input type="hidden" name="businessCategoryName" value="Event Planning">
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessName">Business Name *</label>
+                                <input type="text" id="eventsBusinessName" name="businessName" placeholder="e.g., Campus Events, FUTA Party Planners, etc." required>
+                                <small>Make it professional - this is how it will be published</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessDescription">Business Description *</label>
+                                <textarea id="eventsBusinessDescription" name="businessDescription" placeholder="Describe your event planning services, event types, specialties, experience..." rows="4" required></textarea>
+                                <small>Include types of events, services offered, and any special packages</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessLocation">Location/Address *</label>
+                                <input type="text" id="eventsBusinessLocation" name="businessLocation" placeholder="e.g., FUTA Campus, Southgate Area..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessPhone">Contact WhatsApp Number *</label>
+                                <input type="tel" id="eventsBusinessPhone" name="businessPhone" placeholder="+234..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessPrice">Pricing Information</label>
+                                <input type="text" id="eventsBusinessPrice" name="businessPrice" placeholder="e.g., Various packages, Contact for quote...">
+                                <small>If you have different packages, mention them or that pricing varies</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsBusinessTags">Service Tags (comma separated)</label>
+                                <input type="text" id="eventsBusinessTags" name="businessTags" placeholder="e.g., event planning, parties, decorations, catering">
+                                <small>Help customers find your services easily</small>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="form-group">
+                                <label for="eventsSubmitterName">Your Name *</label>
+                                <input type="text" id="eventsSubmitterName" name="submitterName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsSubmitterDepartment">Your Department *</label>
+                                <input type="text" id="eventsSubmitterDepartment" name="submitterDepartment" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="eventsSubmitterWhatsapp">Your WhatsApp Number *</label>
+                                <input type="tel" id="eventsSubmitterWhatsapp" name="submitterWhatsapp" placeholder="+234..." required>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; align-items: center; margin-top: 1.5rem;">
+                                <button type="submit" class="btn">🚀 Submit Business for Approval</button>
+                                <button type="button" class="btn btn-muted category-preview-btn" data-category="events">🔍 Preview</button>
+                            </div>
+                            
+                            <div class="category-form-message" data-category="events" style="margin-top: 10px"></div>
+                        </form>
                     </div>
                 </section>
                 
@@ -3108,6 +4357,11 @@
                 
                 <div class="page-nav">
                     <a href="#" class="page-btn" data-page="marketing">← Previous</a>
+<div style="text-align: center; margin: 2rem 0;">
+    <button class="btn btn-whatsapp" onclick="window.open('https://wa.me/2347050376975?text=Hello%20O%27yemi!%20I%20need%20assistance%20with%20the%20FUTA%20Survival%20Guide.', '_blank')">
+        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+    </button>
+</div>
                     <a href="#" class="page-btn" data-page="home">Back to Home →</a>
                 </div>
             </div>
@@ -3401,8 +4655,20 @@
                 });
             }
 
-            // Marketing form handlers
-            setupMarketingForm();
+            // Business submission form handler
+            const businessSubmissionForm = document.getElementById('businessSubmissionForm');
+            if (businessSubmissionForm) {
+                businessSubmissionForm.addEventListener('submit', handleBusinessSubmission);
+            }
+
+            // Business preview button
+            const businessPreviewBtn = document.getElementById('businessPreviewBtn');
+            if (businessPreviewBtn) {
+                businessPreviewBtn.addEventListener('click', previewBusinessSubmission);
+            }
+
+            // Prefill business form with user data
+            prefillBusinessForm();
 
             // Feedback form submission handler
             const feedbackForm = document.getElementById('feedbackForm');
@@ -3431,6 +4697,9 @@
             
             // Check if user is already onboarded
             checkOnboardingStatus();
+            
+            // Initialize category business forms
+            initializeCategoryBusinessForms();
         }
 
         function checkOnboardingStatus() {
@@ -3593,6 +4862,338 @@
             });
         }
 
+        // NEW: Business Submission Handler
+        function handleBusinessSubmission(e) {
+            e.preventDefault();
+            
+            const businessName = document.getElementById('businessName').value.trim();
+            const businessCategory = document.getElementById('businessCategory').value;
+            const businessDescription = document.getElementById('businessDescription').value.trim();
+            const businessLocation = document.getElementById('businessLocation').value.trim();
+            const businessPhone = document.getElementById('businessPhone').value.trim();
+            const businessPrice = document.getElementById('businessPrice').value.trim();
+            const businessTags = document.getElementById('businessTags').value.trim();
+            const submitterName = document.getElementById('submitterName').value.trim();
+            const submitterDepartment = document.getElementById('submitterDepartment').value.trim();
+            const submitterWhatsapp = document.getElementById('submitterWhatsapp').value.trim();
+            
+            const businessFormMessage = document.getElementById('businessFormMessage');
+            const submitBtn = document.querySelector('#businessSubmissionForm button[type="submit"]');
+            
+            // Validation
+            if (!businessName || !businessCategory || !businessDescription || !businessLocation || 
+                !businessPhone || !submitterName || !submitterDepartment || !submitterWhatsapp) {
+                businessFormMessage.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Prepare form data for FormSubmit
+            const formData = {
+                '_subject': `NEW BUSINESS SUBMISSION - ${businessName}`,
+                '_template': 'table',
+                '_captcha': 'false',
+                
+                // Business Details
+                'Business Name': businessName,
+                'Category': businessCategory,
+                'Description': businessDescription,
+                'Location': businessLocation,
+                'Phone': businessPhone,
+                'Pricing': businessPrice || 'Not specified',
+                'Tags': businessTags || 'None',
+                
+                // Submitter Details
+                'Submitted By': submitterName,
+                'Submitter Department': submitterDepartment,
+                'Submitter WhatsApp': submitterWhatsapp,
+                
+                'Status': 'PENDING_APPROVAL',
+                'Submission Date': new Date().toISOString(),
+                'Type': 'BUSINESS_SUBMISSION'
+            };
+
+            // Submit using fetch with fallback
+            submitToFormSubmit(formData)
+            .then(() => {
+                // Show success message
+                businessFormMessage.innerHTML = `
+                    <div class="submission-success">
+                        <h4>✅ Business Submitted Successfully!</h4>
+                        <p><strong>Your business "${businessName}" has been received and is awaiting admin approval.</strong></p>
+                        <div class="notice" style="margin-top: 15px;">
+                            <p>📋 <strong>What happens next?</strong></p>
+                            <ul>
+                                <li>Admin will review your submission within 24 hours</li>
+                                <li>You'll be notified once approved</li>
+                                <li>Your business will appear in the marketplace</li>
+                                <li>Ensure your WhatsApp is active for customer inquiries</li>
+                            </ul>
+                        </div>
+                        <p><em>Thank you for choosing to grow with FUTA Marketplace! 🚀</em></p>
+                    </div>
+                `;
+                
+                // Reset form
+                document.getElementById('businessSubmissionForm').reset();
+            })
+            .catch(error => {
+                console.error('Business submission error:', error);
+                businessFormMessage.innerHTML = '<div class="message error">There was an issue submitting your business. Please try again.</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '🚀 Submit Business for Approval';
+                submitBtn.disabled = false;
+            });
+        }
+
+        // NEW: Preview Business Submission
+        function previewBusinessSubmission() {
+            const businessName = document.getElementById('businessName').value.trim();
+            const businessCategory = document.getElementById('businessCategory').value;
+            const businessDescription = document.getElementById('businessDescription').value.trim();
+            const businessLocation = document.getElementById('businessLocation').value.trim();
+            const businessPhone = document.getElementById('businessPhone').value.trim();
+            const businessPrice = document.getElementById('businessPrice').value.trim();
+            const businessTags = document.getElementById('businessTags').value.trim();
+            
+            let previewText = `BUSINESS PREVIEW:\n\n`;
+            previewText += `Name: ${businessName || 'Not provided'}\n`;
+            previewText += `Category: ${businessCategory || 'Not selected'}\n`;
+            previewText += `Description: ${businessDescription || 'Not provided'}\n`;
+            previewText += `Location: ${businessLocation || 'Not provided'}\n`;
+            previewText += `Contact: ${businessPhone || 'Not provided'}\n`;
+            previewText += `Pricing: ${businessPrice || 'Not specified'}\n`;
+            previewText += `Tags: ${businessTags || 'None'}\n`;
+            
+            alert(previewText);
+        }
+
+        // NEW: Prefill Business Form
+        function prefillBusinessForm() {
+            // Try to get user data from localStorage
+            try {
+                const userName = localStorage.getItem('userName');
+                const userDepartment = localStorage.getItem('userDepartment');
+                const userWhatsApp = localStorage.getItem('userWhatsApp');
+                
+                if (userName) document.getElementById('submitterName').value = userName;
+                if (userDepartment) document.getElementById('submitterDepartment').value = userDepartment;
+                if (userWhatsApp) document.getElementById('submitterWhatsapp').value = userWhatsApp;
+            } catch (err) {
+                console.log('Could not prefill business form:', err);
+            }
+        }
+
+        // NEW: Enhanced Category Business Forms
+        function initializeCategoryBusinessForms() {
+            // Add Business Button Click Handlers
+            const addBusinessButtons = document.querySelectorAll('.add-business-btn');
+            addBusinessButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    const categoryName = this.getAttribute('data-category-name');
+                    showCategoryBusinessForm(category, categoryName);
+                });
+            });
+
+            // Close Form Button Handlers
+            const closeFormButtons = document.querySelectorAll('.close-category-form');
+            closeFormButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    hideCategoryBusinessForm(category);
+                });
+            });
+
+            // Category Form Submission Handlers
+            const categoryForms = document.querySelectorAll('.category-business-form');
+            categoryForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    handleCategoryBusinessSubmission(category);
+                });
+            });
+
+            // Category Preview Button Handlers
+            const previewButtons = document.querySelectorAll('.category-preview-btn');
+            previewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    previewCategoryBusinessSubmission(category);
+                });
+            });
+
+            // Prefill forms with user data
+            prefillCategoryBusinessForms();
+        }
+
+        function showCategoryBusinessForm(category, categoryName) {
+            // Hide all category forms first
+            const allForms = document.querySelectorAll('.category-form-container');
+            allForms.forEach(form => {
+                form.classList.remove('active');
+            });
+
+            // Show the specific category form
+            const targetForm = document.getElementById(`${category}BusinessForm`);
+            if (targetForm) {
+                targetForm.classList.add('active');
+                
+                // Scroll to the form
+                targetForm.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        function hideCategoryBusinessForm(category) {
+            const targetForm = document.getElementById(`${category}BusinessForm`);
+            if (targetForm) {
+                targetForm.classList.remove('active');
+            }
+        }
+
+        function handleCategoryBusinessSubmission(category) {
+            const form = document.querySelector(`.category-business-form[data-category="${category}"]`);
+            const messageDiv = document.querySelector(`.category-form-message[data-category="${category}"]`);
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Get form data
+            const formData = new FormData(form);
+            const businessData = {};
+            for (let [key, value] of formData.entries()) {
+                businessData[key] = value;
+            }
+            
+            // Validation
+            if (!businessData.businessName || !businessData.businessDescription || 
+                !businessData.businessLocation || !businessData.businessPhone ||
+                !businessData.submitterName || !businessData.submitterDepartment || 
+                !businessData.submitterWhatsapp) {
+                messageDiv.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Prepare data for FormSubmit
+            const submissionData = {
+                '_subject': `NEW BUSINESS SUBMISSION - ${businessData.businessName} (${businessData.businessCategoryName})`,
+                '_template': 'table',
+                '_captcha': 'false',
+                
+                // Business Details
+                'Business Name': businessData.businessName,
+                'Category': businessData.businessCategoryName,
+                'Description': businessData.businessDescription,
+                'Location': businessData.businessLocation,
+                'Phone': businessData.businessPhone,
+                'Pricing': businessData.businessPrice || 'Not specified',
+                'Tags': businessData.businessTags || 'None',
+                
+                // Submitter Details
+                'Submitted By': businessData.submitterName,
+                'Submitter Department': businessData.submitterDepartment,
+                'Submitter WhatsApp': businessData.submitterWhatsapp,
+                
+                'Status': 'PENDING_APPROVAL',
+                'Submission Date': new Date().toISOString(),
+                'Type': 'CATEGORY_BUSINESS_SUBMISSION'
+            };
+
+            // Submit using fetch with fallback
+            submitToFormSubmit(submissionData)
+            .then(() => {
+                // Show success message
+                messageDiv.innerHTML = `
+                    <div class="submission-success">
+                        <h4>✅ Business Submitted Successfully!</h4>
+                        <p><strong>Your ${businessData.businessCategoryName} business "${businessData.businessName}" has been received and is awaiting admin approval.</strong></p>
+                        <div class="notice" style="margin-top: 15px;">
+                            <p>📋 <strong>What happens next?</strong></p>
+                            <ul>
+                                <li>Admin will review your submission within 24 hours</li>
+                                <li>You'll be notified once approved</li>
+                                <li>Your business will appear in the ${businessData.businessCategoryName} category</li>
+                                <li>Ensure your WhatsApp is active for customer inquiries</li>
+                            </ul>
+                        </div>
+                        <p><em>Thank you for choosing to grow with FUTA Marketplace! 🚀</em></p>
+                    </div>
+                `;
+                
+                // Reset form
+                form.reset();
+                
+                // Hide form after successful submission
+                setTimeout(() => {
+                    hideCategoryBusinessForm(category);
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Category business submission error:', error);
+                messageDiv.innerHTML = '<div class="message error">There was an issue submitting your business. Please try again.</div>';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '🚀 Submit Business for Approval';
+                submitBtn.disabled = false;
+            });
+        }
+
+        function previewCategoryBusinessSubmission(category) {
+            const form = document.querySelector(`.category-business-form[data-category="${category}"]`);
+            const formData = new FormData(form);
+            const businessData = {};
+            for (let [key, value] of formData.entries()) {
+                businessData[key] = value;
+            }
+            
+            let previewText = `BUSINESS PREVIEW - ${businessData.businessCategoryName}:\n\n`;
+            previewText += `Business Name: ${businessData.businessName || 'Not provided'}\n`;
+            previewText += `Category: ${businessData.businessCategoryName || 'Not selected'}\n`;
+            previewText += `Description: ${businessData.businessDescription || 'Not provided'}\n`;
+            previewText += `Location: ${businessData.businessLocation || 'Not provided'}\n`;
+            previewText += `Contact: ${businessData.businessPhone || 'Not provided'}\n`;
+            previewText += `Pricing: ${businessData.businessPrice || 'Not specified'}\n`;
+            previewText += `Tags: ${businessData.businessTags || 'None'}\n`;
+            previewText += `Submitted By: ${businessData.submitterName || 'Not provided'}\n`;
+            previewText += `Department: ${businessData.submitterDepartment || 'Not provided'}\n`;
+            
+            alert(previewText);
+        }
+
+        function prefillCategoryBusinessForms() {
+            // Try to get user data from localStorage
+            try {
+                const userName = localStorage.getItem('userName');
+                const userDepartment = localStorage.getItem('userDepartment');
+                const userWhatsApp = localStorage.getItem('userWhatsApp');
+                
+                if (userName) {
+                    const nameInputs = document.querySelectorAll('input[name="submitterName"]');
+                    nameInputs.forEach(input => input.value = userName);
+                }
+                if (userDepartment) {
+                    const deptInputs = document.querySelectorAll('input[name="submitterDepartment"]');
+                    deptInputs.forEach(input => input.value = userDepartment);
+                }
+                if (userWhatsApp) {
+                    const whatsappInputs = document.querySelectorAll('input[name="submitterWhatsapp"]');
+                    whatsappInputs.forEach(input => input.value = userWhatsApp);
+                }
+            } catch (err) {
+                console.log('Could not prefill category business forms:', err);
+            }
+        }
+
         // FIXED: Feedback form submission with fallback
         function handleFeedbackSubmit(e) {
             e.preventDefault();
@@ -3658,9 +5259,6 @@
                 });
             }
             
-            // Marketing form functionality
-            setupMarketingForm();
-            
             // Enhanced report functionality
             setupReportSystem();
             
@@ -3695,191 +5293,6 @@
                     window.open(whatsappURL, '_blank');
                 });
             });
-        }
-
-        // Marketing Form Setup
-        function setupMarketingForm() {
-            // Toggle between service and advertise sections
-            const purposeRadios = document.getElementsByName('purpose');
-            const serviceSection = document.getElementById('serviceSection');
-            const advertiseSection = document.getElementById('advertiseSection');
-            
-            if (purposeRadios && serviceSection && advertiseSection) {
-                purposeRadios.forEach(radio => {
-                    radio.addEventListener('change', function() {
-                        if (this.value === 'service') {
-                            serviceSection.classList.remove('hidden');
-                            advertiseSection.classList.add('hidden');
-                        } else {
-                            serviceSection.classList.add('hidden');
-                            advertiseSection.classList.remove('hidden');
-                        }
-                    });
-                });
-            }
-            
-            // Toggle level row in marketing form
-            const marketingFresherRadios = document.querySelectorAll('#marketingForm input[name="marketingIsFresher"]');
-            const marketingLevelRow = document.getElementById('marketingLevelRow');
-            
-            if (marketingFresherRadios && marketingLevelRow) {
-                marketingFresherRadios.forEach(radio => {
-                    radio.addEventListener('change', function() {
-                        if (this.value === 'no') {
-                            marketingLevelRow.classList.remove('hidden');
-                        } else {
-                            marketingLevelRow.classList.add('hidden');
-                        }
-                    });
-                });
-            }
-            
-            // Marketing form submission
-            const marketingForm = document.getElementById('marketingForm');
-            if (marketingForm) {
-                marketingForm.addEventListener('submit', handleMarketingSubmit);
-            }
-            
-            // Preview button
-            const previewBtn = document.getElementById('previewBtn');
-            if (previewBtn) {
-                previewBtn.addEventListener('click', previewMarketingSubmission);
-            }
-            
-            // Prefill form with user data if available
-            prefillMarketingForm();
-        }
-
-        function prefillMarketingForm() {
-            // Try to get user data from localStorage
-            try {
-                const userName = localStorage.getItem('userName');
-                const userDepartment = localStorage.getItem('userDepartment');
-                const userWhatsApp = localStorage.getItem('userWhatsApp');
-                const userIsFresher = localStorage.getItem('userIsFresher');
-                const userLevel = localStorage.getItem('userLevel');
-                
-                if (userName) document.getElementById('marketingName').value = userName;
-                if (userDepartment) document.getElementById('marketingDepartment').value = userDepartment;
-                if (userWhatsApp) document.getElementById('marketingWhatsapp').value = userWhatsApp;
-                
-                if (userIsFresher) {
-                    const fresherRadio = document.querySelector(`#marketingForm input[name="marketingIsFresher"][value="${userIsFresher}"]`);
-                    if (fresherRadio) fresherRadio.checked = true;
-                    
-                    // Show/hide level row based on fresher status
-                    const marketingLevelRow = document.getElementById('marketingLevelRow');
-                    if (userIsFresher === 'no') {
-                        marketingLevelRow.classList.remove('hidden');
-                        if (userLevel) document.getElementById('marketingLevel').value = userLevel;
-                    } else {
-                        marketingLevelRow.classList.add('hidden');
-                    }
-                }
-            } catch (err) {
-                console.log('Could not prefill marketing form:', err);
-            }
-        }
-
-        function handleMarketingSubmit(e) {
-            e.preventDefault();
-            
-            const formMessage = document.getElementById('marketingFormMessage');
-            const submitBtn = document.querySelector('#marketingForm button[type="submit"]');
-            
-            // Basic validation
-            const name = document.getElementById('marketingName').value.trim();
-            const department = document.getElementById('marketingDepartment').value.trim();
-            const whatsapp = document.getElementById('marketingWhatsapp').value.trim();
-            const purpose = document.querySelector('#marketingForm input[name="purpose"]:checked').value;
-            
-            if (!name || !department || !whatsapp) {
-                formMessage.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
-                return;
-            }
-            
-            if (purpose === 'service') {
-                const serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
-                if (serviceOption === 'Other') {
-                    const otherService = document.getElementById('serviceOther').value.trim();
-                    if (!otherService) {
-                        formMessage.innerHTML = '<div class="message error">Please specify the service you need.</div>';
-                        return;
-                    }
-                }
-            } else {
-                const businessDetails = document.getElementById('businessDetails').value.trim();
-                if (!businessDetails) {
-                    formMessage.innerHTML = '<div class="message error">Please provide details about your business.</div>';
-                    return;
-                }
-            }
-            
-            // Collect form data
-            const formData = {
-                '_subject': `FUTA Marketplace - ${purpose === 'service' ? 'Service Request' : 'Business Advertisement'}`,
-                '_template': 'table',
-                '_captcha': 'false',
-                'Name': name,
-                'Department': department,
-                'WhatsApp': whatsapp,
-                'Purpose': purpose,
-                'Timestamp': new Date().toISOString(),
-                'Submission Type': 'MARKETPLACE_SUBMISSION'
-            };
-            
-            if (purpose === 'service') {
-                formData.serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
-                if (formData.serviceOption === 'Other') {
-                    formData.serviceOther = document.getElementById('serviceOther').value.trim();
-                }
-            } else {
-                formData.businessDetails = document.getElementById('businessDetails').value.trim();
-            }
-            
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            submitBtn.disabled = true;
-            
-            // Submit to FormSubmit with fallback
-            submitToFormSubmit(formData)
-            .then(() => {
-                formMessage.innerHTML = '<div class="message success">Thank you! Your submission has been received successfully.</div>';
-                document.getElementById('marketingForm').reset();
-            })
-            .catch(error => {
-                console.error('Marketing form submission error:', error);
-                formMessage.innerHTML = '<div class="message error">There was an issue submitting your request. Please try again.</div>';
-            })
-            .finally(() => {
-                submitBtn.innerHTML = '📤 Submit Request';
-                submitBtn.disabled = false;
-            });
-        }
-
-        function previewMarketingSubmission() {
-            const name = document.getElementById('marketingName').value.trim();
-            const department = document.getElementById('marketingDepartment').value.trim();
-            const whatsapp = document.getElementById('marketingWhatsapp').value.trim();
-            const purpose = document.querySelector('#marketingForm input[name="purpose"]:checked').value;
-            
-            let previewText = `Name: ${name || 'Not provided'}\n`;
-            previewText += `Department: ${department || 'Not provided'}\n`;
-            previewText += `WhatsApp: ${whatsapp || 'Not provided'}\n`;
-            
-            if (purpose === 'service') {
-                const serviceOption = document.querySelector('#marketingForm input[name="serviceOption"]:checked').value;
-                previewText += `Service Needed: ${serviceOption}\n`;
-                if (serviceOption === 'Other') {
-                    const otherService = document.getElementById('serviceOther').value.trim();
-                    previewText += `Other Service: ${otherService || 'Not specified'}\n`;
-                }
-            } else {
-                const businessDetails = document.getElementById('businessDetails').value.trim();
-                previewText += `Business Details: ${businessDetails || 'Not provided'}\n`;
-            }
-            
-            alert("Preview of your submission:\n\n" + previewText);
         }
 
         // Enhanced Report System with Email Fallback
