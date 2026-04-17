@@ -379,11 +379,79 @@
             .battle-plan-grid, .documents-grid { grid-template-columns: 1fr; }
             .radio-group { flex-direction: column; gap: 0.5rem; }
         }
-        @media (max-width: 480px) {
-            .welcome-section h1 { font-size: 1.8rem !important; }
-            .form-container { padding: 1.5rem !important; margin: 0 10px !important; }
-        }
-    </style>
+            @media (max-width: 480px) {
+        .welcome-section h1 { font-size: 1.8rem !important; }
+        .form-container { padding: 1.5rem !important; margin: 0 10px !important; }
+    }
+    
+    /* ========== 🆕 ADD ALL THE FIX CSS RIGHT HERE ========== */
+    /* ========== FIXES FOR PROFILE AND REPORT MODAL ========== */
+
+    /* Hide profile on welcome screen */
+    #welcome:not(.hidden) ~ .navbar .user-profile-dropdown,
+    #welcome:not(.hidden) ~ #navbar .user-profile-dropdown {
+        display: none !important;
+    }
+
+    /* Ensure report modal is hidden by default */
+    .report-modal {
+        display: none !important;
+    }
+
+    /* Only show when triggered */
+    .report-modal[style*="display: flex"],
+    .report-modal[style*="display:flex"] {
+        display: flex !important;
+    }
+
+    /* Smaller fonts */
+    .profile-header p {
+        font-size: 0.95rem !important;
+    }
+
+    .profile-header small {
+        font-size: 0.7rem !important;
+    }
+
+    .profile-menu-item {
+        font-size: 0.85rem !important;
+        padding: 10px 16px !important;
+    }
+
+    #profileName {
+        font-size: 0.85rem !important;
+    }
+
+    .report-modal-content h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .report-modal-content p {
+        font-size: 0.8rem !important;
+    }
+
+    .report-reason {
+        font-size: 0.8rem !important;
+        padding: 8px 10px !important;
+    }
+
+    #reportDetails {
+        font-size: 0.8rem !important;
+    }
+
+    .toast {
+        font-size: 0.8rem !important;
+        padding: 10px 14px !important;
+    }
+
+    .user-info {
+        font-size: 0.8rem !important;
+    }
+
+    footer a[href="admin.html"] {
+        font-size: 0.75rem !important;
+    }
+</style>
 </head>
 <body>
 <script>
@@ -4228,6 +4296,14 @@ function prefillCategoryBusinessForms() {
 
     // ========== START APP ==========
     document.addEventListener('DOMContentLoaded', initializeApp);
+
+    // 🆕 ADD THIS RIGHT HERE - BEFORE THE CLOSING </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const reportModal = document.getElementById('reportModal');
+        if (reportModal) {
+            reportModal.style.display = 'none';
+        }
+    });
 </script>
 </body>
 </html>
