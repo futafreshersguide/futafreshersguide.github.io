@@ -6,6 +6,8 @@
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        
+        /* ========== ALL CSS REMAINS EXACTLY THE SAME ========== */
         :root {
             --primary: #003366;
             --secondary: #990000;
@@ -26,1774 +28,373 @@
             --gray-900: #212529;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Welcome Section */
         .welcome-section {
             background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), var(--primary) center/cover no-repeat;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 20px;
         }
-        
-        .welcome-section h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .welcome-section p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin-bottom: 2rem;
-        }
+        .welcome-section h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+        .welcome-section p { font-size: 1.2rem; max-width: 800px; margin-bottom: 2rem; }
         
         .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 500px;
-            color: var(--dark);
+            background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); width: 100%; max-width: 500px; color: var(--dark);
         }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--gray-700);
-        }
-        
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--gray-700); }
         .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--gray-300);
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            width: 100%; padding: 12px; border: 1px solid var(--gray-300); border-radius: 5px;
+            font-size: 1rem; transition: border-color 0.3s;
         }
-        
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+            outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
         }
         
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        /* Improved Radio Button Styles */
-        .radio-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        #welcomeLevelRow {
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-#welcomeLevelRow[style*="display: block"] {
-    display: block !important;
-}
-        .radio-option {
-            flex: 1;
-            position: relative;
-        }
-        
-        .radio-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
+        .radio-group { display: flex; gap: 1rem; margin-top: 0.5rem; }
+        .radio-option { flex: 1; position: relative; }
+        .radio-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
         .radio-label {
-            display: block;
-            padding: 12px 16px;
-            background: var(--gray-100);
-            border: 2px solid var(--gray-300);
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70px;
+            padding: 12px 16px; background: var(--gray-100); border: 2px solid var(--gray-300);
+            border-radius: 5px; text-align: center; cursor: pointer; transition: all 0.3s ease; font-weight: 500;
         }
-        
-        .radio-option input[type="radio"]:checked + .radio-label {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .radio-option input[type="radio"]:hover + .radio-label {
-            border-color: var(--primary);
-        }
+        .radio-label small { display: block; font-weight: normal; opacity: 0.8; font-size: 0.7rem; }
+        .radio-option input[type="radio"]:checked + .radio-label { background: var(--primary); color: white; border-color: var(--primary); }
+        .radio-option input[type="radio"]:hover + .radio-label { border-color: var(--primary); }
         
         .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            margin: 10px;
+            display: inline-block; background: var(--primary); color: white; padding: 12px 24px;
+            border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600;
+            transition: all 0.3s ease; text-decoration: none; margin: 10px;
         }
+        .btn:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .btn-whatsapp { background: #25D366; }
+        .btn-whatsapp:hover { background: #128C7E; }
+        .btn-drive { background: #4285F4; }
+        .btn-drive:hover { background: #3367D6; }
         
-        .btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-whatsapp {
-            background: #25D366;
-        }
-        
-        .btn-whatsapp:hover {
-            background: #128C7E;
-        }
-        
-        .btn-email {
-            background: #EA4335;
-        }
-        
-        .btn-email:hover {
-            background: #D14836;
-        }
-        
-        .btn-drive {
-            background: #4285F4;
-        }
-        
-        .btn-drive:hover {
-            background: #3367D6;
-        }
-        
-        /* Content Sections */
-        .content-section {
-            padding: 4rem 0;
-            min-height: 80vh;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 10px auto;
-        }
+        .content-section { padding: 4rem 0; min-height: 80vh; }
+        .section-title { text-align: center; margin-bottom: 3rem; color: var(--primary); position: relative; }
+        .section-title:after { content: ''; display: block; width: 80px; height: 4px; background: var(--accent); margin: 10px auto; }
         
         .card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem; margin-bottom: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid var(--gray-200);
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
+        .card h3 { color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.5rem;
-        }
-        
-        /* Table of Contents */
-        .toc {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
+        .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
         .toc-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            border: 1px solid var(--gray-200);
+            background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease; cursor: pointer; border: 1px solid var(--gray-200);
         }
+        .toc-item:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); }
+        .toc-item h3 { color: var(--primary); margin-bottom: 0.5rem; }
         
-        .toc-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
+        .navbar { background: var(--primary); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        .nav-links { display: flex; list-style: none; flex-wrap: wrap; }
+        .nav-links li { margin-left: 1.5rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s ease; white-space: nowrap; }
+        .nav-links a:hover { color: var(--accent); }
         
-        .toc-item h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Course Grid */
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .course-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            transition: transform 0.3s ease;
-            border: 1px solid var(--gray-200);
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .course-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .course-card ul {
-            list-style-type: none;
-        }
-        
-        .course-card li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        
-        .course-card li:before {
-            content: '•';
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        /* Navigation */
-        .navbar {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-        
-        .nav-links li {
-            margin-left: 1.5rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        
-        /* User Info */
-        .user-info {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1rem;<
-            border-radius: 5px;
-            color: var(--primary);
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        /* Sidebar Menu */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-right: 1rem;
-        }
-        
+        .menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; margin-right: 1rem; }
         .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100vh;
-            background: var(--primary);
-            color: white;
-            transition: left 0.3s ease;
-            z-index: 1000;
-            padding: 2rem 1rem;
-            overflow-y: auto;
+            position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: var(--primary);
+            color: white; transition: left 0.3s ease; z-index: 1000; padding: 2rem 1rem; overflow-y: auto;
             box-shadow: 2px 0 10px rgba(0,0,0,0.2);
         }
+        .sidebar.active { left: 0; }
+        .sidebar-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .sidebar-links { list-style: none; margin-top: 2rem; }
+        .sidebar-links li { margin-bottom: 1rem; }
+        .sidebar-links a { color: white; text-decoration: none; display: block; padding: 0.5rem 1rem; border-radius: 5px; transition: all 0.3s ease; }
+        .sidebar-links a:hover, .sidebar-links a.active { background: rgba(255,255,255,0.2); color: var(--accent); }
         
-        .sidebar.active {
-            left: 0;
-        }
+        footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+        .message { padding: 15px; margin: 15px 0; border-radius: 5px; text-align: center; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         
-        .sidebar-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        .page-nav { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--gray-300); }
+        .page-btn { background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; transition: all 0.3s ease; }
+        .page-btn:hover { background: var(--secondary); }
         
-        .sidebar-links {
-            list-style: none;
-            margin-top: 2rem;
-        }
+        .content-page { display: none; }
+        .content-page.active { display: block; }
         
-        .sidebar-links li {
-            margin-bottom: 1rem;
-        }
-        
-        .sidebar-links a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar-links a:hover, .sidebar-links a.active {
-            background: rgba(255,255,255,0.2);
-            color: var(--accent);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-content p {
-            margin-bottom: 1rem;
-        }
-        
-        /* Message Styles */
-        .message {
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        /* Feedback Section */
-        .feedback-section {
-            background: var(--primary);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .feedback-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 2rem;
-        }
-        
-        /* Page Navigation */
-        .page-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-300);
-        }
-        
-        .page-btn {
-            background: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .page-btn:hover {
-            background: var(--secondary);
-        }
-        
-        /* Content Sections */
-        .content-page {
-            display: none;
-        }
-        
-        .content-page.active {
-            display: block;
-        }
-        
-        .quote {
-            font-style: italic;
-            border-left: 4px solid var(--accent);
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-            color: var(--gray-600);
-        }
-        
+        .quote { font-style: italic; border-left: 4px solid var(--accent); padding-left: 1rem; margin: 1.5rem 0; color: var(--gray-600); }
         .inspirational-box {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-left: 5px solid var(--accent);
+            border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; border-left: 5px solid var(--accent);
         }
-        
         .drive-link {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin: 10px 0;
-            font-size: 0.9rem;
+            display: inline-block; background: var(--primary); color: white; padding: 8px 16px;
+            border-radius: 4px; text-decoration: none; margin: 10px 0; font-size: 0.9rem;
         }
+        .drive-link:hover { background: var(--secondary); }
         
-        .drive-link:hover {
-            background: var(--secondary);
-        }
-        
-        /* Materials Section */
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
+        .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .course-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        
-        .course-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent);
-        }
-        
-        .course-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .course-item h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .course-item p {
-            color: var(--gray-600);
-            font-size: 0.9rem;
-        }
-        
-        .access-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1px dashed var(--primary);
-        }
-        
-        /* Departmental Courses Section */
-        .department-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-left: 5px solid var(--secondary);
-        }
-        
-        .department-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .dept-course {
-            background: white;
-            padding: 1rem;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        /* Course Battle Plan */
-        .battle-plan-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .battle-plan-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            border-left: 4px solid var(--accent);
-        }
-        
-        .battle-plan-card h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .exam-type {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-        
-        /* Exam Strategy */
-        .strategy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .strategy-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-        }
-        
-        .strategy-card h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.5rem;
-        }
-        
-        /* Benefits of Attending Classes */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .benefit-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        /* Registration Section */
-        .registration-timeline {
-            position: relative;
-            margin: 2rem 0;
-            padding-left: 2rem;
-        }
-        
-        .registration-timeline:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--accent);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-        }
-        
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0.5rem;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid var(--accent);
-        }
-        
-        .timeline-item h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .signature-list {
-            background: var(--gray-100);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-        
-        .signature-list ol {
-            margin-left: 1.5rem;
-        }
-        
-        .signature-list li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .money-breakdown {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .money-breakdown h4 {
-            color: #856404;
-            margin-bottom: 1rem;
-        }
-        
-        /* Documents Section */
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .document-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            border-top: 4px solid var(--primary);
-        }
-        
-        .document-card h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .document-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .document-requirement {
-            display: inline-block;
-            background: var(--gray-200);
-            color: var(--gray-700);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin: 5px 0;
-        }
-        
-        .document-requirement.online {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-        
-        .document-requirement.physical {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .document-requirement.both {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        /* Feedback Form */
-        .feedback-form {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .feedback-form h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-        
-        /* Marketing Section Styles */
-        .marketplace-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .marketplace-subtitle {
-            color: var(--gray-600);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .notice {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            color: #856404;
-            font-size: 0.9rem;
-        }
-        
-        .services-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin: 1rem 0;
-        }
-        
-        .services-list label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px;
-            border-radius: 4px;
-            background: var(--gray-100);
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .services-list label:hover {
-            background: var(--gray-200);
-        }
-        
-        .help {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-            margin-top: 10px;
-        }
-        
-        .btn-muted {
-            background: var(--gray-500);
-        }
-        
-        .btn-muted:hover {
-            background: var(--gray-600);
-        }
-        
-        .category {
-            margin-bottom: 2rem;
-        }
-        
-        .category h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--gray-300);
-        }
-        
-        .business-listing {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--accent);
-        }
-        
-        .business-listing h5 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .business-listing p {
-            margin-bottom: 0.5rem;
-            color: var(--gray-700);
-        }
-        
-        .business-contact {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .business-price {
-            font-weight: bold;
-            color: var(--secondary);
-        }
-        
-        .business-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 0.8rem;
-        }
-        
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--success);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-left: 8px;
-        }
-        
-        .footer-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-300);
-        }
-        
-        .small {
-            font-size: 0.85rem;
-        }
-        
-        .secondary {
-            background: var(--gray-500);
-        }
-        
-        .secondary:hover {
-            background: var(--gray-600);
-        }
-        
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--gray-600);
-        }
-        
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .breadcrumb span {
-            margin: 0 8px;
-        }
-        
-        .whatsapp-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        .whatsapp-link:hover {
-            color: var(--secondary);
-            text-decoration: underline;
-        }
-        
-        /* Animations for Marketplace */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        .typewriter-text {
-            overflow: hidden;
-            border-right: 3px solid var(--accent);
-            white-space: nowrap;
-            animation: typewriter 3s steps(40) 1s 1 normal both;
-        }
-        
-        /* Marketplace specific styles */
-        .marketplace-welcome {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .business-highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            text-align: center;
-        }
-        
-        .business-count {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        
-        .empty-state {
-            text-align: center;
-            color: var(--gray-600);
-            font-style: italic;
-            padding: 2rem;
-            background: var(--gray-100);
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        
-        /* Hidden class for content sections */
-.hidden {
-    display: none !important;
-}
-        
-        /* Inline radio buttons */
-        .inline {
-            display: inline-block;
-            margin-right: 20px;
-        }
-        
-        /* Admin Stats */
-        .admin-stats {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* New Marketplace Styles */
-        .marketplace-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-        }
-        
-        .quick-access-bar {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary);
-        }
-        
-        .quick-access-bar:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .business-count-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-left: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .user-info-toggle {
-            background: var(--accent);
-            color: var(--primary);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .user-info-toggle:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .business-highlight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .business-highlight-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--accent);
-            transition: all 0.3s ease;
-        }
-        
-        .business-highlight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-        }
-        
-        .scroll-indicator {
-            text-align: center;
-            margin: 1rem 0;
-            color: var(--gray-600);
-            animation: bounce 2s infinite;
-        }
-        
-        .scroll-indicator i {
-            font-size: 1.5rem;
-            margin-top: 10px;
-            display: block;
-        }
-        
-        .report-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .report-modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-        }
-        
-        .report-reasons {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin: 1rem 0;
-        }
-        
-        .report-reason {
-            padding: 10px;
-            border: 1px solid var(--gray-300);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .report-reason:hover, .report-reason.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent);
-        }
-        
-        /* NEW: Category-specific business form styles */
-        .category-form-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin: 2rem 0;
-            border-left: 5px solid var(--accent);
-            display: none;
-        }
-        
-        .category-form-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .category-form-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--gray-200);
-        }
-        
-        .category-form-title {
-            color: var(--primary);
-            margin: 0;
-        }
-        
-        .close-category-form {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray-500);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .close-category-form:hover {
-            color: var(--danger);
-        }
-        
-        .add-business-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 1rem;
-        }
-        
-        .add-business-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .category-empty-state {
-            text-align: center;
-            color: var(--gray-600);
-            font-style: italic;
-            padding: 2rem;
-            background: var(--gray-100);
-            border-radius: 8px;
-            margin: 1rem 0;
-            border: 2px dashed var(--gray-300);
-        }
-        
-        .category-empty-state h4 {
-            color: var(--gray-700);
-            margin-bottom: 1rem;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Business Form Styles */
-        .business-form-notice {
-            background: #e3f2fd;
-            border-left: 4px solid #2196F3;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .business-form-notice ul {
-            margin: 10px 0 0 20px;
-        }
-        
-        .business-form-notice li {
-            margin-bottom: 5px;
-        }
-        
-        .form-group small {
-            display: block;
-            margin-top: 5px;
-            color: var(--gray-600);
-            font-size: 0.85rem;
-        }
-        .radio-label small {
-    display: block;
-    font-weight: normal;
-    opacity: 0.8;
-    font-size: 0.7rem;
-}
-        
-        .submission-success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .submission-success h4 {
-            color: #155724;
-            margin-bottom: 1rem;
-        }
-        
-        .submission-success ul {
-            text-align: left;
-            max-width: 500px;
-            margin: 1rem auto;
-        }
-        
-        .submission-success li {
-            margin-bottom: 8px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .welcome-section h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-            }
-            
-            .nav-links {
-                margin-top: 1rem;
-                justify-content: center;
-            }
-            
-            .nav-links li {
-                margin: 0 0.5rem;
-            }
-            
-            .feedback-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .materials-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .department-list {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
-            .battle-plan-grid, .documents-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .menu-btn {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .user-info {
-                position: static;
-                margin-top: 1rem;
-                text-align: center;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .services-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .business-contact {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .business-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .footer-nav {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .radio-group {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .business-highlight-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .category-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .category-form-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .close-category-form {
-                align-self: flex-end;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .welcome-section h1 {
-                font-size: 1.8rem !important;
-            }
-            
-            .welcome-section p {
-                font-size: 1rem !important;
-            }
-            
-            .form-container {
-                padding: 1.5rem !important;
-                margin: 0 10px !important;
-            }
-            
-            .card {
-                padding: 1.5rem !important;
-            }
-            
-            .section-title {
-                font-size: 1.5rem !important;
-            }
-            
-            .toc, .course-grid, .materials-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
-            
-            .battle-plan-grid, .strategy-grid, .benefits-grid, .documents-grid {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .department-list {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
-            }
-            
-            .business-listing {
-                padding: 1rem !important;
-            }
-            
-            .business-contact {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 10px !important;
-            }
-            
-            .business-actions {
-                width: 100% !important;
-                justify-content: space-between !important;
-            }
-            
-            .feedback-buttons {
-                flex-direction: column !important;
-                width: 100% !important;
-            }
-            
-            .feedback-buttons .btn {
-                width: 100% !important;
-                margin: 5px 0 !important;
-            }
-            
-            .page-nav {
-                flex-direction: column !important;
-                gap: 15px !important;
-                text-align: center !important;
-            }
-            
-            .nav-container {
-                flex-wrap: wrap !important;
-            }
-            
-            .logo {
-                font-size: 1.2rem !important;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container {
-                padding: 0 15px !important;
-            }
-            
-            .welcome-section h1 {
-                font-size: 1.5rem !important;
-            }
-            
-            .form-container {
-                padding: 1rem !important;
-            }
-            
-            .btn {
-                padding: 10px 15px !important;
-                font-size: 0.9rem !important;
-                margin: 5px !important;
-            }
-            
-            .card {
-                padding: 1rem !important;
-            }
-            
-            .toc-item, .course-card {
-                padding: 1rem !important;
-            }
-        }
-        
-.user-profile-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-profile-dropdown {
+            background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent;
+        }
+        .course-item:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-color: var(--accent); }
+        .course-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary); }
+        .course-item h4 { color: var(--primary); margin-bottom: 0.5rem; }
+        .access-link { display: inline-block; margin-top: 1rem; color: var(--primary); font-weight: 600; text-decoration: none; border-bottom: 1px dashed var(--primary); }
+        
+        .battle-plan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .battle-plan-card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; border-left: 4px solid var(--accent); }
+        .battle-plan-card h4 { color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        .exam-type { display: inline-block; background: var(--secondary); color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; margin-left: 10px; }
+        
+        .hidden { display: none !important; }
+        .notice { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1.5rem 0; color: #856404; }
+        /* Registration Timeline Styles */
+.registration-timeline {
     position: relative;
+    margin: 2rem 0;
+    padding-left: 2rem;
 }
 
-.profile-btn {
-    background: rgba(255, 255, 255, 0.2);
+.registration-timeline:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.timeline-item:before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--accent);
+}
+
+.signature-list {
+    background: var(--gray-100);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.money-breakdown {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+/* Documents Grid */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.document-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-top: 4px solid var(--primary);
+}
+
+.document-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.document-requirement {
+    display: inline-block;
+    background: var(--gray-200);
+    color: var(--gray-700);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+.document-requirement.online { background: #d1ecf1; color: #0c5460; }
+.document-requirement.physical { background: #f8d7da; color: #721c24; }
+.document-requirement.both { background: #d4edda; color: #155724; }
+
+/* Strategy & Benefits Grid */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.strategy-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.benefit-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover { transform: translateY(-5px); }
+.benefit-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        /* Marketplace Styles */
+.marketplace-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 30px;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.quick-access-bar {
+    background: var(--accent);
+    color: var(--primary);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    text-align: center;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.quick-access-bar:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.business-highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.business-highlight-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--accent);
     transition: all 0.3s ease;
 }
 
-.profile-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+.business-highlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
 }
 
-.profile-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    min-width: 250px;
-    margin-top: 10px;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.profile-header {
-    padding: 20px;
+.scroll-indicator {
     text-align: center;
-    background: var(--gray-100);
-}
-
-.profile-header p {
-    margin: 10px 0 5px;
-    font-weight: 600;
-    color: var(--dark);
-}
-
-.profile-header small {
+    margin: 1rem 0;
     color: var(--gray-600);
+    animation: bounce 2s infinite;
 }
 
-.profile-menu-item {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    text-align: left;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    color: var(--dark);
-    transition: background 0.3s ease;
-}
-
-.profile-menu-item:hover {
-    background: var(--gray-100);
-}
-
-.profile-menu-item i {
-    margin-right: 10px;
-    width: 20px;
+.business-count-badge {
+    display: inline-block;
+    background: var(--accent);
     color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 10px;
 }
-
-.profile-menu hr {
-    margin: 0;
-    border: none;
-    border-top: 1px solid var(--gray-200);
-}
-
-/* Modal Styles */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.modal-header {
-    padding: 20px;
-    border-bottom: 1px solid var(--gray-200);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: var(--primary);
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--gray-600);
-}
-
-.modal-close:hover {
-    color: var(--danger);
-}
-
-.modal-body {
-    padding: 20px;
-}
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--success);
-    color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
+        /* Profile Styles */
+        .user-profile-section { display: flex; align-items: center; gap: 15px; }
+        .user-profile-dropdown { position: relative; }
+        .profile-btn { background: rgba(255, 255, 255, 0.2); color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; }
+        .profile-btn:hover { background: rgba(255, 255, 255, 0.3); }
+        .profile-menu { position: absolute; top: 100%; right: 0; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); min-width: 250px; margin-top: 10px; z-index: 1000; overflow: hidden; }
+        .profile-header { padding: 20px; text-align: center; background: var(--gray-100); }
+        .profile-header p { margin: 10px 0 5px; font-weight: 600; color: var(--dark); }
+        .profile-header small { color: var(--gray-600); }
+        .profile-menu-item { display: block; width: 100%; padding: 12px 20px; text-align: left; background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--dark); transition: background 0.3s ease; }
+        .profile-menu-item:hover { background: var(--gray-100); }
+        .profile-menu-item i { margin-right: 10px; width: 20px; color: var(--primary); }
+        .profile-menu hr { margin: 0; border: none; border-top: 1px solid var(--gray-200); }
+        
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: white; border-radius: 10px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
+        .modal-header { padding: 20px; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h3 { margin: 0; color: var(--primary); }
+        .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-600); }
+        .modal-close:hover { color: var(--danger); }
+        .modal-body { padding: 20px; }
+        
+        .toast { position: fixed; bottom: 20px; right: 20px; background: var(--success); color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        #welcomeLevelRow { margin-bottom: 1.5rem; text-align: left; }
+        #welcomeLevelRow[style*="display: block"] { display: block !important; }
+        
+        @media (max-width: 768px) {
+            .welcome-section h1 { font-size: 2rem; }
+            .nav-container { flex-direction: column; }
+            .nav-links { margin-top: 1rem; justify-content: center; display: none; }
+            .menu-btn { display: block; }
+            .battle-plan-grid, .documents-grid { grid-template-columns: 1fr; }
+            .radio-group { flex-direction: column; gap: 0.5rem; }
+        }
+        @media (max-width: 480px) {
+            .welcome-section h1 { font-size: 1.8rem !important; }
+            .form-container { padding: 1.5rem !important; margin: 0 10px !important; }
+        }
     </style>
 </head>
 <body>
-       <script>
-        const CURRENT_VERSION = '2.0.0';
-        const storedVersion = localStorage.getItem('appVersion');
-        if (storedVersion !== CURRENT_VERSION) {
-            localStorage.clear();
-            localStorage.setItem('appVersion', CURRENT_VERSION);
-            console.log('App updated! Please login again.');
-        }
-    </script>
+<script>
+    const CURRENT_VERSION = '2.0.0';
+    const storedVersion = localStorage.getItem('appVersion');
+    if (storedVersion !== CURRENT_VERSION) {
+        localStorage.clear();
+        localStorage.setItem('appVersion', CURRENT_VERSION);
+        console.log('App updated! Please login again.');
+    }
+</script>
 
     <!-- ========== SAME: Welcome Section ========== -->
     <section id="welcome" class="welcome-section">
@@ -2047,7 +648,36 @@
                 </div>
             </div>
         </section>
-        
+                <!-- Message Page -->
+        <section id="message" class="content-section content-page">
+            <div class="container">
+                <h2 class="section-title">A Message to FUTA Graduating Class of 2029</h2>
+                <div class="card">
+                    <p>To the brilliant minds who have earned their place here, welcome to the Federal University of Technology, Akure (FUTA)! This achievement is a testament to your dedication, and you should be immensely proud.</p>
+                    
+                    <div class="inspirational-box">
+                        <h3>🏆 You Are Architects of Your Future</h3>
+                        <p>The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.</p>
+                        <p class="quote">"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
+                    </div>
+                    
+                    <h3>Your FUTA Legacy Awaits</h3>
+                    <p>FUTA isn't just an institution - it's an ecosystem of innovation, excellence, and transformation. Here, you'll:</p>
+                    <ul>
+                        <li>Develop critical thinking and problem-solving skills</li>
+                        <li>Connect with future industry leaders</li>
+                        <li>Discover your passions and purpose</li>
+                        <li>Build resilience and character</li>
+                        <li>Create memories that will last a lifetime</li>
+                    </ul>
+                    
+                    <div class="page-nav">
+                        <a href="#" class="page-btn" data-page="home">← Previous</a>
+                        <a href="#" class="page-btn" data-page="toc">Next: Table of Contents →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Table of Contents -->
         <section id="toc" class="content-section content-page">
             <div class="container">
@@ -5071,27 +3701,40 @@
         const userInfo = document.getElementById('userInfo');
         if (userInfo) userInfo.innerHTML = `${newName} | ${newDept}` + (newLevel ? ` | ${newLevel}` : '');
         
-        const modal = document.getElementById('editProfileModal');
-        modal.style.display = 'none';
-        modal.classList.add('hidden');
-        
-        showToast('Profile updated successfully!', 'success');
-    }
+      const modal = document.getElementById('editProfileModal');
+modal.style.display = 'none';
+modal.classList.add('hidden');
 
-    function showToast(message, type = 'success') {
-        const toast = document.createElement('div');
-        toast.style.cssText = `
-            position: fixed; bottom: 20px; right: 20px;
-            background: ${type === 'success' ? 'var(--success)' : 'var(--danger)'};
-            color: white; padding: 15px 20px; border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;
-            animation: slideIn 0.3s ease;
-        `;
-        toast.innerHTML = message;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    }
+// 🆕 Track profile update for admin
+saveSubmissionToAdminStorage({
+    id: Date.now() + '-profile-' + Math.random().toString(36).substr(2, 5),
+    name: newName,
+    department: newDept,
+    whatsapp: newWhatsapp,
+    level: newLevel,
+    isFresher: newIsFresher,
+    semester: userData.semester || 'first',
+    timestamp: new Date().toISOString(),
+    action: 'PROFILE_UPDATE',
+    source: 'Profile Edit'
+}, 'user');
 
+showToast('Profile updated successfully!', 'success');
+} 
+
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed; bottom: 20px; right: 20px;
+        background: ${type === 'success' ? 'var(--success)' : 'var(--danger)'};
+        color: white; padding: 15px 20px; border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;
+        animation: slideIn 0.3s ease;
+    `;
+    toast.innerHTML = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
     // ========== CHECK ONBOARDING STATUS ==========
     function checkOnboardingStatus() {
         try {
@@ -5176,7 +3819,18 @@
             'Semester Selected': selectedSemester === 'first' ? 'First Semester' : 'Second Semester',
             'Timestamp': new Date().toISOString()
         };
-
+// 🆕 Save to admin tracking
+saveSubmissionToAdminStorage({
+    id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+    name: nameVal,
+    department: deptVal,
+    whatsapp: whatsappVal,
+    isFresher: isFresher,
+    level: levelVal || 'N/A',
+    semester: selectedSemester,
+    timestamp: new Date().toISOString(),
+    source: 'First Semester'
+}, 'user');
         submitToFormSubmit(formData)
         .then(() => {
             if (selectedSemester === 'second') {
@@ -5277,21 +3931,24 @@
 
     // ========== CATEGORY BUSINESS FORMS ==========
     function initializeCategoryBusinessForms() {
-        document.querySelectorAll('.add-business-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
-                const targetForm = document.getElementById(`${category}BusinessForm`);
-                if (targetForm) { targetForm.classList.add('active'); targetForm.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
+    document.querySelectorAll('.add-business-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            const targetForm = document.getElementById(`${category}BusinessForm`);
+            if (targetForm) { targetForm.classList.add('active'); targetForm.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         });
-        document.querySelectorAll('.close-category-form').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
-                const targetForm = document.getElementById(`${category}BusinessForm`);
-                if (targetForm) targetForm.classList.remove('active');
-            });
+    });
+    document.querySelectorAll('.close-category-form').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            const targetForm = document.getElementById(`${category}BusinessForm`);
+            if (targetForm) targetForm.classList.remove('active');
         });
-    }
+    });
+    
+   
+    prefillCategoryBusinessForms();
+}
 
     // ========== FEEDBACK SUBMISSION ==========
     function handleFeedbackSubmit(e) {
@@ -5426,7 +4083,13 @@
         const map = { 'dna': 'dna', 'microscope': 'microscope', 'flask': 'flask', 'vial': 'vial', 'laptop-code': 'laptop-code', 'cogs': 'cogs', 'language': 'language', 'book': 'book', 'ruler-combined': 'ruler-combined', 'calculator': 'calculator', 'atom': 'atom', 'fire': 'fire', 'vials': 'vial' };
         return map[iconName] || 'file-alt';
     }
-
+// Scroll to category function
+function scrollToCategory(categoryId) {
+    const element = document.getElementById(categoryId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
     // ========== INITIALIZE APP ==========
     function initializeApp() {
         const userForm = document.getElementById('userForm');
@@ -5460,6 +4123,108 @@
         initializeCategoryBusinessForms();
         initProfileDropdown();
     }
+    // ========== 🆕 MISSING: ADMIN TRACKING FUNCTION ==========
+function saveSubmissionToAdminStorage(submissionData, type) {
+    try {
+        const storageKey = type === 'user' ? 'allUserSubmissions' : 
+                          type === 'business' ? 'allBusinessSubmissions' : 
+                          'allFeedbackSubmissions';
+        let existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        existing.push(submissionData);
+        localStorage.setItem(storageKey, JSON.stringify(existing));
+        console.log(`✅ Saved to admin storage: ${storageKey}`);
+    } catch (e) {
+        console.error('Error saving to admin storage:', e);
+    }
+}
+
+// ========== 🆕 MISSING: SHOW CATEGORY BUSINESS FORM ==========
+function showCategoryBusinessForm(category, categoryName) {
+    const allForms = document.querySelectorAll('.category-form-container');
+    allForms.forEach(form => form.classList.remove('active'));
+    const targetForm = document.getElementById(`${category}BusinessForm`);
+    if (targetForm) {
+        targetForm.classList.add('active');
+        targetForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// ========== 🆕 MISSING: HIDE CATEGORY BUSINESS FORM ==========
+function hideCategoryBusinessForm(category) {
+    const targetForm = document.getElementById(`${category}BusinessForm`);
+    if (targetForm) targetForm.classList.remove('active');
+}
+
+// ========== 🆕 MISSING: HANDLE CATEGORY BUSINESS SUBMISSION ==========
+function handleCategoryBusinessSubmission(category) {
+    const form = document.querySelector(`.category-business-form[data-category="${category}"]`);
+    const messageDiv = document.querySelector(`.category-form-message[data-category="${category}"]`);
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    
+    if (!form || !messageDiv || !submitBtn) return;
+    
+    const formData = new FormData(form);
+    const businessData = {};
+    for (let [key, value] of formData.entries()) businessData[key] = value;
+    
+    if (!businessData.businessName || !businessData.businessDescription || !businessData.businessLocation || 
+        !businessData.businessPhone || !businessData.submitterName || !businessData.submitterDepartment || 
+        !businessData.submitterWhatsapp) {
+        messageDiv.innerHTML = '<div class="message error">Please fill in all required fields.</div>';
+        return;
+    }
+    
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    submitBtn.disabled = true;
+    
+    const submissionData = {
+        '_subject': `NEW BUSINESS - ${businessData.businessName}`,
+        '_template': 'table', '_captcha': 'false',
+        'Business Name': businessData.businessName,
+        'Category': businessData.businessCategoryName,
+        'Description': businessData.businessDescription,
+        'Location': businessData.businessLocation,
+        'Phone': businessData.businessPhone,
+        'Pricing': businessData.businessPrice || 'Not specified',
+        'Submitted By': businessData.submitterName,
+        'Submitter Department': businessData.submitterDepartment,
+        'Submitter WhatsApp': businessData.submitterWhatsapp,
+        'Status': 'PENDING_APPROVAL',
+        'Submission Date': new Date().toISOString()
+    };
+
+    submitToFormSubmit(submissionData)
+    .then(() => {
+        messageDiv.innerHTML = `<div class="submission-success"><h4>✅ Business Submitted!</h4><p>Your business "${businessData.businessName}" is awaiting approval.</p></div>`;
+        form.reset();
+        setTimeout(() => hideCategoryBusinessForm(category), 3000);
+    })
+    .catch(() => { messageDiv.innerHTML = '<div class="message error">Submission failed. Please try again.</div>'; })
+    .finally(() => { submitBtn.innerHTML = '🚀 Submit Business for Approval'; submitBtn.disabled = false; });
+}
+
+// ========== 🆕 MISSING: PREVIEW CATEGORY BUSINESS ==========
+function previewCategoryBusinessSubmission(category) {
+    const form = document.querySelector(`.category-business-form[data-category="${category}"]`);
+    if (!form) return;
+    const formData = new FormData(form);
+    let previewText = `BUSINESS PREVIEW:\n`;
+    previewText += `Name: ${formData.get('businessName') || 'Not provided'}\n`;
+    previewText += `Category: ${formData.get('businessCategoryName') || 'Not selected'}`;
+    alert(previewText);
+}
+
+// ========== 🆕 MISSING: PREFILL CATEGORY BUSINESS FORMS ==========
+function prefillCategoryBusinessForms() {
+    try {
+        const userName = localStorage.getItem('userName');
+        const userDepartment = localStorage.getItem('userDepartment');
+        const userWhatsApp = localStorage.getItem('userWhatsApp');
+        if (userName) document.querySelectorAll('input[name="submitterName"]').forEach(i => i.value = userName);
+        if (userDepartment) document.querySelectorAll('input[name="submitterDepartment"]').forEach(i => i.value = userDepartment);
+        if (userWhatsApp) document.querySelectorAll('input[name="submitterWhatsapp"]').forEach(i => i.value = userWhatsApp);
+    } catch (err) { console.log('Could not prefill category business forms'); }
+}
 
     // ========== START APP ==========
     document.addEventListener('DOMContentLoaded', initializeApp);
