@@ -296,8 +296,9 @@
                 <li><a href="#" data-page="read-recall">READ RECALL</a></li>
                 <li><a href="#" data-page="textbooks">Textbooks</a></li>
                 <li><a href="#" data-page="contact">Contact</a></li>
-                <li><a href="index.html" style="background: var(--primary); padding: 5px 12px; border-radius: 20px;"><i class="fas fa-exchange-alt"></i> 1st Semester</a></li>
-            </ul>
+             <li><a href="index.html?switch=true" style="background: var(--primary); padding: 5px 12px; border-radius: 20px;">
+    <i class="fas fa-exchange-alt"></i> 1st Semester
+</a></li>   </ul>
             
             <!-- Profile Section -->
             <div class="user-profile-section" style="display: flex; align-items: center; gap: 15px;">
@@ -382,7 +383,9 @@
             <li><a href="#" data-page="textbooks">📖 Recommended Textbooks</a></li>
             <li><a href="#" data-page="contact">📞 Contact</a></li>
             <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
-                <a href="index.html"><i class="fas fa-arrow-left"></i> First Semester Guide</a>
+              <a href="index.html?switch=true">
+    <i class="fas fa-arrow-left"></i> First Semester Guide
+</a>
             </li>
         </ul>
     </div>
@@ -848,31 +851,48 @@
         }
 
         function checkLocalStorage() {
-            try {
-                const parentOnboarded = localStorage.getItem('onboarded');
-                if (parentOnboarded === 'true') {
-                    const userName = localStorage.getItem('userName'), userDept = localStorage.getItem('userDepartment'), userWA = localStorage.getItem('userWhatsApp'), userLevel = localStorage.getItem('userLevel'), userFresher = localStorage.getItem('userIsFresher');
-                    if (userName) document.getElementById('name').value = userName;
-                    if (userDept) document.getElementById('department').value = userDept;
-                    if (userWA) document.getElementById('whatsapp').value = userWA;
-                    if (userLevel) { document.getElementById('welcomeLevel').value = userLevel; document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
-                    if (userFresher === 'no') { document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
-                }
-                const secondSemOnboarded = localStorage.getItem('onboardedSecondSemester');
-                if (secondSemOnboarded === 'true') {
-                    const userName = localStorage.getItem('secondSemesterUserName'), userDept = localStorage.getItem('secondSemesterUserDepartment');
-                    if (userName && userDept) {
-                        userData = { name: userName, department: userDept, whatsapp: localStorage.getItem('secondSemesterUserWhatsApp') || '', isFresher: localStorage.getItem('secondSemesterUserIsFresher') || 'yes', level: localStorage.getItem('secondSemesterUserLevel') || '' };
-                        document.getElementById('welcome').classList.add('hidden');
-                        document.getElementById('navbar').classList.remove('hidden');
-                        document.getElementById('main-content').classList.remove('hidden');
-                        document.getElementById('userInfo').innerHTML = `${userName} | ${userDept}` + (userData.level ? ` | ${userData.level}` : '');
-                        updateProfileDisplay();
-                    }
-                }
-            } catch (err) { console.error('Error checking localStorage:', err); }
+    try {
+        const parentOnboarded = localStorage.getItem('onboarded');
+        if (parentOnboarded === 'true') {
+            const userName = localStorage.getItem('userName'), userDept = localStorage.getItem('userDepartment'), userWA = localStorage.getItem('userWhatsApp'), userLevel = localStorage.getItem('userLevel'), userFresher = localStorage.getItem('userIsFresher');
+            if (userName) document.getElementById('name').value = userName;
+            if (userDept) document.getElementById('department').value = userDept;
+            if (userWA) document.getElementById('whatsapp').value = userWA;
+            if (userLevel) { document.getElementById('welcomeLevel').value = userLevel; document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
+            if (userFresher === 'no') { document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
         }
-
+        
+        // 🆕 FIXED: Check if we came from a switch
+        const urlParams = new URLSearchParams(window.location.search);
+        const fromSwitch = urlParams.get('switch') === 'true';
+        
+        const secondSemOnboarded = localStorage.getItem('onboardedSecondSemester');
+        if (secondSemOnboarded === 'true' || (parentOnboarded === 'true' && !fromSwitch)) {
+            const userName = localStorage.getItem('secondSemesterUserName') || localStorage.getItem('userName');
+            const userDept = localStorage.getItem('secondSemesterUserDepartment') || localStorage.getItem('userDepartment');
+            
+            if (userName && userDept) {
+                userData = { 
+                    name: userName, 
+                    department: userDept, 
+                    whatsapp: localStorage.getItem('secondSemesterUserWhatsApp') || localStorage.getItem('userWhatsApp') || '', 
+                    isFresher: localStorage.getItem('secondSemesterUserIsFresher') || 'yes', 
+                    level: localStorage.getItem('secondSemesterUserLevel') || '' 
+                };
+                document.getElementById('welcome').classList.add('hidden');
+                document.getElementById('navbar').classList.remove('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('userInfo').innerHTML = `${userName} | ${userDept}` + (userData.level ? ` | ${userData.level}` : '');
+                updateProfileDisplay();
+            }
+        }
+        
+        // Clean up URL if coming from switch
+        if (fromSwitch) {
+            window.history.replaceState({}, document.title, 'second-semester.html');
+        }
+    } catch (err) { console.error('Error checking localStorage:', err); }
+}
         // Profile Functions
         function initProfileDropdown() {
             const profileDropdown = document.getElementById('userProfileDropdown'), profileBtn = document.getElementById('profileBtn'), profileMenu = document.getElementById('profileMenu');
@@ -885,7 +905,7 @@
             document.getElementById('editProfileModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('editProfileModal')) { const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden'); } });
             document.getElementById('editProfileForm')?.addEventListener('submit', (e) => { e.preventDefault(); saveProfileChanges(); });
             document.getElementById('logoutBtn')?.addEventListener('click', () => { if (confirm('Are you sure you want to logout?')) { localStorage.clear(); window.location.reload(); } });
-            document.getElementById('switchSemesterBtn2')?.addEventListener('click', () => { window.location.href = 'index.html'; });
+            document.getElementById('switchSemesterBtn2')?.addEventListener('click', () => { window.location.href = 'index.html?switch=true'; });
         }
 
         function updateProfileDisplay() {
