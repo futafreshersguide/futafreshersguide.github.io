@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+               /* =========================================
+           MOBILE ALIGNMENT & ANTI-DRAG FIX
+           ========================================= */
+        html, body {
+            overflow-x: hidden; /* Completely kills side-to-side dragging */
+            width: 100%;
+            max-width: 100vw;
+            overscroll-behavior-y: none; /* Stops the bouncy dragging effect on mobile */
+        }
+
+        /* Enforce larger, readable text on phones */
+        @media (max-width: 768px) {
+            html {
+                font-size: 16px !important; 
+            }
+            body, p, input, select, button, a, span {
+                font-size: 1.05rem !important; /* Bumps up the text size globally */
+                line-height: 1.6 !important;
+            }
+            h1 { font-size: 1.6rem !important; }
+            h2 { font-size: 1.3rem !important; }
+            h3 { font-size: 1.1rem !important; }
+            
+            /* Make inputs larger so they are easier to tap */
+            input, select, button {
+                padding: 12px !important;
+            }
+        }
         
         /* ========== ALL CSS REMAINS EXACTLY THE SAME ========== */
         :root {
