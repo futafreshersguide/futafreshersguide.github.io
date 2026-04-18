@@ -575,9 +575,9 @@
                 <li><a href="#" data-page="departmental">Departmental</a></li>
                 <li><a href="#" data-page="marketing">Marketplace</a></li>
                 <li><a href="#" data-page="contact">Contact</a></li>
-                <li><a href="second-semester.html" style="background: var(--secondary); padding: 5px 12px; border-radius: 20px; color: white !important;">
-                    <i class="fas fa-exchange-alt"></i> 2nd Semester
-                </a></li>
+                <li><a href="second-semester.html?switch=true" style="background: var(--secondary); padding: 5px 12px; border-radius: 20px; color: white !important;">
+    <i class="fas fa-exchange-alt"></i> 2nd Semester
+</a></li>
             </ul>
             <div class="user-profile-section" style="display: flex; align-items: center; gap: 15px;">
                 <div class="user-info hidden" id="userInfo"></div>
@@ -680,11 +680,9 @@
             <li><a href="#" data-page="departmental">Departmental Courses</a></li>
             <li><a href="#" data-page="marketing">Marketplace</a></li>
             <li><a href="#" data-page="contact">Contact</a></li>
-            <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
-                <a href="second-semester.html">
-                    <i class="fas fa-exchange-alt"></i> Switch to 2nd Semester
-                </a>
-            </li>
+           <a href="second-semester.html?switch=true">
+    <i class="fas fa-exchange-alt"></i> Switch to 2nd Semester
+</a>
         </ul>
     </div>
 
@@ -3692,11 +3690,10 @@
         }
         
         if (switchSemesterBtn) {
-            switchSemesterBtn.addEventListener('click', () => {
-                const currentSemester = userData.semester || 'first';
-                window.location.href = currentSemester === 'first' ? 'second-semester.html' : 'index.html';
-            });
-        }
+    switchSemesterBtn.addEventListener('click', () => {
+        window.location.href = 'second-semester.html?switch=true';
+    });
+}
     }
 
     function updateProfileDisplay() {
@@ -3804,49 +3801,62 @@ function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 3000);
 }
     // ========== CHECK ONBOARDING STATUS ==========
-    function checkOnboardingStatus() {
-        try {
-            const onboarded = localStorage.getItem('onboarded');
-            if (onboarded === 'true') {
-                const userName = localStorage.getItem('userName');
-                const userDepartment = localStorage.getItem('userDepartment');
-                const userWhatsApp = localStorage.getItem('userWhatsApp');
-                const userIsFresher = localStorage.getItem('userIsFresher');
-                const userLevel = localStorage.getItem('userLevel');
-                const userSemester = localStorage.getItem('userSemester');
+   // ========== UPDATED: checkOnboardingStatus function ==========
+function checkOnboardingStatus() {
+    try {
+        const onboarded = localStorage.getItem('onboarded');
+        if (onboarded === 'true') {
+            const userName = localStorage.getItem('userName');
+            const userDepartment = localStorage.getItem('userDepartment');
+            const userWhatsApp = localStorage.getItem('userWhatsApp');
+            const userIsFresher = localStorage.getItem('userIsFresher');
+            const userLevel = localStorage.getItem('userLevel');
+            const userSemester = localStorage.getItem('userSemester');
+            
+            if (userName && userDepartment) {
+                userData = {
+                    name: userName,
+                    department: userDepartment,
+                    whatsapp: userWhatsApp || '',
+                    isFresher: userIsFresher || 'yes',
+                    level: userLevel || '',
+                    semester: userSemester || 'first'
+                };
                 
-                if (userName && userDepartment) {
-                    userData = {
-                        name: userName,
-                        department: userDepartment,
-                        whatsapp: userWhatsApp || '',
-                        isFresher: userIsFresher || 'yes',
-                        level: userLevel || '',
-                        semester: userSemester || 'first'
-                    };
-                    
-                    if (userData.semester === 'second') {
-                        window.location.href = 'second-semester.html';
-                        return;
-                    }
-                    
-                    document.getElementById('welcome').classList.add('hidden');
-                    document.getElementById('navbar').classList.remove('hidden');
-                    document.getElementById('main-content').classList.remove('hidden');
-                    
-                    const userInfo = document.getElementById('userInfo');
-                    if (userInfo) {
-                        userInfo.classList.remove('hidden');
-                        userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
-                    }
-                    updateProfileDisplay();
+                // 🆕 FIXED: Check if we came from a switch (URL parameter)
+                const urlParams = new URLSearchParams(window.location.search);
+                const fromSwitch = urlParams.get('switch') === 'true';
+                
+                // Only redirect if NOT coming from a switch action
+                if (userData.semester === 'second' && !fromSwitch) {
+                    window.location.href = 'second-semester.html';
+                    return;
                 }
+                
+                // If we came from a switch, update the stored semester
+                if (fromSwitch) {
+                    userData.semester = 'first';
+                    localStorage.setItem('userSemester', 'first');
+                    // Clean up the URL
+                    window.history.replaceState({}, document.title, 'index.html');
+                }
+                
+                document.getElementById('welcome').classList.add('hidden');
+                document.getElementById('navbar').classList.remove('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                
+                const userInfo = document.getElementById('userInfo');
+                if (userInfo) {
+                    userInfo.classList.remove('hidden');
+                    userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
+                }
+                updateProfileDisplay();
             }
-        } catch (error) {
-            console.error('Error checking onboarding status:', error);
         }
+    } catch (error) {
+        console.error('Error checking onboarding status:', error);
     }
-
+}
     // ========== HANDLE FORM SUBMIT ==========
     function handleFormSubmit(e) {
         e.preventDefault();
