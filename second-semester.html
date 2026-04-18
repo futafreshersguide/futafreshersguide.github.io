@@ -296,6 +296,9 @@
                 <li><a href="#" data-page="read-recall">READ RECALL</a></li>
                 <li><a href="#" data-page="textbooks">Textbooks</a></li>
                 <li><a href="#" data-page="contact">Contact</a></li>
+<li><a href="calculator.html" style="background: #28a745; padding: 5px 12px; border-radius: 20px; color: white !important;">
+        <i class="fas fa-calculator"></i> GPA Calculator
+    </a></li>
              <li><a href="index.html?switch=true" style="background: var(--primary); padding: 5px 12px; border-radius: 20px;">
     <i class="fas fa-exchange-alt"></i> 1st Semester
 </a></li>   </ul>
@@ -382,6 +385,9 @@
             <li><a href="#" data-page="read-recall">🧠 READ RECALL Method</a></li>
             <li><a href="#" data-page="textbooks">📖 Recommended Textbooks</a></li>
             <li><a href="#" data-page="contact">📞 Contact</a></li>
+ <li><a href="calculator.html">
+        <i class="fas fa-calculator"></i> GPA Calculator
+    </a></li>
             <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
               <a href="index.html?switch=true">
     <i class="fas fa-arrow-left"></i> First Semester Guide
@@ -879,6 +885,19 @@
                     isFresher: localStorage.getItem('secondSemesterUserIsFresher') || 'yes', 
                     level: localStorage.getItem('secondSemesterUserLevel') || '' 
                 };
+// ADD THIS TO TRACK RETURN VISITS TO THE 2ND SEMESTER GUIDE
+                try {
+                    let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
+                    existing.push({
+                        name: userName,
+                        department: userDept,
+                        level: userData.level || 'N/A',
+                        timestamp: new Date().toISOString(),
+                        action: 'VISIT',
+                        calculationType: '2nd Semester Guide' // Shows which page they visited
+                    });
+                    localStorage.setItem('calculatorUsage', JSON.stringify(existing));
+                } catch(e) {}
                 document.getElementById('welcome').classList.add('hidden');
                 document.getElementById('navbar').classList.remove('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
