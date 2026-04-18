@@ -6,6 +6,29 @@
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
     
     <style>
+        /* Quick access buttons on welcome screen */
+.form-container .btn-quick {
+    background: var(--success);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.form-container .btn-quick:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container .btn-quick.secondary {
+    background: var(--secondary);
+}
         /* ========== ALL CSS ========== */
         :root {
             --primary: #003366;
@@ -324,30 +347,36 @@
     </select>
 </div>
 
-<!-- 🆕 SEMESTER SELECTION -->
 <div class="form-group">
     <label>Which semester guide do you need? <span style="color: var(--danger);">*</span></label>
     <div class="radio-group">
         <div class="radio-option">
             <input type="radio" id="semester-first" name="semester" value="first" checked>
             <label for="semester-first" class="radio-label">
-                <i class="fas fa-calendar-alt"></i> First Semester<br>
+                <span style="font-size:1.2rem;">&#128197;</span> First Semester<br>
                 <small>November 2025 Edition</small>
             </label>
         </div>
         <div class="radio-option">
             <input type="radio" id="semester-second" name="semester" value="second">
             <label for="semester-second" class="radio-label">
-                <i class="fas fa-calendar-check"></i> Second Semester<br>
+                <span style="font-size:1.2rem;">&#128198;</span> Second Semester<br>
                 <small>April 2026 Edition</small>
             </label>
         </div>
     </div>
     <small style="display: block; margin-top: 8px; color: var(--gray-600);">
-        <i class="fas fa-info-circle"></i> 
         <strong>First Semester:</strong> Registration, Documents, 100L First Sem Courses<br>
         <strong>Second Semester:</strong> CCMAS Update, 100L Second Sem Courses
     </small>
+    
+    <!-- 🆕 QUICK ACCESS BUTTONS -->
+    <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <a href="calculator.html" style="background: var(--success); color: white; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+            &#128202; GPA Calculator
+        </a>
+      
+    </div>
 </div>
 
 <button type="submit" class="btn" id="submitBtn">Access Guide</button>
