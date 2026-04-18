@@ -575,6 +575,9 @@
                 <li><a href="#" data-page="departmental">Departmental</a></li>
                 <li><a href="#" data-page="marketing">Marketplace</a></li>
                 <li><a href="#" data-page="contact">Contact</a></li>
+ <li><a href="calculator.html" style="background: var(--success); padding: 5px 12px; border-radius: 20px; color: white !important;">
+        <i class="fas fa-calculator"></i> GPA Calculator
+    </a></li>
                 <li><a href="second-semester.html?switch=true" style="background: var(--secondary); padding: 5px 12px; border-radius: 20px; color: white !important;">
     <i class="fas fa-exchange-alt"></i> 2nd Semester
 </a></li>
@@ -680,6 +683,11 @@
             <li><a href="#" data-page="departmental">Departmental Courses</a></li>
             <li><a href="#" data-page="marketing">Marketplace</a></li>
             <li><a href="#" data-page="contact">Contact</a></li>
+  <li><a href="calculator.html">
+        <i class="fas fa-calculator"></i> GPA Calculator
+    </a></li>
+    
+    <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2);">
            <a href="second-semester.html?switch=true">
     <i class="fas fa-exchange-alt"></i> Switch to 2nd Semester
 </a>
@@ -3822,6 +3830,19 @@ function checkOnboardingStatus() {
                     level: userLevel || '',
                     semester: userSemester || 'first'
                 };
+// ADD THIS TO TRACK RETURN VISITS TO THE 1ST SEMESTER GUIDE
+                try {
+                    let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
+                    existing.push({
+                        name: userName,
+                        department: userDepartment,
+                        level: userLevel || 'N/A',
+                        timestamp: new Date().toISOString(),
+                        action: 'VISIT',
+                        calculationType: '1st Semester Guide' // Shows which page they visited
+                    });
+                    localStorage.setItem('calculatorUsage', JSON.stringify(existing));
+                } catch(e) {}
                 
                 // 🆕 FIXED: Check if we came from a switch (URL parameter)
                 const urlParams = new URLSearchParams(window.location.search);
@@ -3847,7 +3868,7 @@ function checkOnboardingStatus() {
                 
                 const userInfo = document.getElementById('userInfo');
                 if (userInfo) {
-                    userInfo.classList.remove('hidden');
+                   
                     userInfo.innerHTML = `${userData.name} | ${userData.department}` + (userData.level ? ` | ${userData.level}` : '');
                 }
                 updateProfileDisplay();
@@ -3922,7 +3943,7 @@ saveSubmissionToAdminStorage({
                     document.getElementById('main-content').classList.remove('hidden');
                     const userInfo = document.getElementById('userInfo');
                     if (userInfo) {
-                        userInfo.classList.remove('hidden');
+                  
                         userInfo.innerHTML = `${nameVal} | ${deptVal}` + (levelVal ? ` | ${levelVal}` : '');
                     }
                     updateProfileDisplay();
@@ -4046,7 +4067,7 @@ saveSubmissionToAdminStorage({
             'Name': feedbackName, 'Email': feedbackEmail, 'Message': feedbackMessage,
             'Timestamp': new Date().toISOString()
         };
-        
+        saveSubmissionToAdminStorage(formData, 'feedback');
         submitToFormSubmit(formData)
         .then(() => { feedbackMessageDiv.innerHTML = '<div class="message success">Thank you for your feedback!</div>'; document.getElementById('feedbackForm').reset(); })
         .catch(() => { feedbackMessageDiv.innerHTML = '<div class="message error">Submission failed. Please try again.</div>'; })
@@ -4270,7 +4291,7 @@ function handleCategoryBusinessSubmission(category) {
         'Status': 'PENDING_APPROVAL',
         'Submission Date': new Date().toISOString()
     };
-
+saveSubmissionToAdminStorage(submissionData, 'business');
     submitToFormSubmit(submissionData)
     .then(() => {
         messageDiv.innerHTML = `<div class="submission-success"><h4>✅ Business Submitted!</h4><p>Your business "${businessData.businessName}" is awaiting approval.</p></div>`;
