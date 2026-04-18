@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* ========== ALL CSS REMAINS EXACTLY THE SAME ========== */
+        /* ========== ALL CSS ========== */
         :root {
             --primary: #003366;
             --secondary: #990000;
@@ -97,7 +97,7 @@
         .toc-item h3 { color: var(--primary); margin-bottom: 0.5rem; }
         
         .navbar { background: var(--primary); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .logo { font-size: 1.5rem; font-weight: 700; }
         .nav-links { display: flex; list-style: none; flex-wrap: wrap; }
         .nav-links li { margin-left: 1.5rem; }
@@ -118,6 +118,9 @@
         .sidebar-links a:hover, .sidebar-links a.active { background: rgba(255,255,255,0.2); color: var(--accent); }
         
         footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+        .footer-content { max-width: 800px; margin: 0 auto; }
+        .footer-content p { margin-bottom: 1rem; }
+        
         .message { padding: 15px; margin: 15px 0; border-radius: 5px; text-align: center; }
         .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
@@ -158,7 +161,6 @@
         .hidden { display: none !important; }
         .notice { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1.5rem 0; color: #856404; }
         
-        /* Registration Timeline Styles */
         .registration-timeline { position: relative; margin: 2rem 0; padding-left: 2rem; }
         .registration-timeline:before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
         .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 2rem; }
@@ -166,7 +168,6 @@
         .signature-list { background: var(--gray-100); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
         .money-breakdown { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
         
-        /* Documents Grid */
         .documents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .document-card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; border-top: 4px solid var(--primary); }
         .document-icon { font-size: 1.5rem; color: var(--primary); }
@@ -175,7 +176,6 @@
         .document-requirement.physical { background: #f8d7da; color: #721c24; }
         .document-requirement.both { background: #d4edda; color: #155724; }
         
-        /* Strategy & Benefits Grid */
         .strategy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .strategy-card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; }
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
@@ -183,7 +183,10 @@
         .benefit-card:hover { transform: translateY(-5px); }
         .benefit-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
         
-        /* Marketplace Styles */
+        .department-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 8px; padding: 2rem; margin: 2rem 0; border-left: 5px solid var(--secondary); }
+        .department-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .dept-course { background: white; padding: 1rem; border-radius: 5px; text-align: center; font-weight: 600; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
         .marketplace-header { text-align: center; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 2rem; border-radius: 10px; margin-top: 1rem; }
         .quick-access-bar { background: var(--accent); color: var(--primary); padding: 1rem; border-radius: 8px; margin: 1.5rem 0; text-align: center; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border: 2px solid var(--primary); }
         .quick-access-bar:hover { background: var(--primary); color: white; transform: translateY(-2px); }
@@ -193,7 +196,6 @@
         .scroll-indicator { text-align: center; margin: 1rem 0; color: var(--gray-600); animation: bounce 2s infinite; }
         .business-count-badge { display: inline-block; background: var(--accent); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-left: 10px; }
         
-        /* Profile Styles */
         .user-profile-section { display: flex; align-items: center; gap: 15px; }
         .user-profile-dropdown { position: relative; }
         .profile-btn { background: rgba(255, 255, 255, 0.2); color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; }
@@ -204,7 +206,6 @@
         .profile-header small { color: var(--gray-600); }
         .profile-menu-item { display: block; width: 100%; padding: 12px 20px; text-align: left; background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--dark); transition: background 0.3s ease; }
         .profile-menu-item:hover { background: var(--gray-100); }
-        .profile-menu-item i { margin-right: 10px; width: 20px; color: var(--primary); }
         .profile-menu hr { margin: 0; border: none; border-top: 1px solid var(--gray-200); }
         
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 2000; }
@@ -219,126 +220,47 @@
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
         #welcomeLevelRow { margin-bottom: 1.5rem; text-align: left; }
-        #welcomeLevelRow[style*="display: block"] { display: block !important; }
+        .report-modal { display: none !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .report-modal[style*="display: flex"] { display: flex !important; }
+        .report-modal-content { background: white; padding: 2rem; border-radius: 10px; max-width: 500px; width: 90%; }
+        .report-reasons { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 1rem 0; }
+        .report-reason { padding: 10px; border: 1px solid var(--gray-300); border-radius: 5px; cursor: pointer; }
+        .report-reason:hover, .report-reason.selected { background: var(--primary); color: white; }
         
-        /* =========================================
-           🆕 FIXED MOBILE STYLES - ALL IN ONE PLACE
-           ========================================= */
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+        
+        /* ========== MOBILE STYLES ========== */
         @media (max-width: 768px) {
-            /* Force text to be readable */
-            * {
-                -webkit-text-size-adjust: 100% !important;
-            }
-            
-            body, p, li, label, input, select, button, a, span, div {
-                font-size: 16px !important;
-                line-height: 1.5 !important;
-            }
-            
+            * { -webkit-text-size-adjust: 100% !important; }
+            body, p, li, label, input, select, button, a, span, div { font-size: 16px !important; line-height: 1.5 !important; }
             h1 { font-size: 2rem !important; }
             h2 { font-size: 1.6rem !important; }
             h3 { font-size: 1.3rem !important; }
-            h4 { font-size: 1.1rem !important; }
-            
-            /* Welcome section */
             .welcome-section h1 { font-size: 2rem !important; }
-            .welcome-section p { font-size: 1.1rem !important; }
-            
-            /* Form elements */
             .form-container h2 { font-size: 1.5rem !important; }
-            .form-group label { font-size: 1rem !important; }
             .form-group input, .form-group select { font-size: 16px !important; padding: 14px !important; }
-            
-            /* Radio buttons */
-            .radio-label {
-                font-size: 1rem !important;
-                min-height: 60px !important;
-                padding: 14px 12px !important;
-            }
-            .radio-label small { font-size: 0.85rem !important; }
-            
-            /* Buttons */
+            .radio-label { font-size: 1rem !important; min-height: 60px !important; padding: 14px 12px !important; }
             .btn { font-size: 1.1rem !important; padding: 14px 24px !important; }
-            
-            /* Cards */
             .card { padding: 1.5rem !important; }
-            .card p, .card li { font-size: 1rem !important; }
-            
-            /* Section titles */
-            .section-title { font-size: 1.6rem !important; }
-            
-            /* Navigation */
             .nav-container { flex-direction: column; }
             .nav-links { margin-top: 1rem; justify-content: center; display: none; }
             .menu-btn { display: block; }
-            
-            /* Grid layouts */
-            .battle-plan-grid, .documents-grid, .toc, .course-grid, .materials-grid {
-                grid-template-columns: 1fr !important;
-            }
-            
+            .battle-plan-grid, .documents-grid, .toc { grid-template-columns: 1fr !important; }
             .radio-group { flex-direction: column; gap: 0.5rem; }
-            
-            /* Profile text */
-            .profile-header p { font-size: 1rem !important; }
-            .profile-header small { font-size: 0.85rem !important; }
-            .profile-menu-item { font-size: 1rem !important; padding: 12px 16px !important; }
-            #profileName { font-size: 1rem !important; }
-            
-            /* Report modal */
-            .report-modal-content h3 { font-size: 1.3rem !important; }
-            .report-modal-content p { font-size: 1rem !important; }
-            .report-reason { font-size: 1rem !important; padding: 12px !important; }
-            #reportDetails { font-size: 16px !important; }
-            
-               /* Toast */
-            .toast { font-size: 1rem !important; padding: 12px 16px !important; }
-            
-            /* User info */
-            .user-info { font-size: 0.9rem !important; }
-            
-            /* Small text */
-            small, .help, .notice { font-size: 0.9rem !important; }
         }
         
-        /* Extra small phones */
         @media (max-width: 480px) {
             h1 { font-size: 1.8rem !important; }
-            h2 { font-size: 1.4rem !important; }
-            
             .welcome-section h1 { font-size: 1.8rem !important; }
-            .form-container { padding: 1.2rem !important; margin: 0 10px !important; }
-            
-            .btn { padding: 12px 20px !important; font-size: 1rem !important; }
-            .card { padding: 1.2rem !important; }
-            
-            .radio-label { padding: 12px 10px !important; }
+            .form-container { padding: 1.2rem !important; }
+            .btn { padding: 12px 20px !important; }
         }
         
-        /* ========== FIXES FOR PROFILE AND REPORT MODAL ========== */
-        /* Hide profile on welcome screen */
-        #welcome:not(.hidden) ~ .navbar .user-profile-dropdown,
-        #welcome:not(.hidden) ~ #navbar .user-profile-dropdown {
-            display: none !important;
-        }
-        
-        /* Ensure report modal is hidden by default */
-        .report-modal {
-            display: none !important;
-        }
-        
-        /* Only show when triggered */
-        .report-modal[style*="display: flex"],
-        .report-modal[style*="display:flex"] {
-            display: flex !important;
-        }
-        
-        footer a[href="admin.html"] {
-            font-size: 0.75rem !important;
-            opacity: 0.6;
-        }
+        #welcome:not(.hidden) ~ .navbar .user-profile-dropdown { display: none !important; }
+        footer a[href="admin.html"] { font-size: 0.75rem !important; opacity: 0.6; }
     </style>
 </head>
+
     <body>
 <script>
     const CURRENT_VERSION = '2.0.0';
