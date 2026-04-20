@@ -2,58 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FUTA Academic Evaluation System | Student Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 🆕 IMPORTANT: Custom CSS FIRST so Tailwind doesn't override everything -->
     <style>
-        /* =========================================
-           CUSTOM STYLES - Must come before Tailwind
+/* =========================================
+           ULTIMATE MOBILE & ANTI-ZOOM FIX
            ========================================= */
-        :root {
-            --mobile-font-size: 16px;
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        html, body { 
+            max-width: 100vw !important; 
+            overflow-x: hidden !important; 
         }
-        
-        /* Force larger text on mobile */
         @media (max-width: 768px) {
-            * {
-                -webkit-text-size-adjust: 100% !important;
-            }
-            
-            body {
+            body, p, span, a, input, select, textarea, button, li, .radio-label, .text-sm, .text-xs {
                 font-size: 16px !important;
-            }
-            
-            h1 {
-                font-size: 22px !important;
-            }
-            
-            h2 {
-                font-size: 20px !important;
-            }
-            
-            h3 {
-                font-size: 18px !important;
-            }
-            
-            p, li, label, input, select, button, a, span, div {
-                font-size: 16px !important;
-            }
-            
-            .text-sm, small {
-                font-size: 14px !important;
-            }
-            
-            .text-xs {
-                font-size: 12px !important;
+                line-height: 1.6 !important;
             }
         }
-        
         /* =========================================
            PDF STRICT ALIGNMENT & STYLING
            ========================================= */
-        #pdf-wrapper {
+   #pdf-wrapper {
             position: fixed !important; 
             top: -9999px !important; 
             left: -9999px !important; 
@@ -96,14 +69,14 @@
             margin-bottom: 20px;
         }
         .pdf-header h1 {
-            font-size: 20px !important;
+            font-size: 20px;
             font-weight: 800;
             color: #1e3a8a;
             margin: 0 0 5px 0;
             letter-spacing: 1px;
         }
         .pdf-header p {
-            font-size: 12px !important;
+            font-size: 12px;
             color: #64748b;
             margin: 0;
             text-transform: uppercase;
@@ -114,7 +87,7 @@
             padding: 10px 12px;
             border-radius: 4px;
             border-left: 4px solid #f59e0b;
-            font-size: 11px !important;
+            font-size: 11px;
             color: #92400e;
             margin-bottom: 20px;
         }
@@ -126,7 +99,7 @@
             padding: 10px 12px;
             border-radius: 4px;
             border-left: 4px solid #2563eb;
-            font-size: 14px !important;
+            font-size: 14px;
             font-weight: 600;
             margin-bottom: 20px;
             color: #334155;
@@ -135,7 +108,7 @@
             margin-top: 25px; 
             padding-top: 15px;
             text-align: center;
-            font-size: 10px !important;
+            font-size: 10px;
             color: #64748b;
             border-top: 1px solid #e2e8f0;
         }
@@ -159,14 +132,14 @@
             padding: 10px 8px;
             text-align: center;
             word-wrap: break-word; 
-            font-size: 12px !important;
+            font-size: 12px;
         }
         .pdf-table th {
             background-color: #f1f5f9;
             font-weight: 700;
             color: #334155;
             text-transform: uppercase;
-            font-size: 10px !important;
+            font-size: 10px;
             letter-spacing: 0.5px;
         }
         .pdf-table tr:nth-child(even) { background-color: #f8fafc; }
@@ -181,13 +154,13 @@
             border: 1px solid #bfdbfe;
         }
         .result-box span {
-            font-size: 14px !important; 
+            font-size: 14px; 
             color: #475569; 
             display: block; 
             margin-bottom: 5px;
         }
         .result-box strong {
-            font-size: 28px !important; 
+            font-size: 28px; 
             color: #1e3a8a;
         }
         
@@ -218,7 +191,7 @@
             gap: 10px;
             color: white;
             font-weight: bold;
-            font-size: 1.2rem !important;
+            font-size: 1.2rem;
         }
         .nav-links {
             display: flex;
@@ -232,7 +205,7 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem !important;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             display: inline-flex;
@@ -268,12 +241,12 @@
         }
         .disclaimer-banner i {
             color: #f59e0b;
-            font-size: 1.2rem !important;
+            font-size: 1.2rem;
             margin-top: 2px;
         }
         .disclaimer-banner p {
             color: #92400e;
-            font-size: 14px !important;
+            font-size: 0.9rem;
             margin: 0;
         }
         .disclaimer-banner strong {
@@ -309,12 +282,12 @@
         }
         .modal-header h2 {
             color: #1e3a8a;
-            font-size: 1.5rem !important;
+            font-size: 1.5rem;
             font-weight: bold;
         }
         .modal-header .disclaimer-note {
             color: #dc2626;
-            font-size: 12px !important;
+            font-size: 0.8rem;
             margin-top: 5px;
         }
         .modal-result {
@@ -325,17 +298,17 @@
             margin-bottom: 20px;
         }
         .modal-result .label {
-            font-size: 14px !important;
+            font-size: 0.9rem;
             color: #64748b;
             text-transform: uppercase;
         }
         .modal-result .value {
-            font-size: 3rem !important;
+            font-size: 3rem;
             font-weight: bold;
             color: #1e3a8a;
         }
         .modal-result .value small {
-            font-size: 1rem !important;
+            font-size: 1rem;
             color: #64748b;
         }
         .modal-details {
@@ -343,13 +316,11 @@
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 20px;
-            font-size: 14px !important;
         }
         .modal-details h4 {
             color: #334155;
             margin-bottom: 10px;
             font-weight: 600;
-            font-size: 16px !important;
         }
         .modal-actions {
             display: flex;
@@ -363,7 +334,6 @@
             cursor: pointer;
             transition: all 0.3s;
             border: none;
-            font-size: 16px !important;
         }
         .modal-btn-primary {
             background: #2563eb;
@@ -380,67 +350,11 @@
             background: #cbd5e1;
         }
         
-        /* 🆕 OVERRIDE TAILWIND ON MOBILE */
-        @media (max-width: 768px) {
-            .tab-btn {
-                font-size: 14px !important;
-                padding: 12px 6px !important;
-            }
-            
-            input, select, button:not(.tab-btn) {
-                font-size: 16px !important;
-                padding: 14px 12px !important;
-            }
-            
-            .nav-btn {
-                font-size: 14px !important;
-                padding: 12px 16px !important;
-            }
-            
-            .disclaimer-banner p {
-                font-size: 13px !important;
-            }
-            
-            .modal-btn {
-                font-size: 16px !important;
-                padding: 14px 20px !important;
-            }
-            
-            /* Override any Tailwind text-sm classes */
-            .text-sm, .text-xs {
-                font-size: 14px !important;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 { font-size: 20px !important; }
-            h2 { font-size: 18px !important; }
-            h3 { font-size: 16px !important; }
-            
-            .tab-btn {
-                font-size: 12px !important;
-                padding: 10px 4px !important;
-            }
-            
-            .modal-result .value {
-                font-size: 2.5rem !important;
-            }
-            
-            input, select {
-                padding: 16px 12px !important;
-            }
-        }
-        
         @media (max-width: 640px) {
             .nav-bar { flex-direction: column; text-align: center; }
             .nav-links { justify-content: center; }
         }
     </style>
-    
-    <!-- 🆕 Tailwind comes AFTER custom styles -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-50 min-h-screen font-sans pb-12 text-slate-800">
 
@@ -578,413 +492,410 @@
         </div>
     </div>
 
-    <script>
-        const olevelGrades = { "A1": 80, "B2": 72, "B3": 67, "C4": 62, "C5": 57, "C6": 52 };
+  <script>
+    const olevelGrades = { "A1": 80, "B2": 72, "B3": 67, "C4": 62, "C5": 57, "C6": 52 };
+    
+    // Store current calculation data for PDF generation
+    let currentCalculation = {
+        type: '',
+        studentName: '',
+        result: null,
+        details: ''
+    };
+
+    function checkUserFromStorage() {
+        const userName = localStorage.getItem('userName');
+        const userDepartment = localStorage.getItem('userDepartment');
+        const userLevel = localStorage.getItem('userLevel');
         
-        // Store current calculation data for PDF generation
-        let currentCalculation = {
-            type: '',
-            studentName: '',
-            result: null,
-            details: ''
-        };
-
-        function checkUserFromStorage() {
-            const userName = localStorage.getItem('userName');
-            const userDepartment = localStorage.getItem('userDepartment');
-            const userLevel = localStorage.getItem('userLevel');
-            
-            if (userName) {
-                let displayName = userName;
-                if (userDepartment) displayName += ` | ${userDepartment}`;
-                if (userLevel) displayName += ` | ${userLevel}`;
-                document.getElementById('student-name').value = displayName;
-            }
-            
-            if (userName) {
-                try {
-                    let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
-                    existing.push({
-                        name: userName,
-                        department: userDepartment || 'N/A',
-                        level: userLevel || 'N/A',
-                        timestamp: new Date().toISOString(),
-                        action: 'PAGE_VISIT'
-                    });
-                    localStorage.setItem('calculatorUsage', JSON.stringify(existing));
-                } catch(e) {}
-            }
+        if (userName) {
+            let displayName = userName;
+            if (userDepartment) displayName += ` | ${userDepartment}`;
+            if (userLevel) displayName += ` | ${userLevel}`;
+            document.getElementById('student-name').value = displayName;
         }
-
-        window.onload = () => {
-            checkUserFromStorage();
-            
-            const olevelCont = document.getElementById('olevel-container');
-            olevelCont.innerHTML = '';
-            for(let i=1; i<=5; i++){
-                let row = document.createElement('div');
-                row.className = 'flex gap-3 olevel-row';
-                row.innerHTML = `
-                    <input type="text" placeholder="Subject ${i} (e.g. Physics)" class="border border-slate-300 rounded-lg p-3 w-2/3 text-sm outline-none focus:border-blue-500 olevel-subj">
-                    <select class="border border-slate-300 rounded-lg p-3 w-1/3 text-sm outline-none focus:border-blue-500 olevel-grade bg-white">
-                        <option value="-1">Grade</option>
-                        ${Object.entries(olevelGrades).map(([grade, val]) => `<option value="${val}">${grade}</option>`).join('')}
-                    </select>
-                `;
-                olevelCont.appendChild(row);
-            }
-            
-            for(let i=0; i<6; i++) addGPARow();
-            for(let i=0; i<2; i++) addCGPARow();
-        };
-
-        function switchTab(tabId) {
-            ['aggregate', 'gpa', 'cgpa'].forEach(id => {
-                document.getElementById(`section-${id}`).classList.add('hidden');
-                document.getElementById(`tab-${id}`).classList.remove('active');
-            });
-            document.getElementById(`section-${tabId}`).classList.remove('hidden');
-            document.getElementById(`section-${tabId}`).classList.add('block');
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-        }
-
-        function addGPARow() {
-            const container = document.getElementById('gpa-rows');
-            const row = document.createElement('div');
-            row.className = "flex gap-3 gpa-row";
-            row.innerHTML = `
-                <input type="text" placeholder="Course Code" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <input type="number" placeholder="Units" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-unit" min="1" max="6">
-                <select class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-grade bg-white">
-                    <option value="-1">Grade</option>
-                    <option value="5">A</option><option value="4">B</option>
-                    <option value="3">C</option><option value="2">D</option>
-                    <option value="1">E</option><option value="0">F</option>
-                </select>
-            `;
-            container.appendChild(row);
-        }
-
-        function addCGPARow() {
-            const container = document.getElementById('cgpa-rows');
-            const row = document.createElement('div');
-            row.className = "flex gap-3 cgpa-row";
-            row.innerHTML = `
-                <input type="text" placeholder="Level/Semester (e.g. 100L 1st)" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <input type="number" placeholder="TCP" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tcp">
-                <input type="number" placeholder="TLU" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tlu">
-            `;
-            container.appendChild(row);
-        }
-
-        function trackUsage(type) {
-            const userName = localStorage.getItem('userName') || 'Guest';
+        
+        if (userName) {
             try {
                 let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
                 existing.push({
                     name: userName,
-                    calculationType: type,
+                    department: userDepartment || 'N/A',
+                    level: userLevel || 'N/A',
                     timestamp: new Date().toISOString(),
-                    action: 'CALCULATION'
+                    action: 'PAGE_VISIT'
                 });
                 localStorage.setItem('calculatorUsage', JSON.stringify(existing));
             } catch(e) {}
         }
+    }
 
-        // ========== AGGREGATE ==========
-        function calculateAggregateAndShowPopup() {
-            const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
-            const jamb = parseFloat(document.getElementById('jamb-score').value) || 0;
+    window.onload = () => {
+        checkUserFromStorage();
+        
+        const olevelCont = document.getElementById('olevel-container');
+        olevelCont.innerHTML = '';
+        for(let i=1; i<=5; i++){
+            let row = document.createElement('div');
+            row.className = 'flex gap-3 olevel-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Subject ${i} (e.g. Physics)" class="border border-slate-300 rounded-lg p-3 w-2/3 text-sm outline-none focus:border-blue-500 olevel-subj">
+                <select class="border border-slate-300 rounded-lg p-3 w-1/3 text-sm outline-none focus:border-blue-500 olevel-grade bg-white">
+                    <option value="-1">Grade</option>
+                    ${Object.entries(olevelGrades).map(([grade, val]) => `<option value="${val}">${grade}</option>`).join('')}
+                </select>
+            `;
+            olevelCont.appendChild(row);
+        }
+        
+        for(let i=0; i<6; i++) addGPARow();
+        for(let i=0; i<2; i++) addCGPARow();
+    };
+
+    function switchTab(tabId) {
+        ['aggregate', 'gpa', 'cgpa'].forEach(id => {
+            document.getElementById(`section-${id}`).classList.add('hidden');
+            document.getElementById(`tab-${id}`).classList.remove('active');
+        });
+        document.getElementById(`section-${tabId}`).classList.remove('hidden');
+        document.getElementById(`section-${tabId}`).classList.add('block');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    function addGPARow() {
+        const container = document.getElementById('gpa-rows');
+        const row = document.createElement('div');
+        row.className = "flex gap-3 gpa-row";
+        row.innerHTML = `
+            <input type="text" placeholder="Course Code" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
+            <input type="number" placeholder="Units" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-unit" min="1" max="6">
+            <select class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-grade bg-white">
+                <option value="-1">Grade</option>
+                <option value="5">A</option><option value="4">B</option>
+                <option value="3">C</option><option value="2">D</option>
+                <option value="1">E</option><option value="0">F</option>
+            </select>
+        `;
+        container.appendChild(row);
+    }
+
+    function addCGPARow() {
+        const container = document.getElementById('cgpa-rows');
+        const row = document.createElement('div');
+        row.className = "flex gap-3 cgpa-row";
+        row.innerHTML = `
+            <input type="text" placeholder="Level/Semester (e.g. 100L 1st)" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
+            <input type="number" placeholder="TCP" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tcp">
+            <input type="number" placeholder="TLU" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tlu">
+        `;
+        container.appendChild(row);
+    }
+
+    function trackUsage(type) {
+        const userName = localStorage.getItem('userName') || 'Guest';
+        const userDept = localStorage.getItem('userDepartment') || 'N/A';
+        const userLevel = localStorage.getItem('userLevel') || 'N/A';
+        try {
+            let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
+            existing.push({
+                name: userName,
+                department: userDept,
+                level: userLevel,
+                calculationType: type,
+                timestamp: new Date().toISOString(),
+                action: 'CALCULATION'
+            });
+            localStorage.setItem('calculatorUsage', JSON.stringify(existing));
+        } catch(e) {}
+    }
+
+    // ========== AGGREGATE ==========
+    function calculateAggregateAndShowPopup() {
+        const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
+        const jamb = parseFloat(document.getElementById('jamb-score').value) || 0;
+        
+        if (jamb > 400 || jamb < 0) {
+            alert("Invalid JAMB Score. Please enter a score between 0 and 400.");
+            return;
+        }
+
+        const rows = document.querySelectorAll('.olevel-row');
+        let sumOLevel = 0;
+        let subjectsDetails = [];
+        
+        rows.forEach((row, index) => {
+            const subjInput = row.querySelector('.olevel-subj').value || `Subject ${index + 1}`;
+            const gradeSelect = row.querySelector('.olevel-grade');
+            const gradeVal = parseFloat(gradeSelect.value);
+            const gradeLabel = gradeSelect.options[gradeSelect.selectedIndex].text;
             
-            if (jamb > 400 || jamb < 0) {
-                alert("Invalid JAMB Score. Please enter a score between 0 and 400.");
-                return;
+            if(gradeVal >= 0) {
+                sumOLevel += gradeVal;
+                subjectsDetails.push({ subject: subjInput, grade: gradeLabel, points: gradeVal });
             }
+        });
 
-            const rows = document.querySelectorAll('.olevel-row');
-            let sumOLevel = 0;
-            let subjectsDetails = [];
+        const jambPoint = (jamb / 400) * 75;
+        const oLevelPoint = (sumOLevel / 5) * 0.25;
+        const total = jambPoint + oLevelPoint;
+
+        trackUsage('aggregate');
+
+        let detailsHTML = `<p><strong>JAMB Score:</strong> ${jamb} / 400 → ${jambPoint.toFixed(2)}% weighted</p>`;
+        detailsHTML += `<p><strong>O'Level Subjects:</strong></p><ul class="list-disc ml-5">`;
+        subjectsDetails.forEach(s => {
+            detailsHTML += `<li>${s.subject}: ${s.grade} (${s.points} pts)</li>`;
+        });
+        detailsHTML += `</ul>`;
+        detailsHTML += `<p><strong>O'Level Average:</strong> ${(sumOLevel/5).toFixed(1)} pts → ${oLevelPoint.toFixed(2)}% weighted</p>`;
+
+        currentCalculation = {
+            type: 'aggregate',
+            studentName: studentName,
+            result: total,
+            details: detailsHTML,
+            rawData: { jamb, jambPoint, sumOLevel, oLevelPoint, subjectsDetails }
+        };
+
+        showResultPopup('Admission Aggregate', total.toFixed(2) + '%', detailsHTML, 'aggregate');
+    }
+
+    // ========== GPA ==========
+    function calculateGPAAndShowPopup() {
+        const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
+        const rows = document.querySelectorAll('.gpa-row');
+        let tlu = 0, tcp = 0;
+        let courseDetails = [];
+        
+        rows.forEach(row => {
+            const inputs = row.children;
+            const course = inputs[0].value || '-';
+            const unit = parseFloat(inputs[1].value);
+            const grade = parseFloat(inputs[2].value);
+            const gradeLabel = inputs[2].options[inputs[2].selectedIndex].text;
             
-            rows.forEach((row, index) => {
-                const subjInput = row.querySelector('.olevel-subj').value || `Subject ${index + 1}`;
-                const gradeSelect = row.querySelector('.olevel-grade');
-                const gradeVal = parseFloat(gradeSelect.value);
-                const gradeLabel = gradeSelect.options[gradeSelect.selectedIndex].text;
-                
-                if(gradeVal >= 0) {
-                    sumOLevel += gradeVal;
-                    subjectsDetails.push({ subject: subjInput, grade: gradeLabel, points: gradeVal });
-                }
-            });
+            if (unit > 0 && grade >= 0) {
+                const cp = unit * grade;
+                tlu += unit;
+                tcp += cp;
+                courseDetails.push({ course, unit, grade: gradeLabel, cp });
+            }
+        });
 
-            const jambPoint = (jamb / 400) * 75;
-            const oLevelPoint = (sumOLevel / 5) * 0.25;
-            const total = jambPoint + oLevelPoint;
+        const gpa = tlu > 0 ? (tcp / tlu) : 0;
+        trackUsage('gpa');
 
-            trackUsage('aggregate');
+        let detailsHTML = `<p><strong>Total Load Units (TLU):</strong> ${tlu}</p>`;
+        detailsHTML += `<p><strong>Total Credit Points (TCP):</strong> ${tcp}</p>`;
+        detailsHTML += `<p><strong>Courses Calculated:</strong></p><ul class="list-disc ml-5">`;
+        courseDetails.forEach(c => {
+            detailsHTML += `<li>${c.course}: ${c.unit} unit(s) × Grade ${c.grade} = ${c.cp} CP</li>`;
+        });
+        detailsHTML += `</ul>`;
 
-            // Build details HTML for popup
-            let detailsHTML = `<p><strong>JAMB Score:</strong> ${jamb} / 400 → ${jambPoint.toFixed(2)}% weighted</p>`;
-            detailsHTML += `<p><strong>O'Level Subjects:</strong></p><ul class="list-disc ml-5">`;
-            subjectsDetails.forEach(s => {
-                detailsHTML += `<li>${s.subject}: ${s.grade} (${s.points} pts)</li>`;
-            });
-            detailsHTML += `</ul>`;
-            detailsHTML += `<p><strong>O'Level Average:</strong> ${(sumOLevel/5).toFixed(1)} pts → ${oLevelPoint.toFixed(2)}% weighted</p>`;
+        currentCalculation = {
+            type: 'gpa',
+            studentName: studentName,
+            result: gpa,
+            details: detailsHTML,
+            rawData: { tlu, tcp, courseDetails }
+        };
 
-            // Store for PDF
-            currentCalculation = {
-                type: 'aggregate',
-                studentName: studentName,
-                result: total,
-                details: detailsHTML,
-                rawData: { jamb, jambPoint, sumOLevel, oLevelPoint, subjectsDetails }
-            };
+        showResultPopup('Semester GPA', gpa.toFixed(2) + ' / 5.00', detailsHTML, 'gpa');
+    }
 
-            showResultPopup('Admission Aggregate', total.toFixed(2) + '%', detailsHTML, 'aggregate');
-        }
-
-        // ========== GPA ==========
-        function calculateGPAAndShowPopup() {
-            const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
-            const rows = document.querySelectorAll('.gpa-row');
-            let tlu = 0, tcp = 0;
-            let courseDetails = [];
+    // ========== CGPA ==========
+    function calculateCGPAAndShowPopup() {
+        const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
+        const rows = document.querySelectorAll('.cgpa-row');
+        let totalTLU = 0, totalTCP = 0;
+        let semesterDetails = [];
+        
+        rows.forEach(row => {
+            const inputs = row.children;
+            const semester = inputs[0].value || '-';
+            const tcp = parseFloat(inputs[1].value);
+            const tlu = parseFloat(inputs[2].value);
             
-            rows.forEach(row => {
-                const inputs = row.children;
-                const course = inputs[0].value || '-';
-                const unit = parseFloat(inputs[1].value);
-                const grade = parseFloat(inputs[2].value);
-                const gradeLabel = inputs[2].options[inputs[2].selectedIndex].text;
-                
-                if (unit > 0 && grade >= 0) {
-                    const cp = unit * grade;
-                    tlu += unit;
-                    tcp += cp;
-                    courseDetails.push({ course, unit, grade: gradeLabel, cp });
-                }
+            if (tcp >= 0 && tlu > 0) {
+                totalTCP += tcp;
+                totalTLU += tlu;
+                semesterDetails.push({ semester, tcp, tlu, gpa: (tcp/tlu).toFixed(2) });
+            }
+        });
+
+        const cgpa = totalTLU > 0 ? (totalTCP / totalTLU) : 0;
+        trackUsage('cgpa');
+
+        let detailsHTML = `<p><strong>Cumulative TLU:</strong> ${totalTLU}</p>`;
+        detailsHTML += `<p><strong>Cumulative TCP:</strong> ${totalTCP}</p>`;
+        detailsHTML += `<p><strong>Semesters Included:</strong></p><ul class="list-disc ml-5">`;
+        semesterDetails.forEach(s => {
+            detailsHTML += `<li>${s.semester}: TCP=${s.tcp}, TLU=${s.tlu} → GPA=${s.gpa}</li>`;
+        });
+        detailsHTML += `</ul>`;
+
+        currentCalculation = {
+            type: 'cgpa',
+            studentName: studentName,
+            result: cgpa,
+            details: detailsHTML,
+            rawData: { totalTLU, totalTCP, semesterDetails }
+        };
+
+        showResultPopup('Cumulative CGPA', cgpa.toFixed(2) + ' / 5.00', detailsHTML, 'cgpa');
+    }
+
+    // ========== POPUP MODAL ==========
+    function showResultPopup(title, result, details, type) {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.id = 'resultModal';
+        
+        overlay.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>${title} Result</h2>
+                    <p class="disclaimer-note"><i class="fas fa-exclamation-triangle"></i> Unofficial Estimate - Not a FUTA Document</p>
+                </div>
+                <div class="modal-result">
+                    <div class="label">Your Estimated ${title}</div>
+                    <div class="value">${result}</div>
+                </div>
+                <div class="modal-details">
+                    <h4><i class="fas fa-list-ul mr-2"></i>Calculation Breakdown</h4>
+                    ${details}
+                </div>
+                <p class="text-xs text-red-600 mb-4 text-center">
+                    <i class="fas fa-info-circle"></i> This is an unofficial estimate. Official results may vary.
+                </p>
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times mr-2"></i>Close
+                    </button>
+                    <button class="modal-btn modal-btn-primary" onclick="downloadPDFFromModal()">
+                        <i class="fas fa-file-pdf mr-2"></i>Download PDF Breakdown
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal();
+        });
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('resultModal');
+        if (modal) modal.remove();
+    }
+
+    function downloadPDFFromModal() {
+        if (!currentCalculation.type) return;
+        
+        const studentName = currentCalculation.studentName;
+        let htmlContent = '';
+        
+        if (currentCalculation.type === 'aggregate') {
+            const data = currentCalculation.rawData;
+            let subjectsHtml = '';
+            data.subjectsDetails.forEach(s => {
+                subjectsHtml += `<tr><td>${s.subject}</td><td>${s.grade}</td><td>${s.points} pts</td></tr>`;
             });
-
-            const gpa = tlu > 0 ? (tcp / tlu) : 0;
-            trackUsage('gpa');
-
-            let detailsHTML = `<p><strong>Total Load Units (TLU):</strong> ${tlu}</p>`;
-            detailsHTML += `<p><strong>Total Credit Points (TCP):</strong> ${tcp}</p>`;
-            detailsHTML += `<p><strong>Courses Calculated:</strong></p><ul class="list-disc ml-5">`;
-            courseDetails.forEach(c => {
-                detailsHTML += `<li>${c.course}: ${c.unit} unit(s) × Grade ${c.grade} = ${c.cp} CP</li>`;
-            });
-            detailsHTML += `</ul>`;
-
-            currentCalculation = {
-                type: 'gpa',
-                studentName: studentName,
-                result: gpa,
-                details: detailsHTML,
-                rawData: { tlu, tcp, courseDetails }
-            };
-
-            showResultPopup('Semester GPA', gpa.toFixed(2) + ' / 5.00', detailsHTML, 'gpa');
-        }
-
-        // ========== CGPA ==========
-        function calculateCGPAAndShowPopup() {
-            const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
-            const rows = document.querySelectorAll('.cgpa-row');
-            let totalTLU = 0, totalTCP = 0;
-            let semesterDetails = [];
             
-            rows.forEach(row => {
-                const inputs = row.children;
-                const semester = inputs[0].value || '-';
-                const tcp = parseFloat(inputs[1].value);
-                const tlu = parseFloat(inputs[2].value);
-                
-                if (tcp >= 0 && tlu > 0) {
-                    totalTCP += tcp;
-                    totalTLU += tlu;
-                    semesterDetails.push({ semester, tcp, tlu, gpa: (tcp/tlu).toFixed(2) });
-                }
-            });
-
-            const cgpa = totalTLU > 0 ? (totalTCP / totalTLU) : 0;
-            trackUsage('cgpa');
-
-            let detailsHTML = `<p><strong>Cumulative TLU:</strong> ${totalTLU}</p>`;
-            detailsHTML += `<p><strong>Cumulative TCP:</strong> ${totalTCP}</p>`;
-            detailsHTML += `<p><strong>Semesters Included:</strong></p><ul class="list-disc ml-5">`;
-            semesterDetails.forEach(s => {
-                detailsHTML += `<li>${s.semester}: TCP=${s.tcp}, TLU=${s.tlu} → GPA=${s.gpa}</li>`;
-            });
-            detailsHTML += `</ul>`;
-
-            currentCalculation = {
-                type: 'cgpa',
-                studentName: studentName,
-                result: cgpa,
-                details: detailsHTML,
-                rawData: { totalTLU, totalTCP, semesterDetails }
-            };
-
-            showResultPopup('Cumulative CGPA', cgpa.toFixed(2) + ' / 5.00', detailsHTML, 'cgpa');
-        }
-
-        // ========== POPUP MODAL ==========
-        function showResultPopup(title, result, details, type) {
-            // Create modal overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'modal-overlay';
-            overlay.id = 'resultModal';
-            
-            overlay.innerHTML = `
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2>${title} Result</h2>
-                        <p class="disclaimer-note"><i class="fas fa-exclamation-triangle"></i> Unofficial Estimate - Not a FUTA Document</p>
-                    </div>
-                    <div class="modal-result">
-                        <div class="label">Your Estimated ${title}</div>
-                        <div class="value">${result}</div>
-                    </div>
-                    <div class="modal-details">
-                        <h4><i class="fas fa-list-ul mr-2"></i>Calculation Breakdown</h4>
-                        ${details}
-                    </div>
-                    <p class="text-xs text-red-600 mb-4 text-center">
-                        <i class="fas fa-info-circle"></i> This is an unofficial estimate. Official results may vary.
-                    </p>
-                    <div class="modal-actions">
-                        <button class="modal-btn modal-btn-secondary" onclick="closeModal()">
-                            <i class="fas fa-times mr-2"></i>Close
-                        </button>
-                        <button class="modal-btn modal-btn-primary" onclick="downloadPDFFromModal()">
-                            <i class="fas fa-file-pdf mr-2"></i>Download PDF Breakdown
-                        </button>
-                    </div>
+            htmlContent = `
+                <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">O'Level Screening (25% Weight)</h2>
+                <table class="pdf-table">
+                    <tr><th>Core Subject</th><th>Grade Attained</th><th>Grade Points</th></tr>
+                    ${subjectsHtml || '<tr><td colspan="3">No subjects entered.</td></tr>'}
+                </table>
+                <h2 style="font-size: 16px; color: #1e3a8a; margin-top: 20px; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Final Aggregate Computation (Estimate)</h2>
+                <table class="pdf-table">
+                    <tr><th>Evaluation Component</th><th>Raw Score</th><th>Weighted Percentage</th></tr>
+                    <tr><td>JAMB UTME (75%)</td><td>${data.jamb} / 400</td><td>${data.jambPoint.toFixed(2)}%</td></tr>
+                    <tr><td>O'Level Average (25%)</td><td>${(data.sumOLevel/5).toFixed(1)} pts avg</td><td>${data.oLevelPoint.toFixed(2)}%</td></tr>
+                </table>
+                <div class="result-box">
+                    <span>ESTIMATED AGGREGATE STANDING (UNOFFICIAL)</span>
+                    <strong>${currentCalculation.result.toFixed(2)}%</strong>
                 </div>
             `;
-            
-            document.body.appendChild(overlay);
-            
-            // Close on overlay click
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) closeModal();
+        } else if (currentCalculation.type === 'gpa') {
+            const data = currentCalculation.rawData;
+            let tableRows = '';
+            data.courseDetails.forEach(c => {
+                tableRows += `<tr><td>${c.course.toUpperCase()}</td><td>${c.unit}</td><td>${c.grade}</td><td>${c.cp}</td></tr>`;
             });
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('resultModal');
-            if (modal) modal.remove();
-        }
-
-        function downloadPDFFromModal() {
-            if (!currentCalculation.type) return;
             
-            const studentName = currentCalculation.studentName;
-            
-            // Generate PDF content based on type
-            let htmlContent = '';
-            
-            if (currentCalculation.type === 'aggregate') {
-                const data = currentCalculation.rawData;
-                let subjectsHtml = '';
-                data.subjectsDetails.forEach(s => {
-                    subjectsHtml += `<tr><td>${s.subject}</td><td>${s.grade}</td><td>${s.points} pts</td></tr>`;
-                });
-                
-                htmlContent = `
-                    <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">O'Level Screening (25% Weight)</h2>
-                    <table class="pdf-table">
-                        <tr><th>Core Subject</th><th>Grade Attained</th><th>Grade Points</th></tr>
-                        ${subjectsHtml || '<tr><td colspan="3">No subjects entered.</td></tr>'}
-                    </table>
-                    <h2 style="font-size: 16px; color: #1e3a8a; margin-top: 20px; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Final Aggregate Computation (Estimate)</h2>
-                    <table class="pdf-table">
-                        <tr><th>Evaluation Component</th><th>Raw Score</th><th>Weighted Percentage</th></tr>
-                        <tr><td>JAMB UTME (75%)</td><td>${data.jamb} / 400</td><td>${data.jambPoint.toFixed(2)}%</td></tr>
-                        <tr><td>O'Level Average (25%)</td><td>${(data.sumOLevel/5).toFixed(1)} pts avg</td><td>${data.oLevelPoint.toFixed(2)}%</td></tr>
-                    </table>
-                    <div class="result-box">
-                        <span>ESTIMATED AGGREGATE STANDING (UNOFFICIAL)</span>
-                        <strong>${currentCalculation.result.toFixed(2)}%</strong>
-                    </div>
-                `;
-            } else if (currentCalculation.type === 'gpa') {
-                const data = currentCalculation.rawData;
-                let tableRows = '';
-                data.courseDetails.forEach(c => {
-                    tableRows += `<tr><td>${c.course.toUpperCase()}</td><td>${c.unit}</td><td>${c.grade}</td><td>${c.cp}</td></tr>`;
-                });
-                
-                htmlContent = `
-                    <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Semester Course Breakdown</h2>
-                    <table class="pdf-table">
-                        <tr><th>Course Code</th><th>Units (Load)</th><th>Grade</th><th>Credit Points</th></tr>
-                        ${tableRows || '<tr><td colspan="4">No valid courses entered.</td></tr>'}
-                        <tr style="font-weight:bold; background-color:#f1f5f9;">
-                            <td>SEMESTER TOTAL</td><td>TLU = ${data.tlu}</td><td>-</td><td>TCP = ${data.tcp}</td>
-                        </tr>
-                    </table>
-                    <div class="result-box">
-                        <span>ESTIMATED GRADE POINT AVERAGE (UNOFFICIAL)</span>
-                        <strong>${currentCalculation.result.toFixed(2)} / 5.00</strong>
-                    </div>
-                `;
-            } else if (currentCalculation.type === 'cgpa') {
-                const data = currentCalculation.rawData;
-                let tableRows = '';
-                data.semesterDetails.forEach(s => {
-                    tableRows += `<tr><td>${s.semester}</td><td>${s.tcp}</td><td>${s.tlu}</td><td>${s.gpa}</td></tr>`;
-                });
-                
-                htmlContent = `
-                    <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Historical Performance Record</h2>
-                    <table class="pdf-table">
-                        <tr><th>Academic Term</th><th>Total Credit Points (TCP)</th><th>Total Load Units (TLU)</th><th>Term GPA</th></tr>
-                        ${tableRows || '<tr><td colspan="4">No valid records entered.</td></tr>'}
-                        <tr style="font-weight:bold; background-color:#f1f5f9;">
-                            <td>CUMULATIVE TOTAL</td><td>Cum. TCP = ${data.totalTCP}</td><td>Cum. TLU = ${data.totalTLU}</td><td>-</td>
-                        </tr>
-                    </table>
-                    <div class="result-box">
-                        <span>ESTIMATED CUMULATIVE GRADE POINT AVERAGE (UNOFFICIAL)</span>
-                        <strong>${currentCalculation.result.toFixed(2)} / 5.00</strong>
-                    </div>
-                `;
-            }
-            
-            // Setup PDF
-            document.getElementById('pdf-student-name').innerHTML = `Student Reference: <span style="color: #1e293b;">${studentName.toUpperCase()}</span>`;
-            document.getElementById('pdf-dynamic-content').innerHTML = htmlContent;
-            
-            const element = document.getElementById('pdf-container');
-            const wrapper = document.getElementById('pdf-wrapper');
-            
-            wrapper.style.position = 'absolute';
-            wrapper.style.top = '0';
-            wrapper.style.left = '0';
-            wrapper.style.zIndex = '-1000';
-            element.style.display = 'block';
-
-            const cleanName = studentName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-            const typeNames = { aggregate: 'Aggregate', gpa: 'GPA', cgpa: 'CGPA' };
-
-           const opt = {
-    margin:       [10, 0], 
-    filename:     `${cleanName}_${typeNames[currentCalculation.type]}_Estimate.pdf`,
-    image:        { type: 'jpeg', quality: 1 },
-    html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowY: 0 }, // <-- Fix applied
-    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-};
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.style.display = 'none';
-                wrapper.style.top = '-9999px'; 
-                wrapper.style.left = '-9999px';
-                closeModal();
+            htmlContent = `
+                <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Semester Course Breakdown</h2>
+                <table class="pdf-table">
+                    <tr><th>Course Code</th><th>Units (Load)</th><th>Grade</th><th>Credit Points</th></tr>
+                    ${tableRows || '<tr><td colspan="4">No valid courses entered.</td></tr>'}
+                    <tr style="font-weight:bold; background-color:#f1f5f9;">
+                        <td>SEMESTER TOTAL</td><td>TLU = ${data.tlu}</td><td>-</td><td>TCP = ${data.tcp}</td>
+                    </tr>
+                </table>
+                <div class="result-box">
+                    <span>ESTIMATED GRADE POINT AVERAGE (UNOFFICIAL)</span>
+                    <strong>${currentCalculation.result.toFixed(2)} / 5.00</strong>
+                </div>
+            `;
+        } else if (currentCalculation.type === 'cgpa') {
+            const data = currentCalculation.rawData;
+            let tableRows = '';
+            data.semesterDetails.forEach(s => {
+                tableRows += `<tr><td>${s.semester}</td><td>${s.tcp}</td><td>${s.tlu}</td><td>${s.gpa}</td></tr>`;
             });
+            
+            htmlContent = `
+                <h2 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">Historical Performance Record</h2>
+                <table class="pdf-table">
+                    <tr><th>Academic Term</th><th>Total Credit Points (TCP)</th><th>Total Load Units (TLU)</th><th>Term GPA</th></tr>
+                    ${tableRows || '<tr><td colspan="4">No valid records entered.</td></tr>'}
+                    <tr style="font-weight:bold; background-color:#f1f5f9;">
+                        <td>CUMULATIVE TOTAL</td><td>Cum. TCP = ${data.totalTCP}</td><td>Cum. TLU = ${data.totalTLU}</td><td>-</td>
+                    </tr>
+                </table>
+                <div class="result-box">
+                    <span>ESTIMATED CUMULATIVE GRADE POINT AVERAGE (UNOFFICIAL)</span>
+                    <strong>${currentCalculation.result.toFixed(2)} / 5.00</strong>
+                </div>
+            `;
         }
-    </script>
+        
+        document.getElementById('pdf-student-name').innerHTML = `Student Reference: <span style="color: #1e293b;">${studentName.toUpperCase()}</span>`;
+        document.getElementById('pdf-dynamic-content').innerHTML = htmlContent;
+        
+        const element = document.getElementById('pdf-container');
+        const wrapper = document.getElementById('pdf-wrapper');
+        
+        wrapper.style.position = 'absolute';
+        wrapper.style.top = '0';
+        wrapper.style.left = '0';
+        wrapper.style.zIndex = '-1000';
+        element.style.display = 'block';
+
+        const cleanName = studentName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        const typeNames = { aggregate: 'Aggregate', gpa: 'GPA', cgpa: 'CGPA' };
+
+        const opt = {
+            margin:       [10, 0], 
+            filename:     `${cleanName}_${typeNames[currentCalculation.type]}_Estimate.pdf`,
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowY: 0 },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none';
+            wrapper.style.top = '-9999px'; 
+            wrapper.style.left = '-9999px';
+            closeModal();
+        });
+    }
+</script>
 </body>
 </html>
