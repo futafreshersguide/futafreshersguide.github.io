@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FUTA Second Semester Survival Guide | April 2026 Edition</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+/* =========================================
+           ULTIMATE MOBILE & ANTI-ZOOM FIX
+           ========================================= */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        html, body { 
+            max-width: 100vw !important; 
+            overflow-x: hidden !important; 
+        }
+        @media (max-width: 768px) {
+            body, p, span, a, input, select, textarea, button, li, .radio-label, .text-sm, .text-xs {
+                font-size: 16px !important;
+                line-height: 1.6 !important;
+            }
+        }
         /* Quick access buttons on welcome screen */
 .form-container .btn-quick {
     background: var(--success);
@@ -212,25 +226,6 @@
         #welcomeLevelRow { margin-bottom: 1.5rem; text-align: left; }
         
         /* ========== MOBILE STYLES ========== */
-        @media (max-width: 768px) {
-            * { -webkit-text-size-adjust: 100% !important; }
-            body, p, li, label, input, select, button, a, span, div { font-size: 16px !important; line-height: 1.5 !important; }
-            h1 { font-size: 2rem !important; }
-            h2 { font-size: 1.6rem !important; }
-            h3 { font-size: 1.3rem !important; }
-            .welcome-section h1 { font-size: 2rem !important; }
-            .form-container h2 { font-size: 1.5rem !important; }
-            .form-group input, .form-group select { font-size: 16px !important; padding: 14px !important; }
-            .radio-label { font-size: 1rem !important; min-height: 60px !important; padding: 14px 12px !important; }
-            .btn { font-size: 1.1rem !important; padding: 14px 24px !important; }
-            .card { padding: 1.5rem !important; }
-            .nav-container { flex-direction: column; }
-            .nav-links { margin-top: 1rem; justify-content: center; display: none; }
-            .menu-btn { display: block; }
-            .battle-plan-grid, .strategy-grid, .benefits-grid, .documents-grid { grid-template-columns: 1fr !important; }
-            .radio-group { flex-direction: column; gap: 0.5rem; }
-        }
-        
         @media (max-width: 480px) {
             h1 { font-size: 1.8rem !important; }
             .welcome-section h1 { font-size: 1.8rem !important; }
@@ -876,352 +871,323 @@
         </div>
     </footer>
 
-    <script>
-        // ========== COURSE DATA ==========
-        const secondSemesterCourses = [
-            { code: "MTS 102", title: "Introductory Mathematics II", topics: ["Functions of real variables", "Graphs of functions", "Limits and continuity", "Techniques of differentiation", "Curve sketching", "Integration", "Applications of integration"], driveLink: "https://drive.google.com/drive/folders/1wjHXcRECQRb0ubIWQpBRJCrYKLqOkdxg", examType: "CBT/CBE", tips: ["Not mandatory for everyone", "Online assignments, tutorials, and manuals included", "Attend all classes", "Manage time effectively"] },
-            { code: "MTS 104", title: "Introductory Applied Mathematics", topics: ["Introduction to vectors", "Applications of vectors", "Coordinate geometry", "Geometry of a circle", "Conic sections", "Dynamics I and II"], driveLink: "https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7", examType: "CBT/CBE", tips: ["3-unit course", "Arrive early", "Read lecturer's materials"] },
-            { code: "MEE 102", title: "Engineering Workshop", topics: ["General safety", "Workshop measurements", "Engineering materials", "Bench work and fittings", "Machining", "Automobile maintenance"], driveLink: "https://drive.google.com/drive/folders/1Tm8klewBc9wvcPuqLuNQUNRZFf2ZpVQF", examType: "CBT/CBE", tips: ["Wear blue lab coat and safety shoes", "Buy the manual", "Attend practical classes early"] },
-            { code: "PHY 102", title: "Basic General Physics II", topics: ["Electrostatics", "Electric fields", "Current electricity", "Magnetic fields", "Electromagnetic waves"], driveLink: "https://drive.google.com/drive/folders/1rt62SVxQ8QThNwhcKTzhF8imHRkE4jrN", examType: "CBT/CBE", tips: ["Manual available", "Practice questions diligently"] },
-            { code: "PHY 108", title: "General Physics Practical II", topics: ["Resistor arrangements", "Power dissipation", "Wheatstone bridge", "Specific heat capacity", "Latent heat"], driveLink: "https://drive.google.com/drive/folders/1mcND2jeXemL3NcZh4yXqkvCInj7WEXVJ", examType: "CBE Only", tips: ["Similar format to PHY 107", "Practical manual required", "No CBT"] },
-            { code: "CSC 102", title: "Introduction to Computer", topics: ["Overview of computers", "Hardware and software", "Programming languages", "Visual Basic"], driveLink: "https://drive.google.com/drive/folders/19JVqvYQhr9lc1z8LfHgTSq_2tdl3b7vf", examType: "CBT/CBE", tips: ["Read lecturer's slides", "Practical manual required"] },
-            { code: "BIO 102", title: "General Biology II", topics: ["Animal kingdom", "Protozoans", "Coelenterates", "Annelids", "Arthropods", "Ecology"], driveLink: "https://drive.google.com/drive/folders/1N2xzuPmM-Oty_bYMePSew1Z26GkPK1jv", examType: "CBT/CBE", tips: ["Extensive slides", "Identify all characteristics"] },
-            { code: "BIO 104", title: "Practical Biology II", topics: ["Protozoa", "Worms", "Arthropods", "Fishes", "Amphibians", "Mammals"], driveLink: "https://drive.google.com/drive/folders/1FTyWrbkWCsQyBkHQu5b_r2gsP0PG4jNk", examType: "CBE Only", tips: ["Review BIO 102", "Practical manual essential", "No CBT"] },
-            { code: "CHE 102", title: "General Chemistry II", topics: ["Organic chemistry", "Hydrocarbons", "Structural determination", "Functional groups", "Periodicity"], driveLink: "https://drive.google.com/drive/folders/143I5Bv1eD-Xu8cHvy7CmeLaRFSotDwmW", examType: "CBT/CBE", tips: ["Challenging course", "Study tutorial questions"] },
-            { code: "CHE 104", title: "Practical Chemistry II", topics: ["Separation techniques", "Solutions", "Qualitative analysis"], driveLink: "https://drive.google.com/drive/folders/1riZnl__fhcNN11HI4rQGUkrx4GaHYexP", examType: "CBE Only", tips: ["Buy the manual", "No CBT"] },
-            { code: "GNS 102", title: "Use of English II", topics: ["Reading comprehension", "Writing process", "Paragraph development", "Report structuring"], driveLink: "https://drive.google.com/drive/folders/19mYRy9HH3fBJ27rAqS2X9y3r5tKqTFLk", examType: "CBT/CBE", tips: ["Download materials", "Complete forum assignments"] },
-            { code: "GNS 106", title: "Philosophy, Logic and Issues in S&T", topics: ["Introduction to philosophy", "Logic", "Fallacies", "Philosophy of science", "Ethics"], driveLink: "https://drive.google.com/drive/folders/1uKJY-ntTQKmn9dXKtSeT9thn-5-6KWuQ", examType: "CBT/CBE", tips: ["Read and understand thoroughly"] }
-        ];
+   <script>
+    // ========== COURSE DATA ==========
+    const secondSemesterCourses = [
+        { code: "MTS 102", title: "Introductory Mathematics II", topics: ["Functions of real variables", "Graphs of functions", "Limits and continuity", "Techniques of differentiation", "Curve sketching", "Integration", "Applications of integration"], driveLink: "https://drive.google.com/drive/folders/1wjHXcRECQRb0ubIWQpBRJCrYKLqOkdxg", examType: "CBT/CBE", tips: ["Not mandatory for everyone", "Online assignments, tutorials, and manuals included", "Attend all classes", "Manage time effectively"] },
+        { code: "MTS 104", title: "Introductory Applied Mathematics", topics: ["Introduction to vectors", "Applications of vectors", "Coordinate geometry", "Geometry of a circle", "Conic sections", "Dynamics I and II"], driveLink: "https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7", examType: "CBT/CBE", tips: ["3-unit course", "Arrive early", "Read lecturer's materials"] },
+        { code: "MEE 102", title: "Engineering Workshop", topics: ["General safety", "Workshop measurements", "Engineering materials", "Bench work and fittings", "Machining", "Automobile maintenance"], driveLink: "https://drive.google.com/drive/folders/1Tm8klewBc9wvcPuqLuNQUNRZFf2ZpVQF", examType: "CBT/CBE", tips: ["Wear blue lab coat and safety shoes", "Buy the manual", "Attend practical classes early"] },
+        { code: "PHY 102", title: "Basic General Physics II", topics: ["Electrostatics", "Electric fields", "Current electricity", "Magnetic fields", "Electromagnetic waves"], driveLink: "https://drive.google.com/drive/folders/1rt62SVxQ8QThNwhcKTzhF8imHRkE4jrN", examType: "CBT/CBE", tips: ["Manual available", "Practice questions diligently"] },
+        { code: "PHY 108", title: "General Physics Practical II", topics: ["Resistor arrangements", "Power dissipation", "Wheatstone bridge", "Specific heat capacity", "Latent heat"], driveLink: "https://drive.google.com/drive/folders/1mcND2jeXemL3NcZh4yXqkvCInj7WEXVJ", examType: "CBE Only", tips: ["Similar format to PHY 107", "Practical manual required", "No CBT"] },
+        { code: "CSC 102", title: "Introduction to Computer", topics: ["Overview of computers", "Hardware and software", "Programming languages", "Visual Basic"], driveLink: "https://drive.google.com/drive/folders/19JVqvYQhr9lc1z8LfHgTSq_2tdl3b7vf", examType: "CBT/CBE", tips: ["Read lecturer's slides", "Practical manual required"] },
+        { code: "BIO 102", title: "General Biology II", topics: ["Animal kingdom", "Protozoans", "Coelenterates", "Annelids", "Arthropods", "Ecology"], driveLink: "https://drive.google.com/drive/folders/1N2xzuPmM-Oty_bYMePSew1Z26GkPK1jv", examType: "CBT/CBE", tips: ["Extensive slides", "Identify all characteristics"] },
+        { code: "BIO 104", title: "Practical Biology II", topics: ["Protozoa", "Worms", "Arthropods", "Fishes", "Amphibians", "Mammals"], driveLink: "https://drive.google.com/drive/folders/1FTyWrbkWCsQyBkHQu5b_r2gsP0PG4jNk", examType: "CBE Only", tips: ["Review BIO 102", "Practical manual essential", "No CBT"] },
+        { code: "CHE 102", title: "General Chemistry II", topics: ["Organic chemistry", "Hydrocarbons", "Structural determination", "Functional groups", "Periodicity"], driveLink: "https://drive.google.com/drive/folders/143I5Bv1eD-Xu8cHvy7CmeLaRFSotDwmW", examType: "CBT/CBE", tips: ["Challenging course", "Study tutorial questions"] },
+        { code: "CHE 104", title: "Practical Chemistry II", topics: ["Separation techniques", "Solutions", "Qualitative analysis"], driveLink: "https://drive.google.com/drive/folders/1riZnl__fhcNN11HI4rQGUkrx4GaHYexP", examType: "CBE Only", tips: ["Buy the manual", "No CBT"] },
+        { code: "GNS 102", title: "Use of English II", topics: ["Reading comprehension", "Writing process", "Paragraph development", "Report structuring"], driveLink: "https://drive.google.com/drive/folders/19mYRy9HH3fBJ27rAqS2X9y3r5tKqTFLk", examType: "CBT/CBE", tips: ["Download materials", "Complete forum assignments"] },
+        { code: "GNS 106", title: "Philosophy, Logic and Issues in S&T", topics: ["Introduction to philosophy", "Logic", "Fallacies", "Philosophy of science", "Ethics"], driveLink: "https://drive.google.com/drive/folders/1uKJY-ntTQKmn9dXKtSeT9thn-5-6KWuQ", examType: "CBT/CBE", tips: ["Read and understand thoroughly"] }
+    ];
 
-        const textbookData = [
-            { course: "MTS 102", books: ["Lecturer's materials", "Bunday Mathematics", "Tutorial manual"] },
-            { course: "CHE 102", books: ["Fundamental Chemistry", "Tutorial manual"] },
-            { course: "PHY 102", books: ["Basic Physics", "Hidden Facts in Physics"] },
-            { course: "BIO 102/104", books: ["Lecturer's slides", "Practical manual"] },
-            { course: "MTS 104", books: ["Lecturer's materials", "Tutorial manual", "Apollo's Mathematics"] },
-            { course: "CHE 104", books: ["Practical manual", "Online PDFs"] },
-            { course: "PHY 108", books: ["YouTube videos", "Practical manual"] },
-            { course: "MEE 102", books: ["MEE 102 manual"] },
-            { course: "CSC 102", books: ["Lecturer's slides", "Practical manual"] },
-            { course: "GNS 102/106", books: ["Online materials", "Lecture slides"] }
-        ];
+    const textbookData = [
+        { course: "MTS 102", books: ["Lecturer's materials", "Bunday Mathematics", "Tutorial manual"] },
+        { course: "CHE 102", books: ["Fundamental Chemistry", "Tutorial manual"] },
+        { course: "PHY 102", books: ["Basic Physics", "Hidden Facts in Physics"] },
+        { course: "BIO 102/104", books: ["Lecturer's slides", "Practical manual"] },
+        { course: "MTS 104", books: ["Lecturer's materials", "Tutorial manual", "Apollo's Mathematics"] },
+        { course: "CHE 104", books: ["Practical manual", "Online PDFs"] },
+        { course: "PHY 108", books: ["YouTube videos", "Practical manual"] },
+        { course: "MEE 102", books: ["MEE 102 manual"] },
+        { course: "CSC 102", books: ["Lecturer's slides", "Practical manual"] },
+        { course: "GNS 102/106", books: ["Online materials", "Lecture slides"] }
+    ];
 
-        const EMAIL_CONFIG = { primary: 'helpinghandshallneverfall@gmail.com', fallback: 'abideenyakub08@gmail.com' };
-        let userData = {};
+    const EMAIL_CONFIG = { primary: 'helpinghandshallneverfall@gmail.com', fallback: 'abideenyakub08@gmail.com' };
+    let userData = {};
 
-        // 🆕 ADMIN TRACKING - Save submission to localStorage for admin panel
-        function saveSubmissionToAdminStorage(submissionData, type) {
-            try {
-                const storageKey = type === 'user' ? 'allUserSubmissions' : 
-                                  type === 'business' ? 'allBusinessSubmissions' : 
-                                  'allFeedbackSubmissions';
-                
-                let existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                existing.push(submissionData);
-                localStorage.setItem(storageKey, JSON.stringify(existing));
-                console.log(`✅ Saved to admin storage: ${storageKey}`);
-            } catch (e) {
-                console.error('Error saving to admin storage:', e);
-            }
-        }
+    function saveSubmissionToAdminStorage(submissionData, type) {
+        try {
+            const storageKey = type === 'user' ? 'allUserSubmissions' : 
+                              type === 'business' ? 'allBusinessSubmissions' : 
+                              'allFeedbackSubmissions';
+            let existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            existing.push(submissionData);
+            localStorage.setItem(storageKey, JSON.stringify(existing));
+            console.log(`✅ Saved to admin storage: ${storageKey}`);
+        } catch (e) { console.error('Error saving to admin storage:', e); }
+    }
 
-        async function submitToFormSubmit(formData, maxRetries = 2) {
-            return new Promise(async (resolve, reject) => {
-                let lastError = null;
-                for (let attempt = 0; attempt <= maxRetries; attempt++) {
-                    try {
-                        const emailToUse = attempt === 0 ? EMAIL_CONFIG.primary : EMAIL_CONFIG.fallback;
-                        const response = await fetch('https://formsubmit.co/ajax/' + emailToUse, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(formData) });
-                        const data = await response.json();
-                        if (data.success) { resolve(data); return; }
-                    } catch (error) { lastError = error; if (attempt < maxRetries) await new Promise(r => setTimeout(r, 1000)); }
-                }
-                reject(lastError);
-            });
-        }
-
-        function checkUrlParams() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('name')) document.getElementById('name').value = decodeURIComponent(params.get('name'));
-            if (params.get('dept')) document.getElementById('department').value = decodeURIComponent(params.get('dept'));
-            if (params.get('whatsapp')) document.getElementById('whatsapp').value = decodeURIComponent(params.get('whatsapp'));
-            if (params.get('level')) { document.getElementById('welcomeLevel').value = params.get('level'); document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
-        }
-
-        function checkLocalStorage() {
-    try {
-        const parentOnboarded = localStorage.getItem('onboarded');
-        if (parentOnboarded === 'true') {
-            const userName = localStorage.getItem('userName'), userDept = localStorage.getItem('userDepartment'), userWA = localStorage.getItem('userWhatsApp'), userLevel = localStorage.getItem('userLevel'), userFresher = localStorage.getItem('userIsFresher');
-            if (userName) document.getElementById('name').value = userName;
-            if (userDept) document.getElementById('department').value = userDept;
-            if (userWA) document.getElementById('whatsapp').value = userWA;
-            if (userLevel) { document.getElementById('welcomeLevel').value = userLevel; document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
-            if (userFresher === 'no') { document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
-        }
-        
-        // 🆕 FIXED: Check if we came from a switch
-        const urlParams = new URLSearchParams(window.location.search);
-        const fromSwitch = urlParams.get('switch') === 'true';
-        
-        const secondSemOnboarded = localStorage.getItem('onboardedSecondSemester');
-        if (secondSemOnboarded === 'true' || (parentOnboarded === 'true' && !fromSwitch)) {
-            const userName = localStorage.getItem('secondSemesterUserName') || localStorage.getItem('userName');
-            const userDept = localStorage.getItem('secondSemesterUserDepartment') || localStorage.getItem('userDepartment');
-            
-            if (userName && userDept) {
-                userData = { 
-                    name: userName, 
-                    department: userDept, 
-                    whatsapp: localStorage.getItem('secondSemesterUserWhatsApp') || localStorage.getItem('userWhatsApp') || '', 
-                    isFresher: localStorage.getItem('secondSemesterUserIsFresher') || 'yes', 
-                    level: localStorage.getItem('secondSemesterUserLevel') || '' 
-                };
-// ADD THIS TO TRACK RETURN VISITS TO THE 2ND SEMESTER GUIDE
+    async function submitToFormSubmit(formData, maxRetries = 2) {
+        return new Promise(async (resolve, reject) => {
+            let lastError = null;
+            for (let attempt = 0; attempt <= maxRetries; attempt++) {
                 try {
-                    let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
-                    existing.push({
-                        name: userName,
-                        department: userDept,
-                        level: userData.level || 'N/A',
-                        timestamp: new Date().toISOString(),
-                        action: 'VISIT',
-                        calculationType: '2nd Semester Guide' // Shows which page they visited
-                    });
-                    localStorage.setItem('calculatorUsage', JSON.stringify(existing));
-                } catch(e) {}
+                    const emailToUse = attempt === 0 ? EMAIL_CONFIG.primary : EMAIL_CONFIG.fallback;
+                    const response = await fetch('https://formsubmit.co/ajax/' + emailToUse, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(formData) });
+                    const data = await response.json();
+                    if (data.success) { resolve(data); return; }
+                } catch (error) { lastError = error; if (attempt < maxRetries) await new Promise(r => setTimeout(r, 1000)); }
+            }
+            reject(lastError);
+        });
+    }
+
+    function checkUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('name')) document.getElementById('name').value = decodeURIComponent(params.get('name'));
+        if (params.get('dept')) document.getElementById('department').value = decodeURIComponent(params.get('dept'));
+        if (params.get('whatsapp')) document.getElementById('whatsapp').value = decodeURIComponent(params.get('whatsapp'));
+        if (params.get('level')) { document.getElementById('welcomeLevel').value = params.get('level'); document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
+    }
+
+    // 🆕 FIXED checkLocalStorage - No redirect when coming from calculator
+    function checkLocalStorage() {
+        try {
+            const parentOnboarded = localStorage.getItem('onboarded');
+            if (parentOnboarded === 'true') {
+                const userName = localStorage.getItem('userName'), userDept = localStorage.getItem('userDepartment'), userWA = localStorage.getItem('userWhatsApp'), userLevel = localStorage.getItem('userLevel'), userFresher = localStorage.getItem('userIsFresher');
+                if (userName) document.getElementById('name').value = userName;
+                if (userDept) document.getElementById('department').value = userDept;
+                if (userWA) document.getElementById('whatsapp').value = userWA;
+                if (userLevel) { document.getElementById('welcomeLevel').value = userLevel; document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
+                if (userFresher === 'no') { document.getElementById('fresher-no').checked = true; document.getElementById('welcomeLevelRow').classList.remove('hidden'); }
+            }
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromSwitch = urlParams.get('switch') === 'true';
+            const fromCalculator = urlParams.get('from') === 'calculator';
+            
+            const secondSemOnboarded = localStorage.getItem('onboardedSecondSemester');
+            if (secondSemOnboarded === 'true' || (parentOnboarded === 'true' && !fromSwitch && !fromCalculator)) {
+                const userName = localStorage.getItem('secondSemesterUserName') || localStorage.getItem('userName');
+                const userDept = localStorage.getItem('secondSemesterUserDepartment') || localStorage.getItem('userDepartment');
+                
+                if (userName && userDept) {
+                    userData = { 
+                        name: userName, department: userDept, 
+                        whatsapp: localStorage.getItem('secondSemesterUserWhatsApp') || localStorage.getItem('userWhatsApp') || '', 
+                        isFresher: localStorage.getItem('secondSemesterUserIsFresher') || 'yes', 
+                        level: localStorage.getItem('secondSemesterUserLevel') || '' 
+                    };
+                    try {
+                        let existing = JSON.parse(localStorage.getItem('calculatorUsage') || '[]');
+                        existing.push({ name: userName, department: userDept, level: userData.level || 'N/A', timestamp: new Date().toISOString(), action: 'VISIT', calculationType: '2nd Semester Guide' });
+                        localStorage.setItem('calculatorUsage', JSON.stringify(existing));
+                    } catch(e) {}
+                    document.getElementById('welcome').classList.add('hidden');
+                    document.getElementById('navbar').classList.remove('hidden');
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.getElementById('userInfo').innerHTML = `${userName} | ${userDept}` + (userData.level ? ` | ${userData.level}` : '');
+                    updateProfileDisplay();
+                }
+            }
+            
+            if (fromSwitch || fromCalculator) {
+                window.history.replaceState({}, document.title, 'second-semester.html');
+            }
+        } catch (err) { console.error('Error checking localStorage:', err); }
+    }
+
+    function initProfileDropdown() {
+        const profileDropdown = document.getElementById('userProfileDropdown'), profileBtn = document.getElementById('profileBtn'), profileMenu = document.getElementById('profileMenu');
+        if (!profileDropdown || !profileBtn) return;
+        if (userData && userData.name) { profileDropdown.classList.remove('hidden'); updateProfileDisplay(); }
+        profileBtn.addEventListener('click', (e) => { e.stopPropagation(); profileMenu.classList.toggle('hidden'); });
+        document.addEventListener('click', (e) => { if (!profileDropdown.contains(e.target)) profileMenu.classList.add('hidden'); });
+        document.getElementById('editProfileBtn')?.addEventListener('click', () => { profileMenu.classList.add('hidden'); openEditProfileModal(); });
+        document.getElementById('closeProfileModal')?.addEventListener('click', () => { const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden'); });
+        document.getElementById('editProfileModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('editProfileModal')) { const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden'); } });
+        document.getElementById('editProfileForm')?.addEventListener('submit', (e) => { e.preventDefault(); saveProfileChanges(); });
+        document.getElementById('logoutBtn')?.addEventListener('click', () => { if (confirm('Logout?')) { localStorage.clear(); window.location.reload(); } });
+        document.getElementById('switchSemesterBtn2')?.addEventListener('click', () => { window.location.href = 'index.html?switch=true'; });
+    }
+
+    function updateProfileDisplay() {
+        if (!userData || !userData.name) return;
+        document.getElementById('profileName').textContent = userData.name.split(' ')[0];
+        document.getElementById('profileFullName').textContent = userData.name;
+        document.getElementById('profileDept').textContent = userData.department + (userData.level ? ` • ${userData.level}` : '');
+        document.getElementById('userProfileDropdown').classList.remove('hidden');
+    }
+
+    function openEditProfileModal() {
+        document.getElementById('editName').value = userData.name || '';
+        document.getElementById('editDepartment').value = userData.department || '';
+        document.getElementById('editWhatsapp').value = userData.whatsapp || '';
+        document.getElementById('editLevel').value = userData.level || '';
+        if (userData.isFresher === 'yes') document.getElementById('editFresherYes').checked = true;
+        else document.getElementById('editFresherNo').checked = true;
+        const m = document.getElementById('editProfileModal'); m.style.display = 'flex'; m.classList.remove('hidden');
+    }
+
+    function saveProfileChanges() {
+        const newName = document.getElementById('editName').value.trim(), newDept = document.getElementById('editDepartment').value.trim(), newWA = document.getElementById('editWhatsapp').value.trim(), newLevel = document.getElementById('editLevel').value, newFresher = document.querySelector('input[name="editIsFresher"]:checked')?.value || 'yes';
+        if (!newName || !newDept || !newWA) { showToast('Please fill all required fields', 'error'); return; }
+        userData = { ...userData, name: newName, department: newDept, whatsapp: newWA, level: newLevel, isFresher: newFresher };
+        localStorage.setItem('secondSemesterUserName', newName); localStorage.setItem('secondSemesterUserDepartment', newDept); localStorage.setItem('secondSemesterUserWhatsApp', newWA); localStorage.setItem('secondSemesterUserLevel', newLevel); localStorage.setItem('secondSemesterUserIsFresher', newFresher);
+        updateProfileDisplay();
+        document.getElementById('userInfo').innerHTML = `${newName} | ${newDept}` + (newLevel ? ` | ${newLevel}` : '');
+        const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden');
+        showToast('Profile updated!', 'success');
+        saveSubmissionToAdminStorage({ id: Date.now() + '-profile', name: newName, department: newDept, whatsapp: newWA, level: newLevel, isFresher: newFresher, semester: 'second', timestamp: new Date().toISOString(), action: 'PROFILE_UPDATE', source: 'Profile Edit (2nd Sem)' }, 'user');
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div'); toast.className = 'toast';
+        toast.style.backgroundColor = type === 'success' ? 'var(--success)' : 'var(--danger)';
+        toast.innerHTML = message; document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function initializeApp() {
+        document.getElementById('userForm')?.addEventListener('submit', handleFormSubmit);
+        const fresherYes = document.getElementById('fresher-yes'), fresherNo = document.getElementById('fresher-no'), levelRow = document.getElementById('welcomeLevelRow');
+        if (fresherYes && fresherNo && levelRow) {
+            levelRow.style.display = 'none';
+            fresherYes.addEventListener('change', () => { if (fresherYes.checked) levelRow.style.display = 'none'; });
+            fresherNo.addEventListener('change', () => { if (fresherNo.checked) levelRow.style.display = 'block'; });
+            fresherNo.addEventListener('click', () => levelRow.style.display = 'block');
+            fresherYes.addEventListener('click', () => levelRow.style.display = 'none');
+        }
+        setupNavigation(); setupSidebar(); generateCourseGrid(); generateTextbooksGrid(); initProfileDropdown();
+    }
+
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        const nameVal = document.getElementById('name').value.trim(), deptVal = document.getElementById('department').value.trim(), waVal = document.getElementById('whatsapp').value.trim();
+        const isFresher = document.querySelector('#userForm input[name="isFresher"]:checked')?.value;
+        const levelVal = document.getElementById('welcomeLevel').value;
+        const formMsg = document.getElementById('formMessage');
+        if (!nameVal) { formMsg.innerHTML = '<div class="message error">Please enter your full name.</div>'; return; }
+        if (!deptVal) { formMsg.innerHTML = '<div class="message error">Please enter your department.</div>'; return; }
+        if (!waVal) { formMsg.innerHTML = '<div class="message error">Please enter your WhatsApp number.</div>'; return; }
+        if (isFresher === 'no' && !levelVal) { formMsg.innerHTML = '<div class="message error">Please select your level.</div>'; return; }
+
+        userData = { name: nameVal, department: deptVal, whatsapp: waVal, isFresher, level: levelVal };
+        localStorage.setItem('secondSemesterUserName', nameVal); localStorage.setItem('secondSemesterUserDepartment', deptVal); localStorage.setItem('secondSemesterUserWhatsApp', waVal); localStorage.setItem('secondSemesterUserIsFresher', isFresher); localStorage.setItem('secondSemesterUserLevel', levelVal); localStorage.setItem('onboardedSecondSemester', 'true');
+
+        const submitBtn = document.getElementById('submitBtn'), origText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...'; submitBtn.disabled = true;
+
+        const formData = { '_subject': `FUTA Second Semester Guide Access - ${nameVal}`, '_template': 'table', '_captcha': 'false', 'Name': nameVal, 'Department': deptVal, 'WhatsApp': waVal, 'Fresher Status': isFresher === 'yes' ? 'Yes' : 'No', 'Level': levelVal || 'N/A', 'Semester': 'Second Semester (April 2026)', 'Timestamp': new Date().toISOString() };
+
+        saveSubmissionToAdminStorage({ id: Date.now() + '-' + Math.random().toString(36).substr(2, 9), name: nameVal, department: deptVal, whatsapp: waVal, isFresher: isFresher, level: levelVal || 'N/A', semester: 'second', timestamp: new Date().toISOString(), source: 'Second Semester' }, 'user');
+
+        submitToFormSubmit(formData).then(() => {
+            formMsg.innerHTML = '<div class="message success">✅ Welcome! Loading Second Semester Guide...</div>';
+            setTimeout(() => {
                 document.getElementById('welcome').classList.add('hidden');
                 document.getElementById('navbar').classList.remove('hidden');
                 document.getElementById('main-content').classList.remove('hidden');
-                document.getElementById('userInfo').innerHTML = `${userName} | ${userDept}` + (userData.level ? ` | ${userData.level}` : '');
+                document.getElementById('userInfo').innerHTML = `${nameVal} | ${deptVal}` + (levelVal ? ` | ${levelVal}` : '');
                 updateProfileDisplay();
-            }
+            }, 1000);
+        }).catch(() => {
+            formMsg.innerHTML = '<div class="message success">✅ Welcome! Loading Second Semester Guide...</div>';
+            setTimeout(() => {
+                document.getElementById('welcome').classList.add('hidden');
+                document.getElementById('navbar').classList.remove('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+            }, 1000);
+        }).finally(() => { submitBtn.innerHTML = origText; submitBtn.disabled = false; });
+    }
+
+    function generateCourseGrid() {
+        const grid = document.getElementById('courseGrid'); if (!grid) return; grid.innerHTML = '';
+        secondSemesterCourses.forEach(c => {
+            const card = document.createElement('div'); card.className = 'battle-plan-card';
+            let tips = ''; c.tips.forEach(t => tips += `<li>${t}</li>`);
+            card.innerHTML = `<h4>${c.code}: ${c.title} <span class="exam-type">${c.examType}</span></h4><p><strong>Topics:</strong> ${c.topics.join(' • ')}</p><ul>${tips}</ul><a href="${c.driveLink}" class="drive-link" target="_blank"><i class="fab fa-google-drive"></i> ${c.code} Materials</a>`;
+            grid.appendChild(card);
+        });
+    }
+
+    function generateTextbooksGrid() {
+        const grid = document.getElementById('textbooksGrid'); if (!grid) return; grid.innerHTML = '';
+        textbookData.forEach(t => {
+            const card = document.createElement('div'); card.className = 'document-card';
+            let books = ''; t.books.forEach(b => books += `<li>${b}</li>`);
+            card.innerHTML = `<h4><i class="fas fa-book"></i> ${t.course}</h4><ul>${books}</ul>`;
+            grid.appendChild(card);
+        });
+    }
+
+    // 🆕 FIXED: setupNavigation - Closes menu when link is clicked
+    function setupNavigation() {
+        const navLinks = document.querySelector('.nav-links');
+        const sidebar = document.getElementById('sidebar');
+        
+        document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a').forEach(el => {
+            el.addEventListener('click', function(e) {
+                const page = this.getAttribute('data-page');
+                if (page) { 
+                    e.preventDefault(); 
+                    showPage(page);
+                    if (navLinks) navLinks.classList.remove('show');
+                    if (sidebar) sidebar.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // 🆕 FIXED: setupSidebar - Better menu handling
+    function setupSidebar() {
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuBtn) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (window.innerWidth <= 768) {
+                    if (navLinks) navLinks.classList.toggle('show');
+                } else {
+                    if (sidebar) sidebar.classList.add('active');
+                }
+            });
         }
         
-        // Clean up URL if coming from switch
-        if (fromSwitch) {
-            window.history.replaceState({}, document.title, 'second-semester.html');
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', () => {
+                if (sidebar) sidebar.classList.remove('active');
+            });
         }
-    } catch (err) { console.error('Error checking localStorage:', err); }
-}
-        // Profile Functions
-        function initProfileDropdown() {
-            const profileDropdown = document.getElementById('userProfileDropdown'), profileBtn = document.getElementById('profileBtn'), profileMenu = document.getElementById('profileMenu');
-            if (!profileDropdown || !profileBtn) return;
-            if (userData && userData.name) { profileDropdown.classList.remove('hidden'); updateProfileDisplay(); }
-            profileBtn.addEventListener('click', (e) => { e.stopPropagation(); profileMenu.classList.toggle('hidden'); });
-            document.addEventListener('click', (e) => { if (!profileDropdown.contains(e.target)) profileMenu.classList.add('hidden'); });
-            document.getElementById('editProfileBtn')?.addEventListener('click', () => { profileMenu.classList.add('hidden'); openEditProfileModal(); });
-            document.getElementById('closeProfileModal')?.addEventListener('click', () => { const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden'); });
-            document.getElementById('editProfileModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('editProfileModal')) { const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden'); } });
-            document.getElementById('editProfileForm')?.addEventListener('submit', (e) => { e.preventDefault(); saveProfileChanges(); });
-            document.getElementById('logoutBtn')?.addEventListener('click', () => { if (confirm('Are you sure you want to logout?')) { localStorage.clear(); window.location.reload(); } });
-            document.getElementById('switchSemesterBtn2')?.addEventListener('click', () => { window.location.href = 'index.html?switch=true'; });
-        }
-
-        function updateProfileDisplay() {
-            if (!userData || !userData.name) return;
-            document.getElementById('profileName').textContent = userData.name.split(' ')[0];
-            document.getElementById('profileFullName').textContent = userData.name;
-            document.getElementById('profileDept').textContent = userData.department + (userData.level ? ` • ${userData.level}` : '');
-            document.getElementById('userProfileDropdown').classList.remove('hidden');
-        }
-
-        function openEditProfileModal() {
-            document.getElementById('editName').value = userData.name || '';
-            document.getElementById('editDepartment').value = userData.department || '';
-            document.getElementById('editWhatsapp').value = userData.whatsapp || '';
-            document.getElementById('editLevel').value = userData.level || '';
-            if (userData.isFresher === 'yes') document.getElementById('editFresherYes').checked = true;
-            else document.getElementById('editFresherNo').checked = true;
-            const m = document.getElementById('editProfileModal'); m.style.display = 'flex'; m.classList.remove('hidden');
-        }
-
-        function saveProfileChanges() {
-            const newName = document.getElementById('editName').value.trim(), newDept = document.getElementById('editDepartment').value.trim(), newWA = document.getElementById('editWhatsapp').value.trim(), newLevel = document.getElementById('editLevel').value, newFresher = document.querySelector('input[name="editIsFresher"]:checked')?.value || 'yes';
-            if (!newName || !newDept || !newWA) { showToast('Please fill all required fields', 'error'); return; }
-            userData = { ...userData, name: newName, department: newDept, whatsapp: newWA, level: newLevel, isFresher: newFresher };
-            localStorage.setItem('secondSemesterUserName', newName); localStorage.setItem('secondSemesterUserDepartment', newDept); localStorage.setItem('secondSemesterUserWhatsApp', newWA); localStorage.setItem('secondSemesterUserLevel', newLevel); localStorage.setItem('secondSemesterUserIsFresher', newFresher);
-            updateProfileDisplay();
-            document.getElementById('userInfo').innerHTML = `${newName} | ${newDept}` + (newLevel ? ` | ${newLevel}` : '');
-            const m = document.getElementById('editProfileModal'); m.style.display = 'none'; m.classList.add('hidden');
-            showToast('Profile updated successfully!', 'success');
-            
-            // 🆕 Track profile update for admin
-            saveSubmissionToAdminStorage({
-                id: Date.now() + '-profile-' + Math.random().toString(36).substr(2, 5),
-                name: newName,
-                department: newDept,
-                whatsapp: newWA,
-                level: newLevel,
-                isFresher: newFresher,
-                semester: 'second',
-                timestamp: new Date().toISOString(),
-                action: 'PROFILE_UPDATE',
-                source: 'Profile Edit (2nd Sem)'
-            }, 'user');
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div'); toast.className = 'toast';
-            toast.style.backgroundColor = type === 'success' ? 'var(--success)' : 'var(--danger)';
-            toast.innerHTML = message; document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        // Initialize App
-        function initializeApp() {
-            document.getElementById('userForm')?.addEventListener('submit', handleFormSubmit);
-            const fresherYes = document.getElementById('fresher-yes'), fresherNo = document.getElementById('fresher-no'), levelRow = document.getElementById('welcomeLevelRow');
-            if (fresherYes && fresherNo && levelRow) {
-                levelRow.style.display = 'none';
-                fresherYes.addEventListener('change', () => { if (fresherYes.checked) levelRow.style.display = 'none'; });
-                fresherNo.addEventListener('change', () => { if (fresherNo.checked) levelRow.style.display = 'block'; });
-                fresherNo.addEventListener('click', () => levelRow.style.display = 'block');
-                fresherYes.addEventListener('click', () => levelRow.style.display = 'none');
+        
+        document.addEventListener('click', (e) => {
+            if (sidebar && !sidebar.contains(e.target) && e.target !== menuBtn) {
+                sidebar.classList.remove('active');
             }
-            setupNavigation(); setupSidebar(); generateCourseGrid(); generateTextbooksGrid(); initProfileDropdown();
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const nameVal = document.getElementById('name').value.trim(), deptVal = document.getElementById('department').value.trim(), waVal = document.getElementById('whatsapp').value.trim();
-            const isFresher = document.querySelector('#userForm input[name="isFresher"]:checked')?.value;
-            const levelVal = document.getElementById('welcomeLevel').value;
-            const formMsg = document.getElementById('formMessage');
-            if (!nameVal) { formMsg.innerHTML = '<div class="message error">Please enter your full name.</div>'; return; }
-            if (!deptVal) { formMsg.innerHTML = '<div class="message error">Please enter your department.</div>'; return; }
-            if (!waVal) { formMsg.innerHTML = '<div class="message error">Please enter your WhatsApp number.</div>'; return; }
-            if (isFresher === 'no' && !levelVal) { formMsg.innerHTML = '<div class="message error">Please select your level.</div>'; return; }
-
-            userData = { name: nameVal, department: deptVal, whatsapp: waVal, isFresher, level: levelVal };
-            localStorage.setItem('secondSemesterUserName', nameVal); localStorage.setItem('secondSemesterUserDepartment', deptVal); localStorage.setItem('secondSemesterUserWhatsApp', waVal); localStorage.setItem('secondSemesterUserIsFresher', isFresher); localStorage.setItem('secondSemesterUserLevel', levelVal); localStorage.setItem('onboardedSecondSemester', 'true');
-
-            const submitBtn = document.getElementById('submitBtn'), origText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...'; submitBtn.disabled = true;
-
-            const formData = { '_subject': `FUTA Second Semester Guide Access - ${nameVal}`, '_template': 'table', '_captcha': 'false', 'Name': nameVal, 'Department': deptVal, 'WhatsApp': waVal, 'Fresher Status': isFresher === 'yes' ? 'Yes' : 'No', 'Level': levelVal || 'N/A', 'Semester': 'Second Semester (April 2026)', 'Timestamp': new Date().toISOString() };
-
-            // 🆕 Save to admin tracking
-            saveSubmissionToAdminStorage({
-                id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
-                name: nameVal,
-                department: deptVal,
-                whatsapp: waVal,
-                isFresher: isFresher,
-                level: levelVal || 'N/A',
-                semester: 'second',
-                timestamp: new Date().toISOString(),
-                source: 'Second Semester'
-            }, 'user');
-
-            submitToFormSubmit(formData).then(() => {
-                formMsg.innerHTML = '<div class="message success">✅ Welcome! Loading Second Semester Guide...</div>';
-                setTimeout(() => {
-                    document.getElementById('welcome').classList.add('hidden');
-                    document.getElementById('navbar').classList.remove('hidden');
-                    document.getElementById('main-content').classList.remove('hidden');
-                    document.getElementById('userInfo').innerHTML = `${nameVal} | ${deptVal}` + (levelVal ? ` | ${levelVal}` : '');
-                    updateProfileDisplay();
-                }, 1000);
-            }).catch(() => {
-                formMsg.innerHTML = '<div class="message success">✅ Welcome! Loading Second Semester Guide...</div>';
-                setTimeout(() => {
-                    document.getElementById('welcome').classList.add('hidden');
-                    document.getElementById('navbar').classList.remove('hidden');
-                    document.getElementById('main-content').classList.remove('hidden');
-                }, 1000);
-            }).finally(() => { submitBtn.innerHTML = origText; submitBtn.disabled = false; });
-        }
-
-        function generateCourseGrid() {
-            const grid = document.getElementById('courseGrid'); if (!grid) return; grid.innerHTML = '';
-            secondSemesterCourses.forEach(c => {
-                const card = document.createElement('div'); card.className = 'battle-plan-card';
-                let tips = ''; c.tips.forEach(t => tips += `<li>${t}</li>`);
-                card.innerHTML = `<h4>${c.code}: ${c.title} <span class="exam-type">${c.examType}</span></h4><p><strong>Topics:</strong> ${c.topics.join(' • ')}</p><ul>${tips}</ul><a href="${c.driveLink}" class="drive-link" target="_blank"><i class="fab fa-google-drive"></i> ${c.code} Materials</a>`;
-                grid.appendChild(card);
-            });
-        }
-
-        function generateTextbooksGrid() {
-            const grid = document.getElementById('textbooksGrid'); if (!grid) return; grid.innerHTML = '';
-            textbookData.forEach(t => {
-                const card = document.createElement('div'); card.className = 'document-card';
-                let books = ''; t.books.forEach(b => books += `<li>${b}</li>`);
-                card.innerHTML = `<h4><i class="fas fa-book"></i> ${t.course}</h4><ul>${books}</ul>`;
-                grid.appendChild(card);
-            });
-        }
-
-        function setupNavigation() {
-            document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    const page = this.getAttribute('data-page');
-                    if (page) { e.preventDefault(); showPage(page); }
-                });
-            });
-        }
-
-     function setupSidebar() {
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.getElementById('sidebar');
-    const sidebarClose = document.getElementById('sidebarClose');
-    const navLinks = document.querySelector('.nav-links');
-    
-    // Toggle menu on mobile
-    if (menuBtn) {
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
             if (window.innerWidth <= 768) {
-                // On mobile: toggle nav-links dropdown
-                if (navLinks) {
-                    navLinks.classList.toggle('show');
+                if (navLinks && !navLinks.contains(e.target) && e.target !== menuBtn) {
+                    navLinks.classList.remove('show');
                 }
+            }
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                if (navLinks) navLinks.classList.remove('show');
             } else {
-                // On desktop: show sidebar
-                if (sidebar) {
-                    sidebar.classList.add('active');
-                }
+                if (sidebar) sidebar.classList.remove('active');
             }
         });
     }
-    
-    // Close sidebar
-    if (sidebarClose) {
-        sidebarClose.addEventListener('click', () => {
-            if (sidebar) sidebar.classList.remove('active');
-        });
+
+    function showPage(pageId) {
+        document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId)?.classList.add('active');
+        document.querySelectorAll('.sidebar-links a').forEach(l => l.classList.remove('active'));
+        document.querySelector(`.sidebar-links a[data-page="${pageId}"]`)?.classList.add('active');
+        
+        const navLinks = document.querySelector('.nav-links');
+        const sidebar = document.getElementById('sidebar');
+        if (navLinks) navLinks.classList.remove('show');
+        if (sidebar) sidebar.classList.remove('active');
+        
+        window.scrollTo(0, 0);
     }
-    
-    // Close when clicking outside
-    document.addEventListener('click', (e) => {
-        if (sidebar && !sidebar.contains(e.target) && e.target !== menuBtn) {
-            sidebar.classList.remove('active');
-        }
-        if (window.innerWidth <= 768) {
-            if (navLinks && !navLinks.contains(e.target) && e.target !== menuBtn) {
-                navLinks.classList.remove('show');
-            }
-        }
-    });
-    
-    // Reset on window resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            if (navLinks) navLinks.classList.remove('show');
-        }
-    });
-}
-function showPage(pageId) {
-    document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId)?.classList.add('active');
-    document.querySelectorAll('.sidebar-links a').forEach(l => l.classList.remove('active'));
-    document.querySelector(`.sidebar-links a[data-page="${pageId}"]`)?.classList.add('active');
-    if (window.innerWidth <= 768) document.getElementById('sidebar')?.classList.remove('active');
-    window.scrollTo(0, 0);
-}
-        document.addEventListener('DOMContentLoaded', () => { checkUrlParams(); checkLocalStorage(); initializeApp(); });
-    </script>
+
+    document.addEventListener('DOMContentLoaded', () => { checkUrlParams(); checkLocalStorage(); initializeApp(); });
+</script>
 </body>
 </html>
