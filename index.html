@@ -596,9 +596,7 @@
                         <label for="whatsapp">WhatsApp Number</label>
                         <input type="tel" id="whatsapp" name="whatsapp" required>
                     </div>
-
-                    <!-- ========== SAME: Fresher radio buttons ========== -->
-                    <div class="form-group">
+ <div class="form-group">
     <label>Are you a fresher?</label>
     <div class="radio-group">
         <div class="radio-option">
@@ -611,8 +609,6 @@
         </div>
     </div>
 </div>
-
-<!-- 🆕 THIS MUST BE RIGHT AFTER THE FRESHER RADIO BUTTONS -->
 <div class="form-group" id="welcomeLevelRow" style="display: none;">
     <label for="welcomeLevel">Select your level <span style="color: var(--danger);">*</span></label>
     <select id="welcomeLevel" name="level">
@@ -649,13 +645,19 @@
         <strong>Second Semester:</strong> CCMAS Update, 100L Second Sem Courses
     </small>
 </div>
-
+             <!-- 🆕 QUICK ACCESS BUTTONS -->
+<div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+    <a href="calculator.html" style="background: var(--success); color: white; padding: 10px 18px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+        &#128202; GPA Calculator
+    </a>
+    
+</div>
 <button type="submit" class="btn" id="submitBtn">Access Guide</button>
                 </form>
                 
                 <div id="formMessage"></div>
             </div>
-            
+  
             <p class="prepared-by">Prepared by: Abideen Yakub Opeyemi (O'yemi)</p>
         </div>
     </section>
