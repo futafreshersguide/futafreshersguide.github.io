@@ -2,13 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FUTA Guide Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
+/* =========================================
+           ULTIMATE MOBILE & ANTI-ZOOM FIX
+           ========================================= */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        html, body { 
+            max-width: 100vw !important; 
+            overflow-x: hidden !important; 
+        }
+        @media (max-width: 768px) {
+            body, p, span, a, input, select, textarea, button, li, .radio-label, .text-sm, .text-xs {
+                font-size: 16px !important;
+                line-height: 1.6 !important;
+            }
+        }
         :root {
             --primary: #003366;
             --secondary: #990000;
@@ -92,203 +106,6 @@
         .editor-section textarea { width: 100%; min-height: 400px; padding: 15px; font-family: monospace; border: 1px solid var(--gray-300); border-radius: 5px; margin-bottom: 15px; }
         
         .action-buttons { display: flex; gap: 5px; }
-
-        /* =========================================
-           🆕 MOBILE RESPONSIVENESS FOR ADMIN PANEL
-           ========================================= */
-        
-        /* Force readable text on mobile */
-        @media (max-width: 768px) {
-            * {
-                -webkit-text-size-adjust: 100% !important;
-            }
-            
-            body {
-                font-size: 16px !important;
-            }
-            
-            h1 { font-size: 22px !important; }
-            h2 { font-size: 20px !important; }
-            h3 { font-size: 18px !important; }
-            h4 { font-size: 16px !important; }
-            
-            p, li, label, input, select, button, a, span, div, td, th {
-                font-size: 15px !important;
-            }
-            
-            /* Stack admin layout on mobile */
-            .admin-container {
-                flex-direction: column !important;
-            }
-            
-            .sidebar {
-                width: 100% !important;
-                padding: 15px !important;
-            }
-            
-            .sidebar h2 {
-                font-size: 20px !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .sidebar-nav li {
-                margin-bottom: 5px !important;
-            }
-            
-            .sidebar-nav a {
-                padding: 12px 15px !important;
-                font-size: 16px !important;
-            }
-            
-            .nav-links-section {
-                margin-top: 15px !important;
-                padding-top: 15px !important;
-            }
-            
-            .nav-link-btn {
-                padding: 12px 15px !important;
-                font-size: 16px !important;
-            }
-            
-            .main-content {
-                padding: 15px !important;
-            }
-            
-            .header {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                gap: 10px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            /* Stats grid - 2 columns on mobile */
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 10px !important;
-            }
-            
-            .stat-card {
-                padding: 15px !important;
-            }
-            
-            .stat-card h3 {
-                font-size: 13px !important;
-            }
-            
-            .stat-value {
-                font-size: 1.8rem !important;
-            }
-            
-            /* Tables - scroll horizontally */
-            .data-table {
-                padding: 10px !important;
-                overflow-x: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-            }
-            
-            table {
-                min-width: 600px !important;
-            }
-            
-            th, td {
-                padding: 10px 8px !important;
-                font-size: 14px !important;
-            }
-            
-            /* Filter bar */
-            .filter-bar {
-                flex-direction: column !important;
-                gap: 8px !important;
-            }
-            
-            .filter-bar select, 
-            .filter-bar input {
-                width: 100% !important;
-                padding: 12px !important;
-                font-size: 16px !important;
-            }
-            
-            /* Export buttons */
-            .export-buttons {
-                width: 100% !important;
-                justify-content: flex-start !important;
-            }
-            
-            .btn {
-                padding: 12px 16px !important;
-                font-size: 15px !important;
-            }
-            
-            /* Login container */
-            .login-container {
-                margin: 20px !important;
-                padding: 25px 20px !important;
-                max-width: 100% !important;
-            }
-            
-            .login-container h2 {
-                font-size: 22px !important;
-            }
-            
-            .form-group input {
-                padding: 14px !important;
-                font-size: 16px !important;
-            }
-            
-            /* Editor section */
-            .editor-section {
-                padding: 15px !important;
-            }
-            
-            .editor-section textarea {
-                min-height: 300px !important;
-                font-size: 14px !important;
-            }
-            
-            /* Badges */
-            .badge {
-                font-size: 12px !important;
-                padding: 5px 8px !important;
-            }
-            
-            /* Action buttons in table */
-            .action-buttons {
-                flex-wrap: wrap !important;
-            }
-            
-            .action-buttons .btn {
-                padding: 8px 10px !important;
-                font-size: 13px !important;
-            }
-        }
-        
-        /* Extra small phones */
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr !important;
-            }
-            
-            h1 { font-size: 20px !important; }
-            h2 { font-size: 18px !important; }
-            
-            .sidebar h2 {
-                font-size: 18px !important;
-            }
-            
-            .stat-value {
-                font-size: 1.5rem !important;
-            }
-            
-            .btn {
-                padding: 10px 14px !important;
-                font-size: 14px !important;
-            }
-            
-            th, td {
-                padding: 8px 6px !important;
-                font-size: 13px !important;
-            }
-        }
     </style>
 </head>
 <body>
