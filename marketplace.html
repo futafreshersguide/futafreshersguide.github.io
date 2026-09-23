@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FUTA Marketplace & Services Directory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* ULTIMATE MOBILE & ANTI-ZOOM FIX */
         html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         html, body { max-width: 100vw !important; overflow-x: hidden !important; }
         @media (max-width: 768px) {
-            body, p, span, a, input, select, textarea, button {
+            body, p, span, a, input, select, textarea, button, li {
                 font-size: 16px !important; line-height: 1.6 !important;
             }
         }
@@ -24,18 +23,50 @@
             --dark: #212529;
             --success: #28a745;
             --danger: #dc3545;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
+            --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-300: #dee2e6;
+            --gray-500: #adb5bd; --gray-600: #6c757d; --gray-700: #495057;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--light); color: var(--dark); }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        /* Top Navigation Bar */
+        /* NOTIFICATIONS */
+        #notifContainer {
+            position: fixed; top: 80px; right: 20px; z-index: 900;
+            display: flex; flex-direction: column; gap: 12px;
+            max-width: 380px; width: calc(100% - 40px);
+            pointer-events: none;
+        }
+        @media (max-width: 600px) {
+            #notifContainer { top: auto; bottom: 20px; left: 20px; right: 20px; max-width: 100%; width: auto; }
+        }
+        .notif-card {
+            background: white; border-radius: 12px; padding: 16px 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--primary);
+            pointer-events: auto;
+            opacity: 0; transform: translateX(50px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .notif-card.show { opacity: 1; transform: translateX(0); }
+        .notif-card.hide { opacity: 0; transform: translateX(50px); }
+        .notif-card.info { border-left-color: #3b82f6; }
+        .notif-card.success { border-left-color: #10b981; }
+        .notif-card.warning { border-left-color: #f59e0b; }
+        .notif-card.error { border-left-color: #ef4444; }
+        .notif-title { font-weight: 800; color: var(--dark); margin-bottom: 6px; font-size: 1rem; padding-right: 24px; }
+        .notif-message { color: var(--gray-700); font-size: 0.9rem; line-height: 1.5; }
+        .notif-close {
+            position: absolute; top: 10px; right: 10px; background: var(--gray-200);
+            border: none; width: 26px; height: 26px; border-radius: 50%;
+            cursor: pointer; font-size: 0.9rem; color: var(--gray-600);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .notif-close:hover { background: var(--gray-300); }
+
+        /* NAV */
         .marketplace-nav {
             background: white; padding: 15px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
@@ -53,347 +84,703 @@
         .btn-calc { background: var(--success); }
         .btn-nav:hover { transform: translateY(-2px); opacity: 0.9; }
 
-        /* Header */
+        /* HEADER */
         .marketplace-header {
             text-align: center; margin-top: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white; padding: 3rem 2rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .business-count-badge { display: inline-block; background: var(--accent); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 15px;}
+        .marketplace-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .marketplace-header p { font-size: 1.1rem; opacity: 0.9; }
+        .business-count-badge { display: inline-block; background: var(--accent); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 15px; }
 
-        /* Grids & Cards */
-        .business-highlight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        /* SEARCH & FILTER */
+        .search-filter-bar {
+            background: white; padding: 1rem; border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex; gap: 10px; flex-wrap: wrap;
+            margin: 1.5rem 0; align-items: center;
+        }
+        .search-filter-bar input,
+        .search-filter-bar select {
+            flex: 1; min-width: 180px; padding: 12px 15px;
+            border: 1px solid var(--gray-300); border-radius: 8px;
+            font-size: 0.95rem; outline: none; background: var(--light);
+        }
+        .search-filter-bar input:focus,
+        .search-filter-bar select:focus {
+            border-color: var(--primary); background: white;
+        }
+
+        /* CATEGORY CHIPS */
+        .category-chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 1rem 0 2rem; }
+        .chip {
+            background: white; border: 1px solid var(--gray-300); color: var(--gray-700);
+            padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; transition: 0.3s;
+        }
+        .chip:hover { background: var(--gray-100); }
+        .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* HIGHLIGHT GRID */
+        .business-highlight-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem; margin: 2rem 0;
+        }
         .business-highlight-card {
-            background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border-top: 4px solid var(--primary); transition: 0.3s; text-align: center;
+            background: white; border-radius: 12px; padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--primary);
+            transition: 0.3s; text-align: center;
         }
         .business-highlight-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .btn-view { background: var(--light); color: var(--primary); border: 1px solid var(--gray-300); padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 15px; transition: 0.3s; }
+        .business-highlight-card h4 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .business-highlight-card .cat-count { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 1rem; }
+        .btn-view {
+            background: var(--light); color: var(--primary); border: 1px solid var(--gray-300);
+            padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: 700;
+            width: 100%; margin-top: 10px; transition: 0.3s;
+        }
         .btn-view:hover { background: var(--primary); color: white; }
 
-        /* Category Sections */
-        .category { background: white; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--gray-200); scroll-margin-top: 100px; }
-        .category-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gray-100); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        /* CATEGORY SECTION */
+        .category {
+            background: white; border-radius: 16px; padding: 2rem;
+            margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--gray-200);
+        }
+        .category-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--gray-100); padding-bottom: 1rem; margin-bottom: 1.5rem;
+            flex-wrap: wrap; gap: 10px;
+        }
         .category-header h4 { font-size: 1.3rem; color: var(--primary); }
-        
-        .business-listing { background: var(--gray-50); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border-left: 4px solid var(--success); }
-        .verified-badge { color: var(--success); font-size: 0.8rem; background: #dcfce7; padding: 4px 10px; border-radius: 12px; margin-left: 10px; }
-        .business-contact { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200); flex-wrap: wrap; gap: 15px; }
-        
-        .btn-whatsapp { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+
+        .business-listing {
+            background: #fafafa; border-radius: 12px; padding: 1.5rem;
+            margin-bottom: 1.5rem; border-left: 4px solid var(--success);
+            position: relative;
+        }
+        .business-listing.featured {
+            background: #fffbeb; border-left-color: var(--accent);
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.15);
+        }
+        .business-listing.featured::after {
+            content: '★ FEATURED';
+            position: absolute; top: 10px; right: 10px;
+            background: var(--accent); color: var(--primary);
+            font-size: 0.7rem; font-weight: 800; padding: 4px 10px;
+            border-radius: 12px; letter-spacing: 0.5px;
+        }
+        .business-listing h5 { font-size: 1.2rem; color: var(--dark); margin-bottom: 8px; padding-right: 100px; }
+        .verified-badge {
+            color: var(--success); font-size: 0.8rem;
+            background: #dcfce7; padding: 4px 10px; border-radius: 12px;
+            margin-left: 10px;
+        }
+        .business-listing .biz-desc { margin: 8px 0; color: var(--gray-700); }
+        .business-listing .biz-meta { font-size: 0.9rem; color: var(--gray-600); margin-top: 6px; }
+        .business-contact {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);
+            flex-wrap: wrap; gap: 15px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366; color: white; border: none; padding: 10px 20px;
+            border-radius: 8px; font-weight: bold; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
         .btn-whatsapp:hover { background: #128C7E; transform: translateY(-2px); }
 
-        .category-empty-state { text-align: center; padding: 3rem 1rem; background: var(--gray-50); border-radius: 12px; border: 2px dashed var(--gray-300); }
-        .add-business-btn { background: white; color: var(--primary); border: 2px solid var(--primary); padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; }
+        .category-empty-state {
+            text-align: center; padding: 3rem 1rem; background: var(--gray-100);
+            border-radius: 12px; border: 2px dashed var(--gray-300);
+        }
+        .add-business-btn {
+            background: white; color: var(--primary); border: 2px solid var(--primary);
+            padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer;
+            transition: 0.3s; margin-top: 15px;
+        }
         .add-business-btn:hover { background: var(--primary); color: white; }
 
-        /* Forms */
-        .category-form-container { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.15); margin-top: 1.5rem; border: 1px solid var(--gray-200); display: none; }
+        /* FORM */
+        .category-form-container {
+            background: white; border-radius: 16px; padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); margin-top: 1.5rem;
+            border: 1px solid var(--gray-200); display: none;
+        }
         .category-form-container.active { display: block; animation: slideDown 0.4s ease; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .category-form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .close-category-form { background: var(--gray-200); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; color: var(--gray-700); cursor: pointer; }
-        
+        .category-form-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .close-category-form {
+            background: var(--gray-200); border: none; width: 35px; height: 35px;
+            border-radius: 50%; font-size: 1.2rem; color: var(--gray-700); cursor: pointer;
+        }
         .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--gray-700); font-size: 0.9rem;}
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 1rem; background: var(--light); outline: none; }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: white; }
-        
-        .btn-submit { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 10px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--gray-700); font-size: 0.9rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 12px; border: 1px solid var(--gray-300);
+            border-radius: 8px; font-size: 1rem; background: var(--light); outline: none;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary); background: white;
+        }
+        .btn-submit {
+            background: var(--primary); color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;
+            font-size: 1rem; margin-top: 10px;
+        }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .spinner {
+            display: inline-block; width: 14px; height: 14px;
+            border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;
+            border-top-color: white; animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%; animation: loading 1.5s infinite;
+            height: 120px; border-radius: 12px; margin-bottom: 15px;
+        }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        .empty-marketplace {
+            text-align: center; padding: 4rem 2rem; background: white;
+            border-radius: 16px; border: 2px dashed var(--gray-300);
+        }
+        .empty-marketplace i { font-size: 4rem; color: var(--gray-400); margin-bottom: 1rem; }
 
         @media (max-width: 600px) {
             .nav-buttons { width: 100%; justify-content: space-between; }
             .btn-nav { flex: 1; justify-content: center; }
             .business-contact { flex-direction: column; align-items: stretch; }
             .business-contact button { width: 100%; justify-content: center; }
+            .marketplace-header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
+
+    <div id="notifContainer"></div>
 
     <nav class="marketplace-nav">
         <div class="nav-brand">
             <i class="fas fa-store"></i> Marketplace
         </div>
         <div class="nav-buttons">
-            <a href="index.html" class="btn-nav btn-1st"><i class="fas fa-book"></i> 1st Sem Guide</a>
-            <a href="second-semester.html" class="btn-nav btn-2nd"><i class="fas fa-book-open"></i> 2nd Sem Guide</a>
+            <a href="index.html" class="btn-nav btn-1st"><i class="fas fa-book"></i> 1st Sem</a>
+            <a href="second-semester.html" class="btn-nav btn-2nd"><i class="fas fa-book-open"></i> 2nd Sem</a>
             <a href="calculator.html" class="btn-nav btn-calc"><i class="fas fa-calculator"></i> GPA</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="marketplace-header">
-            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">FUTA Marketplace</h1>
-            <p style="font-size: 1.1rem; opacity: 0.9;">Connect with trusted FUTArians for services, accommodation, and support</p>
-            <span class="business-count-badge"><i class="fas fa-shield-alt"></i> Verified Student Businesses</span>
+            <h1>FUTA Marketplace</h1>
+            <p>Connect with trusted FUTArians for services, accommodation, and support</p>
+            <span class="business-count-badge" id="businessCountBadge">
+                <i class="fas fa-shield-alt"></i> Loading...
+            </span>
         </div>
 
         <div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; border: 1px solid #ffeaa7;">
             <strong>Important:</strong> All submissions are moderated. Please verify services before payment and negotiate responsibly.
         </div>
 
-        <h3 style="text-align: center; color: var(--primary); margin: 2rem 0 1rem;">🎯 Browse Categories</h3>
-        <div class="business-highlight-grid">
-            <div class="business-highlight-card">
-                <h4 style="color:var(--primary); font-size:1.2rem;"><i class="fas fa-home"></i> Accommodation</h4>
-                <p style="font-size:0.85rem; color:var(--gray-600); margin-top:5px;">Find your perfect lodge</p>
-                <button class="btn-view" onclick="document.getElementById('accommodation').scrollIntoView({behavior: 'smooth'})">View Options</button>
-            </div>
-            <div class="business-highlight-card">
-                <h4 style="color:var(--primary); font-size:1.2rem;"><i class="fas fa-cut"></i> Grooming</h4>
-                <p style="font-size:0.85rem; color:var(--gray-600); margin-top:5px;">Professional barbing & beauty</p>
-                <button class="btn-view" onclick="document.getElementById('grooming').scrollIntoView({behavior: 'smooth'})">View Options</button>
-            </div>
-            <div class="business-highlight-card">
-                <h4 style="color:var(--primary); font-size:1.2rem;"><i class="fas fa-print"></i> Printing</h4>
-                <p style="font-size:0.85rem; color:var(--gray-600); margin-top:5px;">Academic printing & binding</p>
-                <button class="btn-view" onclick="document.getElementById('printing').scrollIntoView({behavior: 'smooth'})">View Options</button>
-            </div>
-            <div class="business-highlight-card">
-                <h4 style="color:var(--primary); font-size:1.2rem;"><i class="fas fa-pizza-slice"></i> Food</h4>
-                <p style="font-size:0.85rem; color:var(--gray-600); margin-top:5px;">Meals and snacks around campus</p>
-                <button class="btn-view" onclick="document.getElementById('food').scrollIntoView({behavior: 'smooth'})">View Options</button>
-            </div>
+        <!-- SEARCH & FILTER -->
+        <div class="search-filter-bar">
+            <input type="text" id="searchInput" placeholder="🔍 Search businesses by name or service...">
+            <select id="sortSelect">
+                <option value="featured">Featured First</option>
+                <option value="recent">Most Recent</option>
+                <option value="name">Name (A-Z)</option>
+            </select>
         </div>
 
-        <div class="category" id="accommodation">
-            <div class="category-header">
-                <h4>🏠 Accommodation & Real Estate</h4>
-            </div>
-            
-            <div class="business-listing">
-                <h5 style="font-size: 1.2rem; color: var(--dark);">BNS REALTY <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                <p style="margin: 8px 0; color: var(--gray-700);">Complete Real Estate Solutions. Professional accommodation services around FUTA, building designs, construction & property management.</p>
-                <p style="font-size: 0.9rem;"><strong>Location:</strong> Northgate, Southgate, Westgate, Awule, Asude, Roadblock</p>
-                <div class="business-contact">
-                    <strong style="color: var(--success);">Contact for pricing</strong>
-                    <button class="btn-whatsapp contact-business" data-phone="+2347080441350" data-business="BNS REALTY"><i class="fab fa-whatsapp"></i> Chat Now</button>
-                </div>
-            </div>
+        <!-- CATEGORY CHIPS -->
+        <div class="category-chips" id="categoryChips"></div>
 
-            <div class="category-empty-state">
-                <h4>List Your Business Here</h4>
-                <p style="color: var(--gray-600); font-size: 0.9rem;">Be the next to list your accommodation business in this category!</p>
-                <button class="add-business-btn" data-category="accommodation"><i class="fas fa-plus"></i> Add Your Business</button>
-            </div>
-
-            <div id="accommodationBusinessForm" class="category-form-container">
-                <div class="category-form-header">
-                    <h3 style="color: var(--primary);">Add Accommodation Business</h3>
-                    <button class="close-category-form">&times;</button>
-                </div>
-                <form class="category-business-form" data-category="accommodation">
-                    <input type="hidden" name="category" value="Accommodation">
-                    <div class="form-group"><label>Business Name</label><input type="text" name="businessName" required></div>
-                    <div class="form-group"><label>Description</label><textarea name="description" rows="3" required></textarea></div>
-                    <div class="form-group"><label>Location</label><input type="text" name="location" required></div>
-                    <div class="form-group"><label>WhatsApp Number</label><input type="tel" name="phone" required></div>
-                    <div class="form-group"><label>Your Name & Dept (For Admin verification)</label><input type="text" name="studentDetails" required></div>
-                    <button type="submit" class="btn-submit">Submit for Approval</button>
-                    <div class="form-message" style="margin-top: 10px; font-weight:bold;"></div>
-                </form>
-            </div>
+        <!-- MAIN LIST -->
+        <div id="marketplaceContent">
+            <div class="loading-skeleton"></div>
+            <div class="loading-skeleton"></div>
+            <div class="loading-skeleton"></div>
         </div>
 
-        <div class="category" id="grooming">
-            <div class="category-header">
-                <h4>💈 Personal Care & Grooming</h4>
+        <!-- GLOBAL FORM (hidden until triggered) -->
+        <div id="globalFormContainer" class="category-form-container">
+            <div class="category-form-header">
+                <h3 style="color: var(--primary);" id="formTitle">Add Your Business</h3>
+                <button class="close-category-form" id="closeGlobalForm">&times;</button>
             </div>
-            
-            <div class="business-listing">
-                <h5 style="font-size: 1.2rem; color: var(--dark);">Sire Cahraz Haircut <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                <p style="margin: 8px 0; color: var(--gray-700);">Quality haircut and barbing services with home delivery option available. Get fresh and clean cuts at affordable prices.</p>
-                <p style="font-size: 0.9rem;"><strong>Location:</strong> Southgate & Home Delivery</p>
-                <div class="business-contact">
-                    <strong style="color: var(--success);">Low Cut: ₦700 | Styles: ₦1,500</strong>
-                    <button class="btn-whatsapp contact-business" data-phone="+2349162339979" data-business="Sire Cahraz Haircut"><i class="fab fa-whatsapp"></i> Chat Now</button>
+            <form id="businessForm">
+                <div class="form-group">
+                    <label>Business Category *</label>
+                    <select id="formCategory" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Accommodation">🏠 Accommodation</option>
+                        <option value="Grooming">💈 Grooming & Personal Care</option>
+                        <option value="Printing">🖨️ Printing & Binding</option>
+                        <option value="Food">🍕 Food & Catering</option>
+                        <option value="Tutoring">📚 Tutoring & Academic</option>
+                        <option value="Tech">💻 Tech & Repairs</option>
+                        <option value="Fashion">👗 Fashion & Tailoring</option>
+                        <option value="Transport">🚗 Transport & Delivery</option>
+                        <option value="Other">✨ Other Services</option>
+                    </select>
                 </div>
-            </div>
-
-            <div class="category-empty-state">
-                <button class="add-business-btn" data-category="grooming"><i class="fas fa-plus"></i> Add Your Business</button>
-            </div>
-
-            <div id="groomingBusinessForm" class="category-form-container">
-                <div class="category-form-header">
-                    <h3 style="color: var(--primary);">Add Grooming Business</h3>
-                    <button class="close-category-form">&times;</button>
+                <div class="form-group">
+                    <label>Business Name *</label>
+                    <input type="text" id="formBusinessName" required placeholder="e.g., BNS Realty">
                 </div>
-                <form class="category-business-form" data-category="grooming">
-                    <input type="hidden" name="category" value="Grooming">
-                    <div class="form-group"><label>Business Name</label><input type="text" name="businessName" required></div>
-                    <div class="form-group"><label>Description</label><textarea name="description" rows="3" required></textarea></div>
-                    <div class="form-group"><label>Location</label><input type="text" name="location" required></div>
-                    <div class="form-group"><label>WhatsApp Number</label><input type="tel" name="phone" required></div>
-                    <div class="form-group"><label>Your Name & Dept</label><input type="text" name="studentDetails" required></div>
-                    <button type="submit" class="btn-submit">Submit for Approval</button>
-                    <div class="form-message" style="margin-top: 10px;"></div>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="formDescription" rows="3" required placeholder="What do you offer? Be specific."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Location *</label>
+                    <input type="text" id="formLocation" required placeholder="e.g., Southgate, Northgate, Westgate">
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Number *</label>
+                    <input type="tel" id="formPhone" required placeholder="e.g., 08123456789">
+                </div>
+                <div class="form-group">
+                    <label>Owner Name *</label>
+                    <input type="text" id="formOwnerName" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label>Owner Department (optional)</label>
+                    <input type="text" id="formOwnerDept" placeholder="e.g., EEE, CPE, MTS">
+                </div>
+                <button type="submit" class="btn-submit" id="formSubmitBtn">
+                    <i class="fas fa-paper-plane"></i> Submit for Approval
+                </button>
+                <div id="formMessage" style="margin-top: 10px; font-weight: bold;"></div>
+            </form>
         </div>
-
-        <div class="category" id="printing">
-            <div class="category-header">
-                <h4>🖨️ Printing & Binding</h4>
-            </div>
-            
-            <div class="business-listing">
-                <h5 style="font-size: 1.2rem; color: var(--dark);">Priviledge Venture <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                <p style="margin: 8px 0; color: var(--gray-700);">Reliable printing services for academic materials, projects, and documents. Quality photocopying and professional binding.</p>
-                <p style="font-size: 0.9rem;"><strong>Location:</strong> Southgate & Northgate areas</p>
-                <div class="business-contact">
-                    <strong style="color: var(--success);">₦50 per page</strong>
-                    <button class="btn-whatsapp contact-business" data-phone="+2347034297237" data-business="Priviledge Venture"><i class="fab fa-whatsapp"></i> Chat Now</button>
-                </div>
-            </div>
-
-            <div class="category-empty-state">
-                <button class="add-business-btn" data-category="printing"><i class="fas fa-plus"></i> Add Your Business</button>
-            </div>
-
-            <div id="printingBusinessForm" class="category-form-container">
-                <div class="category-form-header">
-                    <h3 style="color: var(--primary);">Add Printing Business</h3>
-                    <button class="close-category-form">&times;</button>
-                </div>
-                <form class="category-business-form" data-category="printing">
-                    <input type="hidden" name="category" value="Printing">
-                    <div class="form-group"><label>Business Name</label><input type="text" name="businessName" required></div>
-                    <div class="form-group"><label>Description</label><textarea name="description" rows="3" required></textarea></div>
-                    <div class="form-group"><label>Location</label><input type="text" name="location" required></div>
-                    <div class="form-group"><label>WhatsApp Number</label><input type="tel" name="phone" required></div>
-                    <div class="form-group"><label>Your Name & Dept</label><input type="text" name="studentDetails" required></div>
-                    <button type="submit" class="btn-submit">Submit for Approval</button>
-                    <div class="form-message" style="margin-top: 10px;"></div>
-                </form>
-            </div>
-        </div>
-
-        <div class="category" id="food">
-            <div class="category-header">
-                <h4>🍕 Food & Catering</h4>
-            </div>
-            
-            <div class="business-listing">
-                <h5 style="font-size: 1.2rem; color: var(--dark);">Sahara-Spice <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h5>
-                <p style="margin: 8px 0; color: var(--gray-700);">Production, Selling and Distribution of KILISHI, PLANTAIN CHIPS AND CHIN CHIN. Fresh, hygienic and packed with flavour.</p>
-                <p style="font-size: 0.9rem;"><strong>Location:</strong> FUTA West Gate</p>
-                <div class="business-contact">
-                    <strong style="color: var(--success);">Based on Quantity</strong>
-                    <button class="btn-whatsapp contact-business" data-phone="+2349152312855" data-business="Sahara-Spice"><i class="fab fa-whatsapp"></i> Chat Now</button>
-                </div>
-            </div>
-
-            <div class="category-empty-state">
-                <button class="add-business-btn" data-category="food"><i class="fas fa-plus"></i> Add Your Business</button>
-            </div>
-
-            <div id="foodBusinessForm" class="category-form-container">
-                <div class="category-form-header">
-                    <h3 style="color: var(--primary);">Add Food Business</h3>
-                    <button class="close-category-form">&times;</button>
-                </div>
-                <form class="category-business-form" data-category="food">
-                    <input type="hidden" name="category" value="Food">
-                    <div class="form-group"><label>Business Name</label><input type="text" name="businessName" required></div>
-                    <div class="form-group"><label>Description</label><textarea name="description" rows="3" required></textarea></div>
-                    <div class="form-group"><label>Location</label><input type="text" name="location" required></div>
-                    <div class="form-group"><label>WhatsApp Number</label><input type="tel" name="phone" required></div>
-                    <div class="form-group"><label>Your Name & Dept</label><input type="text" name="studentDetails" required></div>
-                    <button type="submit" class="btn-submit">Submit for Approval</button>
-                    <div class="form-message" style="margin-top: 10px;"></div>
-                </form>
-            </div>
-        </div>
-
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="db.js"></script>
+
     <script>
-        // Form Display Logic
-        document.querySelectorAll('.add-business-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
-                const formContainer = document.getElementById(`${category}BusinessForm`);
-                
-                // Hide all other forms first
-                document.querySelectorAll('.category-form-container').forEach(f => f.classList.remove('active'));
-                
-                if (formContainer) {
-                    formContainer.classList.add('active');
-                    formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (function () {
+        'use strict';
+
+        const U = window.FUTA_UTILS;
+        const S = window.FUTA_STORAGE;
+
+        const CATEGORY_META = {
+            'Accommodation': { icon: 'home', label: 'Accommodation & Real Estate' },
+            'Grooming':      { icon: 'cut', label: 'Personal Care & Grooming' },
+            'Printing':      { icon: 'print', label: 'Printing & Binding' },
+            'Food':          { icon: 'pizza-slice', label: 'Food & Catering' },
+            'Tutoring':      { icon: 'graduation-cap', label: 'Tutoring & Academic Support' },
+            'Tech':          { icon: 'laptop-code', label: 'Tech & Repairs' },
+            'Fashion':       { icon: 'tshirt', label: 'Fashion & Tailoring' },
+            'Transport':     { icon: 'car', label: 'Transport & Delivery' },
+            'Other':         { icon: 'star', label: 'Other Services' }
+        };
+
+        let allBusinesses = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let sortMode = 'featured';
+
+        function getProfile() {
+            return S.get('futa_profile_2nd') || S.get('futa_profile') || {};
+        }
+
+        // ---------- LOAD BUSINESSES ----------
+        async function loadBusinesses() {
+            const content = document.getElementById('marketplaceContent');
+            try {
+                const res = await DB.Businesses.listApproved({});
+                allBusinesses = (res.ok && res.data) ? res.data : [];
+                renderMarketplace();
+                updateCountBadge();
+            } catch (err) {
+                console.error('[Marketplace] Load failed:', err);
+                content.innerHTML = `<div class="empty-marketplace">
+                    <i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i>
+                    <h3>Could not load businesses</h3>
+                    <p>Please check your connection and refresh.</p>
+                </div>`;
+            }
+        }
+
+        function updateCountBadge() {
+            const badge = document.getElementById('businessCountBadge');
+            const n = allBusinesses.length;
+            badge.innerHTML = `<i class="fas fa-shield-alt"></i> ${n} Verified ${n === 1 ? 'Business' : 'Businesses'}`;
+        }
+
+        // ---------- RENDER ----------
+        function renderMarketplace() {
+            renderCategoryChips();
+            renderContent();
+        }
+
+        function renderCategoryChips() {
+            const container = document.getElementById('categoryChips');
+            const counts = {};
+            allBusinesses.forEach(b => {
+                counts[b.category] = (counts[b.category] || 0) + 1;
+            });
+
+            let html = `<button class="chip ${activeCategory === 'all' ? 'active' : ''}" data-cat="all">
+                All (${allBusinesses.length})
+            </button>`;
+            Object.keys(CATEGORY_META).forEach(cat => {
+                if (counts[cat] > 0) {
+                    html += `<button class="chip ${activeCategory === cat ? 'active' : ''}" data-cat="${cat}">
+                        ${CATEGORY_META[cat].icon ? '<i class="fas fa-' + CATEGORY_META[cat].icon + '"></i> ' : ''}${cat} (${counts[cat]})
+                    </button>`;
                 }
             });
-        });
+            container.innerHTML = html;
 
-        document.querySelectorAll('.close-category-form').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                this.closest('.category-form-container').classList.remove('active');
+            container.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    activeCategory = chip.getAttribute('data-cat');
+                    renderMarketplace();
+                });
             });
-        });
+        }
 
-        // WhatsApp Contact Logic
-        document.querySelectorAll('.contact-business').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const business = this.getAttribute('data-business');
-                const phone = this.getAttribute('data-phone');
-                const userName = localStorage.getItem('userName') || 'a FUTA Student';
-                const msg = `Hello ${business}, I saw your advert on the FUTA Marketplace. My name is ${userName} and I'm interested in your services.`;
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        function getFiltered() {
+            let list = [...allBusinesses];
+
+            if (activeCategory !== 'all') {
+                list = list.filter(b => b.category === activeCategory);
+            }
+
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                list = list.filter(b =>
+                    (b.business_name || '').toLowerCase().includes(q) ||
+                    (b.description || '').toLowerCase().includes(q) ||
+                    (b.location || '').toLowerCase().includes(q)
+                );
+            }
+
+            if (sortMode === 'featured') {
+                list.sort((a, b) => {
+                    if (a.is_featured && !b.is_featured) return -1;
+                    if (!a.is_featured && b.is_featured) return 1;
+                    return new Date(b.created_at) - new Date(a.created_at);
+                });
+            } else if (sortMode === 'recent') {
+                list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            } else if (sortMode === 'name') {
+                list.sort((a, b) => (a.business_name || '').localeCompare(b.business_name || ''));
+            }
+            return list;
+        }
+
+        function renderContent() {
+            const container = document.getElementById('marketplaceContent');
+
+            if (allBusinesses.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-marketplace">
+                        <i class="fas fa-store-slash"></i>
+                        <h3 style="color:var(--primary); margin-bottom:0.5rem;">No businesses yet</h3>
+                        <p style="color:var(--gray-600); margin-bottom:1.5rem;">Be the first to list your business in the FUTA Marketplace!</p>
+                        <button class="add-business-btn" id="emptyAddBtn">
+                            <i class="fas fa-plus"></i> Add Your Business
+                        </button>
+                    </div>
+                `;
+                document.getElementById('emptyAddBtn')?.addEventListener('click', openForm);
+                return;
+            }
+
+            const filtered = getFiltered();
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-marketplace">
+                        <i class="fas fa-search"></i>
+                        <h3 style="color:var(--primary); margin-bottom:0.5rem;">No results found</h3>
+                        <p style="color:var(--gray-600);">Try a different search or category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group by category
+            const grouped = {};
+            filtered.forEach(b => {
+                const cat = b.category || 'Other';
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(b);
             });
-        });
 
-        // Submit Business Logic
-        document.querySelectorAll('.category-business-form').forEach(form => {
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const submitBtn = this.querySelector('.btn-submit');
-                const msgDiv = this.querySelector('.form-message');
-                const formData = new FormData(this);
-                
-                submitBtn.innerHTML = 'Submitting...';
-                submitBtn.disabled = true;
+            let html = '';
 
-                const payload = {
-                    '_subject': `NEW MARKETPLACE SUBMISSION - ${formData.get('businessName')}`,
-                    'Category': formData.get('category'),
-                    'Business Name': formData.get('businessName'),
-                    'Description': formData.get('description'),
-                    'Location': formData.get('location'),
-                    'Phone': formData.get('phone'),
-                    'Submitted By': formData.get('studentDetails'),
-                    'Timestamp': new Date().toISOString()
-                };
+            // Featured at top (if any)
+            const featured = filtered.filter(b => b.is_featured);
+            if (featured.length > 0 && sortMode === 'featured' && !searchQuery && activeCategory === 'all') {
+                html += `<div style="text-align:center; margin: 2rem 0 1rem;">
+                    <h3 style="color:var(--accent); font-weight: 800;">⭐ Featured Businesses</h3>
+                </div>`;
+                html += '<div class="business-highlight-grid">';
+                featured.forEach(b => {
+                    html += `
+                        <div class="business-highlight-card">
+                            <h4>${U.escapeHtml(b.business_name)}</h4>
+                            <div class="cat-count">${U.escapeHtml(b.category || 'Other')}</div>
+                            <p style="font-size:0.85rem; color:var(--gray-600);">${U.escapeHtml(U.truncate(b.description, 80))}</p>
+                            <button class="btn-view" data-goto="${U.escapeHtml(b.category)}">
+                                View Details →
+                            </button>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
 
-                try {
-                    // Save to admin tracking
-                    let existing = JSON.parse(localStorage.getItem('allBusinessSubmissions') || '[]');
-                    existing.push({id: Date.now(), status: 'PENDING', ...payload});
-                    localStorage.setItem('allBusinessSubmissions', JSON.stringify(existing));
+            // Category sections
+            Object.keys(grouped).forEach(cat => {
+                const meta = CATEGORY_META[cat] || { icon: 'star', label: cat };
+                html += `<div class="category" id="cat-${cat.toLowerCase().replace(/\s+/g, '-')}">`;
+                html += `<div class="category-header">
+                    <h4><i class="fas fa-${meta.icon}"></i> ${U.escapeHtml(meta.label)}</h4>
+                    <span style="color:var(--gray-600); font-size:0.85rem;">${grouped[cat].length} ${grouped[cat].length === 1 ? 'listing' : 'listings'}</span>
+                </div>`;
+                grouped[cat].forEach(b => {
+                    html += renderBusinessCard(b);
+                });
+                html += `</div>`;
+            });
 
-                    // Send Email to you
-                    await fetch('https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com', {
+            // Add your business button
+            html += `
+                <div style="text-align:center; margin: 2rem 0;">
+                    <button class="add-business-btn" id="bottomAddBtn">
+                        <i class="fas fa-plus"></i> List Your Business
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            // Wire up WhatsApp buttons
+            container.querySelectorAll('.contact-business').forEach(btn => {
+                btn.addEventListener('click', handleWhatsAppClick);
+            });
+
+            // Wire up add buttons
+            document.getElementById('bottomAddBtn')?.addEventListener('click', openForm);
+
+            // Wire up category shortcut buttons in featured cards
+            container.querySelectorAll('.btn-view[data-goto]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cat = btn.getAttribute('data-goto');
+                    activeCategory = cat;
+                    renderMarketplace();
+                    setTimeout(() => {
+                        const el = document.getElementById('cat-' + cat.toLowerCase().replace(/\s+/g, '-'));
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                });
+            });
+        }
+
+        function renderBusinessCard(b) {
+            const featured = b.is_featured ? 'featured' : '';
+            const verified = `<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>`;
+            return `
+                <div class="business-listing ${featured}">
+                    <h5>${U.escapeHtml(b.business_name)} ${verified}</h5>
+                    <p class="biz-desc">${U.escapeHtml(b.description || '')}</p>
+                    <p class="biz-meta"><strong>Location:</strong> ${U.escapeHtml(b.location || 'N/A')}</p>
+                    ${b.owner_name ? `<p class="biz-meta"><strong>Owner:</strong> ${U.escapeHtml(b.owner_name)}${b.owner_department ? ' (' + U.escapeHtml(b.owner_department) + ')' : ''}</p>` : ''}
+                    <div class="business-contact">
+                        <strong style="color: var(--success);">Contact for pricing</strong>
+                        <button class="btn-whatsapp contact-business"
+                            data-phone="${U.escapeHtml(b.phone || '')}"
+                            data-business="${U.escapeHtml(b.business_name)}"
+                            data-bizid="${U.escapeHtml(b.id)}">
+                            <i class="fab fa-whatsapp"></i> Chat Now
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ---------- WHATSAPP CLICK (tracked) ----------
+        function handleWhatsAppClick(e) {
+            const btn = e.currentTarget;
+            const business = btn.getAttribute('data-business');
+            const phone = btn.getAttribute('data-phone');
+            const bizId = btn.getAttribute('data-bizid');
+            const p = getProfile();
+            const userName = p.full_name || 'a FUTA Student';
+
+            const msg = `Hello ${business}, I saw your listing on the FUTA Marketplace. My name is ${userName} and I'm interested in your services.`;
+            const cleanPhone = (phone || '').replace(/[^0-9]/g, '');
+
+            if (cleanPhone) {
+                window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            }
+
+            // Silent tracking (fire and forget)
+            DB.Calculator.log({
+                name: p.full_name || 'Guest',
+                department: p.department || 'N/A',
+                level: p.level || 'N/A',
+                action: 'calculation',
+                calculation_type: 'marketplace_contact',
+                result_value: bizId,
+                page_source: 'marketplace'
+            });
+        }
+
+        // ---------- FORM ----------
+        function openForm() {
+            const p = getProfile();
+            if (p.full_name) document.getElementById('formOwnerName').value = p.full_name;
+            if (p.department) document.getElementById('formOwnerDept').value = p.department;
+
+            document.getElementById('globalFormContainer').classList.add('active');
+            document.getElementById('globalFormContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function closeForm() {
+            document.getElementById('globalFormContainer').classList.remove('active');
+            document.getElementById('formMessage').innerHTML = '';
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('formSubmitBtn');
+            const msg = document.getElementById('formMessage');
+
+            const payload = {
+                business_name: document.getElementById('formBusinessName').value.trim(),
+                category: document.getElementById('formCategory').value,
+                description: document.getElementById('formDescription').value.trim(),
+                location: document.getElementById('formLocation').value.trim(),
+                phone: document.getElementById('formPhone').value.trim(),
+                owner_name: document.getElementById('formOwnerName').value.trim(),
+                owner_department: document.getElementById('formOwnerDept').value.trim() || null
+            };
+
+            if (!payload.business_name || !payload.category || !payload.description ||
+                !payload.location || !payload.phone || !payload.owner_name) {
+                msg.innerHTML = '<span style="color:var(--danger);">Please fill all required fields.</span>';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Submitting...';
+            msg.innerHTML = '';
+
+            try {
+                const res = await DB.Businesses.create(payload);
+
+                if (res.ok) {
+                    msg.innerHTML = '<span style="color:var(--success);">✅ Business submitted! Awaiting admin approval.</span>';
+
+                    // Silent email backup (fire and forget)
+                    fetch('https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+                        body: JSON.stringify({
+                            _subject: `NEW MARKETPLACE SUBMISSION - ${payload.business_name}`,
+                            'Category': payload.category,
+                            'Business Name': payload.business_name,
+                            'Description': payload.description,
+                            'Location': payload.location,
+                            'Phone': payload.phone,
+                            'Submitted By': payload.owner_name + (payload.owner_department ? ' (' + payload.owner_department + ')' : ''),
+                            'Timestamp': new Date().toISOString()
+                        })
+                    }).catch(() => {});
 
-                    msgDiv.innerHTML = '<span style="color: green;">✅ Business submitted successfully! Awaiting Admin approval.</span>';
-                    this.reset();
-                    setTimeout(() => {
-                        this.closest('.category-form-container').classList.remove('active');
-                        msgDiv.innerHTML = '';
-                    }, 3000);
-
-                } catch (err) {
-                    msgDiv.innerHTML = '<span style="color: red;">❌ Submission failed. Please try again.</span>';
-                } finally {
-                    submitBtn.innerHTML = 'Submit for Approval';
-                    submitBtn.disabled = false;
+                    e.target.reset();
+                    setTimeout(closeForm, 2500);
+                } else {
+                    msg.innerHTML = `<span style="color:var(--danger);">❌ ${U.escapeHtml(res.error || 'Submission failed.')}</span>`;
                 }
+            } catch (err) {
+                console.error(err);
+                msg.innerHTML = '<span style="color:var(--danger);">❌ Network error. Please try again.</span>';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit for Approval';
+            }
+        }
+
+        // ---------- SEARCH & SORT ----------
+        function setupSearch() {
+            document.getElementById('searchInput').addEventListener('input', U.debounce((e) => {
+                searchQuery = e.target.value.trim();
+                renderContent();
+            }, 250));
+
+            document.getElementById('sortSelect').addEventListener('change', (e) => {
+                sortMode = e.target.value;
+                renderContent();
             });
+        }
+
+        // ---------- NOTIFICATIONS ----------
+        async function loadNotifications() {
+            try {
+                const audience = getProfile().semester_guide === 'second' ? 'second_sem' : 'first_sem';
+                const res = await DB.Notifications.listActive({ audience });
+                if (!res.ok || !res.data || !res.data.length) return;
+                res.data.forEach((n, i) => setTimeout(() => renderNotification(n), i * 400));
+            } catch (e) { console.warn('[Notifications]', e); }
+        }
+
+        function renderNotification(n) {
+            const container = document.getElementById('notifContainer');
+            const dismissed = S.get('futa_dismissed_notifs', []);
+            if (dismissed.includes(n.id)) return;
+
+            const card = document.createElement('div');
+            card.className = `notif-card ${n.type || 'info'}`;
+            let html = `<button class="notif-close">&times;</button>
+                <div class="notif-title">${U.escapeHtml(n.title)}</div>
+                <div class="notif-message">${U.escapeHtml(n.message)}</div>`;
+            card.innerHTML = html;
+            card.querySelector('.notif-close').addEventListener('click', () => {
+                card.classList.add('hide');
+                setTimeout(() => card.remove(), 400);
+                const list = S.get('futa_dismissed_notifs', []);
+                if (!list.includes(n.id)) { list.push(n.id); S.set('futa_dismissed_notifs', list.slice(-50)); }
+            });
+            container.appendChild(card);
+            requestAnimationFrame(() => card.classList.add('show'));
+            if (n.is_dismissible && (n.type === 'info' || n.type === 'success')) {
+                setTimeout(() => {
+                    card.classList.add('hide');
+                    setTimeout(() => card.remove(), 400);
+                }, 8000);
+            }
+        }
+
+        // ---------- BOOT ----------
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBusinesses();
+            setupSearch();
+            loadNotifications();
+            document.getElementById('businessForm').addEventListener('submit', handleFormSubmit);
+            document.getElementById('closeGlobalForm').addEventListener('click', closeForm);
+            if (window.FUTA_CONFIG?.debug) console.log('[Marketplace] Boot complete');
         });
+    })();
     </script>
 </body>
 </html>
