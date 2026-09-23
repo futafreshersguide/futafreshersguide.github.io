@@ -17,7 +17,7 @@
 
         :root {
             --primary: #003366;
-            --secondary: #00695c;   /* Teal for 2nd semester */
+            --secondary: #00695c;
             --accent: #FFCC00;
             --light: #f8f9fa;
             --dark: #212529;
@@ -31,7 +31,6 @@
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* NOTIFICATIONS (shared style) */
         #notifContainer {
             position: fixed; top: 80px; right: 20px; z-index: 550;
             display: flex; flex-direction: column; gap: 12px;
@@ -83,7 +82,6 @@
         #announcementBanner.success { background: #d4edda; color: #155724; }
         #announcementBanner.error { background: #f8d7da; color: #721c24; }
 
-        /* WELCOME */
         .compact-welcome {
             background: linear-gradient(rgba(0, 105, 92, 0.85), rgba(0, 105, 92, 0.85)), var(--secondary) center/cover no-repeat;
             min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;
@@ -133,7 +131,6 @@
         .submit-btn-compact:disabled { opacity: 0.6; cursor: not-allowed; }
         .footer-credit { font-size: 0.7rem; color: var(--gray-500); margin-top: 12px; font-weight: 700; }
 
-        /* CONTENT */
         .content-section { padding: 4rem 0; min-height: 80vh; }
         .section-title { text-align: center; margin-bottom: 2.5rem; color: var(--secondary); font-weight: 800; text-transform: uppercase; font-size: 1.8rem; }
         .card { background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); padding: 2.5rem; margin-bottom: 2rem; }
@@ -216,7 +213,6 @@
         .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Course codes note (CCMAS brief) */
         #courseCodesNote {
             background:#e0f2f1; border-left:4px solid var(--secondary);
             padding:1rem 1.2rem; border-radius:8px; margin:1rem 0 1.5rem;
@@ -246,7 +242,6 @@
 <div id="announcementBanner"></div>
 <div id="notifContainer"></div>
 
-<!-- WELCOME -->
 <section id="welcome" class="compact-welcome">
     <div class="compact-card">
         <h1>FUTA 2nd Semester Guide</h1>
@@ -303,7 +298,6 @@
     </div>
 </section>
 
-<!-- NAVBAR -->
 <nav class="navbar hidden" id="navbar">
     <div class="container nav-container">
         <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
@@ -337,7 +331,6 @@
     </div>
 </nav>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
     <h3>2nd Semester Guide</h3>
@@ -360,7 +353,6 @@
     </ul>
 </div>
 
-<!-- EDIT PROFILE MODAL -->
 <div class="modal hidden" id="editProfileModal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
@@ -395,7 +387,6 @@
 
 <main id="main-content" class="hidden">
 
-    <!-- HOME -->
     <section id="home" class="content-section content-page active">
         <div class="container">
             <h2 class="section-title">Welcome Back! 100 Level Second Semester</h2>
@@ -433,7 +424,6 @@
         </div>
     </section>
 
-    <!-- STRATEGY -->
     <section id="strategy" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">The Strategic Approach: U-H-P & P.A.S.S</h2>
@@ -483,14 +473,12 @@
         </div>
     </section>
 
-    <!-- COURSES -->
     <section id="courses" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Course-by-Course Battle Plan</h2>
             <div class="card">
                 <p style="margin-bottom: 1.5rem;">Below are the courses that make up the core of your second semester. Each course has unique characteristics, assessment methods, and strategies for success. Pay close attention to the exam format (CBT, CBE, or practical) as this determines how you should prepare.</p>
 
-                <!-- Brief CCMAS note (replaces scary warning) -->
                 <div id="courseCodesNote">
                     <strong>📝 Quick Note on Course Codes:</strong> Some of your 2nd semester courses may use newer CCMAS codes (e.g., <strong>MTS 102</strong> instead of the older MTH 102). The content is the same — only the codes are newer. This means past questions for these new codes are still limited, but the equivalent older materials (MTH 102, etc.) still apply. We've bundled them in each course folder. Read the full CCMAS explainer on the <a href="index.html" style="color:var(--secondary); font-weight:bold;">First Semester Guide</a>.
                 </div>
@@ -506,7 +494,6 @@
         </div>
     </section>
 
-    <!-- PLANNING -->
     <section id="planning" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Plan Effectively</h2>
@@ -532,7 +519,6 @@
         </div>
     </section>
 
-    <!-- BALANCE -->
     <section id="balance" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Balancing Academic and Extracurricular Activities</h2>
@@ -592,7 +578,6 @@
         </div>
     </section>
 
-    <!-- READ RECALL -->
     <section id="read-recall" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Read and Remember: The READ RECALL Method</h2>
@@ -619,7 +604,6 @@
         </div>
     </section>
 
-    <!-- TEXTBOOKS -->
     <section id="textbooks" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Recommended Textbooks</h2>
@@ -658,7 +642,6 @@
         </div>
     </section>
 
-    <!-- CALENDAR -->
     <section id="calendar" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📅 2nd Semester Calendar</h2>
@@ -673,7 +656,6 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Contact & Support</h2>
@@ -741,7 +723,6 @@
     let userData = {};
     let pageContent = {};
 
-    // ---------- CONTENT BLOCKS ----------
     async function loadContentBlocks() {
         try {
             const content = await DB.Content.getPage('second-semester');
@@ -759,7 +740,6 @@
         }
     }
 
-    // ---------- ANNOUNCEMENT ----------
     async function loadAnnouncement() {
         try {
             const settings = await DB.Settings.getAll();
@@ -771,7 +751,6 @@
         } catch (e) {}
     }
 
-    // ---------- NOTIFICATIONS ----------
     async function loadNotifications() {
         try {
             const audience = 'second_sem';
@@ -823,7 +802,6 @@
         }
     }
 
-    // ---------- FALLBACK COURSES ----------
     const FALLBACK_COURSES = [
         { code: 'MTS 102', title: 'Introductory Mathematics II', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1wjHXcRECQRb0ubIWQpBRJCrYKLqOkdxg', topics: ['Functions of real variables', 'Limits and continuity', 'Differentiation', 'Integration'], tips: ['Attend all classes', 'Study tutorials', 'Manage time effectively'] },
         { code: 'MTS 104', title: 'Introductory Applied Mathematics', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7', topics: ['Vectors', 'Coordinate geometry', 'Conic sections', 'Dynamics I & II'], tips: ['3-unit course', 'Arrive early', 'Read materials'] },
@@ -874,7 +852,6 @@
         });
     }
 
-    // ---------- CALENDAR ----------
     async function loadCalendar() {
         try {
             const res = await DB.Calendar.list({ session: '2026/2027', semester: 'second' });
@@ -943,7 +920,6 @@
         });
     }
 
-    // ---------- FORM ----------
     async function handleFormSubmit(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitBtn');
@@ -967,7 +943,6 @@
 
         userData = { name: nameVal, department: deptVal, whatsapp: waVal, level: levelVal, semester: semVal, isFresher };
 
-        // Cache as 2nd sem specific
         S.set('futa_profile_2nd', {
             full_name: nameVal, department: deptVal, whatsapp: waVal,
             level: levelVal, semester_guide: 'second', is_fresher: isFresher
@@ -1043,7 +1018,6 @@
         document.getElementById('profileDept').textContent = userData.department;
     }
 
-    // ---------- EDIT PROFILE ----------
     function openEditProfile() {
         document.getElementById('editName').value = userData.name || '';
         document.getElementById('editDepartment').value = userData.department || '';
@@ -1081,7 +1055,6 @@
         U.toast('Profile updated!', 'success');
     }
 
-    // ---------- NAVIGATION ----------
     function setupNavigation() {
         document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a, .toc-item').forEach(el => {
             el.addEventListener('click', function (e) {
@@ -1159,16 +1132,16 @@
         });
     }
 
-    // ---------- BOOT ----------
     async function boot() {
         await loadContentBlocks();
         loadAnnouncement();
         loadCourses();
         loadCalendar();
 
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // ✅ FIX: null-check before setting (defensive)
+        const yearEl = document.getElementById('currentYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        // Check if already onboarded
         const profile2nd = S.get('futa_profile_2nd');
         const profile = profile2nd || S.get('futa_profile');
         if (profile && profile.full_name && profile.semester_guide === 'second') {
@@ -1198,7 +1171,6 @@
         setupProfileMenu();
         setupAccordions();
 
-        // Preload notifications for already-onboarded users
         if (userData.name) loadNotifications();
 
         if (window.FUTA_CONFIG?.debug) console.log('[SecondSem] Boot complete');
