@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* =========================================
-           ULTIMATE MOBILE & ANTI-ZOOM FIX
-           ========================================= */
         html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         html, body { max-width: 100vw !important; overflow-x: hidden !important; }
         @media (max-width: 768px) {
@@ -19,14 +16,9 @@
         }
 
         :root {
-            --primary: #003366;
-            --secondary: #990000;
-            --accent: #FFCC00;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
+            --primary: #003366; --secondary: #990000; --accent: #FFCC00;
+            --light: #f8f9fa; --dark: #212529;
+            --success: #28a745; --warning: #ffc107; --danger: #dc3545;
             --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-300: #dee2e6;
             --gray-400: #ced4da; --gray-500: #adb5bd; --gray-600: #6c757d;
             --gray-700: #495057; --gray-800: #343a40; --gray-900: #212529;
@@ -36,7 +28,7 @@
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* ========== NOTIFICATION CENTER ========== */
+        /* NOTIFICATIONS */
         #notifContainer {
             position: fixed; top: 80px; right: 20px; z-index: 550;
             display: flex; flex-direction: column; gap: 12px;
@@ -78,7 +70,6 @@
             min-width: 18px; text-align: center;
         }
 
-        /* Top announcement banner (legacy — from site_settings) */
         #announcementBanner {
             display: none; padding: 12px 20px; text-align: center; font-weight: 600;
             position: sticky; top: 0; z-index: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -89,7 +80,7 @@
         #announcementBanner.success { background: #d4edda; color: #155724; }
         #announcementBanner.error { background: #f8d7da; color: #721c24; }
 
-        /* ========== WELCOME ========== */
+        /* WELCOME */
         .compact-welcome {
             background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), var(--primary) center/cover no-repeat;
             min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;
@@ -145,7 +136,7 @@
         .submit-btn-compact:disabled { opacity: 0.6; cursor: not-allowed; }
         .footer-credit { font-size: 0.7rem; color: var(--gray-500); margin-top: 12px; font-weight: 700; }
 
-        /* ========== CONTENT ========== */
+        /* CONTENT */
         .content-section { padding: 4rem 0; min-height: 80vh; }
         .section-title { text-align: center; margin-bottom: 2.5rem; color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 1.8rem; }
         .card { background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); padding: 2.5rem; margin-bottom: 2rem; }
@@ -229,10 +220,11 @@
 
         .signature-list { background: var(--gray-100); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
         .money-breakdown { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
-        .department-box { background: linear-gradient(135deg, #fce4e4 0%, #f8d7da 100%); border-radius: 8px; padding: 2rem; margin: 2rem 0; border-left: 5px solid var(--primary); }
 
         .loading-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; height: 20px; border-radius: 4px; margin-bottom: 10px; }
         @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         @media (max-width: 768px) {
             .nav-container { flex-wrap: nowrap; }
@@ -442,6 +434,15 @@
                     <p>The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.</p>
                     <p class="quote">"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
                 </div>
+                <h3 style="color:var(--primary);">Your FUTA Legacy Awaits</h3>
+                <p>FUTA isn't just an institution - it's an ecosystem of innovation, excellence, and transformation. Here, you'll:</p>
+                <ul style="margin-left: 1.5rem; color: var(--gray-700); font-size: 1.05rem;">
+                    <li>Develop critical thinking and problem-solving skills</li>
+                    <li>Connect with future industry leaders</li>
+                    <li>Discover your passions and purpose</li>
+                    <li>Build resilience and character</li>
+                    <li>Create memories that will last a lifetime</li>
+                </ul>
                 <div class="page-nav"><a class="page-btn" data-page="home">← Previous</a><a class="page-btn" data-page="toc">Next: Table of Contents →</a></div>
             </div>
         </div>
@@ -523,8 +524,13 @@
                         <li><strong>Faculty File</strong> - Official file for your faculty</li>
                         <li><strong>Departmental File</strong> - Official file for your department</li>
                     </ul>
+                    <p style="margin-top: 15px;"><strong>📌 Important Reminders:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><em>Carry both cash and digital payment options.</em></li>
+                        <li><em>Confirm with your faculty for specific requirements.</em></li>
+                        <li><em>Keep receipts for every payment.</em></li>
+                    </ul>
                 </div>
-
                 <div class="page-nav"><a class="page-btn" data-page="toc">← Previous</a><a class="page-btn" data-page="documents">Next: Required Documents →</a></div>
             </div>
         </div>
@@ -599,6 +605,11 @@
                         <div class="document-requirement both">Online & Physical</div>
                     </div>
                 </div>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">💡 Document Assistance Available</h3>
+                    <p>I can help you obtain JAMB Admission Letter, UTME Result Slip, and WAEC Certificate at an affordable fee.</p>
+                    <p style="margin-top: 10px;"><strong data-content="contact.name">Abideen Yakub Opeyemi (O'yemi)</strong> - <span data-content="contact.phone">+2347050376975</span></p>
+                </div>
                 <div class="page-nav"><a class="page-btn" data-page="registration">← Previous</a><a class="page-btn" data-page="great-shift">Next: The Great Shift →</a></div>
             </div>
         </div>
@@ -606,7 +617,7 @@
 
     <section id="great-shift" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">3. The Great Shift: Embracing University Autonomy</h2>
+            <h2 class="section-title">3. The Great Shift</h2>
             <div class="card">
                 <p>The first lesson of university life is self-leadership. You are now the CEO of your education and your future.</p>
                 <div class="inspirational-box">
@@ -706,6 +717,7 @@
     <section id="course-synopsis" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">8. Course Synopsis (First Semester 100L)</h2>
+            <div id="ccmasAwarenessSlot"></div>
             <div class="course-grid" id="courseGrid">
                 <div class="loading-skeleton" style="height: 220px;"></div>
                 <div class="loading-skeleton" style="height: 220px;"></div>
@@ -721,6 +733,7 @@
             <div class="card">
                 <h3 style="color:var(--primary);">Access All Your Course Materials</h3>
                 <p>Click on any course below to access its specific materials on Google Drive.</p>
+                <div id="materialsCcmasNote" style="background:#fff8e1; border-left:4px solid #f59e0b; padding:0.8rem 1rem; border-radius:6px; margin:1rem 0; font-size:0.9rem; color:#78350f;"></div>
                 <div class="materials-grid" id="materialsGrid">
                     <div class="loading-skeleton" style="height: 140px;"></div>
                     <div class="loading-skeleton" style="height: 140px;"></div>
@@ -750,7 +763,6 @@
         </div>
     </section>
 
-    <!-- CALENDAR (dynamic from Supabase) -->
     <section id="calendar" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📅 Academic Calendar</h2>
@@ -783,7 +795,7 @@
                 <div class="inspirational-box" style="text-align:left;">
                     <h3 style="color:var(--primary);">💬 Join Our Community</h3>
                     <div style="text-align:center; margin-top:15px;">
-                        <a href="#" id="whatsappGroupLink" class="btn btn-whatsapp" target="_blank" data-content-href="contact.whatsapp_group">
+                        <a href="#" id="whatsappGroupLink" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Join WhatsApp Group
                         </a>
                     </div>
@@ -823,9 +835,6 @@
     </div>
 </footer>
 
-<!-- ============================================================ -->
-<!-- SCRIPTS -->
-<!-- ============================================================ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="db.js"></script>
@@ -840,7 +849,6 @@
     let userData = {};
     let pageContent = {};
 
-    // ---------- WELCOME TOAST (once) ----------
     function showWelcomeToast() {
         if (S.get('futa_welcomed') === 'true') return;
         setTimeout(() => {
@@ -865,16 +873,25 @@
                 }
             });
 
-            document.querySelectorAll('[data-content-href]').forEach(el => {
-                const key = el.getAttribute('data-content-href');
-                if (content[key]) el.href = content[key];
-            });
+            // Inject CCMAS awareness note into course-synopsis page
+            const awarenessSlot = document.getElementById('ccmasAwarenessSlot');
+            if (awarenessSlot && content['ccmas.awareness_note']) {
+                awarenessSlot.innerHTML = content['ccmas.awareness_note'];
+            }
+
+            // Inject CCMAS materials note
+            const matNote = document.getElementById('materialsCcmasNote');
+            if (matNote) {
+                const note = content['materials.ccmas_note'];
+                if (note) { matNote.textContent = note; matNote.style.display = 'block'; }
+                else { matNote.style.display = 'none'; }
+            }
         } catch (err) {
             console.warn('[Content] Failed:', err);
         }
     }
 
-    // ---------- ANNOUNCEMENT BANNER ----------
+    // ---------- ANNOUNCEMENT ----------
     async function loadAnnouncement() {
         try {
             const settings = await DB.Settings.getAll();
@@ -923,7 +940,6 @@
         container.appendChild(card);
         requestAnimationFrame(() => card.classList.add('show'));
 
-        // Auto-dismiss info/success after 8s (if dismissible)
         if (n.is_dismissible && (n.type === 'info' || n.type === 'success')) {
             setTimeout(() => dismissNotification(n.id, card), 8000);
         }
@@ -939,7 +955,16 @@
         }
     }
 
-    // ---------- LOAD COURSES ----------
+    // ---------- COURSES ----------
+    const FALLBACK_COURSES = [
+        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Scientific Word Formation', 'Parts of Speech'], tips: ['Attend all classes', 'Complete online assignments'] },
+        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'Programming methodology'], tips: ['Practice practicals', 'Buy manual'] },
+        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell Biology', 'Genetics', 'Diversity'], tips: ['Attend all classes'] },
+        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Sequences', 'Trigonometry'], tips: ['Study tutorial manual'] },
+        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Mechanics', 'Vectors', 'SHM'], tips: ['Practice past questions'] },
+        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Theory', 'Thermodynamics'], tips: ['Attend tutorials'] }
+    ];
+
     async function loadCourses() {
         try {
             const res = await DB.Courses.list({ semester: 'first', level: '100' });
@@ -1036,9 +1061,10 @@
 
         function groupBy(items) {
             const today = new Date().toISOString().slice(0, 10);
-            const upcoming = items.filter(e => e.event_date >= today);
-            const past = items.filter(e => e.event_date < today);
-            return { upcoming, past };
+            return {
+                upcoming: items.filter(e => e.event_date >= today),
+                past: items.filter(e => e.event_date < today)
+            };
         }
 
         function renderGroup(title, items, container) {
@@ -1051,8 +1077,8 @@
             items.forEach(e => {
                 const item = document.createElement('div');
                 item.className = 'accordion-item';
-                const dateStr = U.formatDate(e.event_date, { hour: undefined, minute: undefined });
-                const endStr = e.end_date ? ` – ${U.formatDate(e.end_date, { hour: undefined, minute: undefined })}` : '';
+                const dateStr = U.formatDateShort(e.event_date);
+                const endStr = e.end_date ? ` – ${U.formatDateShort(e.end_date)}` : '';
                 const highlight = e.is_highlighted ? ' ⭐' : '';
                 item.innerHTML = `
                     <div class="accordion-header">
@@ -1084,7 +1110,6 @@
         renderGroup('📕 First Semester — Past', firstGroups.past, wrap);
         renderGroup('📙 Second Semester — Past', secondGroups.past, wrap);
 
-        // Setup accordion after render
         wrap.querySelectorAll('.accordion-header').forEach(h => {
             h.addEventListener('click', () => {
                 const item = h.parentElement;
@@ -1095,29 +1120,7 @@
         });
     }
 
-    // ---------- FALLBACK COURSES ----------
-    const FALLBACK_COURSES = [
-        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Scientific Word Formation', 'Parts of Speech'], tips: ['Attend all classes', 'Complete online assignments'] },
-        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'Programming methodology'], tips: ['Practice practicals', 'Buy manual'] },
-        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell Biology', 'Genetics', 'Diversity'], tips: ['Attend all classes'] },
-        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Sequences', 'Trigonometry'], tips: ['Study tutorial manual'] },
-        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Mechanics', 'Vectors', 'SHM'], tips: ['Practice past questions'] },
-        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Theory', 'Thermodynamics'], tips: ['Attend tutorials'] }
-    ];
-
-    // ---------- FORM HANDLING ----------
-    function saveProfile() {
-        const payload = {
-            full_name: userData.name,
-            department: userData.department,
-            whatsapp: userData.whatsapp,
-            level: userData.level,
-            is_fresher: userData.isFresher,
-            semester_guide: userData.semester
-        };
-        return DB.Profiles.create(payload);
-    }
-
+    // ---------- FORM ----------
     async function handleFormSubmit(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitBtn');
@@ -1140,8 +1143,6 @@
         }
 
         userData = { name: nameVal, department: deptVal, whatsapp: waVal, level: levelVal, semester: semVal, isFresher };
-
-        // Cache locally
         S.set('futa_profile', {
             full_name: nameVal, department: deptVal, whatsapp: waVal,
             level: levelVal, semester_guide: semVal, is_fresher: isFresher
@@ -1152,16 +1153,18 @@
         formMsg.innerHTML = '';
 
         try {
-            // Save to Supabase (profile + submission)
-            const [profileRes, subRes] = await Promise.all([
-                saveProfile(),
+            await Promise.all([
+                DB.Profiles.create({
+                    full_name: nameVal, department: deptVal, whatsapp: waVal,
+                    level: levelVal, is_fresher: isFresher, semester_guide: semVal
+                }),
                 DB.Submissions.create({
                     name: nameVal, department: deptVal, whatsapp: waVal,
                     level: levelVal, is_fresher: isFresher, semester: semVal, source: 'web'
                 })
             ]);
 
-            // Silent FormSubmit backup (fire-and-forget)
+            // Silent email backup
             fetch('https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1203,7 +1206,6 @@
         updateProfileUI();
         window.scrollTo(0, 0);
         showWelcomeToast();
-        // Refresh notifications with real audience
         loadNotifications();
     }
 
@@ -1308,7 +1310,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ---------- ACCORDIONS ----------
     function setupAccordions() {
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
@@ -1321,7 +1322,6 @@
         });
     }
 
-    // ---------- PROFILE MENU ----------
     function setupProfileMenu() {
         const btn = document.getElementById('profileBtn');
         const menu = document.getElementById('profileMenu');
@@ -1356,17 +1356,14 @@
 
     // ---------- BOOT ----------
     async function boot() {
-        // Preload content, notifications, courses, calendar
         await loadContentBlocks();
         loadAnnouncement();
         loadNotifications();
         loadCourses();
         loadCalendar();
 
-        // Set year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Check if already onboarded
         const profile = S.get('futa_profile');
         if (profile && profile.full_name) {
             userData = {
@@ -1377,28 +1374,26 @@
             enterGuide();
         }
 
-        // Wire up forms
         document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
         document.getElementById('feedbackForm').addEventListener('submit', handleFeedback);
 
-        // Fresher toggle
         document.getElementById('fresher-no').addEventListener('change', () =>
             document.getElementById('welcomeLevelRow').style.display = 'block');
         document.getElementById('fresher-yes').addEventListener('change', () =>
             document.getElementById('welcomeLevelRow').style.display = 'none');
 
-        // Setup nav + accordions
         setupNavigation();
         setupProfileMenu();
         setupAccordions();
 
-        // Set WhatsApp group link from content blocks (fallback)
         const waLink = document.getElementById('whatsappGroupLink');
         if (waLink && pageContent['contact.whatsapp_group']) {
             waLink.href = pageContent['contact.whatsapp_group'];
         } else if (waLink) {
             waLink.href = 'https://chat.whatsapp.com/EhrUKMAGOnNEZYD1QvVnSs';
         }
+
+        if (window.FUTA_CONFIG?.debug) console.log('[Index] Boot complete');
     }
 
     document.addEventListener('DOMContentLoaded', boot);
