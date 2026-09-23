@@ -5,223 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* =========================================
            ULTIMATE MOBILE & ANTI-ZOOM FIX
            ========================================= */
         html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-        html, body { 
-            max-width: 100vw !important; 
-            overflow-x: hidden !important; 
-        }
+        html, body { max-width: 100vw !important; overflow-x: hidden !important; }
         @media (max-width: 768px) {
             body, p, span, a, input, select, textarea, button, li, .radio-label, .text-sm, .text-xs {
-                font-size: 16px !important;
-                line-height: 1.6 !important;
+                font-size: 16px !important; line-height: 1.6 !important;
             }
         }
 
-        /* ========== GLOBAL THEME VARIABLES ========== */
         :root {
-            --primary: #003366;    /* 1st Semester Theme: FUTA Blue */
-            --secondary: #990000;  
-            --accent: #FFCC00;     /* FUTA Yellow */
+            --primary: #003366;
+            --secondary: #990000;
+            --accent: #FFCC00;
             --light: #f8f9fa;
             --dark: #212529;
             --success: #28a745;
             --warning: #ffc107;
             --danger: #dc3545;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
+            --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-300: #dee2e6;
+            --gray-400: #ced4da; --gray-500: #adb5bd; --gray-600: #6c757d;
+            --gray-700: #495057; --gray-800: #343a40; --gray-900: #212529;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* ========== COMPACT APP-LIKE WELCOME SCREEN ========== */
+        /* ========== NOTIFICATION CENTER ========== */
+        #notifContainer {
+            position: fixed; top: 80px; right: 20px; z-index: 550;
+            display: flex; flex-direction: column; gap: 12px;
+            max-width: 380px; width: calc(100% - 40px);
+            pointer-events: none;
+        }
+        @media (max-width: 600px) {
+            #notifContainer { top: auto; bottom: 20px; left: 20px; right: 20px; max-width: 100%; width: auto; }
+        }
+        .notif-card {
+            background: white; border-radius: 12px; padding: 16px 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--primary);
+            pointer-events: auto; cursor: pointer;
+            opacity: 0; transform: translateX(50px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .notif-card.show { opacity: 1; transform: translateX(0); }
+        .notif-card.hide { opacity: 0; transform: translateX(50px); }
+        .notif-card.info { border-left-color: #3b82f6; }
+        .notif-card.success { border-left-color: #10b981; }
+        .notif-card.warning { border-left-color: #f59e0b; }
+        .notif-card.error { border-left-color: #ef4444; }
+        .notif-card.urgent { border-left-color: #ef4444; background: #fef2f2; }
+        .notif-title { font-weight: 800; color: var(--dark); margin-bottom: 6px; font-size: 1rem; padding-right: 24px; }
+        .notif-message { color: var(--gray-700); font-size: 0.9rem; line-height: 1.5; }
+        .notif-link { display: inline-block; margin-top: 10px; color: var(--primary); font-weight: 700; font-size: 0.85rem; text-decoration: none; }
+        .notif-close {
+            position: absolute; top: 10px; right: 10px; background: var(--gray-200);
+            border: none; width: 26px; height: 26px; border-radius: 50%;
+            cursor: pointer; font-size: 0.9rem; color: var(--gray-600);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .notif-close:hover { background: var(--gray-300); color: var(--dark); }
+        .notif-badge {
+            position: absolute; top: -6px; right: -6px; background: var(--danger); color: white;
+            font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 10px;
+            min-width: 18px; text-align: center;
+        }
+
+        /* Top announcement banner (legacy — from site_settings) */
+        #announcementBanner {
+            display: none; padding: 12px 20px; text-align: center; font-weight: 600;
+            position: sticky; top: 0; z-index: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        #announcementBanner.show { display: block; }
+        #announcementBanner.info { background: #d1ecf1; color: #0c5460; }
+        #announcementBanner.warning { background: #fff3cd; color: #856404; }
+        #announcementBanner.success { background: #d4edda; color: #155724; }
+        #announcementBanner.error { background: #f8d7da; color: #721c24; }
+
+        /* ========== WELCOME ========== */
         .compact-welcome {
             background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), var(--primary) center/cover no-repeat;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;
         }
         .compact-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 16px;
-            padding: 20px 20px 15px 20px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
+            background: rgba(255, 255, 255, 0.98); border-radius: 16px;
+            padding: 20px; width: 100%; max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); text-align: center;
         }
-        .compact-card h1 {
-            font-size: 1.5rem !important;
-            color: var(--primary);
-            margin-bottom: 12px;
-            font-weight: 800;
-            text-shadow: none;
-        }
+        .compact-card h1 { font-size: 1.5rem !important; color: var(--primary); margin-bottom: 12px; font-weight: 800; }
         .quick-gpa-btn {
-            display: inline-flex; align-items: center; gap: 5px;
-            background: #dcfce7; color: #166534; border: 1px solid #bbf7d0;
-            padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
-            text-decoration: none; margin-bottom: 15px; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 5px; background: #dcfce7; color: #166534;
+            border: 1px solid #bbf7d0; padding: 6px 14px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 700; text-decoration: none; margin-bottom: 10px; transition: 0.3s;
         }
         .quick-gpa-btn:hover { background: #bbf7d0; }
-        
+        .quick-mkt-btn {
+            display: inline-flex; align-items: center; gap: 5px; background: #fff3cd; color: #856404;
+            border: 1px solid #ffeaa7; padding: 6px 14px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 700; text-decoration: none; margin-bottom: 15px; transition: 0.3s;
+        }
+        .quick-mkt-btn:hover { background: #ffeaa7; }
+
         .compact-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .compact-group { flex: 1; text-align: left; margin-bottom: 10px; }
         .compact-row .compact-group { margin-bottom: 0; }
-        .compact-group label {
-            display: block; font-size: 0.75rem !important; font-weight: 700;
-            color: var(--gray-700); margin-bottom: 4px; text-transform: uppercase;
-        }
+        .compact-group label { display: block; font-size: 0.75rem !important; font-weight: 700; color: var(--gray-700); margin-bottom: 4px; text-transform: uppercase; }
         .compact-group input, .compact-group select {
             width: 100%; padding: 10px !important; font-size: 0.9rem !important;
             border: 1px solid var(--gray-300); border-radius: 8px;
             background: var(--light); outline: none; transition: 0.3s; height: 42px;
         }
         .compact-group input:focus, .compact-group select:focus {
-            border-color: var(--primary); background: white;
-            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+            border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
         }
 
-        .app-toggle {
-            display: flex; background: var(--gray-200);
-            border-radius: 8px; padding: 3px; height: 42px;
-        }
+        .app-toggle { display: flex; background: var(--gray-200); border-radius: 8px; padding: 3px; height: 42px; }
         .app-toggle input[type="radio"] { display: none; }
         .app-toggle label {
-            flex: 1; text-align: center; padding: 8px 4px; font-size: 0.8rem !important;
-            font-weight: 700; color: var(--gray-600); cursor: pointer;
-            border-radius: 6px; transition: all 0.3s; margin: 0;
+            flex: 1; text-align: center; padding: 8px 4px; font-size: 0.8rem !important; font-weight: 700;
+            color: var(--gray-600); cursor: pointer; border-radius: 6px; transition: all 0.3s; margin: 0;
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-        .app-toggle input[type="radio"]:checked + label {
-            background: white; color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .app-toggle.theme-color input[type="radio"]:checked + label {
-            background: var(--primary); color: white;
-        }
+        .app-toggle input[type="radio"]:checked + label { background: white; color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .app-toggle.theme-color input[type="radio"]:checked + label { background: var(--primary); color: white; }
 
         .submit-btn-compact {
-            width: 100%; padding: 12px; font-size: 1.05rem; font-weight: bold;
-            background: var(--primary); color: white; border: none;
-            border-radius: 8px; margin-top: 5px; cursor: pointer;
+            width: 100%; padding: 12px; font-size: 1.05rem; font-weight: bold; background: var(--primary); color: white;
+            border: none; border-radius: 8px; margin-top: 5px; cursor: pointer;
             box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2); transition: 0.3s;
         }
         .submit-btn-compact:active { transform: scale(0.98); }
+        .submit-btn-compact:disabled { opacity: 0.6; cursor: not-allowed; }
         .footer-credit { font-size: 0.7rem; color: var(--gray-500); margin-top: 12px; font-weight: 700; }
 
-        /* ========== PREMIUM CONTENT LAYOUT ========== */
+        /* ========== CONTENT ========== */
         .content-section { padding: 4rem 0; min-height: 80vh; }
-        .section-title { 
-            text-align: center; margin-bottom: 2.5rem; color: var(--primary); 
-            font-weight: 800; text-transform: uppercase; font-size: 1.8rem;
-        }
-        .card {
-            background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            padding: 2.5rem; margin-bottom: 2rem; border: none; 
-        }
+        .section-title { text-align: center; margin-bottom: 2.5rem; color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 1.8rem; }
+        .card { background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); padding: 2.5rem; margin-bottom: 2rem; }
         .inspirational-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; 
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.05);
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px;
+            padding: 1.5rem; margin: 1.5rem 0; border-left: 5px solid var(--primary);
         }
-        
-        /* 🆕 PROPERLY FORMATTED ACCORDIONS */
-        .accordion-container {
-            display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0;
-        }
-        .accordion-item {
-            background: var(--light); border-radius: 8px; overflow: hidden;
-            transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            border: 1px solid var(--gray-200);
-        }
-        .accordion-header {
-            padding: 18px 20px; font-weight: 700; color: var(--primary);
-            display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; user-select: none;
-        }
+
+        .accordion-container { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
+        .accordion-item { background: var(--light); border-radius: 8px; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid var(--gray-200); }
+        .accordion-header { padding: 18px 20px; font-weight: 700; color: var(--primary); display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
         .accordion-header:hover { background: #e3f2fd; }
         .accordion-header i { transition: transform 0.3s ease; color: var(--gray-500); }
-        .accordion-content {
-            max-height: 0; 
-            overflow: hidden; 
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            background: white; color: var(--gray-800); font-size: 1rem;
-            padding: 0 20px;
-        }
-        .accordion-item.active .accordion-content {
-            max-height: 2000px; /* High enough to fit all your detailed text */
-            padding: 20px; 
-            border-top: 1px solid var(--gray-200);
-        }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; background: white; color: var(--gray-800); font-size: 1rem; padding: 0 20px; }
+        .accordion-item.active .accordion-content { max-height: 2000px; padding: 20px; border-top: 1px solid var(--gray-200); }
         .accordion-item.active .accordion-header i { transform: rotate(180deg); color: var(--primary); }
         .accordion-item.active { box-shadow: 0 5px 15px rgba(0,0,0,0.08); transform: translateY(-2px); border-color: var(--primary); }
 
-        /* SLEEK GRIDS */
-        .battle-plan-grid, .documents-grid, .course-grid, .materials-grid, .toc { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 1.5rem; margin: 2rem 0; 
-        }
-        .battle-plan-card, .toc-item, .course-card, .course-item, .document-card { 
-            background: white; border-radius: 12px; padding: 1.5rem; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
-            border-top: 4px solid var(--primary);
-            transition: transform 0.3s ease; cursor: pointer;
+        .battle-plan-grid, .documents-grid, .course-grid, .materials-grid, .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .battle-plan-card, .toc-item, .course-card, .course-item, .document-card {
+            background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--primary); transition: transform 0.3s ease; cursor: pointer;
         }
         .battle-plan-card:hover, .toc-item:hover, .course-item:hover, .document-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .battle-plan-card h4, .toc-item h3 { color: var(--primary); margin-bottom: 1rem; }
         .exam-type { background: #e3f2fd; color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; float: right; }
-        
-        /* Document requirements tags */
-        .document-requirement {
-            display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; margin: 8px 0; font-weight: 600;
-        }
+
+        .document-requirement { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; margin: 8px 0; font-weight: 600; }
         .document-requirement.online { background: #d1ecf1; color: #0c5460; }
         .document-requirement.physical { background: #f8d7da; color: #721c24; }
         .document-requirement.both { background: #d4edda; color: #155724; }
 
-        /* BUTTONS & NAVIGATION */
-        .btn {
-            display: inline-block; background: var(--primary); color: white; padding: 12px 24px;
-            border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700;
-            transition: all 0.3s ease; text-decoration: none; text-align: center;
-        }
-        .btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2); color: white; }
+        .btn { display: inline-block; background: var(--primary); color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: all 0.3s ease; text-decoration: none; text-align: center; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); color: white; }
         .btn-drive { background: #4285F4; color: white !important; }
         .btn-whatsapp { background: #25D366; color: white !important; }
-        
+
         .page-nav { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200); }
-        .page-btn { background: var(--gray-200); color: var(--dark); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .page-btn { background: var(--gray-200); color: var(--dark); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; cursor: pointer; }
         .page-btn:hover { background: var(--gray-300); }
 
-        /* NAVBAR & SIDEBAR */
         .navbar { background: var(--primary); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .logo { font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-        .semester-badge { background: white; color: var(--primary); padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight:bold;}
-        
+        .logo { font-size: 1.3rem; font-weight: 800; }
+
         .nav-links { display: flex; list-style: none; flex-wrap: wrap; align-items: center; }
         .nav-links li { margin-left: 1rem; }
         .nav-links a { color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; opacity: 0.9; }
         .nav-links a:hover { opacity: 1; }
-        
+
         .menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-        .sidebar { position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: white; color: var(--dark); transition: left 0.3s ease; z-index: 1000; padding: 2rem 1rem; box-shadow: 5px 0 25px rgba(0,0,0,0.1); overflow-y: auto;}
+        .sidebar { position: fixed; top: 0; left: -320px; width: 300px; height: 100vh; background: white; color: var(--dark); transition: left 0.3s ease; z-index: 1000; padding: 2rem 1rem; box-shadow: 5px 0 25px rgba(0,0,0,0.1); overflow-y: auto; }
         .sidebar.active { left: 0; }
         .sidebar-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--gray-600); font-size: 1.5rem; cursor: pointer; }
         .sidebar h3 { color: var(--primary); margin-bottom: 1.5rem; padding-left: 1rem; }
@@ -230,1358 +206,1203 @@
         .sidebar-links a { color: var(--gray-700); text-decoration: none; display: block; padding: 10px 15px; border-radius: 8px; font-weight: 600; transition: 0.3s; }
         .sidebar-links a:hover, .sidebar-links a.active { background: #e3f2fd; color: var(--primary); }
 
-        /* PROFILE & MODALS */
         .user-profile-dropdown { position: relative; }
         .profile-btn { background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .profile-menu { position: absolute; top: 120%; right: 0; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); min-width: 250px; overflow: hidden; z-index:2000; }
+        .profile-menu { position: absolute; top: 120%; right: 0; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); min-width: 250px; overflow: hidden; z-index: 2000; }
         .profile-header { padding: 20px; text-align: center; background: var(--gray-100); }
         .profile-header p { font-weight: bold; color: var(--dark); margin: 10px 0 0; }
         .profile-menu-item { display: block; width: 100%; padding: 12px 20px; text-align: left; background: none; border: none; cursor: pointer; color: var(--gray-700); font-weight: 600; transition: 0.2s; }
         .profile-menu-item:hover { background: var(--gray-100); color: var(--primary); }
-        
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-content { background: white; border-radius: 12px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); padding: 2rem; }
+
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 2000; padding: 15px; }
+        .modal-content { background: white; border-radius: 12px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); padding: 2rem; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1rem; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-600); }
-        
-        .toast { position: fixed; bottom: 20px; right: 20px; background: var(--success); color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
         .hidden { display: none !important; }
         .content-page { display: none; animation: fadeIn 0.4s ease; }
         .content-page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .quote { font-style: italic; font-weight: 600; color: var(--primary); text-align: center; margin: 2rem 0; font-size: 1.1rem; }
-        
-        footer { background: var(--dark); color: var(--gray-400); padding: 3rem 0; text-align: center; font-size: 0.9rem; }
-        #welcome:not(.hidden) ~ .navbar .user-profile-dropdown { display: none !important; }
 
-        /* Specific Lists and Timelines */
-        .registration-timeline { position: relative; margin: 2rem 0; padding-left: 2rem; }
-        .registration-timeline:before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
-        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 2rem; }
-        .timeline-item:before { content: ''; position: absolute; left: -2.5rem; top: 0.5rem; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); border: 3px solid var(--accent); }
-        
+        footer { background: var(--dark); color: var(--gray-400); padding: 3rem 0; text-align: center; font-size: 0.9rem; }
+
         .signature-list { background: var(--gray-100); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
         .money-breakdown { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
         .department-box { background: linear-gradient(135deg, #fce4e4 0%, #f8d7da 100%); border-radius: 8px; padding: 2rem; margin: 2rem 0; border-left: 5px solid var(--primary); }
 
-        /* Mobile Breakpoints */
+        .loading-skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: loading 1.5s infinite; height: 20px; border-radius: 4px; margin-bottom: 10px; }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
         @media (max-width: 768px) {
             .nav-container { flex-wrap: nowrap; }
             .menu-btn { display: block; }
             .nav-links { display: none; }
-            .logo span { display: none; }
+            .logo { font-size: 1rem; }
             .card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-<script>
-    const CURRENT_VERSION = '2.0.0';
-    const storedVersion = localStorage.getItem('appVersion');
-    if (storedVersion !== CURRENT_VERSION) {
-        localStorage.clear();
-        localStorage.setItem('appVersion', CURRENT_VERSION);
-    }
-</script>
 
-    <section id="welcome" class="compact-welcome">
-        <div class="compact-card">
-            <h1>FUTA Survival Guide</h1>
-           
-            
-            <form id="userForm">
+<div id="announcementBanner"></div>
+<div id="notifContainer"></div>
+
+<!-- WELCOME -->
+<section id="welcome" class="compact-welcome">
+    <div class="compact-card">
+        <h1>FUTA Survival Guide</h1>
+
+        <a href="calculator.html" class="quick-gpa-btn"><i class="fas fa-calculator"></i> Aggregate & GPA Calculator</a>
+        <a href="marketplace.html" class="quick-mkt-btn"><i class="fas fa-store"></i> Marketplace</a>
+
+        <form id="userForm">
+            <div class="compact-group">
+                <label>Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter Your Name">
+            </div>
+            <div class="compact-row">
                 <div class="compact-group">
-                    <label>Full Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter Your Name ">
+                    <label>Department</label>
+                    <input type="text" id="department" name="department" required placeholder="e.g. EEE">
                 </div>
-                
-                <div class="compact-row">
-                    <div class="compact-group">
-                        <label>Department</label>
-                        <input type="text" id="department" name="department" required placeholder="e.g. EEE">
-                    </div>
-                    <div class="compact-group">
-                        <label>WhatsApp</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="0812...">
-                    </div>
-                </div>
-
-                <div class="compact-row" style="align-items: flex-end;">
-                    <div class="compact-group">
-                        <label>Fresher?</label>
-                        <div class="app-toggle">
-                            <input type="radio" id="fresher-yes" name="isFresher" value="yes" checked>
-                            <label for="fresher-yes">Yes</label>
-                            
-                            <input type="radio" id="fresher-no" name="isFresher" value="no">
-                            <label for="fresher-no">No</label>
-                        </div>
-                    </div>
-                    <div class="compact-group" id="welcomeLevelRow" style="display: none;">
-                        <label>Level</label>
-                        <select id="welcomeLevel" name="level">
-                            <option value="">Select Level</option>
-                            <option>200L</option>
-                            <option>300L</option>
-                            <option>400L</option>
-                            <option>500L</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="compact-group">
-                    <label>Target Semester Guide</label>
-                    <div class="app-toggle theme-color">
-                        <input type="radio" id="semester-first" name="semester" value="first" checked>
-                        <label for="semester-first"><i class="fas fa-calendar-alt"></i> 1st Sem</label>
-                        
-                        <input type="radio" id="semester-second" name="semester" value="second">
-                        <label for="semester-second"><i class="fas fa-calendar-check"></i> 2nd Sem</label>
-                       
-                      
-                    </div>
-                     
+                    <label>WhatsApp</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="0812...">
                 </div>
-  <a href="calculator.html" class="quick-gpa-btn"><i class="fas fa-calculator"></i> Aggregate & GPA Calculator</a>
-  <a href="marketplace.html" class="quick-mkt-btn"><i class="fas fa-market"></i> Marketplace</a>
-                <button type="submit" class="submit-btn-compact" id="submitBtn">Access Guide</button>
-            </form>
-            
-            <div id="formMessage" style="font-size: 0.8rem; margin-top: 8px; font-weight:bold;"></div>
-            <p class="footer-credit">Prepared by: O'yemi | Academic Mentorship</p>
+            </div>
+            <div class="compact-row" style="align-items: flex-end;">
+                <div class="compact-group">
+                    <label>Fresher?</label>
+                    <div class="app-toggle">
+                        <input type="radio" id="fresher-yes" name="isFresher" value="yes" checked>
+                        <label for="fresher-yes">Yes</label>
+                        <input type="radio" id="fresher-no" name="isFresher" value="no">
+                        <label for="fresher-no">No</label>
+                    </div>
+                </div>
+                <div class="compact-group" id="welcomeLevelRow" style="display: none;">
+                    <label>Level</label>
+                    <select id="welcomeLevel" name="level">
+                        <option value="">Select Level</option>
+                        <option>200L</option>
+                        <option>300L</option>
+                        <option>400L</option>
+                        <option>500L</option>
+                    </select>
+                </div>
+            </div>
+            <div class="compact-group">
+                <label>Target Semester Guide</label>
+                <div class="app-toggle theme-color">
+                    <input type="radio" id="semester-first" name="semester" value="first" checked>
+                    <label for="semester-first"><i class="fas fa-calendar-alt"></i> 1st Sem</label>
+                    <input type="radio" id="semester-second" name="semester" value="second">
+                    <label for="semester-second"><i class="fas fa-calendar-check"></i> 2nd Sem</label>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn-compact" id="submitBtn">Access Guide</button>
+        </form>
+
+        <div id="formMessage" style="font-size: 0.85rem; margin-top: 8px; font-weight:bold;"></div>
+        <p class="footer-credit">Prepared by: O'yemi | Academic Mentorship</p>
+    </div>
+</section>
+
+<!-- NAVBAR -->
+<nav class="navbar hidden" id="navbar">
+    <div class="container nav-container">
+        <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+        <div class="logo">FUTA Survival Guide</div>
+        <ul class="nav-links">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="toc">Contents</a></li>
+            <li><a href="#" data-page="registration">Registration</a></li>
+            <li><a href="#" data-page="course-synopsis">Courses</a></li>
+            <li><a href="#" data-page="materials">Materials</a></li>
+            <li><a href="#" data-page="calendar">📅 Calendar</a></li>
+            <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> Marketplace</a></li>
+            <li><a href="calculator.html" style="background: var(--success); padding: 5px 12px; border-radius: 20px; color: white !important;"><i class="fas fa-calculator"></i> GPA</a></li>
+            <li><a href="second-semester.html?switch=true" style="background: var(--secondary); padding: 5px 12px; border-radius: 20px; color: white !important;"><i class="fas fa-exchange-alt"></i> 2nd Sem</a></li>
+        </ul>
+        <div class="user-profile-dropdown" id="userProfileDropdown">
+            <button class="profile-btn" id="profileBtn">
+                <i class="fas fa-user-circle"></i> <span id="profileName">User</span> <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="profile-menu hidden" id="profileMenu">
+                <div class="profile-header">
+                    <i class="fas fa-user-circle" style="font-size: 3rem; color: var(--primary);"></i>
+                    <p id="profileFullName">Loading...</p>
+                    <small id="profileDept"></small>
+                </div>
+                <hr>
+                <button class="profile-menu-item" id="editProfileBtn"><i class="fas fa-edit"></i> Edit Profile</button>
+                <button class="profile-menu-item" id="switchSemesterBtn"><i class="fas fa-exchange-alt"></i> Switch to 2nd Semester</button>
+                <button class="profile-menu-item" id="logoutBtn" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    <h3>FUTA Survival Guide</h3>
+    <ul class="sidebar-links">
+        <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
+        <li><a href="#" data-page="message">✉️ Welcome Message</a></li>
+        <li><a href="#" data-page="toc">📑 Table of Contents</a></li>
+        <li><a href="#" data-page="registration">📝 Registration Guide</a></li>
+        <li><a href="#" data-page="documents">📁 Required Documents</a></li>
+        <li><a href="#" data-page="great-shift">🔄 The Great Shift</a></li>
+        <li><a href="#" data-page="academic-playbook">🎯 Academic Playbook</a></li>
+        <li><a href="#" data-page="beyond-books">🏃 Beyond Books</a></li>
+        <li><a href="#" data-page="navigating-storms">⛈️ Navigating Storms</a></li>
+        <li><a href="#" data-page="anchor">⚓ The Anchor</a></li>
+        <li><a href="#" data-page="course-synopsis">📚 Course Synopsis</a></li>
+        <li><a href="#" data-page="materials">📂 Course Materials</a></li>
+        <li><a href="#" data-page="departmental">🏛️ Departmental Courses</a></li>
+        <li><a href="#" data-page="calendar">📅 Academic Calendar</a></li>
+        <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> FUTA Marketplace</a></li>
+        <li><a href="#" data-page="contact">📞 Contact & Support</a></li>
+    </ul>
+    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+        <a href="calculator.html" class="btn" style="width: 100%; margin: 0 0 10px 0; background: var(--success);"><i class="fas fa-calculator"></i> GPA Calculator</a>
+        <a href="second-semester.html?switch=true" class="btn" style="width: 100%; margin: 0; background: var(--secondary);"><i class="fas fa-exchange-alt"></i> 2nd Semester Guide</a>
+    </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal hidden" id="editProfileModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 style="color:var(--primary);"><i class="fas fa-user-edit"></i> Edit Your Profile</h3>
+            <button class="modal-close" id="closeProfileModal">&times;</button>
+        </div>
+        <form id="editProfileForm">
+            <div class="compact-group"><label>Full Name</label><input type="text" id="editName" required></div>
+            <div class="compact-group"><label>Department</label><input type="text" id="editDepartment" required></div>
+            <div class="compact-group"><label>WhatsApp</label><input type="tel" id="editWhatsapp" required></div>
+            <div class="compact-group">
+                <label>Level</label>
+                <select id="editLevel">
+                    <option value="">-- Select Level --</option>
+                    <option>100 Level</option><option>200 Level</option><option>300 Level</option>
+                    <option>400 Level</option><option>500 Level</option>
+                </select>
+            </div>
+            <div class="compact-group">
+                <label>Fresher Status</label>
+                <div class="app-toggle theme-color">
+                    <input type="radio" id="editFresherYes" name="editIsFresher" value="yes">
+                    <label for="editFresherYes">Yes</label>
+                    <input type="radio" id="editFresherNo" name="editIsFresher" value="no">
+                    <label for="editFresherNo">No</label>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn-compact" style="margin-top:20px;">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="main-content" class="hidden">
+
+    <section id="home" class="content-section content-page active">
+        <div class="container">
+            <h2 class="section-title">Welcome to Your FUTA Journey</h2>
+            <div class="card">
+                <p>Congratulations on securing your admission to the Federal University of Technology, Akure! You are now part of a legacy of excellence and innovation. You are a FUTArian.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🎯 Your Mission Starts Here</h3>
+                    <p>This isn't just about earning a degree - it's about building the foundation for your future self.</p>
+                    <p class="quote">"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</p>
+                </div>
+                <h3 style="color:var(--primary);">What This Guide Offers</h3>
+                <ul style="margin-left: 1.5rem; font-size: 1.05rem; color: var(--gray-700);">
+                    <li>Academic strategies for first-class performance</li>
+                    <li>Personal development insights</li>
+                    <li>Course-by-course battle plans</li>
+                    <li>Mental and spiritual wellness guidance</li>
+                    <li>Access to all course materials</li>
+                    <li>Complete registration guide</li>
+                </ul>
+                <div class="page-nav"><div></div><a class="page-btn" data-page="message">Next: Welcome Message →</a></div>
+            </div>
         </div>
     </section>
 
-    <nav class="navbar hidden" id="navbar">
-        <div class="container nav-container">
-            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
-            <div class="logo">FUTA Survival Guide</div>
-            <ul class="nav-links">
-                <li><a href="#" data-page="home">Home</a></li>
-                <li><a href="#" data-page="toc">Contents</a></li>
-                <li><a href="#" data-page="registration">Registration</a></li>
-                <li><a href="#" data-page="course-synopsis">Courses</a></li>
-                <li><a href="#" data-page="materials">Materials</a></li>
-                <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> Marketplace</a></li>
-                <li><a href="calculator.html" style="background: var(--success); padding: 5px 12px; border-radius: 20px; color: white !important;"><i class="fas fa-calculator"></i> GPA</a></li>
-                <li><a href="second-semester.html?switch=true" style="background: var(--secondary); padding: 5px 12px; border-radius: 20px; color: white !important;"><i class="fas fa-exchange-alt"></i> 2nd Sem</a></li>
-            </ul>
-            <div class="user-profile-dropdown" id="userProfileDropdown">
-                <button class="profile-btn" id="profileBtn">
-                    <i class="fas fa-user-circle"></i> <span id="profileName">User</span> <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="profile-menu hidden" id="profileMenu">
-                    <div class="profile-header">
-                        <i class="fas fa-user-circle" style="font-size: 3rem; color: var(--primary);"></i>
-                        <p id="profileFullName">Loading...</p>
-                        <small id="profileDept"></small>
-                    </div>
-                    <hr>
-                    <button class="profile-menu-item" id="editProfileBtn"><i class="fas fa-edit"></i> Edit Profile</button>
-                    <button class="profile-menu-item" id="switchSemesterBtn"><i class="fas fa-exchange-alt"></i> Switch to 2nd Semester</button>
-                    <button class="profile-menu-item" id="logoutBtn" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <section id="message" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">A Message to FUTA Graduating Class of <span data-content="global.class_year">2029</span></h2>
+            <div class="card">
+                <p>To the brilliant minds who have earned their place here, welcome to the Federal University of Technology, Akure (FUTA)! This achievement is a testament to your dedication, and you should be immensely proud.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🏆 You Are Architects of Your Future</h3>
+                    <p>The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.</p>
+                    <p class="quote">"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
                 </div>
+                <div class="page-nav"><a class="page-btn" data-page="home">← Previous</a><a class="page-btn" data-page="toc">Next: Table of Contents →</a></div>
             </div>
         </div>
-    </nav>
+    </section>
 
-    <div class="sidebar" id="sidebar">
-        <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-        <h3>FUTA Survival Guide</h3>
-        <ul class="sidebar-links">
-            <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
-            <li><a href="#" data-page="message">✉️ Welcome Message</a></li>
-            <li><a href="#" data-page="toc">📑 Table of Contents</a></li>
-            <li><a href="#" data-page="registration">📝 Registration Guide</a></li>
-            <li><a href="#" data-page="documents">📁 Required Documents</a></li>
-            <li><a href="#" data-page="great-shift">🔄 The Great Shift</a></li>
-            <li><a href="#" data-page="academic-playbook">🎯 Academic Playbook</a></li>
-            <li><a href="#" data-page="beyond-books">🏃 Beyond Books</a></li>
-            <li><a href="#" data-page="navigating-storms">⛈️ Navigating Storms</a></li>
-            <li><a href="#" data-page="anchor">⚓ The Anchor</a></li>
-            <li><a href="#" data-page="course-synopsis">📚 Course Synopsis</a></li>
-            <li><a href="#" data-page="materials">📂 Course Materials</a></li>
-            <li><a href="#" data-page="departmental">🏛️ Departmental Courses</a></li>
-            <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> FUTA Marketplace</a></li>
-            <li><a href="#" data-page="contact">📞 Contact & Support</a></li>
-        </ul>
-        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
-            <a href="calculator.html" class="btn" style="width: 100%; margin: 0 0 10px 0; background: var(--success);"><i class="fas fa-calculator"></i> GPA Calculator</a>
-            <a href="second-semester.html?switch=true" class="btn" style="width: 100%; margin: 0; background: var(--secondary);"><i class="fas fa-exchange-alt"></i> 2nd Semester Guide</a>
+    <section id="toc" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">Table of Contents</h2>
+            <div class="toc">
+                <div class="toc-item" data-page="registration"><h3>1. Registration Guide</h3><p>Complete Step-by-Step Registration Process</p></div>
+                <div class="toc-item" data-page="documents"><h3>2. Required Documents</h3><p>All Documents Needed for Registration</p></div>
+                <div class="toc-item" data-page="great-shift"><h3>3. The Great Shift</h3><p>Embracing University Autonomy</p></div>
+                <div class="toc-item" data-page="academic-playbook"><h3>4. Your Academic Playbook</h3><p>For a First-Class Journey</p></div>
+                <div class="toc-item" data-page="beyond-books"><h3>5. Beyond the Books</h3><p>Building a Complete Life</p></div>
+                <div class="toc-item" data-page="navigating-storms"><h3>6. Navigating the Storms</h3><p>You Are Not Alone</p></div>
+                <div class="toc-item" data-page="anchor"><h3>7. The Anchor</h3><p>The Power of Prayer</p></div>
+                <div class="toc-item" data-page="course-synopsis"><h3>8. Course Synopsis</h3><p>All Your First Semester Courses</p></div>
+                <div class="toc-item" data-page="materials"><h3>9. Course Materials</h3><p>Access All Study Materials</p></div>
+                <div class="toc-item" data-page="departmental"><h3>10. Departmental Courses</h3><p>Know Your Specific Courses</p></div>
+                <div class="toc-item" data-page="calendar"><h3>11. Academic Calendar</h3><p>Key dates for 2026/2027 session</p></div>
+                <div class="toc-item" onclick="window.location.href='marketplace.html'"><h3>12. FUTA Marketplace</h3><p>Student Services & Business Directory</p></div>
+                <div class="toc-item" data-page="contact"><h3>13. Contact</h3><p>Get in Touch</p></div>
+                <div class="toc-item" onclick="window.location.href='second-semester.html'" style="background:#e3f2fd; border-color:var(--primary);">
+                    <h3>📖 Second Semester Guide</h3>
+                    <p>100L Second Semester Survival Guide</p>
+                </div>
+            </div>
+            <div class="page-nav"><a class="page-btn" data-page="message">← Previous</a><a class="page-btn" data-page="registration">Next: Registration Guide →</a></div>
         </div>
-    </div>
+    </section>
 
-    <div class="modal hidden" id="editProfileModal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 style="color:var(--primary);"><i class="fas fa-user-edit"></i> Edit Your Profile</h3>
-                <button class="modal-close" id="closeProfileModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="editProfileForm">
-                    <div class="compact-group">
-                        <label for="editName">Full Name <span style="color: var(--danger);">*</span></label>
-                        <input type="text" id="editName" required>
-                    </div>
-                    <div class="compact-group">
-                        <label for="editDepartment">Department <span style="color: var(--danger);">*</span></label>
-                        <input type="text" id="editDepartment" required>
-                    </div>
-                    <div class="compact-group">
-                        <label for="editWhatsapp">WhatsApp Number <span style="color: var(--danger);">*</span></label>
-                        <input type="tel" id="editWhatsapp" required>
-                    </div>
-                    <div class="compact-group">
-                        <label for="editLevel">Level</label>
-                        <select id="editLevel">
-                            <option value="">-- Select Level --</option>
-                            <option>100 Level</option>
-                            <option>200 Level</option>
-                            <option>300 Level</option>
-                            <option>400 Level</option>
-                            <option>500 Level</option>
-                        </select>
-                    </div>
-                    <div class="compact-group" style="margin-top: 15px;">
-                        <label>Fresher Status</label>
-                        <div class="app-toggle theme-color">
-                            <input type="radio" id="editFresherYes" name="editIsFresher" value="yes">
-                            <label for="editFresherYes">Yes, Fresher</label>
-                            <input type="radio" id="editFresherNo" name="editIsFresher" value="no">
-                            <label for="editFresherNo">No, Returning</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="submit-btn-compact" style="margin-top:20px;">Save Changes</button>
-                </form>
+    <section id="registration" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">1. Complete Registration Guide</h2>
+            <div class="card">
+                <h3 style="color:var(--primary);">Your Registration Journey Begins <span data-content="reg.physical_start_date">November 24, 2025</span></h3>
+                <p>On this date, your FUTA journey officially begins. The registration process is your first major challenge, and this guide will help you navigate it successfully.</p>
+
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">📅 Important Registration Timeline</h3>
+                    <p><strong data-content="reg.portal_open_date">November 17, 2025</strong>: <span data-content="reg.portal_open_desc">Undergraduate portal opens for online registrations and BIO-DATA FORM download</span></p>
+                    <p><strong data-content="reg.physical_start_date">November 24, 2025</strong>: <span data-content="reg.physical_start_desc">Physical registration begins</span></p>
+                    <p class="quote">"Proper preparation prevents poor performance. Start your registration process early!"</p>
+                </div>
+
+                <h3 style="color:var(--primary); margin-top:2rem;">The BIO-DATA Form - Your First Challenge</h3>
+                <p>The BIO-DATA form is the most tedious part of your registration. On the back page, you'll find six names with spaces for signatures:</p>
+
+                <div class="signature-list">
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Your School Officer</strong> - General officer who signs for all students</li>
+                        <li><strong>Your Registration Officer</strong> - Department-specific officer</li>
+                        <li><strong>Your Head of Department (HOD)</strong> - Head of your department</li>
+                        <li><strong>Your Dean of School</strong> - Head of your faculty</li>
+                        <li><strong>Dean of Students' Affairs Division</strong></li>
+                        <li><strong>The School Registrar</strong></li>
+                    </ol>
+                </div>
+                <p><strong>Location Guide:</strong> The first four signatures are from your faculty building, while the last two are outside your faculty.</p>
+
+                <h3 style="color:var(--primary); margin-top: 2.5rem;">Step-by-Step Registration Process</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">Step 1: School Officer <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Step 2: Registration Officer <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every department has its own registration officer. This person handles registration for your department specifically.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Step 3: Head of Department (HOD) <i class="fas fa-chevron-down"></i></div><div class="accordion-content">You should already know your HOD's name by now. If you don't, find out immediately!</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Step 4: Dean of School <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The Dean is the highest authority in your faculty. You might not see them physically during registration.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Step 5: Students' Affairs Division <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Once you have the Dean's signature, proceed to Students' Affairs. <strong>Dress formally for this step!</strong></div></div>
+                    <div class="accordion-item"><div class="accordion-header">Step 6: Final Submission <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Return to your faculty for final submission. You'll submit your file for the School Registrar.</div></div>
+                </div>
+
+                <h3 style="color:var(--primary); margin-top:2.5rem;">💼 Financial Preparation</h3>
+                <div class="money-breakdown">
+                    <h4 style="color:var(--primary);">💰 Recommended Budget: <span data-content="reg.budget_amount">₦20,000</span> (Cash or Bank Transfer)</h4>
+                    <p><em data-content="reg.budget_note">Actual costs may vary by faculty.</em></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 10px;">
+                        <li><strong>Faculty Dues</strong> - Payment to your faculty</li>
+                        <li><strong>Departmental Dues</strong> - Payment to your department</li>
+                        <li><strong>Engineering Students:</strong> Blue Lab Coat</li>
+                        <li><strong>Faculty File</strong> - Official file for your faculty</li>
+                        <li><strong>Departmental File</strong> - Official file for your department</li>
+                    </ul>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="toc">← Previous</a><a class="page-btn" data-page="documents">Next: Required Documents →</a></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <main id="main-content" class="hidden">
-        
-        <section id="home" class="content-section content-page active">
-            <div class="container">
-                <h2 class="section-title">Welcome to Your FUTA Journey</h2>
-                <div class="card">
-                    <p>Congratulations on securing your admission to the Federal University of Technology, Akure! You are now part of a legacy of excellence and innovation. You are a FUTArian.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🎯 Your Mission Starts Here</h3>
-                        <p>This isn't just about earning a degree - it's about building the foundation for your future self.</p>
-                        <p class="quote">"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary);">What This Guide Offers</h3>
-                    <ul style="margin-left: 1.5rem; font-size: 1.05rem; color: var(--gray-700);">
-                        <li>Academic strategies for first-class performance</li>
-                        <li>Personal development insights</li>
-                        <li>Course-by-course battle plans</li>
-                        <li>Mental and spiritual wellness guidance</li>
-                        <li>Access to all course materials</li>
-                        <li>Complete registration guide</li>
-                    </ul>
-                    
-                    <div class="page-nav"><div></div><a href="#" class="page-btn" data-page="message">Next: Welcome Message →</a></div>
+    <section id="documents" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">2. Required Documents for Registration</h2>
+            <div class="card">
+                <h3 style="color:var(--primary);">Complete Document Checklist</h3>
+                <p>Prepare these documents in advance. Make at least 5 photocopies of each document.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">📋 Document Preparation Guide</h3>
+                    <p><strong>Online Registration First:</strong> Upload clear scans of all documents to the FUTA portal</p>
+                    <p><strong>Physical Registration Second:</strong> Bring originals and photocopies for verification</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="message" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">A Message to FUTA Graduating Class of 2029</h2>
-                <div class="card">
-                    <p>To the brilliant minds who have earned their place here, welcome to the Federal University of Technology, Akure (FUTA)! This achievement is a testament to your dedication, and you should be immensely proud.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🏆 You Are Architects of Your Future</h3>
-                        <p>The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.</p>
-                        <p class="quote">"Education is the most powerful weapon which you can use to change the world." - Nelson Mandela</p>
+                <div class="documents-grid">
+                    <div class="document-card">
+                        <h4><i class="fas fa-file-alt"></i> FUTA Admission Letter</h4>
+                        <p style="font-size:0.9rem;">Official admission letter with your department and course details</p>
+                        <div class="document-requirement physical">Physical Registration</div>
+                        <p style="font-size:0.85rem; margin-top:10px;"><strong>Acceptance fee:</strong> <span data-content="reg.acceptance_fee">₦50,000 (previous session)</span></p>
                     </div>
-                    
-                    <h3 style="color:var(--primary);">Your FUTA Legacy Awaits</h3>
-                    <p>FUTA isn't just an institution - it's an ecosystem of innovation, excellence, and transformation. Here, you'll:</p>
-                    <ul style="margin-left: 1.5rem; color: var(--gray-700); font-size: 1.05rem;">
-                        <li>Develop critical thinking and problem-solving skills</li>
-                        <li>Connect with future industry leaders</li>
-                        <li>Discover your passions and purpose</li>
-                        <li>Build resilience and character</li>
-                        <li>Create memories that will last a lifetime</li>
-                    </ul>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="home">← Previous</a><a href="#" class="page-btn" data-page="toc">Next: Table of Contents →</a></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="toc" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">Table of Contents</h2>
-                <div class="toc">
-                    <div class="toc-item" data-page="registration"><h3>1. Registration Guide</h3><p>Complete Step-by-Step Registration Process</p></div>
-                    <div class="toc-item" data-page="documents"><h3>2. Required Documents</h3><p>All Documents Needed for Registration</p></div>
-                    <div class="toc-item" data-page="great-shift"><h3>3. The Great Shift</h3><p>Embracing University Autonomy</p></div>
-                    <div class="toc-item" data-page="academic-playbook"><h3>4. Your Academic Playbook</h3><p>For a First-Class Journey</p></div>
-                    <div class="toc-item" data-page="beyond-books"><h3>5. Beyond the Books</h3><p>Building a Complete Life</p></div>
-                    <div class="toc-item" data-page="navigating-storms"><h3>6. Navigating the Storms</h3><p>You Are Not Alone</p></div>
-                    <div class="toc-item" data-page="anchor"><h3>7. The Anchor</h3><p>The Power of Prayer</p></div>
-                    <div class="toc-item" data-page="course-synopsis"><h3>8. Course Synopsis</h3><p>All Your First Semester Courses</p></div>
-                    <div class="toc-item" data-page="materials"><h3>9. Course Materials</h3><p>Access All Study Materials</p></div>
-                    <div class="toc-item" data-page="departmental"><h3>10. Departmental Courses</h3><p>Know Your Specific Courses</p></div>
-                    <div class="toc-item" onclick="window.location.href='marketplace.html'"><h3>11. FUTA Marketplace</h3><p>Student Services & Business Directory</p></div>
-                    <div class="toc-item" data-page="contact"><h3>12. Contact</h3><p>Get in Touch</p></div>
-                    <div class="toc-item" onclick="window.location.href='second-semester.html'" style="background:#e3f2fd; border-color:var(--primary);">
-                        <h3>📖 Second Semester Guide</h3>
-                        <p>100L Second Semester Survival Guide (April 2026 Edition)</p>
-                        <small style="color: var(--primary); font-weight:bold;">CCMAS Update • Course Breakdown • Study Strategies</small>
+                    <div class="document-card">
+                        <h4><i class="fas fa-university"></i> JAMB Admission Letter</h4>
+                        <p style="font-size:0.9rem;">Official JAMB approval of your admission into FUTA</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-graduation-cap"></i> Testimonial</h4>
+                        <p style="font-size:0.9rem;">Secondary school leaving certificate</p>
+                        <div class="document-requirement physical">Physical Registration</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-chart-bar"></i> UTME Result Slip</h4>
+                        <p style="font-size:0.9rem;">Original JAMB score slip</p>
+                        <div class="document-requirement physical">Physical Registration</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-award"></i> WAEC Certificate</h4>
+                        <p style="font-size:0.9rem;">Original O'Level certificate</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-user-check"></i> Attestation Letter</h4>
+                        <p style="font-size:0.9rem;">Character reference letter</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-gavel"></i> Court Affidavit</h4>
+                        <p style="font-size:0.9rem;">Sworn declaration against cult membership</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-birthday-cake"></i> Birth Certificate</h4>
+                        <p style="font-size:0.9rem;">Official birth declaration</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-id-card"></i> Passport Photographs</h4>
+                        <p style="font-size:0.9rem;">20 recommended, white/red background</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-file-contract"></i> Bio-Data Form</h4>
+                        <p style="font-size:0.9rem;">4-page form filled online</p>
+                        <div class="document-requirement both">Online & Physical</div>
+                    </div>
+                    <div class="document-card">
+                        <h4><i class="fas fa-id-card-alt"></i> Local Government ID</h4>
+                        <p style="font-size:0.9rem;">Certificate of identification from LGA</p>
+                        <div class="document-requirement both">Online & Physical</div>
                     </div>
                 </div>
-                <div class="page-nav"><a href="#" class="page-btn" data-page="message">← Previous</a><a href="#" class="page-btn" data-page="registration">Next: Registration Guide →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="registration">← Previous</a><a class="page-btn" data-page="great-shift">Next: The Great Shift →</a></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="registration" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">1. Complete Registration Guide</h2>
-                <div class="card">
-                    <h3 style="color:var(--primary);">Your Registration Journey Begins November 24, 2025</h3>
-                    <p>On this date, your FUTA journey officially begins. The registration process is your first major challenge, and this guide will help you navigate it successfully.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">📅 Important Registration Timeline for 2025/26 Admission</h3>
-                        <p><strong>November 17, 2025:</strong> Undergraduate portal opens for online registrations and BIO-DATA FORM download</p>
-                        <p><strong>November 24, 2025:</strong> Physical registration begins</p>
-                        <p class="quote">"Proper preparation prevents poor performance. Start your registration process early!"</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">The BIO-DATA Form - Your First Challenge</h3>
-                    <p>The BIO-DATA form is the most tedious part of your registration. On the back page, you'll find six names with spaces for signatures:</p>
-                    
-                    <div class="signature-list">
-                        <ol style="margin-left: 1.5rem;">
-                            <li><strong>Your School Officer</strong> - General officer who signs for all students</li>
-                            <li><strong>Your Registration Officer</strong> - Department-specific officer</li>
-                            <li><strong>Your Head of Department (HOD)</strong> - Head of your department</li>
-                            <li><strong>Your Dean of School</strong> - Head of your faculty</li>
-                            <li><strong>Dean of Students' Affairs Division</strong></li>
-                            <li><strong>The School Registrar</strong></li>
-                        </ol>
-                    </div>
-                    <p><strong>Location Guide:</strong> The first four signatures are from your faculty building, while the last two are outside your faculty.</p>
-
-                    <h3 style="color:var(--primary); margin-top: 2.5rem;">Step-by-Step Registration Process</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 1: School Officer <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 2: Registration Officer <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Every department has its own registration officer. This person handles registration for your department specifically.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 3: Head of Department (HOD) <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">You should already know your HOD's name by now. If you don't, find out immediately! This is the head of your department.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 4: Dean of School <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">The Dean is the highest authority in your faculty. You might not see them physically during registration. Some might need to submit the form and return later (next day or whenever ready) to collect.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 5: Students' Affairs Division <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Once you have the Dean's signature, proceed to Students' Affairs. <strong>Dress formally for this step!</strong> After conquering this part, you can wear whatever you like.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Step 6: Final Submission <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Return to your faculty for final submission. You'll submit your file for the School Registrar.</div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">Registration Rules & Etiquette</h3>
-                    <div class="battle-plan-grid">
-                        <div class="battle-plan-card">
-                            <h4>👔 Dress Code</h4>
-                            <ul style="margin-left: 1rem; color:var(--gray-700);">
-                                <li>Dress as neatly as possible</li>
-                                <li>Have a good haircut or hairdo</li>
-                                <li>No need to overdress</li>
-                                <li>When going to Students' Affairs, dress formally</li>
-                            </ul>
-                        </div>
-                        <div class="battle-plan-card">
-                            <h4>🗣️ Communication</h4>
-                            <ul style="margin-left: 1rem; color:var(--gray-700);">
-                                <li>Speak "most-politely" to all officials</li>
-                                <li>Listen to instructions carefully</li>
-                                <li>Ask questions respectfully when confused</li>
-                                <li>Be patient and understanding</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">💼 Financial Preparation</h3>
-                    <div class="money-breakdown">
-                        <h4 style="color:var(--primary);">💰 Recommended Budget: ₦20,000 (Cash or Bank Transfer)</h4>
-                        <p><em>Note: Actual costs may vary by faculty.</em></p>
-                        <ul style="margin-left: 1.5rem; margin-top: 10px;">
-                            <li><strong>Faculty Dues</strong> - Payment to your faculty</li>
-                            <li><strong>Departmental Dues</strong> - Payment to your department</li>
-                            <li><strong>Engineering Students:</strong> Blue Lab Coat</li>
-                            <li><strong>Faculty File</strong> - Official file for your faculty</li>
-                            <li><strong>Departmental File</strong> - Official file for your department</li>
-                        </ul>
-                        <p style="margin-top: 15px;"><strong>📌 Important Reminders:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li><em>Carry both cash and digital payment options:</em> Some payments may only be accepted via bank transfer, while others may require cash.</li>
-                            <li><em>Confirm with your faculty:</em> Each department may have specific requirements or additional charges. It's best to check with your faculty representatives or notice boards upon arrival.</li>
-                            <li><em>Keep receipts:</em> Always collect and keep receipts for every payment made. They may be required for verification later.</li>
-                        </ul>
-                    </div>
-
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">Document Preparation</h3>
-                    <p>During physical registration, all your documents will be screened. If you're missing any required documents, you'll be sent back. Prepare all necessary documents in advance!</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">💡 Pro Tips for Successful Registration</h3>
-                        <ul style="margin-left: 1.5rem; margin-top:10px;">
-                            <li><strong>Start early</strong> - Avoid the last-minute rush</li>
-                            <li><strong>Ask a senior</strong> - They know the process and can guide you</li>
-                            <li><strong>Be patient</strong> - Registration can take time, especially at busy offices</li>
-                            <li><strong>Double-check everything</strong> - Ensure all documents are complete</li>
-                            <li><strong>Network with coursemates</strong> - Share information and help each other</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="toc">← Previous</a><a href="#" class="page-btn" data-page="documents">Next: Required Documents →</a></div>
+    <section id="great-shift" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">3. The Great Shift: Embracing University Autonomy</h2>
+            <div class="card">
+                <p>The first lesson of university life is self-leadership. You are now the CEO of your education and your future.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🚀 From Passenger to Pilot</h3>
+                    <p>In secondary school, you were following a set path. At FUTA, you're charting your own course.</p>
+                    <p class="quote">"The greatest day in your life is when you take total responsibility for yourself." - Denis Waitley</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="documents" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">2. Required Documents for Registration</h2>
-                <div class="card">
-                    <h3 style="color:var(--primary);">Complete Document Checklist</h3>
-                    <p>Prepare these documents in advance to ensure a smooth registration process. Make at least 5 photocopies of each document.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">📋 Document Preparation Guide</h3>
-                        <p><strong>Online Registration First:</strong> Upload clear scans of all documents to the FUTA portal</p>
-                        <p><strong>Physical Registration Second:</strong> Bring originals and photocopies for verification</p>
-                        <p><strong>Important:</strong> Originals will be returned after inspection</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top: 2rem;">Essential Registration Documents</h3>
-                    <div class="documents-grid">
-                        <div class="document-card">
-                            <h4><i class="fas fa-file-alt"></i> FUTA Admission Letter</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Official admission letter from FUTA with your department and course details</p>
-                            <div class="document-requirement physical">Physical Registration</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> Download from student portal after paying acceptance fee</li>
-                                <li><strong>Cost of acceptance fee:</strong> ₦50,000(previous session)</li>
-                                <li><strong>Copies needed:</strong> 5 copies</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-university"></i> JAMB Admission Letter</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Official JAMB approval of your admission into FUTA</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> Print from JAMB portal</li>
-                                <li><strong>Format:</strong> 2-page document (Original & Duplicate)</li>
-                                <li><strong>Use:</strong> Duplicate for registration, Original for scholarships</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-graduation-cap"></i> Testimonial</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Secondary school leaving certificate verifying your conduct and attendance</p>
-                            <div class="document-requirement physical">Physical Registration</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> From your secondary school</li>
-                                <li><strong>Availability:</strong> Depends on your former school</li>
-                                <li>Provides secondary verification of your academic history</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-chart-bar"></i> UTME Result Slip</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Original JAMB score slip proving you met the cutoff mark</p>
-                            <div class="document-requirement physical">Physical Registration</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> Print from JAMB portal</li>
-                                <li>Primary evidence of meeting academic requirements</li>
-                                <li>Required for physical registration verification</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-award"></i> WAEC Certificate</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Original O'Level certificate (not result slip)</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> From your exam center/school</li>
-                                <li><strong>If unavailable:</strong> Use Statement of Result</li>
-                                <li><strong>For two sittings:</strong> Get both certificates but if the two are not available, get one certificate and statement of result for the second</li>
-                                <li>Ultimate proof of basic qualifications</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-user-check"></i> Attestation Letter</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Character reference letter from authority figure</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> From principal, religious leader, or community leader</li>
-                                <li><strong>Format:</strong> Must be on letter-headed paper</li>
-                                <li>Provides extra verification of your character</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-gavel"></i> Court Affidavit</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Sworn declaration against secret cult membership</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> Inside FUTA or any High Court</li>
-                                <li><strong>Process:</strong> Fill information, get signature and red seal</li>
-                                <li>Legal safeguard for the university</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-birthday-cake"></i> Birth Certificate</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Official document declaring your date of birth</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>How to get:</strong> From birth registry or declaration center</li>
-                                <li>Confirms minimum age requirement</li>
-                                <li>Key data for permanent student record</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-id-card"></i> Passport Photographs</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Recent standardized passport photos</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>Specifications:</strong> White or red background</li>
-                                <li><strong>Copies needed:</strong> 20 recommended</li>
-                                <li><strong>Use:</strong> Faculty/department records, library card, health center</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-file-contract"></i> Bio-Data Form</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">4-page form with personal details filled online</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>Process:</strong> Fill online during registration</li>
-                                <li><strong>Important:</strong> Page 4 must have signatures</li>
-                                <li><strong>Timeline:</strong> Takes 2-5 days to complete</li>
-                                <li>Creates official student file and digital record</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="document-card">
-                            <h4><i class="fas fa-id-card-alt"></i> Local Government ID</h4>
-                            <p style="font-size:0.9rem; margin-bottom:10px;">Certificate of identification from your LGA</p>
-                            <div class="document-requirement both">Online & Physical</div>
-                            <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
-                                <li><strong>Cruciality:</strong> Highly important</li>
-                                <li><strong>Copies needed:</strong> 5 copies sufficient</li>
-                                <li>Required for both online and physical registration</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">💡 Document Assistance Available</h3>
-                        <p>I can help you obtain JAMB Admission Letter, UTME Result Slip, and WAEC Certificate at an affordable fee. Send me a DM for quick and reliable service.</p>
-                        <p style="margin-top: 10px;"><strong>Abideen Yakub Opeyemi (O'yemi) - +2347050376975</strong></p>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="registration">← Previous</a><a href="#" class="page-btn" data-page="great-shift">Next: The Great Shift →</a></div>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">You Are in Charge <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your lecturers are guides, not taskmasters. The drive must come from within.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Master Your Time <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The freedom you now have is your greatest tool, or your biggest trap.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Own Your Decisions <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every choice shapes your FUTA experience and your future.</div></div>
                 </div>
+                <div class="page-nav"><a class="page-btn" data-page="documents">← Previous</a><a class="page-btn" data-page="academic-playbook">Next: Academic Playbook →</a></div>
             </div>
-        </section>
-          <section id="great-shift" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">3. The Great Shift: Embracing University Autonomy</h2>
-                <div class="card">
-                    <p>The first lesson of university life is self-leadership. You are now the CEO of your education and your future.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🚀 From Passenger to Pilot</h3>
-                        <p>In secondary school, you were following a set path. At FUTA, you're charting your own course. This shift from dependence to independence is your first and most important lesson.</p>
-                        <p class="quote">"The greatest day in your life is when you take total responsibility for yourself." - Denis Waitley</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Key Principles for Success</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">You Are in Charge <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Your lecturers are guides, not taskmasters. The drive to attend lectures, complete assignments, and delve deeper into topics must come from within.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Master Your Time <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">The freedom you now have is your greatest tool, or your biggest trap. Create a realistic schedule that balances academics, personal growth, and rest.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Own Your Decisions <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Every choice - from which lectures to attend to how you spend your evenings - shapes your FUTA experience and your future.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="documents">← Previous</a><a href="#" class="page-btn" data-page="academic-playbook">Next: Academic Playbook →</a></div>
+        </div>
+    </section>
+
+    <section id="academic-playbook" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">4. Your Academic Playbook</h2>
+            <div class="card">
+                <p>Your number one goal is academic excellence. To achieve this, you need a strategy.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🎓 P5 Principle: Proper Preparation Prevents Poor Performance</h3>
+                    <p class="quote">"The will to win is nothing without the will to prepare." - Juma Ikangaa</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="academic-playbook" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">4. Your Academic Playbook for a First-Class Journey</h2>
-                <div class="card">
-                    <p>Your number one goal is academic excellence. To achieve this, you need a strategy.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🎓 P5 Principle: Proper Preparation Prevents Poor Performance</h3>
-                        <p>Success in FUTA isn't about being the smartest - it's about being the most prepared, consistent, and resilient. Your daily habits determine your semester results.</p>
-                        <p class="quote">"The will to win is nothing without the will to prepare." - Juma Ikangaa</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">Course-by-Course Battle Plan</h3>
-                    <div class="battle-plan-grid">
-                        <div class="battle-plan-card">
-                            <h4>BIO 101: General Biology I <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes regularly</li>
-                                <li>Complete all assignments and class works</li>
-                                <li>Read course materials thoroughly</li>
-                                <li>Prepare for CBT and CBE examinations</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>BIO 103/107: General Biology Practical <span class="exam-type">CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all practical classes</li>
-                                <li>Complete lab reports very well</li>
-                                <li>Buy practical manuals</li>
-                                <li>No test, but CBE exam at the end</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>MTH 101: Elementary Mathematics I <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes and tutorial sessions</li>
-                                <li>Buy and study the tutorial manual thoroughly</li>
-                                <li>Complete all assignments (online and physical)</li>
-                                <li>Practice class works regularly</li>
-                                <li>Develop speed and accuracy for time-limited CBT exams</li>
-                            </ul>
-                        </div>
-
-                        <div class="battle-plan-card">
-                            <h4>FMTH 103: Elementary Mathematics III <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes and tutorial sessions</li>
-                                <li>Buy and study the tutorial manual thoroughly</li>
-                                <li>Complete all assignments (online and physical)</li>
-                                <li>Practice class works regularly</li>
-                                <li>Test and Exam times are limited, try and solve all the questions in your tutorial manual before the day</li>
-                                <li>Develop speed and accuracy for time-limited CBT exams</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>FMEE 101: Engineering Drawing I <span class="exam-type">Written</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes without missing any</li>
-                                <li>Buy the practical manual</li>
-                                <li>Complete class exercises as the lecturer draws</li>
-                                <li>Submit drawings immediately after class (even if incomplete)</li>
-                                <li>Ensure border lines and title blocks are properly done</li>
-                                <li>Complete all assignments on time</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>GNS 101/GST 111: Use of English I <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes regularly</li>
-                                <li>Complete all online assignments (forum posts)</li>
-                                <li>Stay active and organized on your Telegram group</li>
-                                <li>Focus on application and understanding of coursework</li>
-                                <li>Complete all class works diligently</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>FGNS 103: Information Literacy <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes</li>
-                                <li>Complete all class works and assignments</li>
-                                <li>Make sure you attend the library tour (easy marks)</li>
-                                <li>Exam is straightforward - focus on basic concepts</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>CSC 101/COS 101: Intro to Computer Sci <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all theoretical and practical classes</li>
-                                <li>Buy and study practical manuals</li>
-                                <li>Perform well in practical tests</li>
-                                <li>Complete all assignments thoroughly</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>PHY 101 & 103: General Physics <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes without missing</li>
-                                <li>Buy manuals and complete assignments at the back</li>
-                                <li>Read your coursework very well</li>
-                                <li>Focus on objective questions preparation</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>CHE 101/FCHE 101: General Chemistry I <span class="exam-type">CBE/CBT</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes regularly</li>
-                                <li>Buy tutorials manual</li>
-                                <li>Go to tutorial classes and complete all exercises</li>
-                                <li>Read your coursework thoroughly</li>
-                                <li>Focus on objective questions preparation</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>GET 101: Engineers In Society <span class="exam-type">CBT/CBE</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Attend all classes</li>
-                                <li>Buy and study the prescribed manual thoroughly</li>
-                                <li>Pay for the sympossiun ontime</li>
-                                <li>Use AI to generative practice questions from the manual</li>
-                                <li>Review your test and exam questions thoroughly before submission</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="battle-plan-card">
-                            <h4>CHE 103/107 & PHY 107: Practicals <span class="exam-type">CBE/Online</span></h4>
-                            <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">
-                                <li>Buy practical manuals for both courses</li>
-                                <li>Attend all practical classes</li>
-                                <li>Submit all lab reports on time</li>
-                                <li>Complete all online practicals for PHY 107</li>
-                                <li>No test for PHY 107, but online practicals count</li>
-                                <li>CBE exam for CHE 103 - study your manuals well</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">Benefits of Attending Classes</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">Attendance Marks <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Some courses award marks for class attendance, which contributes to your final grade</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Better Understanding <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Lecturers explain concepts in ways that textbooks can't, helping you understand better</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Ask Questions <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Get immediate clarification on confusing topics directly from the expert</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Test Structure <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Learn the exam format - whether it's objectives, MCQs, or German (fill-in-the-gaps)</div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2.5rem;">Exam and Test Strategy</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">📝 Before Tests/Exams <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">
-                                <ul style="margin-left: 1rem;">
-                                    <li>Start preparation early - don't wait till the last minute</li>
-                                    <li>Create a study schedule and stick to it</li>
-                                    <li>Practice with past questions</li>
-                                    <li>Get enough sleep the night before</li>
-                                    <li>Prepare all necessary materials in advance</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">📅 On Test/Exam Day <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">
-                                <ul style="margin-left: 1rem;">
-                                    <li>Arrive early to the venue</li>
-                                    <li>Stay calm and focused</li>
-                                    <li>Read instructions carefully</li>
-                                    <li>Manage your time effectively</li>
-                                    <li>For CBT: Practice speed and accuracy</li>
-                                    <li>For written: Write legibly and show your workings</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">📊 After Tests/Exams <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">
-                                <ul style="margin-left: 1rem;">
-                                    <li>Gather questions from friends immediately after</li>
-                                    <li>These questions often reappear in final exams</li>
-                                    <li>Don't make the same mistake twice</li>
-                                    <li>Analyze your performance and learn from mistakes</li>
-                                    <li>Start preparing for the next assessment immediately</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">💡 Important Reminder</h3>
-                        <p>For both computer-based and written exams, immediately after your test, gather questions from your friends that you remember. These are likely to come out in the final exam. Don't miss this opportunity twice!</p>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="great-shift">← Previous</a><a href="#" class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
+                <h3 style="color:var(--primary); margin-top:2.5rem;">Course-by-Course Battle Plan</h3>
+                <div class="battle-plan-grid" id="battlePlanGrid">
+                    <div class="loading-skeleton" style="height: 200px;"></div>
+                    <div class="loading-skeleton" style="height: 200px;"></div>
+                    <div class="loading-skeleton" style="height: 200px;"></div>
                 </div>
+                <div class="page-nav"><a class="page-btn" data-page="great-shift">← Previous</a><a class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
             </div>
-        </section>
-          <section id="beyond-books" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">5. Beyond the Books: Building a Complete Life</h2>
-                <div class="card">
-                    <p>FUTA offers more than a certificate. It offers an experience that will shape your character and future.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🌟 Your Education Extends Beyond the Classroom</h3>
-                        <p>The most valuable lessons often happen outside lecture halls - in student organizations, late-night discussions with roommates, and challenges you overcome together.</p>
-                        <p class="quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Building Your Complete FUTA Experience</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">Network Intentionally <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">The friends you make here will be your professional network for life. Connect with people who challenge and inspire you.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Get Involved <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Join a club, society, or sports team. It builds character, leadership, and lifelong friendships.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Prioritize Your Well-being <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Your mental and physical health are critical. Eat well, exercise, sleep, and seek help when needed.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Develop Soft Skills <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Communication, teamwork, and time management are as important as your technical knowledge.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="academic-playbook">← Previous</a><a href="#" class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a></div>
+        </div>
+    </section>
+
+    <section id="beyond-books" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">5. Beyond the Books</h2>
+            <div class="card">
+                <p>FUTA offers more than a certificate. It offers an experience that will shape your character and future.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🌟 Your Education Extends Beyond the Classroom</h3>
+                    <p class="quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="navigating-storms" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">6. Navigating the Storms: You Are Not Alone</h2>
-                <div class="card">
-                    <p>There will be difficult days. Challenging courses, overwhelming workloads, and personal struggles are part of the journey.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">⚡ Storms Make Better Sailors</h3>
-                        <p>Every successful FUTA graduate has faced challenges. What separates them is not the absence of storms, but their ability to navigate through them.</p>
-                        <p class="quote">"The oak fought the wind and was broken, the willow bent when it must and survived." - Robert Jordan</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Your Support System</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">FUTA Student Union Govt (FUTASUG) <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Your representatives are here to help with academic and welfare issues.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Departmental Associations & Seniors <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Connect with seniors who've walked your path. Don't hesitate to ask for guidance from those ahead of you.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Lecturers & Course Advisors <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Most lecturers are willing to help students who show genuine interest. Your course advisor and Student Affairs division offer professional help when needed.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Religious Groups <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">The heads in your religious bodies are also there to help you.</div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Turning Setbacks into Comebacks</h3>
-                    <p><strong>Failure is Feedback:</strong> A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something - what matters is what they learned from it.</p>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="beyond-books">← Previous</a><a href="#" class="page-btn" data-page="anchor">Next: The Anchor →</a></div>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">Network Intentionally <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The friends you make here will be your professional network for life.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Get Involved <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Join a club, society, or sports team.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Prioritize Your Well-being <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your mental and physical health are critical.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Develop Soft Skills <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Communication, teamwork, and time management.</div></div>
                 </div>
+                <div class="page-nav"><a class="page-btn" data-page="academic-playbook">← Previous</a><a class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="anchor" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">7. The Anchor: The Power of Prayer</h2>
-                <div class="card">
-                    <p>In the midst of the pressure, never underestimate the power of faith and prayer. Let it be your source of strength, peace, and guidance.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🙏 Your Spiritual "P" - The Ultimate Game Changer</h3>
-                        <p>While you're studying hard and preparing thoroughly, remember that some battles are won on your knees. Your spiritual foundation will sustain you when everything else feels unstable.</p>
-                        <p class="quote">"You can't do without having Problems, but Prayer is a solution to Problem, and you'll be Passed."</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Integrating Faith into Your FUTA Journey</h3>
-                    <div class="accordion-container">
-                        <div class="accordion-item">
-                            <div class="accordion-header">Start Your Day Right <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Begin each day with prayer and meditation to set the right tone.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Faith During Challenges <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">When facing difficult courses or personal struggles, turn to prayer for strength and guidance.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Gratitude & Balance <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Regularly give thanks for the opportunity to study at FUTA. Remember that "faith without works is dead" - pray like it depends on God, work like it depends on you.</div>
-                        </div>
-                        <div class="accordion-item">
-                            <div class="accordion-header">Campus Fellowship <i class="fas fa-chevron-down"></i></div>
-                            <div class="accordion-content">Join one of the many religious groups on campus for community and support.</div>
-                        </div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Your Final Charge, Class '29</h3>
-                    <p>You are the architects of the future. The world is waiting for the solutions you will design, the technologies you will build, and the leadership you will provide. It all starts here, at FUTA.</p>
-                    <p>Take relentless <strong>ACTION</strong>. Be an unstoppable <strong>FORCE</strong>. Apply the <strong>P5</strong> principle daily. And anchor it all in Prayer.</p>
-                    <p style="font-size:1.2rem; margin-top:10px; color:var(--primary);"><strong>Your time is now. Make it legendary.</strong></p>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="navigating-storms">← Previous</a><a href="#" class="page-btn" data-page="course-synopsis">Next: Course Synopsis →</a></div>
+    <section id="navigating-storms" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">6. Navigating the Storms</h2>
+            <div class="card">
+                <p>There will be difficult days. Challenging courses, overwhelming workloads, and personal struggles are part of the journey.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">⚡ Storms Make Better Sailors</h3>
+                    <p class="quote">"The oak fought the wind and was broken, the willow bent when it must and survived."</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="course-synopsis" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">8. Course Synopsis</h2>
-                <div class="course-grid">
-                    </div>
-                <div class="page-nav"><a href="#" class="page-btn" data-page="anchor">← Previous</a><a href="#" class="page-btn" data-page="materials">Next: Course Materials →</a></div>
-            </div>
-        </section>
-        <section id="materials" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">9. Course Materials</h2>
-                <div class="card">
-                    <h3 style="color:var(--primary);">Access All Your Course Materials</h3>
-                    <p>Click on any course below to access its specific materials on Google Drive.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">📚 Direct Access to Course Resources</h3>
-                        <p>Each course has its own dedicated folder with organized materials. Click on any course to go directly to its specific resources.</p>
-                        <p class="quote">"Organization is the key to effective studying. Having materials properly sorted by course saves valuable time."</p>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">Available Course Materials</h3>
-                    <div class="materials-grid">
-                        </div>
-                    
-                    <div style="text-align: center; margin: 2rem 0;">
-                        <a href="https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ" class="btn btn-drive" target="_blank">
-                            📁 Access Main Materials Folder
-                        </a>
-                    </div>
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="course-synopsis">← Previous</a><a href="#" class="page-btn" data-page="departmental">Next: Departmental →</a></div>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">FUTA Student Union Govt (FUTASUG) <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your representatives are here to help with academic and welfare issues.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Departmental Associations & Seniors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Connect with seniors who've walked your path.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Lecturers & Course Advisors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Most lecturers are willing to help students who show genuine interest.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Religious Groups <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The heads in your religious bodies are also there to help you.</div></div>
                 </div>
+                <div class="page-nav"><a class="page-btn" data-page="beyond-books">← Previous</a><a class="page-btn" data-page="anchor">Next: The Anchor →</a></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="departmental" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">10. Departmental Courses Information</h2>
-                <div class="card">
-                    <h3 style="color:var(--primary);">Understanding Your Course Structure</h3>
-                    <p>The courses listed in this guide are the <strong>general courses</strong> that almost all FUTA students take in their first year. However, depending on your department, you may also have specific departmental courses.</p>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">🎯 Important Notice About Your Courses</h3>
-                        <p><strong>Some departments start their specialized courses from 100 level!</strong> While the courses in this guide are essential for all students, you need to check your specific departmental requirements.</p>
-                    </div>
-
-                    <h3 style="color:var(--primary); margin-top:2rem;">Common Departmental Courses in First Year</h3>
-                    <p>Depending on your department, you might encounter courses like:</p>
-                    <div class="accordion-container" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap:10px;">
-                        <div class="document-requirement online" style="text-align:center;">EEE 101</div>
-                        <div class="document-requirement online" style="text-align:center;">ARC 101</div>
-                        <div class="document-requirement online" style="text-align:center;">BCH 101</div>
-                        <div class="document-requirement online" style="text-align:center;">AGY 101</div>
-                        <div class="document-requirement online" style="text-align:center;">CPE 101</div>
-                        <div class="document-requirement online" style="text-align:center;">FST 101</div>
-                        <div class="document-requirement online" style="text-align:center;">MET 101</div>
-                        <div class="document-requirement online" style="text-align:center;">MEE 101</div>
-                        <div class="document-requirement online" style="text-align:center;">MNE 101</div>
-                        <div class="document-requirement online" style="text-align:center;">MTH 101</div>
-                    </div>
-                    
-                    <h3 style="color:var(--primary); margin-top:2rem;">How to Know Your Exact Courses</h3>
-                    <ul style="margin-left:1.5rem; color:var(--gray-700);">
-                        <li><strong>Check your course form during course registration</strong> - Carefully review all courses assigned to you during online registration</li>
-                        <li><strong>Consult 200 Level Students:</strong> Reach out to seniors in your department - they've been through this before</li>
-                        <li><strong>Departmental Notice Boards:</strong> Check for course information posted by your department</li>
-                        <li><strong>Ask Your Course Adviser:</strong> Each department has course advisers for fresh students</li>
-                    </ul>
-                    
-                    <div class="inspirational-box">
-                        <h3 style="color:var(--primary);">💡 Take Your Departmental Courses Seriously!</h3>
-                        <p>Your departmental courses form the foundation of your specialized knowledge. Don't make the mistake of focusing only on general courses while neglecting your core departmental subjects. These courses:</p>
-                        <ul style="margin-left:1.5rem; margin-top:10px;">
-                            <li>Build your technical foundation</li>
-                            <li>Introduce you to your field of study</li>
-                            <li>Prepare you for advanced courses</li>
-                            <li>Often have higher credit units</li>
-                        </ul>
-                        <p class="quote">"The expert in anything was once a beginner. Start strong with your departmental courses!"</p>
-                    </div>
-
-                    <h3 style="color:var(--primary); margin-top:2rem;">Attend Classes to Know Your Exam Structure</h3>
-                    <p>Make sure to attend your departmental course classes regularly. This is how you'll discover:</p>
-                    <ul style="margin-left:1.5rem; color:var(--gray-700);">
-                        <li>Whether you'll be taking tests or exams</li>
-                        <li>The type of examination (CBT, written, practical)</li>
-                        <li>The course requirements and expectations</li>
-                        <li>Important announcements about assessments</li>
-                    </ul>
-
-                    <h3 style="color:var(--primary); margin-top:2rem;">Need Help?</h3>
-                    <p>If you're unsure about your departmental courses or who to ask:</p>
-                    <ul style="margin-left:1.5rem; color:var(--gray-700);">
-                        <li><strong>Check your course form during registration</strong></li>
-                        <li><strong>Reach out to me directly</strong> - I can help connect you with the right people</li>
-                        <li><strong>Join your departmental WhatsApp group</strong> - this is where important information is shared</li>
-                        <li><strong>Visit your department office</strong> - the administrative staff can guide you</li>
-                        <li><strong>Attend departmental orientation</strong> - don't miss this important event</li>
-                    </ul>
-
-                    <div style="text-align: center; margin: 2rem 0; font-size:1.1rem; color:var(--primary);">
-                        <p><strong>Remember:</strong> Your first year sets the tone for your entire FUTA journey. Start strong, ask questions, and build good academic habits from day one!</p>
-                    </div>
-                    
-                    <div class="page-nav"><a href="#" class="page-btn" data-page="materials">← Previous</a><a href="#" class="page-btn" data-page="marketing">Next: Marketplace →</a></div>
+    <section id="anchor" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">7. The Anchor: The Power of Prayer</h2>
+            <div class="card">
+                <p>In the midst of the pressure, never underestimate the power of faith and prayer.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🙏 Your Spiritual "P"</h3>
+                    <p class="quote">"You can't do without having Problems, but Prayer is a solution to Problem, and you'll be Passed."</p>
                 </div>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">Start Your Day Right <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Begin each day with prayer and meditation.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Faith During Challenges <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Turn to prayer for strength and guidance.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Gratitude & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">"Faith without works is dead" - pray like it depends on God, work like it depends on you.</div></div>
+                </div>
+                <div class="page-nav"><a class="page-btn" data-page="navigating-storms">← Previous</a><a class="page-btn" data-page="course-synopsis">Next: Course Synopsis →</a></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="marketing" class="content-section content-page">
-            <div class="container">
-                <div class="marketplace-header" style="text-align: center; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary) 0%, #001a33 100%); color: white; padding: 3rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                    <h2 class="section-title" style="color: white; margin-bottom: 1rem; border-bottom:none;">FUTA Marketplace</h2>
-                    <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">
-                        Connect with trusted FUTArians for services, accommodation, food, printing, and academic support.
-                    </p>
-                    <a href="marketplace.html" class="btn" style="background: var(--accent); color: var(--primary); font-size: 1.1rem; padding: 15px 30px; box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);">
-                        <i class="fas fa-store"></i> Visit The Marketplace
+    <section id="course-synopsis" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">8. Course Synopsis (First Semester 100L)</h2>
+            <div class="course-grid" id="courseGrid">
+                <div class="loading-skeleton" style="height: 220px;"></div>
+                <div class="loading-skeleton" style="height: 220px;"></div>
+                <div class="loading-skeleton" style="height: 220px;"></div>
+            </div>
+            <div class="page-nav"><a class="page-btn" data-page="anchor">← Previous</a><a class="page-btn" data-page="materials">Next: Course Materials →</a></div>
+        </div>
+    </section>
+
+    <section id="materials" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">9. Course Materials</h2>
+            <div class="card">
+                <h3 style="color:var(--primary);">Access All Your Course Materials</h3>
+                <p>Click on any course below to access its specific materials on Google Drive.</p>
+                <div class="materials-grid" id="materialsGrid">
+                    <div class="loading-skeleton" style="height: 140px;"></div>
+                    <div class="loading-skeleton" style="height: 140px;"></div>
+                </div>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <a href="https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ" class="btn btn-drive" target="_blank">
+                        📁 Access Main Materials Folder
                     </a>
                 </div>
-                
-                <div class="page-nav">
-                    <a href="#" class="page-btn" data-page="departmental">← Previous</a>
-                    <a href="#" class="page-btn" data-page="contact">Next: Contact →</a>
-                </div>
+                <div class="page-nav"><a class="page-btn" data-page="course-synopsis">← Previous</a><a class="page-btn" data-page="departmental">Next: Departmental →</a></div>
             </div>
-        </section>
-
-        <section id="contact" class="content-section content-page">
-            <div class="container">
-                <h2 class="section-title">Contact</h2>
-                <div class="card" style="text-align: center;">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Your Senior Fellow FUTArian</h3>
-                    <p style="font-size:1.2rem; font-weight:bold;">Abideen Yakub Opeyemi (Ó'YẸMÍ)</p>
-                    <p style="margin: 10px 0;"><i class="fas fa-phone"></i> Phone: <strong>+2347050376975</strong></p>
-                    <p><i class="fas fa-envelope"></i> Email: abideenyakub08@gmail.com</p>
-                    
-                    <div class="inspirational-box" style="text-align:left;">
-                        <h3 style="color:var(--primary);">💬 I'm Here to Help!</h3>
-                        <p>Don't hesitate to reach out if you have questions, need clarification, or just want to connect with a senior who's been through what you're experiencing now.</p>
-                        <p class="quote">"Alone we can do so little; together we can do so much." - Helen Keller</p>
-                    </div>
-
-                    <div class="inspirational-box" style="text-align:left;">
-                        <h3 style="color:var(--primary);">💬 Join Our Community</h3>
-                        <p>Connect with other FUTA students in our WhatsApp group for real-time updates, questions, and support!</p>
-                        <div style="text-align:center; margin-top:15px;">
-                            <a href="https://chat.whatsapp.com/EhrUKMAGOnNEZYD1QvVnSs" class="btn btn-whatsapp" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="inspirational-box" style="text-align: left; margin-top: 3rem; background: var(--light); border-left:5px solid var(--primary);">
-                        <h3 style="color: var(--primary);"><i class="fas fa-paper-plane"></i> Send Feedback</h3>
-                        <p>Please share your thoughts, suggestions, or any questions you have about the guide...</p>
-                        <form id="feedbackForm" style="margin-top: 1rem;">
-                            <div class="compact-row">
-                                <div class="compact-group"><label>Your Name</label><input type="text" id="feedbackName" required></div>
-                                <div class="compact-group"><label>Your Email</label><input type="email" id="feedbackEmail" required></div>
-                            </div>
-                            <div class="compact-group">
-                                <label>Your Message</label>
-                                <textarea id="feedbackMessage" rows="3" style="width: 100%; border: 1px solid var(--gray-300); border-radius: 8px; padding: 10px;" required></textarea>
-                            </div>
-                            <button type="submit" id="feedbackSubmitBtn" class="btn">Send Feedback</button>
-                        </form>
-                        <div id="feedbackMessageDiv"></div>
-                    </div>
-                    
-                    <div style="margin: 2rem 0;">
-                        <h3 style="margin-bottom:1rem; color:var(--primary);">Found This Guide Helpful?</h3>
-                        <p style="margin-bottom:1rem;">Let me know! Your feedback helps me improve this resource for future students.</p>
-                        <button class="btn btn-whatsapp" onclick="window.open('https://wa.me/2347050376975?text=Hello%20O\'yemi,%20I%20found%20the%20FUTA%20Survival%20Guide%20very%20helpful!', '_blank')"><i class="fab fa-whatsapp"></i> Send Appreciation via WhatsApp</button>
-                       
-                    </div>
-                     <div class="page-nav"><a href="#" class="page-btn" data-page="home">← Go back home </a><a onclick="window.location.href='second-semester.html'">Go to Second Semester Guide→</a></div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="container footer-content">
-            <p>Federal University of Technology, Akure | Welcome, Class of '29!</p>
-            <p>&copy; 2025 FUTA Survival Guide. Compiled by Abideen Yakub Opeyemi (Ó'YẸMÍ).</p>
-            <div style="margin-top: 15px;"><a href="admin.html" style="color: white; opacity: 0.6;"><i class="fas fa-lock"></i> Admin</a></div>
         </div>
-    </footer>
-     <script>
-        // Core Course Data for Generation
-        const courses = [
-            { code: "BIO 101", title: "General Biology I", icon: "dna", topics: ["Cell & Molecular Biology: Cell structure and organization, Functions of cellular organelles", "Genetics & Heredity: Interrelationship between plant and hereditary, Biological Variation", "Diversity & Classification: Classification of plants, Virus, fungi, algae and bacteria, Bryophytes and pteridophytes, Flowering plants, Angiosperms, Biodiversity", "Ecology & Reproduction: Ecology, Reproduction"], driveLink: "https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ" },
-            { code: "BIO 103/107", title: "General Biology Practical", icon: "microscope", topics: ["Introduction to Biology practical use of the microscope", "Cell structure", "Staining starch in plant tissue", "Algae, fungi, bryophytamosses and liverwort", "Gymnosperms", "Angiosperms"], driveLink: "https://drive.google.com/drive/folders/1ZtVc7RGT27-I_tNhxGtVUUxyA1zBys3L" },
-            { code: "CHM 101", title: "Basic General Chemistry I", icon: "flask", topics: ["Atomic Structure & Theory: Atomic Theory, Atomic structure, Atomic spectra, Determination of ionization energy", "Nuclear & Kinetics: Radioactivity, Chemical kinetics, Order, molecularity of reactions and collision theory, Half-life equations", "Thermodynamics & Equilibrium: Thermochemistry/energetics, Chemical equilibrium", "Solutions & Electrochemistry: Solution and solubility, Electrochemistry, Acid base and salt"], driveLink: "https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1" },
-            { code: "CHM 103/107", title: "Basic Chemistry Practical", icon: "vial", topics: ["Recording of laboratory data", "Calibration of basic laboratory equipment", "Preparation and standardization of common reagent", "Determination of atomic weight of metals"], driveLink: "https://drive.google.com/drive/folders/1jr0eRfvjZsVOiXZIbMyZ6I1ulunuks0r" },
-            { code: "CSC/COS 101", title: "Introduction to Computer Science", icon: "laptop-code", topics: ["Computer Fundamentals: Introduction and history of computer, Components of computer, Functional units of computer, Classification of computer", "Applications & Impacts: Uses and impact of computers, Exploring Microsoft", "Programming Concepts: Programming methodology and algorithms, Problem solving strategies, Structured programming principles, Visual Basic programming language"], driveLink: "https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg" },
-            { code: "GET 101", title: "Engineers In Society", icon: "cogs", topics: ["Early development of technology", "Historical development of science, engineering and technology", "The revolution of profession industry", "Engineering professional development", "Transfer technology", "Roles and challenges of engineering in national building", "Health, safety and environmental (HSE) management in engineering practice", "Engineering risk analysis"], driveLink: "https://drive.google.com/drive/folders/1f_aFrHG8WuKwtgj5Yq70v9LbYqs7ifAd?usp=drive_link" },
-            { code: "GNS 101/GST 111", title: "Use of English I", icon: "language", topics: ["Academic Skills: Time Management, Study Skills, Note taking and note making", "Language Fundamentals: Scientific Word Formation, Parts of Speech, Aspects of English grammar"], driveLink: "https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV" },
-            { code: "FGNS 103", title: "Information Literacy", icon: "book", topics: ["History and types of library", "Library materials", "Study skills", "Classification of library", "Storage device and electronics device"], driveLink: "https://drive.google.com/drive/folders/1sqeUsoS3B7J65vM8iIKzLQPISxfhrt5N" },
-            { code: "FMEE 101", title: "Engineering Drawing I", icon: "ruler-combined", topics: ["Drawing Fundamentals: Introduction to engineering drawing and materials used, Free hand sketching", "Geometrical Construction: Geometrical construction (bisection of lines, angles), Polygons, Tangency and loci", "Technical Drawing: Pictorial drawing, Free Hand Sketching"], driveLink: "https://drive.google.com/drive/folders/1f6zvKIcxIcvcLMKNf2zLD4WFjC_3nuhS" },
-            { code: "MTH 101", title: "Elementary Mathematics I", icon: "calculator", topics: ["Foundations: Set THEORY, Real numbers and mathematical induction", "Algebra & Sequences: Sequence and series, Quadratic equation and polynomials, Binomial theorem, Partial fractions", "Trigonometry: Circular measure, Trigonometry and trigonometric functions"], driveLink: "https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i" },
-            { code: "FMTH 103", title: "Elementary Mathematics III", icon: "calculator", topics: ["Introduction to vectors", "Applications of vectors", "The geometry of a circle", "Conic sections", "Dynamics (I) and (II)"], driveLink: "https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7?usp=drive_link" },
-            { code: "PHY 101", title: "General Physics I", icon: "atom", topics: ["Fundamentals: Quantities, units and dimensions, Vector analysis", "Mechanics: Laws of mechanics, Rotational dynamics, Simple Harmonic Motion, Law of gravitation, Linear momentum, Kinematics, Projectile motion, Circular motion, Statics and dynamics, Universal gravitation, Work energy and power"], driveLink: "https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl" },
-            { code: "PHY 103", title: "General Physics III", icon: "fire", topics: ["Molecular properties of matter", "Fluids at rest", "Surface tension", "Viscosity", "Hydrodynamics", "Gas laws", "Kinetic theory of gases", "Heat and temperature"], driveLink: "https://drive.google.com/drive/folders/1n7X-ynKrJVyqkAUomIZwgcQQ7ekZ2_lB" },
-            { code: "PHY 107", title: "Experimental Physics", icon: "vials", topics: ["Graph and error analysis", "The simple pendulum", "The bar pendulum", "Optics Experiments: Refraction through glass prism, Refractive index of triangular prism, Determination of focal length, Image characteristics of focal length"], driveLink: "https://drive.google.com/drive/folders/1Oxzgz1X0dOjSpkgXp8ZN8s_wRZdwJiCR" }
-        ];
+    </section>
 
-        let userData = {};
+    <section id="departmental" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">10. Departmental Courses Information</h2>
+            <div class="card">
+                <h3 style="color:var(--primary);">Understanding Your Course Structure</h3>
+                <p>The courses listed in this guide are the <strong>general courses</strong>. Depending on your department, you may also have specific departmental courses.</p>
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">🎯 Important Notice</h3>
+                    <p><strong>Some departments start their specialized courses from 100 level!</strong> Check your specific departmental requirements.</p>
+                </div>
+                <div class="page-nav"><a class="page-btn" data-page="materials">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
+            </div>
+        </div>
+    </section>
 
-        function generateCourseCards() {
-            const courseGrid = document.querySelector('.course-grid');
-            if (!courseGrid) return;
-            courseGrid.innerHTML = '';
-            courses.forEach(c => {
-                const card = document.createElement('div');
-                card.className = 'course-card';
-                let topicsList = '';
-                c.topics.forEach(t => topicsList += `<li style="font-size:0.85rem; color:var(--gray-600); margin-bottom:5px;">• ${t}</li>`);
-                card.innerHTML = `<h4 style="color:var(--primary); margin-bottom:5px;">${c.code}</h4>
-                                  <p style="font-weight:bold; margin-bottom:10px;">${c.title}</p>
-                                  <ul style="list-style:none; padding:0; margin-bottom:15px;">${topicsList}</ul>
-                                  <a href="${c.driveLink}" target="_blank" style="color:#4285F4; font-weight:bold; font-size:0.85rem; text-decoration:none;"><i class="fab fa-google-drive"></i> Access Material</a>`;
-                courseGrid.appendChild(card);
-            });
-        }
+    <!-- CALENDAR (dynamic from Supabase) -->
+    <section id="calendar" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">📅 Academic Calendar</h2>
+            <div class="card">
+                <div id="calendarHeader"></div>
+                <div id="calendarContent">
+                    <div class="loading-skeleton" style="height: 80px;"></div>
+                    <div class="loading-skeleton" style="height: 80px;"></div>
+                    <div class="loading-skeleton" style="height: 80px;"></div>
+                </div>
+                <div class="page-nav"><a class="page-btn" data-page="departmental">← Previous</a><a class="page-btn" data-page="contact">Next: Contact →</a></div>
+            </div>
+        </div>
+    </section>
 
-        function generateMaterialsSection() {
-            const materialsGrid = document.querySelector('.materials-grid');
-            if (!materialsGrid) return;
-            materialsGrid.innerHTML = '';
-            courses.forEach(c => {
-                const item = document.createElement('div');
-                item.className = 'course-item';
-                item.onclick = () => window.open(c.driveLink, '_blank');
-                item.innerHTML = `<i class="fas fa-${c.icon}" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
-                                  <h4>${c.code}</h4><p style="font-size:0.9rem;">${c.title}</p>`;
-                materialsGrid.appendChild(item);
-            });
-        }
+    <section id="contact" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">Your Senior Fellow FUTArian</h3>
+                <p style="font-size:1.2rem; font-weight:bold;" data-content="contact.name">Abideen Yakub Opeyemi (Ó'YẸMÍ)</p>
+                <p style="margin: 10px 0;"><i class="fas fa-phone"></i> Phone: <strong data-content="contact.phone">+2347050376975</strong></p>
+                <p><i class="fas fa-envelope"></i> Email: <span data-content="contact.email">abideenyakub08@gmail.com</span></p>
 
-        // 🆕 PROPER ACCORDION LOGIC
-        function setupAccordions() {
-            document.querySelectorAll('.accordion-header').forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const isActive = item.classList.contains('active');
-                    item.parentElement.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
-                });
-            });
-        }
+                <div class="inspirational-box" style="text-align:left;">
+                    <h3 style="color:var(--primary);">💬 I'm Here to Help!</h3>
+                    <p>Don't hesitate to reach out if you have questions or need clarification.</p>
+                </div>
 
-        // Navigation
-        function showPage(pageId) {
-            document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId)?.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            const navLinks = document.querySelector('.nav-links');
-            const sidebar = document.getElementById('sidebar');
-            if (navLinks) navLinks.classList.remove('show');
-            if (sidebar) sidebar.classList.remove('active');
-        }
-        function setupNavigation() {
-            document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a, .toc-item').forEach(el => {
-                el.addEventListener('click', function(e) {
-                    const page = this.getAttribute('data-page');
-                    if (page) { e.preventDefault(); showPage(page); }
-                });
-            });
-            document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.add('active'));
-            document.getElementById('sidebarClose').addEventListener('click', () => document.getElementById('sidebar').classList.remove('active'));
-        }
+                <div class="inspirational-box" style="text-align:left;">
+                    <h3 style="color:var(--primary);">💬 Join Our Community</h3>
+                    <div style="text-align:center; margin-top:15px;">
+                        <a href="#" id="whatsappGroupLink" class="btn btn-whatsapp" target="_blank" data-content-href="contact.whatsapp_group">
+                            <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+                        </a>
+                    </div>
+                </div>
 
-        // Form Logic & Admin Save
-        function saveSubmissionToAdminStorage(data, type) {
-            try {
-                const storageKey = type === 'user' ? 'allUserSubmissions' : type === 'business' ? 'allBusinessSubmissions' : 'allFeedbackSubmissions';
-                let existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                existing.push(data);
-                localStorage.setItem(storageKey, JSON.stringify(existing));
-            } catch (e) { console.error(e); }
-        }
+                <div class="inspirational-box" style="text-align: left; margin-top: 3rem; background: var(--light); border-left:5px solid var(--primary);">
+                    <h3 style="color: var(--primary);"><i class="fas fa-paper-plane"></i> Send Feedback</h3>
+                    <p>Please share your thoughts, suggestions, or questions.</p>
+                    <form id="feedbackForm" style="margin-top: 1rem;">
+                        <div class="compact-row">
+                            <div class="compact-group"><label>Your Name</label><input type="text" id="feedbackName" required></div>
+                            <div class="compact-group"><label>Your Email</label><input type="email" id="feedbackEmail" required></div>
+                        </div>
+                        <div class="compact-group">
+                            <label>Your Message</label>
+                            <textarea id="feedbackMessage" rows="3" style="width: 100%; border: 1px solid var(--gray-300); border-radius: 8px; padding: 10px;" required></textarea>
+                        </div>
+                        <button type="submit" id="feedbackSubmitBtn" class="btn">Send Feedback</button>
+                    </form>
+                    <div id="feedbackMessageDiv"></div>
+                </div>
 
-        async function submitToFormSubmit(formData) {
-            const email = 'helpinghandshallneverfall@gmail.com';
-            const res = await fetch('https://formsubmit.co/ajax/' + email, {
-                method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(formData)
-            });
-            return await res.json();
-        }
+                <div class="page-nav">
+                    <a class="page-btn" data-page="home">← Go back home</a>
+                    <a href="second-semester.html">Go to Second Semester Guide →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const nameVal = document.getElementById('name').value.trim();
-            const deptVal = document.getElementById('department').value.trim();
-            const waVal = document.getElementById('whatsapp').value.trim();
-            const levelVal = document.getElementById('welcomeLevel').value;
-            const semVal = document.querySelector('input[name="semester"]:checked').value;
-            const isFresher = document.querySelector('input[name="isFresher"]:checked').value;
-            const formMsg = document.getElementById('formMessage');
+<footer>
+    <div class="container">
+        <p>Federal University of Technology, Akure | Welcome, Class of '<span data-content="global.class_year">2029</span>!</p>
+        <p>&copy; <span id="currentYear"></span> FUTA Survival Guide. Compiled by <span data-content="contact.name">Abideen Yakub Opeyemi (Ó'YẸMÍ)</span>.</p>
+        <div style="margin-top: 15px;"><a href="admin.html" style="color: white; opacity: 0.6;"><i class="fas fa-lock"></i> Admin</a></div>
+    </div>
+</footer>
 
-            userData = { name: nameVal, department: deptVal, whatsapp: waVal, level: levelVal, semester: semVal, isFresher };
-            
-            localStorage.setItem('userName', nameVal);
-            localStorage.setItem('userDepartment', deptVal);
-            localStorage.setItem('userWhatsApp', waVal);
-            localStorage.setItem('userLevel', levelVal);
-            localStorage.setItem('userSemester', semVal);
-            localStorage.setItem('onboarded', 'true');
-            
-            saveSubmissionToAdminStorage({ id: Date.now(), name: nameVal, department: deptVal, whatsapp: waVal, level: levelVal, semester: semVal, timestamp: new Date().toISOString() }, 'user');
-            
-            formMsg.innerHTML = '<div class="message success">Processing...</div>';
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="db.js"></script>
 
-            if (semVal === 'second') {
-                setTimeout(() => {
-                    window.location.href = 'second-semester.html?switch=true';
-                }, 1000);
-            } else {
-                setTimeout(() => {
-                    document.getElementById('welcome').classList.add('hidden');
-                    document.getElementById('navbar').classList.remove('hidden');
-                    document.getElementById('main-content').classList.remove('hidden');
-                    document.getElementById('profileName').textContent = nameVal.split(' ')[0];
-                    document.getElementById('profileFullName').textContent = nameVal;
-                    document.getElementById('profileDept').textContent = deptVal;
-                    window.scrollTo(0,0);
-                }, 1000);
-            }
-        }
+<script>
+(function () {
+    'use strict';
 
-        function checkOnboarding() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const fromSwitch = urlParams.get('switch') === 'true';
+    const U = window.FUTA_UTILS;
+    const S = window.FUTA_STORAGE;
 
-            if (localStorage.getItem('onboarded') === 'true') {
-                userData.name = localStorage.getItem('userName');
-                userData.department = localStorage.getItem('userDepartment');
-                userData.whatsapp = localStorage.getItem('userWhatsApp');
-                userData.level = localStorage.getItem('userLevel');
-                
-                if (fromSwitch) {
-                    window.history.replaceState({}, document.title, 'index.html');
-                }
-                
-                document.getElementById('welcome').classList.add('hidden');
-                document.getElementById('navbar').classList.remove('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                document.getElementById('profileName').textContent = userData.name.split(' ')[0];
-                document.getElementById('profileFullName').textContent = userData.name;
-                document.getElementById('profileDept').textContent = userData.department;
-            }
-            
-            // Handle Profile menu
-            document.getElementById('profileBtn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                document.getElementById('profileMenu').classList.toggle('hidden');
-            });
-            document.addEventListener('click', (e) => {
-                if (!document.getElementById('userProfileDropdown').contains(e.target)) {
-                    document.getElementById('profileMenu').classList.add('hidden');
+    let userData = {};
+    let pageContent = {};
+
+    // ---------- WELCOME TOAST (once) ----------
+    function showWelcomeToast() {
+        if (S.get('futa_welcomed') === 'true') return;
+        setTimeout(() => {
+            U.toast('Welcome to the FUTA Survival Guide!', 'success', 4000);
+            S.set('futa_welcomed', 'true');
+        }, 1500);
+    }
+
+    // ---------- CONTENT BLOCKS ----------
+    async function loadContentBlocks() {
+        try {
+            const content = await DB.Content.getPage('index');
+            if (!content || Object.keys(content).length === 0) return;
+            pageContent = content;
+
+            document.querySelectorAll('[data-content]').forEach(el => {
+                const key = el.getAttribute('data-content');
+                if (content[key] !== undefined && content[key] !== null) {
+                    const contentType = el.getAttribute('data-content-type') || 'text';
+                    if (contentType === 'html') el.innerHTML = content[key];
+                    else el.textContent = content[key];
                 }
             });
 
-            document.getElementById('switchSemesterBtn').addEventListener('click', () => window.location.href = 'second-semester.html?switch=true');
-            document.getElementById('logoutBtn').addEventListener('click', () => { localStorage.clear(); window.location.reload(); });
-        }
-
-        // Init App
-        document.addEventListener('DOMContentLoaded', () => {
-            generateCourseCards();
-            generateMaterialsSection();
-            setupAccordions();
-            setupNavigation();
-            checkOnboarding();
-            
-            document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
-            document.getElementById('feedbackForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('feedbackSubmitBtn');
-                btn.innerHTML = 'Sending...';
-                
-                const formData = {
-                    '_subject': `FUTA Guide Feedback - ${document.getElementById('feedbackName').value}`,
-                    'Name': document.getElementById('feedbackName').value,
-                    'Email': document.getElementById('feedbackEmail').value,
-                    'Message': document.getElementById('feedbackMessage').value,
-                    'Timestamp': new Date().toISOString()
-                };
-                
-                saveSubmissionToAdminStorage(formData, 'feedback');
-                
-                setTimeout(() => {
-                    document.getElementById('feedbackMessageDiv').innerHTML = '<div style="color: green; margin-top: 10px; font-weight: bold;">Thank you for your feedback!</div>';
-                    e.target.reset();
-                    btn.innerHTML = 'Send Feedback';
-                }, 1000);
+            document.querySelectorAll('[data-content-href]').forEach(el => {
+                const key = el.getAttribute('data-content-href');
+                if (content[key]) el.href = content[key];
             });
-            
-            // Level Row Toggle
-            document.getElementById('fresher-no').addEventListener('change', () => document.getElementById('welcomeLevelRow').style.display = 'block');
-            document.getElementById('fresher-yes').addEventListener('change', () => document.getElementById('welcomeLevelRow').style.display = 'none');
+        } catch (err) {
+            console.warn('[Content] Failed:', err);
+        }
+    }
+
+    // ---------- ANNOUNCEMENT BANNER ----------
+    async function loadAnnouncement() {
+        try {
+            const settings = await DB.Settings.getAll();
+            const ann = settings.announcement;
+            if (!ann || !ann.enabled || !ann.message) return;
+            const banner = document.getElementById('announcementBanner');
+            banner.textContent = ann.message;
+            banner.classList.add('show', ann.type || 'info');
+        } catch (e) {}
+    }
+
+    // ---------- NOTIFICATIONS ----------
+    async function loadNotifications() {
+        try {
+            const audience = S.get('futa_profile')?.semester_guide === 'second' ? 'second_sem' : 'first_sem';
+            const res = await DB.Notifications.listActive({ audience });
+            if (!res.ok || !res.data || !res.data.length) return;
+            res.data.forEach((n, i) => setTimeout(() => renderNotification(n), i * 400));
+        } catch (e) { console.warn('[Notifications]', e); }
+    }
+
+    function renderNotification(n) {
+        const container = document.getElementById('notifContainer');
+        const dismissed = S.get('futa_dismissed_notifs', []);
+        if (dismissed.includes(n.id)) return;
+
+        const card = document.createElement('div');
+        card.className = `notif-card ${n.type || 'info'}`;
+        card.dataset.id = n.id;
+
+        let html = '';
+        if (n.is_pinned) html += `<span class="notif-badge">📌</span>`;
+        html += `<button class="notif-close" aria-label="Close">&times;</button>`;
+        html += `<div class="notif-title">${U.escapeHtml(n.title)}</div>`;
+        html += `<div class="notif-message">${U.escapeHtml(n.message)}</div>`;
+        if (n.link_url) {
+            html += `<a href="${U.escapeHtml(n.link_url)}" class="notif-link" target="_blank">${U.escapeHtml(n.link_label || 'Learn more')} →</a>`;
+        }
+        card.innerHTML = html;
+
+        card.querySelector('.notif-close').addEventListener('click', (e) => {
+            e.stopPropagation();
+            dismissNotification(n.id, card);
         });
-    </script>
+
+        container.appendChild(card);
+        requestAnimationFrame(() => card.classList.add('show'));
+
+        // Auto-dismiss info/success after 8s (if dismissible)
+        if (n.is_dismissible && (n.type === 'info' || n.type === 'success')) {
+            setTimeout(() => dismissNotification(n.id, card), 8000);
+        }
+    }
+
+    function dismissNotification(id, card) {
+        card.classList.add('hide');
+        setTimeout(() => card.remove(), 400);
+        const dismissed = S.get('futa_dismissed_notifs', []);
+        if (!dismissed.includes(id)) {
+            dismissed.push(id);
+            S.set('futa_dismissed_notifs', dismissed.slice(-50));
+        }
+    }
+
+    // ---------- LOAD COURSES ----------
+    async function loadCourses() {
+        try {
+            const res = await DB.Courses.list({ semester: 'first', level: '100' });
+            const courses = (res.ok && res.data && res.data.length) ? res.data : FALLBACK_COURSES;
+            renderCourses(courses);
+            renderBattlePlan(courses);
+            renderMaterials(courses);
+        } catch (e) {
+            renderCourses(FALLBACK_COURSES);
+            renderBattlePlan(FALLBACK_COURSES);
+            renderMaterials(FALLBACK_COURSES);
+        }
+    }
+
+    function renderCourses(courses) {
+        const grid = document.getElementById('courseGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (!courses.length) {
+            grid.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">No courses available yet.</p>';
+            return;
+        }
+        courses.forEach(c => {
+            const topicsHtml = (c.topics || []).map(t => `<li style="font-size:0.85rem; color:var(--gray-600); margin-bottom:5px;">• ${U.escapeHtml(t)}</li>`).join('');
+            const card = document.createElement('div');
+            card.className = 'course-card';
+            card.innerHTML = `
+                <h4 style="color:var(--primary); margin-bottom:5px;">${U.escapeHtml(c.code)} <span class="exam-type">${U.escapeHtml(c.exam_type || '')}</span></h4>
+                <p style="font-weight:bold; margin-bottom:10px;">${U.escapeHtml(c.title)}</p>
+                <ul style="list-style:none; padding:0; margin-bottom:15px;">${topicsHtml}</ul>
+                ${c.drive_link ? `<a href="${U.escapeHtml(c.drive_link)}" target="_blank" style="color:#4285F4; font-weight:bold; font-size:0.85rem; text-decoration:none;"><i class="fab fa-google-drive"></i> Access Material</a>` : ''}
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function renderBattlePlan(courses) {
+        const grid = document.getElementById('battlePlanGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (!courses.length) return;
+        courses.forEach(c => {
+            const tips = (c.tips && c.tips.length) ? c.tips : ['Attend all classes', 'Complete assignments', 'Practice past questions'];
+            const tipsHtml = tips.map(t => `<li>${U.escapeHtml(t)}</li>`).join('');
+            const card = document.createElement('div');
+            card.className = 'battle-plan-card';
+            card.innerHTML = `
+                <h4>${U.escapeHtml(c.code)}: ${U.escapeHtml(c.title)} <span class="exam-type">${U.escapeHtml(c.exam_type || 'CBT/CBE')}</span></h4>
+                <ul style="margin-left: 1rem; font-size:0.9rem; color:var(--gray-700);">${tipsHtml}</ul>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function renderMaterials(courses) {
+        const grid = document.getElementById('materialsGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        courses.forEach(c => {
+            if (!c.drive_link) return;
+            const item = document.createElement('div');
+            item.className = 'course-item';
+            item.onclick = () => window.open(c.drive_link, '_blank');
+            item.innerHTML = `
+                <i class="fas fa-${U.escapeHtml(c.icon || 'book')}" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                <h4>${U.escapeHtml(c.code)}</h4>
+                <p style="font-size:0.9rem;">${U.escapeHtml(c.title)}</p>
+            `;
+            grid.appendChild(item);
+        });
+    }
+
+    // ---------- CALENDAR ----------
+    async function loadCalendar() {
+        try {
+            const res = await DB.Calendar.list({ session: '2026/2027' });
+            const events = res.ok ? res.data : [];
+            renderCalendar(events);
+        } catch (e) { renderCalendar([]); }
+    }
+
+    function renderCalendar(events) {
+        const wrap = document.getElementById('calendarContent');
+        const header = document.getElementById('calendarHeader');
+        if (!wrap) return;
+
+        if (!events || !events.length) {
+            wrap.innerHTML = '<p style="text-align:center; padding:2rem; color:#666;">Calendar coming soon. Check back later!</p>';
+            return;
+        }
+
+        const first = events.filter(e => e.semester === 'first');
+        const second = events.filter(e => e.semester === 'second');
+
+        function groupBy(items) {
+            const today = new Date().toISOString().slice(0, 10);
+            const upcoming = items.filter(e => e.event_date >= today);
+            const past = items.filter(e => e.event_date < today);
+            return { upcoming, past };
+        }
+
+        function renderGroup(title, items, container) {
+            if (!items.length) return;
+            const section = document.createElement('div');
+            section.style.marginBottom = '2rem';
+            section.innerHTML = `<h3 style="color:var(--primary); margin-bottom:1rem;">${title}</h3>`;
+            const list = document.createElement('div');
+            list.className = 'accordion-container';
+            items.forEach(e => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+                const dateStr = U.formatDate(e.event_date, { hour: undefined, minute: undefined });
+                const endStr = e.end_date ? ` – ${U.formatDate(e.end_date, { hour: undefined, minute: undefined })}` : '';
+                const highlight = e.is_highlighted ? ' ⭐' : '';
+                item.innerHTML = `
+                    <div class="accordion-header">
+                        <span>${U.escapeHtml(e.title)}${highlight}</span>
+                        <span style="font-weight:600; color:var(--gray-600); font-size:0.85rem;">${dateStr}${endStr}</span>
+                    </div>
+                    ${e.description ? `<div class="accordion-content">${U.escapeHtml(e.description)}</div>` : ''}
+                `;
+                list.appendChild(item);
+            });
+            section.appendChild(list);
+            container.appendChild(section);
+        }
+
+        wrap.innerHTML = '';
+        if (header) {
+            header.innerHTML = `<p style="text-align:center; color:var(--gray-600); margin-bottom:1.5rem;">
+                Session: <strong>2026/2027</strong> | 
+                <span style="color:var(--success);">● Upcoming</span> • 
+                <span style="color:var(--gray-400);">● Past</span>
+            </p>`;
+        }
+
+        const firstGroups = groupBy(first);
+        const secondGroups = groupBy(second);
+
+        renderGroup('📘 First Semester — Upcoming', firstGroups.upcoming, wrap);
+        renderGroup('📗 Second Semester — Upcoming', secondGroups.upcoming, wrap);
+        renderGroup('📕 First Semester — Past', firstGroups.past, wrap);
+        renderGroup('📙 Second Semester — Past', secondGroups.past, wrap);
+
+        // Setup accordion after render
+        wrap.querySelectorAll('.accordion-header').forEach(h => {
+            h.addEventListener('click', () => {
+                const item = h.parentElement;
+                const isActive = item.classList.contains('active');
+                item.parentElement.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    }
+
+    // ---------- FALLBACK COURSES ----------
+    const FALLBACK_COURSES = [
+        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Scientific Word Formation', 'Parts of Speech'], tips: ['Attend all classes', 'Complete online assignments'] },
+        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'Programming methodology'], tips: ['Practice practicals', 'Buy manual'] },
+        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell Biology', 'Genetics', 'Diversity'], tips: ['Attend all classes'] },
+        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Sequences', 'Trigonometry'], tips: ['Study tutorial manual'] },
+        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Mechanics', 'Vectors', 'SHM'], tips: ['Practice past questions'] },
+        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Theory', 'Thermodynamics'], tips: ['Attend tutorials'] }
+    ];
+
+    // ---------- FORM HANDLING ----------
+    function saveProfile() {
+        const payload = {
+            full_name: userData.name,
+            department: userData.department,
+            whatsapp: userData.whatsapp,
+            level: userData.level,
+            is_fresher: userData.isFresher,
+            semester_guide: userData.semester
+        };
+        return DB.Profiles.create(payload);
+    }
+
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const formMsg = document.getElementById('formMessage');
+
+        const nameVal = document.getElementById('name').value.trim();
+        const deptVal = document.getElementById('department').value.trim();
+        const waVal = document.getElementById('whatsapp').value.trim();
+        const levelVal = document.getElementById('welcomeLevel').value;
+        const semVal = document.querySelector('input[name="semester"]:checked').value;
+        const isFresher = document.querySelector('input[name="isFresher"]:checked').value;
+
+        if (!nameVal || !deptVal || !waVal) {
+            formMsg.innerHTML = '<span style="color:var(--danger);">Please fill all required fields.</span>';
+            return;
+        }
+        if (isFresher === 'no' && !levelVal) {
+            formMsg.innerHTML = '<span style="color:var(--danger);">Please select your level.</span>';
+            return;
+        }
+
+        userData = { name: nameVal, department: deptVal, whatsapp: waVal, level: levelVal, semester: semVal, isFresher };
+
+        // Cache locally
+        S.set('futa_profile', {
+            full_name: nameVal, department: deptVal, whatsapp: waVal,
+            level: levelVal, semester_guide: semVal, is_fresher: isFresher
+        });
+
+        submitBtn.innerHTML = '<span class="spinner"></span> Saving...';
+        submitBtn.disabled = true;
+        formMsg.innerHTML = '';
+
+        try {
+            // Save to Supabase (profile + submission)
+            const [profileRes, subRes] = await Promise.all([
+                saveProfile(),
+                DB.Submissions.create({
+                    name: nameVal, department: deptVal, whatsapp: waVal,
+                    level: levelVal, is_fresher: isFresher, semester: semVal, source: 'web'
+                })
+            ]);
+
+            // Silent FormSubmit backup (fire-and-forget)
+            fetch('https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: `FUTA Guide Access - ${nameVal}`,
+                    Name: nameVal, Department: deptVal, WhatsApp: waVal,
+                    Level: levelVal || 'N/A', Semester: semVal,
+                    Timestamp: new Date().toISOString()
+                })
+            }).catch(() => {});
+
+            formMsg.innerHTML = '<span style="color:var(--success);">✅ Welcome! Loading guide...</span>';
+
+            setTimeout(() => {
+                if (semVal === 'second') {
+                    window.location.href = 'second-semester.html?switch=true';
+                } else {
+                    enterGuide();
+                }
+            }, 800);
+
+        } catch (err) {
+            console.error('Save error:', err);
+            formMsg.innerHTML = '<span style="color:var(--warning);">⚠️ Saved locally. Loading guide...</span>';
+            setTimeout(() => {
+                if (semVal === 'second') window.location.href = 'second-semester.html?switch=true';
+                else enterGuide();
+            }, 1000);
+        } finally {
+            submitBtn.innerHTML = 'Access Guide';
+            submitBtn.disabled = false;
+        }
+    }
+
+    function enterGuide() {
+        document.getElementById('welcome').classList.add('hidden');
+        document.getElementById('navbar').classList.remove('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        updateProfileUI();
+        window.scrollTo(0, 0);
+        showWelcomeToast();
+        // Refresh notifications with real audience
+        loadNotifications();
+    }
+
+    function updateProfileUI() {
+        if (!userData.name) return;
+        document.getElementById('profileName').textContent = userData.name.split(' ')[0];
+        document.getElementById('profileFullName').textContent = userData.name;
+        document.getElementById('profileDept').textContent = userData.department;
+    }
+
+    // ---------- FEEDBACK ----------
+    async function handleFeedback(e) {
+        e.preventDefault();
+        const btn = document.getElementById('feedbackSubmitBtn');
+        const msgDiv = document.getElementById('feedbackMessageDiv');
+        const name = document.getElementById('feedbackName').value.trim();
+        const email = document.getElementById('feedbackEmail').value.trim();
+        const message = document.getElementById('feedbackMessage').value.trim();
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Sending...';
+
+        try {
+            const res = await DB.Feedback.create({ name, email, message });
+            if (res.ok) {
+                msgDiv.innerHTML = '<div style="color: var(--success); margin-top: 10px; font-weight: bold;">✅ Thank you for your feedback!</div>';
+                e.target.reset();
+            } else {
+                msgDiv.innerHTML = '<div style="color: var(--danger); margin-top: 10px;">❌ Failed. Please try again.</div>';
+            }
+        } catch (err) {
+            msgDiv.innerHTML = '<div style="color: var(--danger); margin-top: 10px;">❌ Network error.</div>';
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = 'Send Feedback';
+            setTimeout(() => { msgDiv.innerHTML = ''; }, 5000);
+        }
+    }
+
+    // ---------- EDIT PROFILE ----------
+    function openEditProfile() {
+        document.getElementById('editName').value = userData.name || '';
+        document.getElementById('editDepartment').value = userData.department || '';
+        document.getElementById('editWhatsapp').value = userData.whatsapp || '';
+        document.getElementById('editLevel').value = userData.level || '';
+        if (userData.isFresher === 'yes') document.getElementById('editFresherYes').checked = true;
+        else document.getElementById('editFresherNo').checked = true;
+        const m = document.getElementById('editProfileModal');
+        m.style.display = 'flex';
+        m.classList.remove('hidden');
+    }
+
+    function closeEditProfile() {
+        const m = document.getElementById('editProfileModal');
+        m.style.display = 'none';
+        m.classList.add('hidden');
+    }
+
+    function saveProfileChanges(e) {
+        e.preventDefault();
+        userData.name = document.getElementById('editName').value.trim();
+        userData.department = document.getElementById('editDepartment').value.trim();
+        userData.whatsapp = document.getElementById('editWhatsapp').value.trim();
+        userData.level = document.getElementById('editLevel').value;
+        userData.isFresher = document.querySelector('input[name="editIsFresher"]:checked')?.value || 'yes';
+
+        S.set('futa_profile', {
+            full_name: userData.name, department: userData.department,
+            whatsapp: userData.whatsapp, level: userData.level,
+            semester_guide: userData.semester, is_fresher: userData.isFresher
+        });
+
+        updateProfileUI();
+        closeEditProfile();
+        U.toast('Profile updated!', 'success');
+    }
+
+    // ---------- NAVIGATION ----------
+    function setupNavigation() {
+        document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a, .toc-item').forEach(el => {
+            el.addEventListener('click', function (e) {
+                const page = this.getAttribute('data-page');
+                if (page) {
+                    e.preventDefault();
+                    showPage(page);
+                }
+            });
+        });
+        document.getElementById('menuBtn').addEventListener('click', () =>
+            document.getElementById('sidebar').classList.add('active'));
+        document.getElementById('sidebarClose').addEventListener('click', () =>
+            document.getElementById('sidebar').classList.remove('active'));
+    }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(pageId);
+        if (target) target.classList.add('active');
+        document.querySelectorAll('.sidebar-links a').forEach(a => a.classList.remove('active'));
+        document.querySelector(`.sidebar-links a[data-page="${pageId}"]`)?.classList.add('active');
+        document.getElementById('sidebar').classList.remove('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---------- ACCORDIONS ----------
+    function setupAccordions() {
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+                const parent = item.parentElement;
+                if (parent) parent.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    }
+
+    // ---------- PROFILE MENU ----------
+    function setupProfileMenu() {
+        const btn = document.getElementById('profileBtn');
+        const menu = document.getElementById('profileMenu');
+        const dropdown = document.getElementById('userProfileDropdown');
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) menu.classList.add('hidden');
+        });
+
+        document.getElementById('editProfileBtn').addEventListener('click', () => {
+            menu.classList.add('hidden');
+            openEditProfile();
+        });
+        document.getElementById('closeProfileModal').addEventListener('click', closeEditProfile);
+        document.getElementById('editProfileForm').addEventListener('submit', saveProfileChanges);
+        document.getElementById('switchSemesterBtn').addEventListener('click', () => {
+            window.location.href = 'second-semester.html?switch=true';
+        });
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm('Logout and clear your local data?')) {
+                S.clearAll();
+                localStorage.clear();
+                window.location.reload();
+            }
+        });
+    }
+
+    // ---------- BOOT ----------
+    async function boot() {
+        // Preload content, notifications, courses, calendar
+        await loadContentBlocks();
+        loadAnnouncement();
+        loadNotifications();
+        loadCourses();
+        loadCalendar();
+
+        // Set year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Check if already onboarded
+        const profile = S.get('futa_profile');
+        if (profile && profile.full_name) {
+            userData = {
+                name: profile.full_name, department: profile.department,
+                whatsapp: profile.whatsapp, level: profile.level,
+                semester: profile.semester_guide, isFresher: profile.is_fresher
+            };
+            enterGuide();
+        }
+
+        // Wire up forms
+        document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
+        document.getElementById('feedbackForm').addEventListener('submit', handleFeedback);
+
+        // Fresher toggle
+        document.getElementById('fresher-no').addEventListener('change', () =>
+            document.getElementById('welcomeLevelRow').style.display = 'block');
+        document.getElementById('fresher-yes').addEventListener('change', () =>
+            document.getElementById('welcomeLevelRow').style.display = 'none');
+
+        // Setup nav + accordions
+        setupNavigation();
+        setupProfileMenu();
+        setupAccordions();
+
+        // Set WhatsApp group link from content blocks (fallback)
+        const waLink = document.getElementById('whatsappGroupLink');
+        if (waLink && pageContent['contact.whatsapp_group']) {
+            waLink.href = pageContent['contact.whatsapp_group'];
+        } else if (waLink) {
+            waLink.href = 'https://chat.whatsapp.com/EhrUKMAGOnNEZYD1QvVnSs';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', boot);
+})();
+</script>
 </body>
-</html> 
-    
+</html>
