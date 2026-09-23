@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUTA Guide — Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
@@ -32,7 +32,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', -apple-system, sans-serif; }
         body { background: var(--light); color: var(--dark); }
 
-        /* ============ LOGIN ============ */
         .login-wrap {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, #0f172a 0%, #003366 100%);
@@ -64,7 +63,6 @@
         .login-back a { color: var(--gray-500); text-decoration: none; font-size: 0.85rem; }
         .login-back a:hover { color: var(--primary); }
 
-        /* ============ LAYOUT ============ */
         .app { display: none; min-height: 100vh; }
         .app.active { display: flex; }
 
@@ -112,7 +110,6 @@
         }
         .btn-logout:hover { background: rgba(220, 53, 69, 0.25); }
 
-        /* ============ MAIN ============ */
         .main { flex: 1; padding: 30px; overflow-x: hidden; }
         .main-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -125,7 +122,6 @@
         .page-section.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ============ STATS ============ */
         .stats-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px; margin-bottom: 25px;
@@ -145,7 +141,6 @@
         .stat-card.info { border-left-color: var(--info); }
         .stat-card.info .value { color: var(--info); }
 
-        /* ============ CARDS & TABLES ============ */
         .panel {
             background: white; border-radius: 12px; padding: 22px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.04); margin-bottom: 20px;
@@ -221,7 +216,6 @@
         .loading i { font-size: 1.5rem; animation: spin 1s linear infinite; margin-right: 8px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ============ MODAL ============ */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.6); display: none;
@@ -269,7 +263,6 @@
         .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         @media (max-width: 500px) { .form-row-2 { grid-template-columns: 1fr; } }
 
-        /* Toasts */
         #toasts {
             position: fixed; top: 20px; right: 20px; z-index: 99999;
             display: flex; flex-direction: column; gap: 10px;
@@ -288,7 +281,6 @@
         .toast.warning { border-left-color: var(--warning); }
         @keyframes toastIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
-        /* Mobile nav toggle */
         .mobile-menu-btn {
             display: none; position: fixed; bottom: 20px; right: 20px;
             width: 55px; height: 55px; border-radius: 50%;
@@ -315,7 +307,6 @@
 </head>
 <body>
 
-<!-- ============ LOGIN ============ -->
 <div class="login-wrap" id="loginWrap">
     <div class="login-card">
         <h1><i class="fas fa-shield-alt"></i> Admin Login</h1>
@@ -340,7 +331,6 @@
     </div>
 </div>
 
-<!-- ============ APP ============ -->
 <div class="app" id="app">
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
@@ -383,7 +373,6 @@
             <span class="datetime" id="currentDateTime"></span>
         </div>
 
-        <!-- ========== DASHBOARD ========== -->
         <section id="page-dashboard" class="page-section active">
             <div class="stats-grid">
                 <div class="stat-card"><div class="label"><i class="fas fa-users"></i> Total Users</div><div class="value" id="statTotalUsers">—</div></div>
@@ -418,7 +407,6 @@
             </div>
         </section>
 
-        <!-- ========== USERS ========== -->
         <section id="page-users" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -448,7 +436,6 @@
             </div>
         </section>
 
-        <!-- ========== BUSINESSES ========== -->
         <section id="page-businesses" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -474,7 +461,6 @@
             </div>
         </section>
 
-        <!-- ========== FEEDBACK ========== -->
         <section id="page-feedback" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -497,7 +483,6 @@
             </div>
         </section>
 
-        <!-- ========== CALCULATOR ========== -->
         <section id="page-calculator" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -528,7 +513,6 @@
             </div>
         </section>
 
-        <!-- ========== COURSES ========== -->
         <section id="page-courses" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -560,7 +544,6 @@
             </div>
         </section>
 
-        <!-- ========== CALENDAR ========== -->
         <section id="page-calendar" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -585,7 +568,6 @@
             </div>
         </section>
 
-        <!-- ========== NOTIFICATIONS ========== -->
         <section id="page-notifications" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -609,7 +591,6 @@
             </div>
         </section>
 
-        <!-- ========== CONTENT ========== -->
         <section id="page-content" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -636,7 +617,6 @@
             </div>
         </section>
 
-        <!-- ========== SESSIONS ========== -->
         <section id="page-sessions" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -651,7 +631,6 @@
             </div>
         </section>
 
-        <!-- ========== ACTIVITY LOG ========== -->
         <section id="page-activity" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -682,7 +661,6 @@
             </div>
         </section>
 
-        <!-- ========== SETTINGS ========== -->
         <section id="page-settings" class="page-section">
             <div class="panel">
                 <div class="panel-head"><h3><i class="fas fa-sliders-h"></i> Site Settings</h3></div>
@@ -707,7 +685,6 @@
 <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
 <div id="toasts"></div>
 
-<!-- ============ MODALS ============ -->
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal-box" id="modalBox">
         <div class="modal-head">
@@ -719,7 +696,6 @@
     </div>
 </div>
 
-<!-- ============ SCRIPTS ============ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="db.js"></script>
@@ -743,7 +719,6 @@
     let allSessions = [];
     let allActivity = [];
 
-    // ============ TOAST ============
     function toast(msg, type = 'info', dur = 3000) {
         const wrap = document.getElementById('toasts');
         const el = document.createElement('div');
@@ -758,7 +733,6 @@
         }, dur);
     }
 
-    // ============ LOGIN ============
     async function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value.trim();
@@ -819,7 +793,6 @@
         location.reload();
     }
 
-    // ============ CLOCK ============
     function startClock() {
         const el = document.getElementById('currentDateTime');
         function tick() { el.textContent = new Date().toLocaleString(); }
@@ -827,7 +800,6 @@
         setInterval(tick, 1000);
     }
 
-    // ============ NAVIGATION ============
     function initNavigation() {
         document.querySelectorAll('.sidebar-nav a[data-page]').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -856,7 +828,6 @@
         document.querySelector(`.sidebar-nav a[data-page="${pageId}"]`)?.classList.add('active');
         document.getElementById('pageTitle').textContent = pageId.charAt(0).toUpperCase() + pageId.slice(1).replace('-', ' ');
 
-        // Lazy load per page
         if (pageId === 'users') loadUsers();
         else if (pageId === 'businesses') loadBusinesses();
         else if (pageId === 'feedback') loadFeedback();
@@ -871,7 +842,6 @@
         window.scrollTo(0, 0);
     }
 
-    // ============ DASHBOARD ============
     async function loadDashboard() {
         const [usersStats, bizStats, fbStats, calcStats] = await Promise.all([
             DB.Submissions.stats(),
@@ -889,7 +859,6 @@
         document.getElementById('statUnreadFb').textContent = fbStats.unread;
         document.getElementById('statCalculations').textContent = calcStats.calculations;
 
-        // Badges
         const p = document.getElementById('badgePendingBiz');
         if (bizStats.pending > 0) { p.textContent = bizStats.pending; p.style.display = 'inline-block'; }
         else p.style.display = 'none';
@@ -897,11 +866,9 @@
         if (fbStats.unread > 0) { u.textContent = fbStats.unread; u.style.display = 'inline-block'; }
         else u.style.display = 'none';
 
-        // Recent users
         const recent = await DB.Submissions.list({ limit: 10 });
         renderRecentUsers(recent.data || []);
 
-        // Recent activity
         const act = await DB.Activity.list({ limit: 10 });
         renderRecentActivity(act.data || []);
     }
@@ -947,7 +914,6 @@
         wrap.innerHTML = html;
     }
 
-    // ============ USERS ============
     async function loadUsers() {
         const search = document.getElementById('userSearch').value;
         const sem = document.getElementById('userFilterSem').value;
@@ -997,7 +963,6 @@
         else toast('Delete failed: ' + res.error, 'error');
     };
 
-    // ============ BUSINESSES ============
     async function loadBusinesses() {
         const search = document.getElementById('bizSearch').value;
         const status = document.getElementById('bizFilterStatus').value;
@@ -1010,7 +975,6 @@
         const rows = res.data || [];
         allBusinesses = rows;
 
-        // Populate category filter
         const catSelect = document.getElementById('bizFilterCategory');
         const cats = [...new Set(rows.map(r => r.category).filter(Boolean))].sort();
         catSelect.innerHTML = '<option value="">All Categories</option>' + cats.map(c => `<option value="${U.escapeHtml(c)}" ${c === category ? 'selected' : ''}>${U.escapeHtml(c)}</option>`).join('');
@@ -1083,7 +1047,6 @@
         `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
     };
 
-    // ============ FEEDBACK ============
     async function loadFeedback() {
         const search = document.getElementById('fbSearch').value;
         const filter = document.getElementById('fbFilterRead').value;
@@ -1169,7 +1132,6 @@
         if (res.ok) { toast('Deleted', 'success'); loadFeedback(); loadDashboard(); }
     };
 
-    // ============ CALCULATOR ============
     async function loadCalculator() {
         const search = document.getElementById('calcSearch').value;
         const action = document.getElementById('calcFilterAction').value;
@@ -1211,7 +1173,6 @@
         wrap.innerHTML = html;
     }
 
-    // ============ COURSES ============
     async function loadCourses() {
         const search = document.getElementById('courseSearch').value;
         const sem = document.getElementById('courseFilterSem').value;
@@ -1349,7 +1310,6 @@
         else toast('Error: ' + res.error, 'error');
     };
 
-    // ============ CALENDAR ============
     async function loadCalendar() {
         const search = document.getElementById('calSearch').value;
         const session = document.getElementById('calFilterSession').value;
@@ -1366,7 +1326,6 @@
         }
         allCalendar = rows;
 
-        // Populate session filter
         const sSel = document.getElementById('calFilterSession');
         const sessions = [...new Set(rows.map(r => r.session).filter(Boolean))];
         if (sSel.options.length <= 1) {
@@ -1470,7 +1429,6 @@
         if (res.ok) { toast('Deleted', 'success'); loadCalendar(); }
     };
 
-    // ============ NOTIFICATIONS ============
     async function loadNotifications() {
         const search = document.getElementById('notifSearch').value;
         const status = document.getElementById('notifFilterStatus').value;
@@ -1602,7 +1560,6 @@
         if (res.ok) { toast('Deleted', 'success'); loadNotifications(); }
     };
 
-    // ============ CONTENT ============
     async function loadContent() {
         const search = document.getElementById('contentSearch').value;
         const page = document.getElementById('contentFilterPage').value;
@@ -1614,7 +1571,6 @@
         const rows = res.data || [];
         allContent = rows;
 
-        // Populate category filter
         const catSel = document.getElementById('contentFilterCategory');
         const cats = [...new Set(rows.map(r => r.category).filter(Boolean))].sort();
         if (catSel.options.length <= 1) {
@@ -1682,7 +1638,6 @@
         if (res.ok) { toast('Reset to default', 'success'); closeModal(); loadContent(); }
     };
 
-    // ============ SESSIONS ============
     async function loadSessions() {
         const wrap = document.getElementById('sessionsTable');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
@@ -1769,7 +1724,6 @@
         if (res.ok) { toast('Deleted', 'success'); loadSessions(); }
     };
 
-    // ============ ACTIVITY ============
     async function loadActivity() {
         const search = document.getElementById('actSearch').value;
         const entityType = document.getElementById('actFilterType').value;
@@ -1818,7 +1772,6 @@
         `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
     };
 
-    // ============ SETTINGS ============
     async function loadSettings() {
         const wrap = document.getElementById('settingsForm');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
@@ -1856,15 +1809,14 @@
         else toast('Error: ' + res.error, 'error');
     };
 
+    // ✅ FIX: Now uses DB.Calculator.removeAll() instead of raw query
     window.clearAllCalculatorLogs = async function () {
         if (!confirm('Delete ALL calculator logs? This cannot be undone.')) return;
-        const res = await DB._query('calculator_usage',
-            window.getSupabase().from('calculator_usage').delete().neq('id', '00000000-0000-0000-0000-000000000000'));
+        const res = await DB.Calculator.removeAll();
         if (res.ok) { toast('All calculator logs cleared', 'success'); loadDashboard(); }
         else toast('Error: ' + res.error, 'error');
     };
 
-    // ============ MODAL ============
     window.openModal = function (title, bodyHtml, footHtml) {
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('modalBody').innerHTML = bodyHtml;
@@ -1878,7 +1830,6 @@
         if (e.target === e.currentTarget) closeModal();
     });
 
-    // ============ EXPORTS ============
     window.exportData = function (type, format) {
         let data, filename;
         if (type === 'users') { data = allUsers; filename = 'users'; }
@@ -1908,7 +1859,6 @@
         }
     };
 
-    // ============ REFRESH ============
     window.refreshAll = function () {
         loadDashboard();
         toast('Refreshed', 'success', 1500);
@@ -1919,7 +1869,6 @@
         if (window.FUTA_CONFIG?.debug) console.log('[Admin] Dashboard loaded');
     }
 
-    // ============ FILTERS LISTENERS ============
     function setupFilters() {
         const uf = U.debounce(loadUsers, 300);
         document.getElementById('userSearch').addEventListener('input', uf);
@@ -1964,12 +1913,10 @@
         document.getElementById('actFilterAction').addEventListener('change', loadActivity);
     }
 
-    // ============ BOOT ============
     document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('loginForm').addEventListener('submit', handleLogin);
         setupFilters();
 
-        // Auto-login if session exists
         const logged = await checkSession();
         if (!logged) {
             document.getElementById('loginWrap').style.display = 'flex';
