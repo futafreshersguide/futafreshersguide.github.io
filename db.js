@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — DATABASE LAYER
 // File: db.js
-// Version: 2.0.0
+// Version: 2.1.0
 // Depends on: supabase-config.js
 // ============================================================
 
@@ -17,14 +17,12 @@
         return;
     }
 
-    // ---------- CLIENT GETTER ----------
     function sb() {
         const client = global.getSupabase ? global.getSupabase() : null;
         if (!client) throw new Error('[DB] Supabase client not available');
         return client;
     }
 
-    // ---------- GENERIC QUERY WRAPPER ----------
     async function query(table, builder, { silent = false } = {}) {
         try {
             const { data, error } = await builder;
@@ -41,7 +39,6 @@
         async signIn(email, password) {
             const { data, error } = await sb().auth.signInWithPassword({ email, password });
             if (error) return { ok: false, error: error.message };
-            // update last_login
             try {
                 await sb().from(CONFIG.tables.admins)
                     .update({ last_login: new Date().toISOString() })
@@ -72,7 +69,6 @@
             const u = await Auth.getUser();
             if (!u.ok || !u.user) return { ok: false, error: 'No user', admin: null };
 
-            // Check cache (5 min)
             const cached = Storage.get(CONFIG.profileCacheKey);
             if (cached && cached.id === u.user.id && (Date.now() - cached.ts < 5 * 60 * 1000)) {
                 return { ok: true, admin: cached.data };
@@ -130,7 +126,7 @@
         }
     };
 
-    // ---------- USER SUBMISSIONS ----------
+    // ---------- SUBMISSIONS ----------
     const Submissions = {
         async create(payload) {
             const row = {
@@ -243,10 +239,8 @@
                 query(CONFIG.tables.businesses, sb().from(CONFIG.tables.businesses).select('*', { count: 'exact', head: true }).eq('is_featured', true), { silent: true })
             ]);
             return {
-                total: total.data ?? 0,
-                pending: pending.data ?? 0,
-                approved: approved.data ?? 0,
-                rejected: rejected.data ?? 0,
+                total: total.data ?? 0, pending: pending.data ?? 0,
+                approved: approved.data ?? 0, rejected: rejected.data ?? 0,
                 featured: featured.data ?? 0
             };
         },
@@ -317,7 +311,7 @@
         }
     };
 
-    // ---------- CALCULATOR USAGE ----------
+    // ---------- CALCULATOR ----------
     const Calculator = {
         async log(payload) {
             const row = {
@@ -331,7 +325,6 @@
                 user_agent: navigator.userAgent || null
             };
             if (payload.profile_id) row.profile_id = payload.profile_id;
-            // fire and forget (don't block UI)
             return query(CONFIG.tables.calculator,
                 sb().from(CONFIG.tables.calculator).insert(row), { silent: true });
         },
@@ -353,10 +346,8 @@
                 query(CONFIG.tables.calculator, sb().from(CONFIG.tables.calculator).select('*', { count: 'exact', head: true }).eq('action', 'page_visit'), { silent: true })
             ]);
             return {
-                total: total.data ?? 0,
-                calculations: calcs.data ?? 0,
-                pdfs: pdfs.data ?? 0,
-                visits: visits.data ?? 0
+                total: total.data ?? 0, calculations: calcs.data ?? 0,
+                pdfs: pdfs.data ?? 0, visits: visits.data ?? 0
             };
         },
 
@@ -412,10 +403,8 @@
             const today = new Date().toISOString().slice(0, 10);
             return query(CONFIG.tables.calendar,
                 sb().from(CONFIG.tables.calendar)
-                    .select('*')
-                    .gte('event_date', today)
-                    .order('event_date', { ascending: true })
-                    .limit(limit));
+                    .select('*').gte('event_date', today)
+                    .order('event_date', { ascending: true }).limit(limit));
         },
 
         async create(payload) {
@@ -460,6 +449,180 @@
         }
     };
 
+    // ---------- CONTENT BLOCKS ----------
+    const Content = {
+        async getPage(page) {
+            const res = await query(CONFIG.tables.content,
+                sb().rpc('get_page_content', { p_page: page }), { silent: true });
+            if (!res.ok) return {};
+            return (res.data || []).reduce((acc, row) => {
+                acc[row.key] = row.value;
+                return acc;
+            }, {});
+        },
+
+        async listAll({ page = '', category = '', search = '' } = {}) {
+            let b = sb().from(CONFIG.tables.content)
+                .select('*')
+                .order('page').order('category').order('display_order');
+            if (page) b = b.eq('page', page);
+            if (category) b = b.eq('category', category);
+            if (search) b = b.or(`key.ilike.%${search}%,label.ilike.%${search}%,description.ilike.%${search}%`);
+            return query(CONFIG.tables.content, b);
+        },
+
+        async update(key, value, adminId) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content)
+                    .update({ value, updated_by: adminId, updated_at: new Date().toISOString() })
+                    .eq('key', key).select().single());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content).insert(payload).select().single());
+        },
+
+        async remove(key) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content).delete().eq('key', key));
+        }
+    };
+
+    // ---------- NOTIFICATIONS ----------
+    const Notifications = {
+        async listActive({ audience = 'all' } = {}) {
+            const now = new Date().toISOString();
+            let b = sb().from(CONFIG.tables.notifications).select('*')
+                .eq('is_active', true)
+                .lte('publish_at', now)
+                .or(`expires_at.is.null,expires_at.gt.${now}`);
+            if (audience && audience !== 'all') {
+                b = b.in('target_audience', ['all', audience]);
+            }
+            b = b.order('is_pinned', { ascending: false })
+                 .order('priority', { ascending: true })
+                 .order('publish_at', { ascending: false });
+            return query(CONFIG.tables.notifications, b, { silent: true });
+        },
+
+        async listAll({ search = '', onlyActive = false } = {}) {
+            let b = sb().from(CONFIG.tables.notifications).select('*');
+            if (onlyActive) b = b.eq('is_active', true);
+            if (search) b = b.or(`title.ilike.%${search}%,message.ilike.%${search}%`);
+            b = b.order('is_pinned', { ascending: false })
+                 .order('created_at', { ascending: false });
+            return query(CONFIG.tables.notifications, b);
+        },
+
+        async create(payload, adminId) {
+            const row = {
+                title: payload.title,
+                message: payload.message,
+                type: payload.type || 'info',
+                priority: payload.priority || 5,
+                target_audience: payload.target_audience || 'all',
+                is_dismissible: payload.is_dismissible !== false,
+                is_pinned: payload.is_pinned === true,
+                is_active: payload.is_active !== false,
+                publish_at: payload.publish_at || new Date().toISOString(),
+                expires_at: payload.expires_at || null,
+                link_url: payload.link_url || null,
+                link_label: payload.link_label || null,
+                created_by: adminId
+            };
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).insert(row).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).update(payload).eq('id', id).select().single());
+        },
+
+        async toggleActive(id, active) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).update({ is_active: active }).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).delete().eq('id', id));
+        },
+
+        async logRead(notificationId, profileId, dismissed = false) {
+            return query(CONFIG.tables.notifReads,
+                sb().from(CONFIG.tables.notifReads).insert({
+                    notification_id: notificationId,
+                    profile_id: profileId,
+                    dismissed
+                }), { silent: true });
+        },
+
+        async stats() {
+            const [total, active, pinned] = await Promise.all([
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }), { silent: true }),
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }).eq('is_active', true), { silent: true }),
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }).eq('is_pinned', true), { silent: true })
+            ]);
+            return { total: total.data ?? 0, active: active.data ?? 0, pinned: pinned.data ?? 0 };
+        }
+    };
+
+    // ---------- SESSIONS ----------
+    const Sessions = {
+        async listAll() {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).select('*').order('start_date', { ascending: false }));
+        },
+
+        async getActive() {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).select('*').eq('is_active', true).maybeSingle());
+        },
+
+        async setActive(id) {
+            await query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update({ is_active: false })
+                    .neq('id', '00000000-0000-0000-0000-000000000000'),
+                { silent: true });
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update({ is_active: true }).eq('id', id).select().single());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).delete().eq('id', id));
+        }
+    };
+
+    // ---------- ACTIVITY ----------
+    const Activity = {
+        async list({ entityType = '', action = '', search = '', limit = 200, offset = 0 } = {}) {
+            let b = sb().from(CONFIG.tables.activity).select('*', { count: 'exact' });
+            if (entityType) b = b.eq('entity_type', entityType);
+            if (action) b = b.eq('action', action);
+            if (search) b = b.or(`entity_label.ilike.%${search}%,admin_email.ilike.%${search}%`);
+            b = b.order('created_at', { ascending: false }).range(offset, offset + limit - 1);
+            return query(CONFIG.tables.activity, b);
+        },
+
+        async log(payload) {
+            return query(CONFIG.tables.activity,
+                sb().from(CONFIG.tables.activity).insert(payload), { silent: true });
+        }
+    };
+
     // ---------- REALTIME ----------
     function subscribe(table, callback, filter = null) {
         try {
@@ -480,7 +643,6 @@
         try { if (channel) sb().removeChannel(channel); } catch {}
     }
 
-    // ---------- HEALTH CHECK ----------
     async function healthCheck() {
         try {
             const { error } = await sb().from(CONFIG.tables.settings).select('key').limit(1);
@@ -489,196 +651,14 @@
             return { ok: false, error: err.message };
         }
     }
-    // ---------- CONTENT BLOCKS (editable text) ----------
-    const Content = {
-        async getPage(page) {
-            const res = await query(CONFIG.tables.content || 'content_blocks',
-                sb().rpc('get_page_content', { p_page: page }), { silent: true });
-            if (!res.ok) return {};
-            return (res.data || []).reduce((acc, row) => {
-                acc[row.key] = row.value;
-                return acc;
-            }, {});
-        },
 
-        async listAll({ page = '', category = '', search = '' } = {}) {
-            let b = sb().from('content_blocks').select('*').order('page').order('category').order('display_order');
-            if (page) b = b.eq('page', page);
-            if (category) b = b.eq('category', category);
-            if (search) b = b.or(`key.ilike.%${search}%,label.ilike.%${search}%,description.ilike.%${search}%`);
-            return query('content_blocks', b);
-        },
-
-        async update(key, value, adminId) {
-            return query('content_blocks',
-                sb().from('content_blocks')
-                    .update({ value, updated_by: adminId, updated_at: new Date().toISOString() })
-                    .eq('key', key).select().single());
-        },
-
-        async create(payload) {
-            return query('content_blocks',
-                sb().from('content_blocks').insert(payload).select().single());
-        },
-
-        async remove(key) {
-            return query('content_blocks',
-                sb().from('content_blocks').delete().eq('key', key));
-        }
-    };
-
-    // ---------- NOTIFICATIONS ----------
-    const Notifications = {
-        async listActive({ audience = 'all' } = {}) {
-            let b = sb().from('notifications').select('*')
-                .eq('is_active', true)
-                .lte('publish_at', new Date().toISOString())
-                .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
-            if (audience && audience !== 'all') {
-                b = b.in('target_audience', ['all', audience]);
-            }
-            b = b.order('is_pinned', { ascending: false })
-                 .order('priority', { ascending: true })
-                 .order('publish_at', { ascending: false });
-            return query('notifications', b, { silent: true });
-        },
-
-        async listAll({ search = '', onlyActive = false } = {}) {
-            let b = sb().from('notifications').select('*');
-            if (onlyActive) b = b.eq('is_active', true);
-            if (search) b = b.or(`title.ilike.%${search}%,message.ilike.%${search}%`);
-            b = b.order('is_pinned', { ascending: false })
-                 .order('created_at', { ascending: false });
-            return query('notifications', b);
-        },
-
-        async create(payload, adminId) {
-            const row = {
-                title: payload.title,
-                message: payload.message,
-                type: payload.type || 'info',
-                priority: payload.priority || 5,
-                target_audience: payload.target_audience || 'all',
-                is_dismissible: payload.is_dismissible !== false,
-                is_pinned: payload.is_pinned === true,
-                is_active: payload.is_active !== false,
-                publish_at: payload.publish_at || new Date().toISOString(),
-                expires_at: payload.expires_at || null,
-                link_url: payload.link_url || null,
-                link_label: payload.link_label || null,
-                created_by: adminId
-            };
-            return query('notifications',
-                sb().from('notifications').insert(row).select().single());
-        },
-
-        async update(id, payload) {
-            return query('notifications',
-                sb().from('notifications').update(payload).eq('id', id).select().single());
-        },
-
-        async toggleActive(id, active) {
-            return query('notifications',
-                sb().from('notifications').update({ is_active: active }).eq('id', id).select().single());
-        },
-
-        async remove(id) {
-            return query('notifications',
-                sb().from('notifications').delete().eq('id', id));
-        },
-
-        async logRead(notificationId, profileId, dismissed = false) {
-            return query('notification_reads',
-                sb().from('notification_reads').insert({
-                    notification_id: notificationId,
-                    profile_id: profileId,
-                    dismissed
-                }), { silent: true });
-        },
-
-        async stats() {
-            const [total, active, pinned] = await Promise.all([
-                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }), { silent: true }),
-                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }).eq('is_active', true), { silent: true }),
-                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }).eq('is_pinned', true), { silent: true })
-            ]);
-            return { total: total.data ?? 0, active: active.data ?? 0, pinned: pinned.data ?? 0 };
-        }
-    };
-
-    // ---------- SESSIONS ----------
-    const Sessions = {
-        async listAll() {
-            return query('academic_sessions',
-                sb().from('academic_sessions').select('*').order('start_date', { ascending: false }));
-        },
-
-        async getActive() {
-            return query('academic_sessions',
-                sb().from('academic_sessions').select('*').eq('is_active', true).maybeSingle());
-        },
-
-        async setActive(id) {
-            // First, deactivate all
-            await query('academic_sessions',
-                sb().from('academic_sessions').update({ is_active: false }).neq('id', '00000000-0000-0000-0000-000000000000'),
-                { silent: true });
-            // Then activate the chosen one
-            return query('academic_sessions',
-                sb().from('academic_sessions').update({ is_active: true }).eq('id', id).select().single());
-        },
-
-        async create(payload) {
-            return query('academic_sessions',
-                sb().from('academic_sessions').insert(payload).select().single());
-        },
-
-        async update(id, payload) {
-            return query('academic_sessions',
-                sb().from('academic_sessions').update(payload).eq('id', id).select().single());
-        },
-
-        async remove(id) {
-            return query('academic_sessions',
-                sb().from('academic_sessions').delete().eq('id', id));
-        }
-    };
-
-    // ---------- ACTIVITY LOG ----------
-    const Activity = {
-        async list({ entityType = '', action = '', search = '', limit = 200, offset = 0 } = {}) {
-            let b = sb().from('activity_log').select('*', { count: 'exact' });
-            if (entityType) b = b.eq('entity_type', entityType);
-            if (action) b = b.eq('action', action);
-            if (search) b = b.or(`entity_label.ilike.%${search}%,admin_email.ilike.%${search}%`);
-            b = b.order('created_at', { ascending: false }).range(offset, offset + limit - 1);
-            return query('activity_log', b);
-        },
-
-        async log(payload) {
-            return query('activity_log',
-                sb().from('activity_log').insert(payload), { silent: true });
-        }
-    };
-    // ---------- EXPOSE GLOBAL API ----------
+    // ---------- EXPOSE ----------
     global.DB = {
-        Auth,
-        Profiles,
-        Submissions,
-        Businesses,
-        Feedback,
-        Calculator,
-        Courses,
-        Calendar,
-        Settings,
-        Content,
-        Notifications,
-        Sessions,
-        Activity,
-        subscribe,
-        unsubscribe,
-        healthCheck,
-        _query: query // exposed for advanced usage
+        Auth, Profiles, Submissions, Businesses, Feedback, Calculator,
+        Courses, Calendar, Settings,
+        Content, Notifications, Sessions, Activity,
+        subscribe, unsubscribe, healthCheck,
+        _query: query
     };
 
     if (CONFIG.debug) console.log('[FUTA DB] Loaded v' + CONFIG.version);
