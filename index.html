@@ -873,13 +873,11 @@
                 }
             });
 
-            // Inject CCMAS awareness note into course-synopsis page
             const awarenessSlot = document.getElementById('ccmasAwarenessSlot');
             if (awarenessSlot && content['ccmas.awareness_note']) {
                 awarenessSlot.innerHTML = content['ccmas.awareness_note'];
             }
 
-            // Inject CCMAS materials note
             const matNote = document.getElementById('materialsCcmasNote');
             if (matNote) {
                 const note = content['materials.ccmas_note'];
@@ -1164,7 +1162,6 @@
                 })
             ]);
 
-            // Silent email backup
             fetch('https://formsubmit.co/ajax/helpinghandshallneverfall@gmail.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1362,7 +1359,9 @@
         loadCourses();
         loadCalendar();
 
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // ✅ FIX: null-check before setting (defensive)
+        const yearEl = document.getElementById('currentYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         const profile = S.get('futa_profile');
         if (profile && profile.full_name) {
