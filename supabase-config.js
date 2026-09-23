@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — SUPABASE CONFIGURATION
 // File: supabase-config.js
-// Version: 2.0.0
+// Version: 2.1.0
 // Load this BEFORE db.js on every page
 // ============================================================
 
@@ -18,10 +18,10 @@
         supabaseAnonKey: SUPABASE_ANON_KEY,
         formSubmitEmail: 'helpinghandshallneverfall@gmail.com',
         adminEmail: 'helpinghandshallneverfall@gmail.com',
-        version: '2.0.0',
+        version: '2.1.0',
         sessionKey: 'futa_guide_session',
-        profileCacheKey: 'futa_guide_profile',
-        debug: false, // set to true to see verbose logs
+        profileCacheKey: 'futa_guide_admin_profile',
+        debug: true, // ← set false before going live to reduce logs
         tables: {
             admins: 'admins',
             profiles: 'profiles',
@@ -31,7 +31,12 @@
             calculator: 'calculator_usage',
             courses: 'courses',
             calendar: 'calendar_events',
-            settings: 'site_settings'
+            settings: 'site_settings',
+            content: 'content_blocks',
+            notifications: 'notifications',
+            notifReads: 'notification_reads',
+            sessions: 'academic_sessions',
+            activity: 'activity_log'
         }
     };
 
@@ -42,7 +47,7 @@
         if (supabaseClient) return supabaseClient;
 
         if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
-            console.error('[Supabase] SDK not loaded. Make sure to include the CDN script before supabase-config.js');
+            console.error('[Supabase] SDK not loaded. Include the CDN <script> BEFORE this file.');
             return null;
         }
 
@@ -57,9 +62,7 @@
                         detectSessionInUrl: false,
                         storageKey: CONFIG.sessionKey
                     },
-                    realtime: {
-                        params: { eventsPerSecond: 10 }
-                    }
+                    realtime: { params: { eventsPerSecond: 10 } }
                 }
             );
             if (CONFIG.debug) console.log('[Supabase] Client initialized ✓');
@@ -72,7 +75,6 @@
 
     // ---------- UTILITIES ----------
     const Utils = {
-        /** Safe UUID generator */
         uuid() {
             if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -82,7 +84,6 @@
             });
         },
 
-        /** Simple debounce */
         debounce(fn, wait = 300) {
             let t;
             return function (...args) {
@@ -91,22 +92,20 @@
             };
         },
 
-        /** Format date nicely */
         formatDate(date, opts = {}) {
             if (!date) return 'N/A';
             const d = typeof date === 'string' ? new Date(date) : date;
             if (isNaN(d.getTime())) return 'N/A';
             return d.toLocaleString('en-NG', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                ...opts
+                year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', ...opts
             });
         },
 
-        /** Escape HTML to prevent XSS */
+        formatDateShort(date) {
+            return Utils.formatDate(date, { hour: undefined, minute: undefined });
+        },
+
         escapeHtml(str) {
             if (str === null || str === undefined) return '';
             return String(str)
@@ -117,14 +116,12 @@
                 .replace(/'/g, '&#039;');
         },
 
-        /** Truncate text */
         truncate(str, max = 60) {
             if (!str) return '';
             str = String(str);
             return str.length > max ? str.slice(0, max) + '…' : str;
         },
 
-        /** Export JSON to CSV */
         jsonToCSV(data) {
             if (!Array.isArray(data) || data.length === 0) return '';
             const headers = Array.from(
@@ -143,7 +140,6 @@
             return [headers.join(','), ...rows].join('\n');
         },
 
-        /** Trigger file download */
         downloadBlob(content, filename, type = 'text/plain') {
             const blob = new Blob([content], { type });
             const url = URL.createObjectURL(blob);
@@ -156,46 +152,26 @@
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         },
 
-        /** Toast notification */
         toast(message, type = 'info', duration = 3000) {
-            const existing = document.getElementById('futa-toast-container');
-            let container = existing;
+            const containerId = 'futa-toast-container';
+            let container = document.getElementById(containerId);
             if (!container) {
                 container = document.createElement('div');
-                container.id = 'futa-toast-container';
+                container.id = containerId;
                 container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;pointer-events:none;';
                 document.body.appendChild(container);
             }
-            const colors = {
-                success: '#10b981',
-                error: '#ef4444',
-                warning: '#f59e0b',
-                info: '#3b82f6'
-            };
-            const icons = {
-                success: '✓',
-                error: '✕',
-                warning: '⚠',
-                info: 'ℹ'
-            };
+            const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
+            const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
             const el = document.createElement('div');
             el.style.cssText = `
                 background:${colors[type] || colors.info};
-                color:white;
-                padding:12px 20px;
-                border-radius:8px;
+                color:white; padding:12px 20px; border-radius:8px;
                 box-shadow:0 10px 25px rgba(0,0,0,0.15);
-                font-family:'Segoe UI',sans-serif;
-                font-size:0.95rem;
-                font-weight:600;
-                display:flex;
-                align-items:center;
-                gap:10px;
-                min-width:240px;
-                max-width:340px;
-                pointer-events:auto;
-                opacity:0;
-                transform:translateX(40px);
+                font-family:'Segoe UI',sans-serif; font-size:0.95rem; font-weight:600;
+                display:flex; align-items:center; gap:10px;
+                min-width:240px; max-width:340px; pointer-events:auto;
+                opacity:0; transform:translateX(40px);
                 transition:all 0.3s ease;
             `;
             el.innerHTML = `<span style="font-size:1.1rem;">${icons[type] || icons.info}</span><span>${Utils.escapeHtml(message)}</span>`;
@@ -212,7 +188,7 @@
         }
     };
 
-    // ---------- LOCAL STORAGE HELPERS ----------
+    // ---------- LOCAL STORAGE ----------
     const Storage = {
         get(key, fallback = null) {
             try {
@@ -228,8 +204,9 @@
         },
         clearAll() {
             try {
-                Object.keys(localStorage).forEach(k => {
-                    if (k.startsWith('futa_guide_') || k === 'appVersion' || k === 'onboarded') {
+                const keys = Object.keys(localStorage);
+                keys.forEach(k => {
+                    if (k.startsWith('futa_') || k === 'appVersion' || k === 'onboarded' || k === 'onboardedSecondSemester') {
                         localStorage.removeItem(k);
                     }
                 });
@@ -237,13 +214,12 @@
         }
     };
 
-    // ---------- EXPOSE GLOBALLY ----------
+    // ---------- EXPOSE ----------
     global.FUTA_CONFIG = CONFIG;
     global.FUTA_UTILS = Utils;
     global.FUTA_STORAGE = Storage;
     global.getSupabase = initSupabase;
 
-    // Auto-init when DOM ready (or immediately if already loaded)
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initSupabase);
     } else {
