@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — DATABASE LAYER
 // File: db.js
-// Version: 2.1.0
+// Version: 2.1.1
 // Depends on: supabase-config.js
 // ============================================================
 
@@ -354,6 +354,12 @@
         async remove(id) {
             return query(CONFIG.tables.calculator,
                 sb().from(CONFIG.tables.calculator).delete().eq('id', id));
+        },
+
+        // ✅ Added removeAll for danger-zone "Clear Calculator Logs"
+        async removeAll() {
+            return query(CONFIG.tables.calculator,
+                sb().from(CONFIG.tables.calculator).delete().neq('id', '00000000-0000-0000-0000-000000000000'));
         }
     };
 
