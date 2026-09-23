@@ -281,12 +281,26 @@
         .toast.warning { border-left-color: var(--warning); }
         @keyframes toastIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
+        /* ============ MOBILE MENU BUTTON ============ */
         .mobile-menu-btn {
             display: none; position: fixed; bottom: 20px; right: 20px;
             width: 55px; height: 55px; border-radius: 50%;
             background: var(--primary); color: white; border: none;
             font-size: 1.4rem; box-shadow: 0 8px 20px rgba(0,51,102,0.4);
-            z-index: 100; cursor: pointer;
+            z-index: 300; cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* ✅ Show menu button ONLY after login AND on mobile */
+        body.app-active .mobile-menu-btn {
+            display: none;
+        }
+        @media (max-width: 900px) {
+            body.app-active .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 900px) {
@@ -295,7 +309,6 @@
                 transition: left 0.3s ease;
             }
             .sidebar.open { left: 0; }
-            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
             .main { padding: 20px 15px 100px; }
             .sidebar-overlay {
                 display: none; position: fixed; inset: 0;
@@ -305,7 +318,7 @@
         }
     </style>
 </head>
-<body>
+<body class="login-active">
 
 <div class="login-wrap" id="loginWrap">
     <div class="login-card">
@@ -780,6 +793,9 @@
     function enterApp() {
         document.getElementById('loginWrap').style.display = 'none';
         document.getElementById('app').classList.add('active');
+        // ✅ Toggle body class so menu button shows only after login
+        document.body.classList.remove('login-active');
+        document.body.classList.add('app-active');
         document.getElementById('sbUserName').textContent = currentAdmin.full_name || 'Admin';
         document.getElementById('sbUserEmail').textContent = currentAdmin.email || '';
         startClock();
@@ -1800,7 +1816,6 @@
         else toast('Error: ' + res.error, 'error');
     };
 
-    // ============ DANGER ZONE ============
     window.clearAllSubmissions = async function () {
         if (!confirm('Delete ALL user submissions? This cannot be undone.')) return;
         if (!confirm('Are you ABSOLUTELY sure?')) return;
@@ -1809,7 +1824,6 @@
         else toast('Error: ' + res.error, 'error');
     };
 
-    // ✅ FIX: Now uses DB.Calculator.removeAll() instead of raw query
     window.clearAllCalculatorLogs = async function () {
         if (!confirm('Delete ALL calculator logs? This cannot be undone.')) return;
         const res = await DB.Calculator.removeAll();
