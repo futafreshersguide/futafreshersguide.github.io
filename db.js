@@ -489,7 +489,177 @@
             return { ok: false, error: err.message };
         }
     }
+    // ---------- CONTENT BLOCKS (editable text) ----------
+    const Content = {
+        async getPage(page) {
+            const res = await query(CONFIG.tables.content || 'content_blocks',
+                sb().rpc('get_page_content', { p_page: page }), { silent: true });
+            if (!res.ok) return {};
+            return (res.data || []).reduce((acc, row) => {
+                acc[row.key] = row.value;
+                return acc;
+            }, {});
+        },
 
+        async listAll({ page = '', category = '', search = '' } = {}) {
+            let b = sb().from('content_blocks').select('*').order('page').order('category').order('display_order');
+            if (page) b = b.eq('page', page);
+            if (category) b = b.eq('category', category);
+            if (search) b = b.or(`key.ilike.%${search}%,label.ilike.%${search}%,description.ilike.%${search}%`);
+            return query('content_blocks', b);
+        },
+
+        async update(key, value, adminId) {
+            return query('content_blocks',
+                sb().from('content_blocks')
+                    .update({ value, updated_by: adminId, updated_at: new Date().toISOString() })
+                    .eq('key', key).select().single());
+        },
+
+        async create(payload) {
+            return query('content_blocks',
+                sb().from('content_blocks').insert(payload).select().single());
+        },
+
+        async remove(key) {
+            return query('content_blocks',
+                sb().from('content_blocks').delete().eq('key', key));
+        }
+    };
+
+    // ---------- NOTIFICATIONS ----------
+    const Notifications = {
+        async listActive({ audience = 'all' } = {}) {
+            let b = sb().from('notifications').select('*')
+                .eq('is_active', true)
+                .lte('publish_at', new Date().toISOString())
+                .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`);
+            if (audience && audience !== 'all') {
+                b = b.in('target_audience', ['all', audience]);
+            }
+            b = b.order('is_pinned', { ascending: false })
+                 .order('priority', { ascending: true })
+                 .order('publish_at', { ascending: false });
+            return query('notifications', b, { silent: true });
+        },
+
+        async listAll({ search = '', onlyActive = false } = {}) {
+            let b = sb().from('notifications').select('*');
+            if (onlyActive) b = b.eq('is_active', true);
+            if (search) b = b.or(`title.ilike.%${search}%,message.ilike.%${search}%`);
+            b = b.order('is_pinned', { ascending: false })
+                 .order('created_at', { ascending: false });
+            return query('notifications', b);
+        },
+
+        async create(payload, adminId) {
+            const row = {
+                title: payload.title,
+                message: payload.message,
+                type: payload.type || 'info',
+                priority: payload.priority || 5,
+                target_audience: payload.target_audience || 'all',
+                is_dismissible: payload.is_dismissible !== false,
+                is_pinned: payload.is_pinned === true,
+                is_active: payload.is_active !== false,
+                publish_at: payload.publish_at || new Date().toISOString(),
+                expires_at: payload.expires_at || null,
+                link_url: payload.link_url || null,
+                link_label: payload.link_label || null,
+                created_by: adminId
+            };
+            return query('notifications',
+                sb().from('notifications').insert(row).select().single());
+        },
+
+        async update(id, payload) {
+            return query('notifications',
+                sb().from('notifications').update(payload).eq('id', id).select().single());
+        },
+
+        async toggleActive(id, active) {
+            return query('notifications',
+                sb().from('notifications').update({ is_active: active }).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query('notifications',
+                sb().from('notifications').delete().eq('id', id));
+        },
+
+        async logRead(notificationId, profileId, dismissed = false) {
+            return query('notification_reads',
+                sb().from('notification_reads').insert({
+                    notification_id: notificationId,
+                    profile_id: profileId,
+                    dismissed
+                }), { silent: true });
+        },
+
+        async stats() {
+            const [total, active, pinned] = await Promise.all([
+                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }), { silent: true }),
+                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }).eq('is_active', true), { silent: true }),
+                query('notifications', sb().from('notifications').select('*', { count: 'exact', head: true }).eq('is_pinned', true), { silent: true })
+            ]);
+            return { total: total.data ?? 0, active: active.data ?? 0, pinned: pinned.data ?? 0 };
+        }
+    };
+
+    // ---------- SESSIONS ----------
+    const Sessions = {
+        async listAll() {
+            return query('academic_sessions',
+                sb().from('academic_sessions').select('*').order('start_date', { ascending: false }));
+        },
+
+        async getActive() {
+            return query('academic_sessions',
+                sb().from('academic_sessions').select('*').eq('is_active', true).maybeSingle());
+        },
+
+        async setActive(id) {
+            // First, deactivate all
+            await query('academic_sessions',
+                sb().from('academic_sessions').update({ is_active: false }).neq('id', '00000000-0000-0000-0000-000000000000'),
+                { silent: true });
+            // Then activate the chosen one
+            return query('academic_sessions',
+                sb().from('academic_sessions').update({ is_active: true }).eq('id', id).select().single());
+        },
+
+        async create(payload) {
+            return query('academic_sessions',
+                sb().from('academic_sessions').insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query('academic_sessions',
+                sb().from('academic_sessions').update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query('academic_sessions',
+                sb().from('academic_sessions').delete().eq('id', id));
+        }
+    };
+
+    // ---------- ACTIVITY LOG ----------
+    const Activity = {
+        async list({ entityType = '', action = '', search = '', limit = 200, offset = 0 } = {}) {
+            let b = sb().from('activity_log').select('*', { count: 'exact' });
+            if (entityType) b = b.eq('entity_type', entityType);
+            if (action) b = b.eq('action', action);
+            if (search) b = b.or(`entity_label.ilike.%${search}%,admin_email.ilike.%${search}%`);
+            b = b.order('created_at', { ascending: false }).range(offset, offset + limit - 1);
+            return query('activity_log', b);
+        },
+
+        async log(payload) {
+            return query('activity_log',
+                sb().from('activity_log').insert(payload), { silent: true });
+        }
+    };
     // ---------- EXPOSE GLOBAL API ----------
     global.DB = {
         Auth,
@@ -501,6 +671,10 @@
         Courses,
         Calendar,
         Settings,
+        Content,
+        Notifications,
+        Sessions,
+        Activity,
         subscribe,
         unsubscribe,
         healthCheck,
