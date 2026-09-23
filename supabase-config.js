@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — SUPABASE CONFIGURATION
 // File: supabase-config.js
-// Version: 2.1.0
+// Version: 2.1.1
 // Load this BEFORE db.js on every page
 // ============================================================
 
@@ -18,10 +18,10 @@
         supabaseAnonKey: SUPABASE_ANON_KEY,
         formSubmitEmail: 'helpinghandshallneverfall@gmail.com',
         adminEmail: 'helpinghandshallneverfall@gmail.com',
-        version: '2.1.0',
+        version: '2.1.1',
         sessionKey: 'futa_guide_session',
         profileCacheKey: 'futa_guide_admin_profile',
-        debug: true, // ← set false before going live to reduce logs
+        debug: false, // ✅ Off for production. Set true only when debugging.
         tables: {
             admins: 'admins',
             profiles: 'profiles',
