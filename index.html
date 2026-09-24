@@ -233,6 +233,30 @@
             .logo { font-size: 1rem; }
             .card { padding: 1.5rem; }
         }
+
+        /* 🆕 Genius Point Academy card */
+        .gpa-card {
+            background: linear-gradient(135deg, #003366 0%, #001a33 100%);
+            color: white; border-radius: 12px; padding: 2rem;
+            margin: 1.5rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 6px solid var(--accent);
+        }
+        .gpa-card h3 { color: var(--accent); margin-bottom: 0.8rem; font-size: 1.3rem; }
+        .gpa-card p { margin-bottom: 0.8rem; opacity: 0.95; }
+        .gpa-card .gpa-highlight {
+            background: rgba(255, 204, 0, 0.15);
+            border-radius: 8px; padding: 1rem;
+            margin: 1rem 0; border-left: 3px solid var(--accent);
+        }
+        .gpa-card ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .gpa-card ul li { margin-bottom: 0.4rem; }
+        .gpa-card .btn-gpa {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #25D366; color: white; padding: 14px 24px;
+            border-radius: 8px; text-decoration: none; font-weight: 700;
+            margin-top: 0.5rem; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .gpa-card .btn-gpa:hover { background: #128C7E; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -355,6 +379,7 @@
         <li><a href="#" data-page="materials">📂 Course Materials</a></li>
         <li><a href="#" data-page="departmental">🏛️ Departmental Courses</a></li>
         <li><a href="#" data-page="calendar">📅 Academic Calendar</a></li>
+        <li><a href="#" data-page="genius-point" style="background:#fff8e1; color:#b45309; font-weight:800;">📚 Genius Point Academy</a></li>
         <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> FUTA Marketplace</a></li>
         <li><a href="#" data-page="contact">📞 Contact & Support</a></li>
     </ul>
@@ -455,14 +480,15 @@
                 <div class="toc-item" data-page="registration"><h3>1. Registration Guide</h3><p>Complete Step-by-Step Registration Process</p></div>
                 <div class="toc-item" data-page="documents"><h3>2. Required Documents</h3><p>All Documents Needed for Registration</p></div>
                 <div class="toc-item" data-page="great-shift"><h3>3. The Great Shift</h3><p>Embracing University Autonomy</p></div>
-                <div class="toc-item" data-page="academic-playbook"><h3>4. Your Academic Playbook</h3><p>For a First-Class Journey</p></div>
-                <div class="toc-item" data-page="beyond-books"><h3>5. Beyond the Books</h3><p>Building a Complete Life</p></div>
-                <div class="toc-item" data-page="navigating-storms"><h3>6. Navigating the Storms</h3><p>You Are Not Alone</p></div>
-                <div class="toc-item" data-page="anchor"><h3>7. The Anchor</h3><p>The Power of Prayer</p></div>
-                <div class="toc-item" data-page="course-synopsis"><h3>8. Course Synopsis</h3><p>All Your First Semester Courses</p></div>
+                <div class="toc-item" data-page="course-synopsis"><h3>4. Course Synopsis</h3><p>All Your First Semester Courses</p></div>
+                <div class="toc-item" data-page="academic-playbook"><h3>5. Academic Playbook</h3><p>Course-by-Course Battle Plan for a First-Class Journey</p></div>
+                <div class="toc-item" data-page="beyond-books"><h3>6. Beyond the Books</h3><p>Building a Complete Life</p></div>
+                <div class="toc-item" data-page="navigating-storms"><h3>7. Navigating the Storms</h3><p>You Are Not Alone</p></div>
+                <div class="toc-item" data-page="anchor"><h3>8. The Anchor</h3><p>The Power of Prayer</p></div>
                 <div class="toc-item" data-page="materials"><h3>9. Course Materials</h3><p>Access All Study Materials</p></div>
                 <div class="toc-item" data-page="departmental"><h3>10. Departmental Courses</h3><p>Know Your Specific Courses</p></div>
                 <div class="toc-item" data-page="calendar"><h3>11. Academic Calendar</h3><p>Key dates for 2026/2027 session</p></div>
+                <div class="toc-item" data-page="genius-point"><h3>📚 Genius Point Academy</h3><p>Expert Tutoring for First-Year Success</p></div>
                 <div class="toc-item" onclick="window.location.href='marketplace.html'"><h3>12. FUTA Marketplace</h3><p>Student Services & Business Directory</p></div>
                 <div class="toc-item" data-page="contact"><h3>13. Contact</h3><p>Get in Touch</p></div>
                 <div class="toc-item" onclick="window.location.href='second-semester.html'" style="background:#e3f2fd; border-color:var(--primary);">
@@ -474,6 +500,7 @@
         </div>
     </section>
 
+    <!-- REGISTRATION — FULL DETAIL -->
     <section id="registration" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">1. Complete Registration Guide</h2>
@@ -505,12 +532,67 @@
 
                 <h3 style="color:var(--primary); margin-top: 2.5rem;">Step-by-Step Registration Process</h3>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">Step 1: School Officer <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Step 2: Registration Officer <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every department has its own registration officer. This person handles registration for your department specifically.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Step 3: Head of Department (HOD) <i class="fas fa-chevron-down"></i></div><div class="accordion-content">You should already know your HOD's name by now. If you don't, find out immediately!</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Step 4: Dean of School <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The Dean is the highest authority in your faculty. You might not see them physically during registration.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Step 5: Students' Affairs Division <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Once you have the Dean's signature, proceed to Students' Affairs. <strong>Dress formally for this step!</strong></div></div>
-                    <div class="accordion-item"><div class="accordion-header">Step 6: Final Submission <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Return to your faculty for final submission. You'll submit your file for the School Registrar.</div></div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 1: School Officer <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step. The officer handles all students across all departments in your school, so expect a queue — but the process itself is fast. Have your form filled out correctly before you get to the front of the line to avoid being sent back.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 2: Registration Officer <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            Every department has its own registration officer. This person handles registration for your department specifically. They will verify that your courses are properly selected and that your bio-data matches departmental records. Since this is department-specific, the queue is usually shorter than the school officer's queue — but the verification is more thorough. Bring all your documents here.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 3: Head of Department (HOD) <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            You should already know your HOD's name by now. If you don't, find out immediately! This is the head of your department — the senior academic in charge. You'll need to see them personally for their signature. Dress well, greet respectfully, and be brief. Some HODs will sign on the spot; others may ask you to return at a specific time. Always confirm the HOD's office hours before going.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 4: Dean of School <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            The Dean is the highest authority in your faculty. You might not see them physically during registration. Some faculties will collect all students' forms in one batch, present them to the Dean, and then distribute them back the next day. Other faculties require you to submit and return later to collect the signed form. Either way, don't panic — just follow the instructions given at the Dean's office.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 5: Students' Affairs Division <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            Once you have the Dean's signature, proceed to Students' Affairs. <strong>Dress formally for this step!</strong> Some staff in this office are strict about appearance and will send you back if you're not dressed properly. After conquering this part, you can wear whatever you like. Students' Affairs handles your welfare as a student — they'll also want to see your documents one more time before signing.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Step 6: Final Submission <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            Return to your faculty for final submission. You'll submit your file for the School Registrar. The Registrar is the highest administrative officer in the university and their signature validates your registration. This is the last step — once submitted, your registration is officially complete. Keep a photocopy of everything you submit for your own records.
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color:var(--primary); margin-top:2.5rem;">Registration Rules & Etiquette</h3>
+                <div class="battle-plan-grid">
+                    <div class="battle-plan-card">
+                        <h4>👔 Dress Code</h4>
+                        <ul style="margin-left: 1rem; color:var(--gray-700);">
+                            <li>Dress as neatly as possible for every registration step</li>
+                            <li>Have a good haircut or hairdo — first impressions matter</li>
+                            <li>No need to overdress with expensive clothes; neatness is what counts</li>
+                            <li>When going to Students' Affairs, dress formally (shirt, trousers, or decent native wear for guys; appropriate formal or semi-formal for ladies)</li>
+                            <li>Avoid slippers, shorts, and casual flip-flops in administrative offices</li>
+                        </ul>
+                    </div>
+                    <div class="battle-plan-card">
+                        <h4>🗣️ Communication</h4>
+                        <ul style="margin-left: 1rem; color:var(--gray-700);">
+                            <li>Speak "most-politely" to all officials — they deal with hundreds of students daily</li>
+                            <li>Listen to instructions carefully the first time to avoid repeats</li>
+                            <li>Ask questions respectfully when confused; don't argue</li>
+                            <li>Be patient and understanding — queues can be long</li>
+                            <li>If you're sent back, don't take it personally; just fix the issue and return</li>
+                            <li>Greet first; "Good morning sir/ma" goes a long way</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <h3 style="color:var(--primary); margin-top:2.5rem;">💼 Financial Preparation</h3>
@@ -526,16 +608,32 @@
                     </ul>
                     <p style="margin-top: 15px;"><strong>📌 Important Reminders:</strong></p>
                     <ul style="margin-left: 1.5rem;">
-                        <li><em>Carry both cash and digital payment options.</em></li>
-                        <li><em>Confirm with your faculty for specific requirements.</em></li>
-                        <li><em>Keep receipts for every payment.</em></li>
+                        <li><em>Carry both cash and digital payment options.</em> Some payments may only be accepted via bank transfer, while others may require cash.</li>
+                        <li><em>Confirm with your faculty for specific requirements.</em> Each department may have its own additional charges.</li>
+                        <li><em>Keep receipts for every payment.</em> Always collect and keep receipts — they may be required for verification later.</li>
                     </ul>
                 </div>
+
+                <h3 style="color:var(--primary); margin-top:2.5rem;">Document Preparation</h3>
+                <p>During physical registration, all your documents will be screened. If you're missing any required documents, you'll be sent back. Prepare all necessary documents in advance — check the next page for the full document checklist.</p>
+
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">💡 Pro Tips for Successful Registration</h3>
+                    <ul style="margin-left: 1.5rem; margin-top:10px;">
+                        <li><strong>Start early</strong> - Avoid the last-minute rush</li>
+                        <li><strong>Ask a senior</strong> - They know the process and can guide you</li>
+                        <li><strong>Be patient</strong> - Registration can take time, especially at busy offices</li>
+                        <li><strong>Double-check everything</strong> - Ensure all documents are complete before you leave home</li>
+                        <li><strong>Network with coursemates</strong> - Share information and help each other</li>
+                    </ul>
+                </div>
+
                 <div class="page-nav"><a class="page-btn" data-page="toc">← Previous</a><a class="page-btn" data-page="documents">Next: Required Documents →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- DOCUMENTS — FULL DETAIL -->
     <section id="documents" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">2. Required Documents for Registration</h2>
@@ -550,59 +648,115 @@
                 <div class="documents-grid">
                     <div class="document-card">
                         <h4><i class="fas fa-file-alt"></i> FUTA Admission Letter</h4>
-                        <p style="font-size:0.9rem;">Official admission letter with your department and course details</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Official admission letter from FUTA with your department and course details</p>
                         <div class="document-requirement physical">Physical Registration</div>
-                        <p style="font-size:0.85rem; margin-top:10px;"><strong>Acceptance fee:</strong> <span data-content="reg.acceptance_fee">₦50,000 (previous session)</span></p>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> Download from student portal after paying acceptance fee</li>
+                            <li><strong>Cost of acceptance fee:</strong> <span data-content="reg.acceptance_fee">₦50,000 (previous session)</span></li>
+                            <li><strong>Copies needed:</strong> 5 copies</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-university"></i> JAMB Admission Letter</h4>
-                        <p style="font-size:0.9rem;">Official JAMB approval of your admission into FUTA</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Official JAMB approval of your admission into FUTA</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> Print from JAMB portal</li>
+                            <li><strong>Format:</strong> 2-page document (Original & Duplicate)</li>
+                            <li><strong>Use:</strong> Duplicate for registration, Original for scholarships</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-graduation-cap"></i> Testimonial</h4>
-                        <p style="font-size:0.9rem;">Secondary school leaving certificate</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Secondary school leaving certificate verifying your conduct and attendance</p>
                         <div class="document-requirement physical">Physical Registration</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> From your secondary school</li>
+                            <li><strong>Availability:</strong> Depends on your former school</li>
+                            <li>Provides secondary verification of your academic history</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-chart-bar"></i> UTME Result Slip</h4>
-                        <p style="font-size:0.9rem;">Original JAMB score slip</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Original JAMB score slip proving you met the cutoff mark</p>
                         <div class="document-requirement physical">Physical Registration</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> Print from JAMB portal</li>
+                            <li>Primary evidence of meeting academic requirements</li>
+                            <li>Required for physical registration verification</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-award"></i> WAEC Certificate</h4>
-                        <p style="font-size:0.9rem;">Original O'Level certificate</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Original O'Level certificate (not result slip)</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> From your exam center/school</li>
+                            <li><strong>If unavailable:</strong> Use Statement of Result</li>
+                            <li><strong>For two sittings:</strong> Get both certificates; if not, use one certificate + statement of result for the second</li>
+                            <li>Ultimate proof of basic qualifications</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-user-check"></i> Attestation Letter</h4>
-                        <p style="font-size:0.9rem;">Character reference letter</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Character reference letter from authority figure</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> From principal, religious leader, or community leader</li>
+                            <li><strong>Format:</strong> Must be on letter-headed paper</li>
+                            <li>Provides extra verification of your character</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-gavel"></i> Court Affidavit</h4>
-                        <p style="font-size:0.9rem;">Sworn declaration against cult membership</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Sworn declaration against secret cult membership</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> Inside FUTA or any High Court</li>
+                            <li><strong>Process:</strong> Fill information, get signature and red seal</li>
+                            <li>Legal safeguard for the university</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-birthday-cake"></i> Birth Certificate</h4>
-                        <p style="font-size:0.9rem;">Official birth declaration</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Official document declaring your date of birth</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>How to get:</strong> From birth registry or declaration center</li>
+                            <li>Confirms minimum age requirement</li>
+                            <li>Key data for permanent student record</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-id-card"></i> Passport Photographs</h4>
-                        <p style="font-size:0.9rem;">20 recommended, white/red background</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Recent standardized passport photos</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>Specifications:</strong> White or red background</li>
+                            <li><strong>Copies needed:</strong> 20 recommended</li>
+                            <li><strong>Use:</strong> Faculty/department records, library card, health center</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-file-contract"></i> Bio-Data Form</h4>
-                        <p style="font-size:0.9rem;">4-page form filled online</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">4-page form with personal details filled online</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>Process:</strong> Fill online during registration</li>
+                            <li><strong>Important:</strong> Page 4 must have signatures</li>
+                            <li><strong>Timeline:</strong> Takes 2-5 days to complete</li>
+                            <li>Creates official student file and digital record</li>
+                        </ul>
                     </div>
                     <div class="document-card">
                         <h4><i class="fas fa-id-card-alt"></i> Local Government ID</h4>
-                        <p style="font-size:0.9rem;">Certificate of identification from LGA</p>
+                        <p style="font-size:0.9rem; margin-bottom:10px;">Certificate of identification from your LGA</p>
                         <div class="document-requirement both">Online & Physical</div>
+                        <ul style="font-size:0.85rem; color:var(--gray-700); margin-top:10px; margin-left:1rem;">
+                            <li><strong>Cruciality:</strong> Highly important</li>
+                            <li><strong>Copies needed:</strong> 5 copies sufficient</li>
+                            <li>Required for both online and physical registration</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="inspirational-box">
@@ -626,38 +780,143 @@
                     <p class="quote">"The greatest day in your life is when you take total responsibility for yourself." - Denis Waitley</p>
                 </div>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">You Are in Charge <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your lecturers are guides, not taskmasters. The drive must come from within.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Master Your Time <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The freedom you now have is your greatest tool, or your biggest trap.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Own Your Decisions <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every choice shapes your FUTA experience and your future.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">You Are in Charge <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your lecturers are guides, not taskmasters. The drive must come from within. Nobody will chase you to class. Nobody will remind you about assignments. You are now responsible for your own learning — embrace it.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Master Your Time <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The freedom you now have is your greatest tool, or your biggest trap. Build a schedule. Balance academics, personal growth, and rest. The students who succeed aren't the smartest — they're the most disciplined.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Own Your Decisions <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every choice — from which lectures to attend to how you spend your evenings — shapes your FUTA experience and your future. Choose wisely, but also learn from mistakes. Nobody gets it perfect.</div></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="documents">← Previous</a><a class="page-btn" data-page="academic-playbook">Next: Academic Playbook →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="documents">← Previous</a><a class="page-btn" data-page="course-synopsis">Next: Course Synopsis →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- COURSE SYNOPSIS (with CCMAS note + GPA promo card) -->
+    <section id="course-synopsis" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">4. Course Synopsis (First Semester 100L)</h2>
+
+            <!-- CCMAS-friendly intro -->
+            <div class="card">
+                <div style="background:#e3f2fd; border-left:5px solid var(--primary); padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
+                    <h3 style="color:var(--primary); margin-bottom:0.8rem;">💙 Don't Be Scared — You've Done Most of This Before!</h3>
+                    <p>Before you panic when you see the list of courses, breathe. Here's the truth: <strong>most of your 100 level first semester courses are things you already learned in secondary school.</strong> Biology, Chemistry, Physics, Mathematics — they're just at a deeper level now. You're not starting from scratch; you're building on a foundation you already have.</p>
+                    <p style="margin-top:0.8rem;">The only truly new things will be a few introductory courses that everyone takes (like Intro to Computing, Use of English, and Engineering Drawing). These are designed to <em>introduce</em> you, not to fail you. Attend every class, take notes, do your assignments — and you'll be fine.</p>
+                    <p style="margin-top:0.8rem;">Also — remember we use the word <strong>"course"</strong> here, not "subject". Get used to that. You'll take courses; you'll pass courses.</p>
+                </div>
+            </div>
+
+            <div id="ccmasAwarenessSlot"></div>
+
+            <div class="course-grid" id="courseGrid">
+                <div class="loading-skeleton" style="height: 220px;"></div>
+                <div class="loading-skeleton" style="height: 220px;"></div>
+                <div class="loading-skeleton" style="height: 220px;"></div>
+            </div>
+
+            <!-- Genius Point Academy promo card -->
+            <div class="gpa-card">
+                <h3>📚 Need Extra Help? Genius Point Academy Has You Covered</h3>
+                <p>If you want to build a <strong>solid first-year foundation</strong> and set yourself up for a strong CGPA, our classes at <strong>Genius Point Academy</strong> are designed exactly for you.</p>
+                <div class="gpa-highlight">
+                    <strong>🎯 What We Help With:</strong>
+                    <ul>
+                        <li>Mastering 100L courses before exams</li>
+                        <li>Building a strong GPA foundation from day one</li>
+                        <li>Understanding the CCMAS course structure</li>
+                        <li>Solving past questions and exam-focused practice</li>
+                        <li>Personal mentoring by top-performing seniors</li>
+                    </ul>
+                </div>
+                <p style="font-size:0.9rem; opacity:0.85;">We're a team of dedicated FUTA tutors — including O'yemi, the author of this guide.</p>
+                <button onclick="contactGeniusPoint()" class="btn-gpa">
+                    <i class="fab fa-whatsapp"></i> Chat With Us on WhatsApp
+                </button>
+            </div>
+
+            <div class="page-nav"><a class="page-btn" data-page="great-shift">← Previous</a><a class="page-btn" data-page="academic-playbook">Next: Academic Playbook →</a></div>
+        </div>
+    </section>
+
+    <!-- ACADEMIC PLAYBOOK — full detail, now AFTER course synopsis -->
     <section id="academic-playbook" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">4. Your Academic Playbook</h2>
+            <h2 class="section-title">5. Your Academic Playbook</h2>
             <div class="card">
                 <p>Your number one goal is academic excellence. To achieve this, you need a strategy.</p>
                 <div class="inspirational-box">
                     <h3 style="color:var(--primary);">🎓 P5 Principle: Proper Preparation Prevents Poor Performance</h3>
+                    <p>Success in FUTA isn't about being the smartest — it's about being the most prepared, consistent, and resilient. Your daily habits determine your semester results.</p>
                     <p class="quote">"The will to win is nothing without the will to prepare." - Juma Ikangaa</p>
                 </div>
+
                 <h3 style="color:var(--primary); margin-top:2.5rem;">Course-by-Course Battle Plan</h3>
                 <div class="battle-plan-grid" id="battlePlanGrid">
                     <div class="loading-skeleton" style="height: 200px;"></div>
                     <div class="loading-skeleton" style="height: 200px;"></div>
                     <div class="loading-skeleton" style="height: 200px;"></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="great-shift">← Previous</a><a class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
+
+                <h3 style="color:var(--primary); margin-top:2.5rem;">Benefits of Attending Classes</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">Attendance Marks <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Some courses award marks for class attendance, which contributes to your final grade. Don't throw away free marks — just showing up can be worth 5-10% of your grade.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Better Understanding <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Lecturers explain concepts in ways that textbooks can't. They give examples, tell stories, and highlight what matters. You learn faster when you're in the room.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Ask Questions <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Get immediate clarification on confusing topics directly from the expert. Don't let a small misunderstanding compound over weeks.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Test Structure <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Learn the exam format — whether it's objectives, MCQs, or fill-in-the-gaps. Lecturers usually drop hints about this before the test.</div></div>
+                </div>
+
+                <h3 style="color:var(--primary); margin-top:2.5rem;">Exam and Test Strategy</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item">
+                        <div class="accordion-header">📝 Before Tests/Exams <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Start preparation early — don't wait till the last minute</li>
+                                <li>Create a study schedule and stick to it</li>
+                                <li>Practice with past questions</li>
+                                <li>Get enough sleep the night before</li>
+                                <li>Prepare all necessary materials in advance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">📅 On Test/Exam Day <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Arrive early to the venue</li>
+                                <li>Stay calm and focused</li>
+                                <li>Read instructions carefully</li>
+                                <li>Manage your time effectively</li>
+                                <li>For CBT: Practice speed and accuracy</li>
+                                <li>For written: Write legibly and show your workings</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">📊 After Tests/Exams <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Gather questions from friends immediately after</li>
+                                <li>These questions often reappear in final exams</li>
+                                <li>Don't make the same mistake twice</li>
+                                <li>Analyze your performance and learn from mistakes</li>
+                                <li>Start preparing for the next assessment immediately</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inspirational-box">
+                    <h3 style="color:var(--primary);">💡 Important Reminder</h3>
+                    <p>For both computer-based and written exams, immediately after your test, gather questions from your friends that you remember. These are likely to come out in the final exam. Don't miss this opportunity twice!</p>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="course-synopsis">← Previous</a><a class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
             </div>
         </div>
     </section>
 
     <section id="beyond-books" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">5. Beyond the Books</h2>
+            <h2 class="section-title">6. Beyond the Books</h2>
             <div class="card">
                 <p>FUTA offers more than a certificate. It offers an experience that will shape your character and future.</p>
                 <div class="inspirational-box">
@@ -665,10 +924,10 @@
                     <p class="quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</p>
                 </div>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">Network Intentionally <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The friends you make here will be your professional network for life.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Get Involved <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Join a club, society, or sports team.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Prioritize Your Well-being <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your mental and physical health are critical.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Develop Soft Skills <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Communication, teamwork, and time management.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Network Intentionally <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The friends you make here will be your professional network for life. Connect with people who challenge and inspire you. Join study groups. Attend departmental events.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Get Involved <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Join a club, society, or sports team. It builds character, leadership, and lifelong friendships. Don't be a ghost — be present.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Prioritize Your Well-being <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your mental and physical health are critical. Eat well, exercise, sleep, and seek help when needed. A healthy mind learns more efficiently than an exhausted one.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Develop Soft Skills <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Communication, teamwork, and time management are as important as your technical knowledge. Employers look for people who can work with others.</div></div>
                 </div>
                 <div class="page-nav"><a class="page-btn" data-page="academic-playbook">← Previous</a><a class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a></div>
             </div>
@@ -677,7 +936,7 @@
 
     <section id="navigating-storms" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">6. Navigating the Storms</h2>
+            <h2 class="section-title">7. Navigating the Storms</h2>
             <div class="card">
                 <p>There will be difficult days. Challenging courses, overwhelming workloads, and personal struggles are part of the journey.</p>
                 <div class="inspirational-box">
@@ -685,11 +944,13 @@
                     <p class="quote">"The oak fought the wind and was broken, the willow bent when it must and survived."</p>
                 </div>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">FUTA Student Union Govt (FUTASUG) <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your representatives are here to help with academic and welfare issues.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Departmental Associations & Seniors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Connect with seniors who've walked your path.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Lecturers & Course Advisors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Most lecturers are willing to help students who show genuine interest.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Religious Groups <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The heads in your religious bodies are also there to help you.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">FUTA Student Union Govt (FUTASUG) <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Your representatives are here to help with academic and welfare issues. Don't hesitate to reach out to them.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Departmental Associations & Seniors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Connect with seniors who've walked your path. They have the answers, the past questions, and the experience. Don't be shy — most seniors are happy to help.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Lecturers & Course Advisors <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Most lecturers are willing to help students who show genuine interest. Attend office hours. Ask intelligent questions. Show effort.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Religious Groups <i class="fas fa-chevron-down"></i></div><div class="accordion-content">The heads in your religious bodies are also there to help you. Balance your spiritual life with your academic life — both matter.</div></div>
                 </div>
+                <h3 style="color:var(--primary); margin-top:2rem;">Turning Setbacks into Comebacks</h3>
+                <p><strong>Failure is Feedback:</strong> A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something — what matters is what they learned from it.</p>
                 <div class="page-nav"><a class="page-btn" data-page="beyond-books">← Previous</a><a class="page-btn" data-page="anchor">Next: The Anchor →</a></div>
             </div>
         </div>
@@ -697,7 +958,7 @@
 
     <section id="anchor" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">7. The Anchor: The Power of Prayer</h2>
+            <h2 class="section-title">8. The Anchor: The Power of Prayer</h2>
             <div class="card">
                 <p>In the midst of the pressure, never underestimate the power of faith and prayer.</p>
                 <div class="inspirational-box">
@@ -705,25 +966,12 @@
                     <p class="quote">"You can't do without having Problems, but Prayer is a solution to Problem, and you'll be Passed."</p>
                 </div>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">Start Your Day Right <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Begin each day with prayer and meditation.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Faith During Challenges <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Turn to prayer for strength and guidance.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Gratitude & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">"Faith without works is dead" - pray like it depends on God, work like it depends on you.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Start Your Day Right <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Begin each day with prayer and meditation to set the right tone. A calm morning makes a productive day.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Faith During Challenges <i class="fas fa-chevron-down"></i></div><div class="accordion-content">When facing difficult courses or personal struggles, turn to prayer for strength and guidance. You are not alone.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Gratitude & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">"Faith without works is dead" — pray like it depends on God, work like it depends on you. Both matter equally.</div></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="navigating-storms">← Previous</a><a class="page-btn" data-page="course-synopsis">Next: Course Synopsis →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="navigating-storms">← Previous</a><a class="page-btn" data-page="materials">Next: Course Materials →</a></div>
             </div>
-        </div>
-    </section>
-
-    <section id="course-synopsis" class="content-section content-page">
-        <div class="container">
-            <h2 class="section-title">8. Course Synopsis (First Semester 100L)</h2>
-            <div id="ccmasAwarenessSlot"></div>
-            <div class="course-grid" id="courseGrid">
-                <div class="loading-skeleton" style="height: 220px;"></div>
-                <div class="loading-skeleton" style="height: 220px;"></div>
-                <div class="loading-skeleton" style="height: 220px;"></div>
-            </div>
-            <div class="page-nav"><a class="page-btn" data-page="anchor">← Previous</a><a class="page-btn" data-page="materials">Next: Course Materials →</a></div>
         </div>
     </section>
 
@@ -743,7 +991,7 @@
                         📁 Access Main Materials Folder
                     </a>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="course-synopsis">← Previous</a><a class="page-btn" data-page="departmental">Next: Departmental →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="anchor">← Previous</a><a class="page-btn" data-page="departmental">Next: Departmental →</a></div>
             </div>
         </div>
     </section>
@@ -753,11 +1001,12 @@
             <h2 class="section-title">10. Departmental Courses Information</h2>
             <div class="card">
                 <h3 style="color:var(--primary);">Understanding Your Course Structure</h3>
-                <p>The courses listed in this guide are the <strong>general courses</strong>. Depending on your department, you may also have specific departmental courses.</p>
+                <p>The courses listed in this guide are the <strong>general courses</strong> that almost all FUTA students take in their first year. Depending on your department, you may also have specific departmental courses.</p>
                 <div class="inspirational-box">
                     <h3 style="color:var(--primary);">🎯 Important Notice</h3>
-                    <p><strong>Some departments start their specialized courses from 100 level!</strong> Check your specific departmental requirements.</p>
+                    <p><strong>Some departments start their specialized courses from 100 level!</strong> While the courses in this guide are essential for all students, you need to check your specific departmental requirements.</p>
                 </div>
+                <p style="margin-top:1.5rem;">Make sure to check your course form during registration to see exactly which courses apply to you. When in doubt, ask your departmental adviser or a senior.</p>
                 <div class="page-nav"><a class="page-btn" data-page="materials">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
             </div>
         </div>
@@ -773,7 +1022,56 @@
                     <div class="loading-skeleton" style="height: 80px;"></div>
                     <div class="loading-skeleton" style="height: 80px;"></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="departmental">← Previous</a><a class="page-btn" data-page="contact">Next: Contact →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="departmental">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🆕 GENIUS POINT ACADEMY — dedicated section -->
+    <section id="genius-point" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">📚 Genius Point Academy</h2>
+            <div class="card">
+                <div class="gpa-card" style="margin-top:0;">
+                    <h3>🎓 Build a Solid First-Year Foundation With Us</h3>
+                    <p>Starting university can feel overwhelming — new courses, new environment, new expectations. At <strong>Genius Point Academy</strong>, we make the transition smooth and set you up for long-term academic success.</p>
+
+                    <div class="gpa-highlight">
+                        <strong>Our Goal For You:</strong>
+                        <ul>
+                            <li><strong>Excel in your 100L courses</strong> — understand concepts deeply, not just pass exams</li>
+                            <li><strong>Build a strong GPA from day one</strong> — because a strong CGPA starts in year one</li>
+                            <li><strong>Master exam technique</strong> — past questions, timing, and CBT practice</li>
+                            <li><strong>Gain confidence</strong> — walk into every test knowing you've prepared well</li>
+                            <li><strong>Get mentorship</strong> — learn from seniors who've been there and excelled</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="color:var(--accent); margin-top:1.5rem; margin-bottom:0.6rem;">What We Offer</h4>
+                    <ul>
+                        <li>Tutoring for all 100L courses (MTH/MTS, PHY, CHM/CHE, BIO, GNS, etc.)</li>
+                        <li>Step-by-step breakdown of difficult topics</li>
+                        <li>Past question review and exam-focused practice</li>
+                        <li>Small-group sessions or one-on-one (your choice)</li>
+                        <li>Ongoing mentorship beyond the classroom</li>
+                    </ul>
+
+                    <h4 style="color:var(--accent); margin-top:1.5rem; margin-bottom:0.6rem;">Who We Are</h4>
+                    <p>We're a team of dedicated FUTA students and recent graduates who have walked the path you're on. We know exactly where freshers struggle, and we've built a proven system to help you thrive.</p>
+                    <p style="margin-top:0.6rem;"><strong>O'yemi</strong> — the author of this guide — is also a member of the Genius Point Academy team. So you're not just getting tutoring; you're getting someone who's invested in your success.</p>
+                </div>
+
+                <div class="inspirational-box" style="margin-top:1.5rem;">
+                    <h3 style="color:var(--primary);">🚀 Ready to Start?</h3>
+                    <p>Click the button below to chat with us directly on WhatsApp. Let's talk about how we can help you build a strong first year.</p>
+                    <div style="text-align:center; margin-top:1.5rem;">
+                        <button onclick="contactGeniusPoint()" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 32px;">
+                            <i class="fab fa-whatsapp"></i> Chat With Us on WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="calendar">← Previous</a><a class="page-btn" data-page="contact">Next: Contact →</a></div>
             </div>
         </div>
     </section>
@@ -790,6 +1088,18 @@
                 <div class="inspirational-box" style="text-align:left;">
                     <h3 style="color:var(--primary);">💬 I'm Here to Help!</h3>
                     <p>Don't hesitate to reach out if you have questions or need clarification.</p>
+                </div>
+
+                <!-- 🆕 GPA mention in contact -->
+                <div class="inspirational-box" style="text-align:left; background:#fff8e1; border-left:5px solid #f59e0b;">
+                    <h3 style="color:#b45309;">📚 Also: I'm Part of Genius Point Academy</h3>
+                    <p>Alongside this guide, I'm a tutor and team member at <strong>Genius Point Academy</strong> — where we help 100L students build a solid foundation and crush their first year.</p>
+                    <p style="margin-top:0.6rem;">Want to boost your GPA, master difficult courses, and get mentored? Reach out and let's talk.</p>
+                    <div style="margin-top:1rem;">
+                        <button onclick="contactGeniusPoint()" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Chat With Genius Point Academy
+                        </button>
+                    </div>
                 </div>
 
                 <div class="inspirational-box" style="text-align:left;">
@@ -849,6 +1159,27 @@
     let userData = {};
     let pageContent = {};
 
+    // 🆕 Genius Point Academy WhatsApp contact
+    window.contactGeniusPoint = function () {
+        const p = S.get('futa_profile') || {};
+        const name = p.full_name || 'a FUTA Student';
+        const dept = p.department || '';
+        const level = p.level || '';
+
+        let msg = `Hello Genius Point Academy 👋\n\n`;
+        msg += `I'm interested in your tutoring classes for 100L students.\n`;
+        msg += `I saw this on the FUTA Survival Guide.\n\n`;
+        msg += `I'd like to talk about:\n`;
+        msg += `• Building a solid first-year foundation\n`;
+        msg += `• Improving my GPA\n\n`;
+        msg += `Name: ${name}\n`;
+        if (dept) msg += `Department: ${dept}\n`;
+        if (level) msg += `Level: ${level}\n`;
+
+        const encoded = encodeURIComponent(msg);
+        window.open(`https://wa.me/2347050376975?text=${encoded}`, '_blank');
+    };
+
     function showWelcomeToast() {
         if (S.get('futa_welcomed') === 'true') return;
         setTimeout(() => {
@@ -857,7 +1188,6 @@
         }, 1500);
     }
 
-    // ---------- CONTENT BLOCKS ----------
     async function loadContentBlocks() {
         try {
             const content = await DB.Content.getPage('index');
@@ -889,7 +1219,6 @@
         }
     }
 
-    // ---------- ANNOUNCEMENT ----------
     async function loadAnnouncement() {
         try {
             const settings = await DB.Settings.getAll();
@@ -901,7 +1230,6 @@
         } catch (e) {}
     }
 
-    // ---------- NOTIFICATIONS ----------
     async function loadNotifications() {
         try {
             const audience = S.get('futa_profile')?.semester_guide === 'second' ? 'second_sem' : 'first_sem';
@@ -953,14 +1281,13 @@
         }
     }
 
-    // ---------- COURSES ----------
     const FALLBACK_COURSES = [
-        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Scientific Word Formation', 'Parts of Speech'], tips: ['Attend all classes', 'Complete online assignments'] },
-        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'Programming methodology'], tips: ['Practice practicals', 'Buy manual'] },
-        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell Biology', 'Genetics', 'Diversity'], tips: ['Attend all classes'] },
-        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Sequences', 'Trigonometry'], tips: ['Study tutorial manual'] },
-        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Mechanics', 'Vectors', 'SHM'], tips: ['Practice past questions'] },
-        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Theory', 'Thermodynamics'], tips: ['Attend tutorials'] }
+        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Time Management', 'Study Skills', 'Note taking and note making', 'Scientific Word Formation', 'Parts of Speech', 'Aspects of English grammar'], tips: ['Attend all classes regularly', 'Complete all online assignments', 'Stay active on Telegram group'] },
+        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'History of computers', 'Components of computer', 'Classification of computer', 'Uses and impact of computers', 'Programming methodology and algorithms'], tips: ['Attend theoretical and practical classes', 'Buy and study practical manuals', 'Perform well in practical tests'] },
+        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell & Molecular Biology', 'Genetics & Heredity', 'Diversity & Classification', 'Ecology & Reproduction', 'Flowering plants'], tips: ['Attend all classes regularly', 'Complete all assignments and class works', 'Read course materials thoroughly'] },
+        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Real numbers and mathematical induction', 'Sequence and series', 'Quadratic equation', 'Binomial theorem', 'Trigonometry'], tips: ['Attend all classes and tutorials', 'Buy and study tutorial manual thoroughly', 'Develop speed for CBT exams'] },
+        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Quantities, units and dimensions', 'Vector analysis', 'Laws of mechanics', 'Rotational dynamics', 'Simple Harmonic Motion', 'Universal gravitation', 'Work energy and power'], tips: ['Attend all classes without missing', 'Buy manuals and complete assignments', 'Focus on objective questions'] },
+        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Structure & Theory', 'Nuclear & Kinetics', 'Thermodynamics & Equilibrium', 'Solutions & Electrochemistry'], tips: ['Attend all classes regularly', 'Buy tutorials manual', 'Focus on objective questions'] }
     ];
 
     async function loadCourses() {
@@ -1035,7 +1362,6 @@
         });
     }
 
-    // ---------- CALENDAR ----------
     async function loadCalendar() {
         try {
             const res = await DB.Calendar.list({ session: '2026/2027' });
@@ -1118,7 +1444,6 @@
         });
     }
 
-    // ---------- FORM ----------
     async function handleFormSubmit(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitBtn');
@@ -1213,7 +1538,6 @@
         document.getElementById('profileDept').textContent = userData.department;
     }
 
-    // ---------- FEEDBACK ----------
     async function handleFeedback(e) {
         e.preventDefault();
         const btn = document.getElementById('feedbackSubmitBtn');
@@ -1242,7 +1566,6 @@
         }
     }
 
-    // ---------- EDIT PROFILE ----------
     function openEditProfile() {
         document.getElementById('editName').value = userData.name || '';
         document.getElementById('editDepartment').value = userData.department || '';
@@ -1280,7 +1603,6 @@
         U.toast('Profile updated!', 'success');
     }
 
-    // ---------- NAVIGATION ----------
     function setupNavigation() {
         document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a, .toc-item').forEach(el => {
             el.addEventListener('click', function (e) {
@@ -1351,7 +1673,6 @@
         });
     }
 
-    // ---------- BOOT ----------
     async function boot() {
         await loadContentBlocks();
         loadAnnouncement();
@@ -1359,7 +1680,6 @@
         loadCourses();
         loadCalendar();
 
-        // ✅ FIX: null-check before setting (defensive)
         const yearEl = document.getElementById('currentYear');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
 
