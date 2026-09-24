@@ -220,6 +220,30 @@
         }
         #courseCodesNote strong { color:var(--secondary); }
 
+        /* 🆕 Genius Point Academy card */
+        .gpa-card {
+            background: linear-gradient(135deg, #00695c 0%, #003d34 100%);
+            color: white; border-radius: 12px; padding: 2rem;
+            margin: 1.5rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 6px solid var(--accent);
+        }
+        .gpa-card h3 { color: var(--accent); margin-bottom: 0.8rem; font-size: 1.3rem; }
+        .gpa-card p { margin-bottom: 0.8rem; opacity: 0.95; }
+        .gpa-card .gpa-highlight {
+            background: rgba(255, 204, 0, 0.15);
+            border-radius: 8px; padding: 1rem;
+            margin: 1rem 0; border-left: 3px solid var(--accent);
+        }
+        .gpa-card ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .gpa-card ul li { margin-bottom: 0.4rem; }
+        .gpa-card .btn-gpa {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #25D366; color: white; padding: 14px 24px;
+            border-radius: 8px; text-decoration: none; font-weight: 700;
+            margin-top: 0.5rem; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .gpa-card .btn-gpa:hover { background: #128C7E; transform: translateY(-2px); }
+
         @media (max-width: 768px) {
             .nav-container { flex-direction: row !important; flex-wrap: wrap !important; }
             .menu-btn { display: block !important; order: 1 !important; font-size: 1.8rem !important; padding: 5px 10px !important; }
@@ -306,6 +330,7 @@
             <li><a href="#" data-page="home">Home</a></li>
             <li><a href="#" data-page="strategy">Strategy</a></li>
             <li><a href="#" data-page="courses">Courses</a></li>
+            <li><a href="#" data-page="playbook">Playbook</a></li>
             <li><a href="#" data-page="planning">Planning</a></li>
             <li><a href="#" data-page="read-recall">READ RECALL</a></li>
             <li><a href="#" data-page="calendar">📅 Calendar</a></li>
@@ -338,11 +363,13 @@
         <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
         <li><a href="#" data-page="strategy">🎯 U-H-P & P.A.S.S</a></li>
         <li><a href="#" data-page="courses">📚 Course Breakdown</a></li>
+        <li><a href="#" data-page="playbook">🎓 Academic Playbook</a></li>
         <li><a href="#" data-page="planning">📅 Effective Planning</a></li>
         <li><a href="#" data-page="balance">⚖️ Academic Balance</a></li>
         <li><a href="#" data-page="read-recall">🧠 READ RECALL</a></li>
         <li><a href="#" data-page="textbooks">📖 Textbooks</a></li>
         <li><a href="#" data-page="calendar">📅 Academic Calendar</a></li>
+        <li><a href="#" data-page="genius-point" style="background:#e0f2f1; color:#00695c; font-weight:800;">📚 Genius Point Academy</a></li>
         <li><a href="#" data-page="contact">📞 Contact</a></li>
         <li><a href="calculator.html"><i class="fas fa-calculator"></i> GPA Calculator</a></li>
         <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.1);">
@@ -387,6 +414,7 @@
 
 <main id="main-content" class="hidden">
 
+    <!-- HOME -->
     <section id="home" class="content-section content-page active">
         <div class="container">
             <h2 class="section-title">Welcome Back! 100 Level Second Semester</h2>
@@ -412,11 +440,11 @@
 
                 <h3 style="color:var(--secondary);">Inside this Guide:</h3>
                 <div class="accordion-container">
-                    <div class="accordion-item"><div class="accordion-header">The U-H-P & P.A.S.S Strategies for Success <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Proven frameworks that top-performing students use to stay organized, focused, and ahead of their coursework.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Detailed Course Breakdowns <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Comprehensive analysis of all second semester 100L courses (MTS, PHY, CHE, BIO, GNS, MEE, CSC) with specific tips, exam formats, and study strategies.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Free Google Drive Study Materials & Textbooks <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Direct access to past questions, lecture slides, practical manuals, and recommended textbooks organized by course.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Effective Planning & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Step-by-step guidance on creating a realistic study schedule that balances academics with personal life.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">READ RECALL Method <i class="fas fa-chevron-down"></i></div><div class="accordion-content">A powerful 10-step memorization technique that will transform how you study and retain information.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">The U-H-P & P.A.S.S Strategies for Success <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Proven frameworks that top-performing students use to stay organized, focused, and ahead of their coursework. We'll break down each letter and show you how to apply them practically.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Detailed Course Breakdowns <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Comprehensive analysis of all second semester 100L courses (MTS, PHY, CHE, BIO, GNS, MEE, CSC) with specific tips, exam formats, and study strategies. Each course is explained with its exam format (CBT, CBE, or written) so you know exactly how to prepare.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Free Google Drive Study Materials & Textbooks <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Direct access to past questions, lecture slides, practical manuals, and recommended textbooks organized by course. Everything is hosted on Google Drive for easy access — just click a course to open its specific folder.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Effective Planning & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Step-by-step guidance on creating a realistic study schedule that balances academics with personal life, including the Eisenhower Matrix and SMART goals framework.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">READ RECALL Method <i class="fas fa-chevron-down"></i></div><div class="accordion-content">A powerful 10-step memorization technique that will transform how you study and retain information. This isn't just theory — it's the exact method top students use.</div></div>
                 </div>
 
                 <div class="page-nav"><div></div><a class="page-btn" data-page="strategy">Next: Strategy →</a></div>
@@ -424,6 +452,7 @@
         </div>
     </section>
 
+    <!-- STRATEGY -->
     <section id="strategy" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">The Strategic Approach: U-H-P & P.A.S.S</h2>
@@ -434,15 +463,21 @@
                 <div class="accordion-container">
                     <div class="accordion-item">
                         <div class="accordion-header">U - Understand Yourself <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">This is the foundation of effective studying. Take an honest assessment of your strengths and limitations. What are your peak productivity hours? Are you a night reader who absorbs information best between 10 PM and 2 AM, or a day reader who's most alert in the morning? How many hours can you actually study before your concentration breaks? Which study techniques work for you; reading aloud, writing notes, teaching others, or watching video explanations? Understanding yourself helps you create a personalized study system that works with your natural rhythms rather than against them.</div>
+                        <div class="accordion-content">
+                            This is the foundation of effective studying. Take an honest assessment of your strengths and limitations. What are your peak productivity hours? Are you a night reader who absorbs information best between 10 PM and 2 AM, or a day reader who's most alert in the morning? How many hours can you actually study before your concentration breaks? Which study techniques work for you — reading aloud, writing notes, teaching others, or watching video explanations? Understanding yourself helps you create a personalized study system that works with your natural rhythms rather than against them.
+                        </div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">H - Have a Goal <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">What CGPA do you want to achieve this semester? Be specific. Do you want to maintain a First Class standing (4.50-5.00), move up to Second Class Upper (3.50-4.49), or simply ensure you pass all courses without carryovers? Your goal determines your strategy. A student aiming for First Class needs to start preparing from week one, while someone aiming to pass might focus more on understanding core concepts and past questions. Write down your target CGPA and place it somewhere visible as a daily reminder.</div>
+                        <div class="accordion-content">
+                            What CGPA do you want to achieve this semester? Be specific. Do you want to maintain a First Class standing (4.50-5.00), move up to Second Class Upper (3.50-4.49), or simply ensure you pass all courses without carryovers? Your goal determines your strategy. A student aiming for First Class needs to start preparing from week one, while someone aiming to pass might focus more on understanding core concepts and past questions. Write down your target CGPA and place it somewhere visible as a daily reminder.
+                        </div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">P - Plan <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Proper planning is like having a map. A good plan must be <strong>P</strong>urposeful (with clear targets for each study session), <strong>L</strong>ogical (based on your actual available time and energy), <strong>A</strong>ctionable (broken down into specific tasks you can complete), and <strong>N</strong>avigable (flexible enough to adjust when unexpected events occur). Without a plan, you'll drift through the semester and panic when exams approach.</div>
+                        <div class="accordion-content">
+                            Proper planning is like having a map. A good plan must be <strong>P</strong>urposeful (with clear targets for each study session), <strong>L</strong>ogical (based on your actual available time and energy), <strong>A</strong>ctionable (broken down into specific tasks you can complete), and <strong>N</strong>avigable (flexible enough to adjust when unexpected events occur). Without a plan, you'll drift through the semester and panic when exams approach.
+                        </div>
                     </div>
                 </div>
 
@@ -450,19 +485,27 @@
                 <div class="accordion-container">
                     <div class="accordion-item">
                         <div class="accordion-header">P - Past Questions <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">FUTA lecturers love repeating questions, sometimes word-for-word from previous years. This is not laziness; it's because certain concepts are fundamental and must be tested. Start collecting and solving past questions from your first week. Join tutorial groups where seniors share question banks. When you study a topic, immediately check how it has been tested in previous exams. This gives you insight into what lecturers consider important and how they structure their questions. For CBT courses, practice with timed conditions to build speed and accuracy.</div>
+                        <div class="accordion-content">
+                            FUTA lecturers love repeating questions, sometimes word-for-word from previous years. This is not laziness; it's because certain concepts are fundamental and must be tested. Start collecting and solving past questions from your first week. Join tutorial groups where seniors share question banks. When you study a topic, immediately check how it has been tested in previous exams. This gives you insight into what lecturers consider important and how they structure their questions. For CBT courses, practice with timed conditions to build speed and accuracy.
+                        </div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">A - Attend Classes & Practicals <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Do not joke with attendance. Many courses award 5-10% of total marks just for showing up. Practicals are even more critical; they're essentially free marks but can fail you if missed. In courses like MEE 102, PHY 108, BIO 104, and CHE 104, practical attendance and lab report submission directly determine whether you'll be allowed to write the final exam. Beyond marks, classes are where lecturers drop hints about exam focus areas, explain complex concepts in simpler terms, and sometimes even solve past questions as examples.</div>
+                        <div class="accordion-content">
+                            Do not joke with attendance. Many courses award 5-10% of total marks just for showing up. Practicals are even more critical; they're essentially free marks but can fail you if missed. In courses like MEE 102, PHY 108, BIO 104, and CHE 104, practical attendance and lab report submission directly determine whether you'll be allowed to write the final exam. Beyond marks, classes are where lecturers drop hints about exam focus areas, explain complex concepts in simpler terms, and sometimes even solve past questions as examples.
+                        </div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">S - Start Early <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Don't wait until two weeks before exams to begin serious studying. The volume of material in second semester courses like CHE 102 (Organic Chemistry) and BIO 102 (General Biology II) is simply too large to cram. Start reading from week one. Create a schedule where you review each day's lectures the same evening. Use weekends to catch up on topics you didn't fully understand. By starting early, you give your brain time to process information, make connections between topics, and retain knowledge long-term rather than just memorizing for exams.</div>
+                        <div class="accordion-content">
+                            Don't wait until two weeks before exams to begin serious studying. The volume of material in second semester courses like CHE 102 (Organic Chemistry) and BIO 102 (General Biology II) is simply too large to cram. Start reading from week one. Create a schedule where you review each day's lectures the same evening. Use weekends to catch up on topics you didn't fully understand. By starting early, you give your brain time to process information, make connections between topics, and retain knowledge long-term rather than just memorizing for exams.
+                        </div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">S - Sleep & Socialize <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">You are human, not a machine. Rest well and keep good friends. Sleep is when your brain consolidates memories and repairs itself; skipping sleep to study actually reduces your ability to retain information. Aim for 6-7 hours of quality sleep, especially before tests and exams. Maintain a healthy social life with friends who share your academic goals. Positive peer pressure from serious-minded friends can motivate you when you feel lazy, and studying in groups helps you understand topics from different perspectives.</div>
+                        <div class="accordion-content">
+                            You are human, not a machine. Rest well and keep good friends. Sleep is when your brain consolidates memories and repairs itself; skipping sleep to study actually reduces your ability to retain information. Aim for 6-7 hours of quality sleep, especially before tests and exams. Maintain a healthy social life with friends who share your academic goals. Positive peer pressure from serious-minded friends can motivate you when you feel lazy, and studying in groups helps you understand topics from different perspectives.
+                        </div>
                     </div>
                 </div>
 
@@ -473,11 +516,19 @@
         </div>
     </section>
 
+    <!-- COURSES (with CCMAS intro + GPA promo card) -->
     <section id="courses" class="content-section content-page">
         <div class="container">
-            <h2 class="section-title">Course-by-Course Battle Plan</h2>
+            <h2 class="section-title">Course-by-Course Breakdown</h2>
             <div class="card">
                 <p style="margin-bottom: 1.5rem;">Below are the courses that make up the core of your second semester. Each course has unique characteristics, assessment methods, and strategies for success. Pay close attention to the exam format (CBT, CBE, or practical) as this determines how you should prepare.</p>
+
+                <!-- CCMAS-friendly intro -->
+                <div style="background:#e0f2f1; border-left:5px solid var(--secondary); padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
+                    <h3 style="color:var(--secondary); margin-bottom:0.8rem;">💙 Don't Be Scared — You've Got This!</h3>
+                    <p>By now, you've already completed your first semester. You know how FUTA works, you know your lecturers, and you know your study rhythm. This semester isn't new — it's just the next step. <strong>Most of your 2nd semester courses are built on what you already learned in 1st semester.</strong> MTS 102 builds on MTH 101. CHE 102 builds on CHM 101. BIO 102 builds on BIO 101. You're not starting over; you're going deeper.</p>
+                    <p style="margin-top:0.8rem;">And remember — we say <strong>"course"</strong>, not "subject." That's the language of university. Get used to it.</p>
+                </div>
 
                 <div id="courseCodesNote">
                     <strong>📝 Quick Note on Course Codes:</strong> Some of your 2nd semester courses may use newer CCMAS codes (e.g., <strong>MTS 102</strong> instead of the older MTH 102). The content is the same — only the codes are newer. This means past questions for these new codes are still limited, but the equivalent older materials (MTH 102, etc.) still apply. We've bundled them in each course folder. Read the full CCMAS explainer on the <a href="index.html" style="color:var(--secondary); font-weight:bold;">First Semester Guide</a>.
@@ -489,11 +540,108 @@
                     <div class="loading-skeleton" style="height: 220px;"></div>
                 </div>
 
-                <div class="page-nav"><a class="page-btn" data-page="strategy">← Previous</a><a class="page-btn" data-page="planning">Next: Planning →</a></div>
+                <!-- Genius Point Academy promo card (tailored for 2nd sem) -->
+                <div class="gpa-card">
+                    <h3>📚 Want to Boost Your CGPA This Semester? We Can Help.</h3>
+                    <p>You already survived 1st semester — now it's time to <strong>improve</strong>. Whether you want to move from Second Class to First Class, or you just want to strengthen weak areas, our tutors at <strong>Genius Point Academy</strong> are here for you.</p>
+                    <div class="gpa-highlight">
+                        <strong>🎯 What We Help 2nd Semester Students With:</strong>
+                        <ul>
+                            <li>Building on your 1st semester foundation</li>
+                            <li>Mastering 2nd semester courses (CHE 102, BIO 102, MTS 102, etc.)</li>
+                            <li>Improving your CGPA strategically</li>
+                            <li>Past questions + exam-focused practice</li>
+                            <li>One-on-one mentorship for personalized help</li>
+                        </ul>
+                    </div>
+                    <p style="font-size:0.9rem; opacity:0.85;">We're a team of dedicated FUTA tutors — including O'yemi, the author of this guide.</p>
+                    <button onclick="contactGeniusPoint()" class="btn-gpa">
+                        <i class="fab fa-whatsapp"></i> Chat With Us on WhatsApp
+                    </button>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="strategy">← Previous</a><a class="page-btn" data-page="playbook">Next: Academic Playbook →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- ACADEMIC PLAYBOOK (after courses) -->
+    <section id="playbook" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">Academic Playbook</h2>
+            <div class="card">
+                <p>Your number one goal is academic excellence. To achieve this, you need a strategy — not just effort, but <strong>intelligent effort</strong>.</p>
+
+                <div class="inspirational-box">
+                    <h3 style="color:var(--secondary);">🎯 P5 Principle: Proper Preparation Prevents Poor Performance</h3>
+                    <p>Success in FUTA isn't about being the smartest — it's about being the most prepared, consistent, and resilient. Your daily habits determine your semester results.</p>
+                    <p class="quote">"The will to win is nothing without the will to prepare." - Juma Ikangaa</p>
+                </div>
+
+                <h3 style="color:var(--secondary); margin-top:2.5rem;">Exam and Test Strategy</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item">
+                        <div class="accordion-header">📝 Before Tests/Exams <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Start preparation early — don't wait till the last minute</li>
+                                <li>Create a study schedule and stick to it</li>
+                                <li>Practice with past questions — this is non-negotiable</li>
+                                <li>Get enough sleep the night before</li>
+                                <li>Prepare all necessary materials in advance</li>
+                                <li>Review your 1st semester notes — 2nd semester builds on them</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">📅 On Test/Exam Day <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Arrive early to the venue</li>
+                                <li>Stay calm and focused</li>
+                                <li>Read instructions carefully — especially for CBT</li>
+                                <li>Manage your time effectively</li>
+                                <li>For CBT: Practice speed and accuracy before the exam</li>
+                                <li>For written: Write legibly and show your workings</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">📊 After Tests/Exams <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <ul style="margin-left: 1rem;">
+                                <li>Gather questions from friends immediately after</li>
+                                <li>These questions often reappear in final exams</li>
+                                <li>Don't make the same mistake twice</li>
+                                <li>Analyze your performance and learn from mistakes</li>
+                                <li>Start preparing for the next assessment immediately</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color:var(--secondary); margin-top:2.5rem;">CGPA Improvement Mindset</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item">
+                        <div class="accordion-header">Your CGPA is Not Fixed <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">Many students think that once their CGPA drops, it's over. That's a lie. Your CGPA can always be improved — it just requires consistency. If you had a tough 1st semester, 2nd semester is your redemption. Focus on acing every test and exam. Each strong semester pulls your CGPA up.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Small Wins Compound <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">A+ in a class quiz, a solid assignment score, a good test — these add up. Don't wait for final exams to start caring. Every mark counts.</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Get Help Early <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">If you're struggling with a particular course, don't wait until the week before the exam. Reach out to seniors, join tutorials, ask questions in class, or connect with us at Genius Point Academy. Early intervention saves your CGPA.</div>
+                    </div>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="courses">← Previous</a><a class="page-btn" data-page="planning">Next: Planning →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANNING -->
     <section id="planning" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Plan Effectively</h2>
@@ -514,11 +662,12 @@
 
                 <p style="margin-top:1rem;"><strong>Weekly Review Sessions:</strong> Set aside 2-3 hours every weekend to review everything covered during the week. This reinforcement helps move information from short-term to long-term memory. Use this time to organize your notes, complete pending assignments, and identify topics you need to revisit.</p>
 
-                <div class="page-nav"><a class="page-btn" data-page="courses">← Previous</a><a class="page-btn" data-page="balance">Next: Academic Balance →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="playbook">← Previous</a><a class="page-btn" data-page="balance">Next: Academic Balance →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- BALANCE -->
     <section id="balance" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Balancing Academic and Extracurricular Activities</h2>
@@ -578,6 +727,7 @@
         </div>
     </section>
 
+    <!-- READ RECALL -->
     <section id="read-recall" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Read and Remember: The READ RECALL Method</h2>
@@ -604,6 +754,7 @@
         </div>
     </section>
 
+    <!-- TEXTBOOKS -->
     <section id="textbooks" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Recommended Textbooks</h2>
@@ -642,6 +793,7 @@
         </div>
     </section>
 
+    <!-- CALENDAR -->
     <section id="calendar" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📅 2nd Semester Calendar</h2>
@@ -651,11 +803,61 @@
                     <div class="loading-skeleton" style="height: 80px;"></div>
                     <div class="loading-skeleton" style="height: 80px;"></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="textbooks">← Previous</a><a class="page-btn" data-page="contact">Next: Contact →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="textbooks">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- GENIUS POINT ACADEMY (2nd sem tailored) -->
+    <section id="genius-point" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">📚 Genius Point Academy</h2>
+            <div class="card">
+                <div class="gpa-card" style="margin-top:0;">
+                    <h3>🎓 Improve Your CGPA This Semester With Us</h3>
+                    <p>1st semester is behind you. Now it's time to <strong>level up</strong>. Whether you had an amazing first semester and want to maintain it, or you had a rough start and want to turn things around — Genius Point Academy is here to help you succeed.</p>
+
+                    <div class="gpa-highlight">
+                        <strong>What We Help 2nd Semester Students With:</strong>
+                        <ul>
+                            <li><strong>Boost your CGPA strategically</strong> — understand what matters most</li>
+                            <li><strong>Master difficult 2nd semester courses</strong> — CHE 102, BIO 102, MTS 102, MTS 104, and more</li>
+                            <li><strong>Solve past questions effectively</strong> — we provide materials + guidance</li>
+                            <li><strong>Prepare for CBT, CBE, and written exams</strong> — different strategies for each</li>
+                            <li><strong>Get mentored by seniors</strong> — people who've actually walked your path</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="color:var(--accent); margin-top:1.5rem; margin-bottom:0.6rem;">Our Approach</h4>
+                    <ul>
+                        <li>Small-group sessions or one-on-one (your choice)</li>
+                        <li>Step-by-step breakdown of tough topics</li>
+                        <li>Exam-focused practice with real past questions</li>
+                        <li>Continuous mentorship — not just before exams</li>
+                        <li>Personalized feedback on your weak areas</li>
+                    </ul>
+
+                    <h4 style="color:var(--accent); margin-top:1.5rem; margin-bottom:0.6rem;">Who We Are</h4>
+                    <p>We're a team of dedicated FUTA students and recent graduates who know exactly how to help you succeed. Many of us have been through what you're going through right now — and we've come out the other side with strong CGPAs.</p>
+                    <p style="margin-top:0.6rem;"><strong>O'yemi</strong> — the author of this guide — is a member of our team. So you're not just getting tutoring; you're getting someone invested in your success.</p>
+                </div>
+
+                <div class="inspirational-box" style="margin-top:1.5rem;">
+                    <h3 style="color:var(--secondary);">🚀 Ready to Improve Your CGPA?</h3>
+                    <p>Click the button below to chat with us directly on WhatsApp. Let's talk about your goals and how we can help you reach them.</p>
+                    <div style="text-align:center; margin-top:1.5rem;">
+                        <button onclick="contactGeniusPoint()" class="btn btn-whatsapp" style="font-size:1.1rem; padding:15px 32px;">
+                            <i class="fab fa-whatsapp"></i> Chat With Us on WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div class="page-nav"><a class="page-btn" data-page="calendar">← Previous</a><a class="page-btn" data-page="contact">Next: Contact →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Contact & Support</h2>
@@ -684,6 +886,18 @@
                     </ul>
                 </div>
 
+                <!-- 🆕 GPA mention (2nd sem tailored) -->
+                <div class="inspirational-box" style="background:#e0f2f1; border-left:5px solid var(--secondary);">
+                    <h3 style="color:var(--secondary);">📚 Also: I'm Part of Genius Point Academy</h3>
+                    <p>Alongside this guide, I'm a tutor and team member at <strong>Genius Point Academy</strong> — where we help students improve their CGPA, master difficult courses, and build strong academic foundations.</p>
+                    <p style="margin-top:0.6rem;">Want to boost your CGPA this semester or get personalized help with any course? Reach out and let's talk.</p>
+                    <div style="margin-top:1rem;">
+                        <button onclick="contactGeniusPoint()" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Chat With Genius Point Academy
+                        </button>
+                    </div>
+                </div>
+
                 <div style="text-align: center; margin: 2rem 0;">
                     <a href="https://wa.me/2347050376975?text=Hello%20O'yemi!%20I%20need%20assistance%20with%20the%20Second%20Semester%20Guide." class="btn btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> Contact via WhatsApp
@@ -691,7 +905,7 @@
                 </div>
 
                 <div class="page-nav">
-                    <a class="page-btn" data-page="calendar">← Previous</a>
+                    <a class="page-btn" data-page="genius-point">← Previous</a>
                     <a href="index.html" class="page-btn">Back to 1st Semester Guide →</a>
                 </div>
             </div>
@@ -722,6 +936,27 @@
 
     let userData = {};
     let pageContent = {};
+
+    // 🆕 Genius Point Academy WhatsApp contact (2nd sem tailored)
+    window.contactGeniusPoint = function () {
+        const p = S.get('futa_profile_2nd') || S.get('futa_profile') || {};
+        const name = p.full_name || 'a FUTA Student';
+        const dept = p.department || '';
+        const level = p.level || '';
+
+        let msg = `Hello Genius Point Academy 👋\n\n`;
+        msg += `I'm a 100L second semester student and I'm interested in your tutoring classes.\n`;
+        msg += `I saw this on the FUTA Survival Guide.\n\n`;
+        msg += `I'd like to talk about:\n`;
+        msg += `• Improving my CGPA this semester\n`;
+        msg += `• Getting help with my 2nd semester courses\n\n`;
+        msg += `Name: ${name}\n`;
+        if (dept) msg += `Department: ${dept}\n`;
+        if (level) msg += `Level: ${level}\n`;
+
+        const encoded = encodeURIComponent(msg);
+        window.open(`https://wa.me/2347050376975?text=${encoded}`, '_blank');
+    };
 
     async function loadContentBlocks() {
         try {
@@ -1138,7 +1373,6 @@
         loadCourses();
         loadCalendar();
 
-        // ✅ FIX: null-check before setting (defensive)
         const yearEl = document.getElementById('currentYear');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
 
