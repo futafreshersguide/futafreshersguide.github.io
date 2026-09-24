@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — SUPABASE CONFIGURATION
 // File: supabase-config.js
-// Version: 2.1.1
+// Version: 2.2.0
 // Load this BEFORE db.js on every page
 // ============================================================
 
@@ -18,7 +18,7 @@
         supabaseAnonKey: SUPABASE_ANON_KEY,
         formSubmitEmail: 'helpinghandshallneverfall@gmail.com',
         adminEmail: 'helpinghandshallneverfall@gmail.com',
-        version: '2.1.1',
+        version: '2.2.0',
         sessionKey: 'futa_guide_session',
         profileCacheKey: 'futa_guide_admin_profile',
         debug: false, // ✅ Off for production. Set true only when debugging.
@@ -36,7 +36,10 @@
             notifications: 'notifications',
             notifReads: 'notification_reads',
             sessions: 'academic_sessions',
-            activity: 'activity_log'
+            activity: 'activity_log',
+            manuals: 'manuals',
+            mindset: 'mindset_content',
+            glossary: 'glossary'
         }
     };
 
@@ -104,6 +107,12 @@
 
         formatDateShort(date) {
             return Utils.formatDate(date, { hour: undefined, minute: undefined });
+        },
+
+        formatNaira(amount) {
+            if (amount === null || amount === undefined) return 'N/A';
+            if (amount === 0) return 'Free';
+            return '₦' + Number(amount).toLocaleString('en-NG');
         },
 
         escapeHtml(str) {
