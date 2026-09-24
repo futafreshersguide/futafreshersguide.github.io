@@ -1,5 +1,5 @@
 % ============================================================
-% FUTA FRESHERS' SURVIVAL GUIDE — LaTeX Source
+% FUTA FRESHERS' SURVIVAL GUIDE — LaTeX Source (FULLY RESTORED)
 % Author: Abideen Yakub Opeyemi (Ó'YẸMÍ)
 % Compiles to: futa-guide.pdf
 % ============================================================
@@ -34,13 +34,13 @@
 \tcbuselibrary{skins,breakable}
 
 % ============================================================
-% COLORS (matching the website theme)
+% COLORS
 % ============================================================
-\definecolor{primary}{HTML}{003366}       % Navy blue
-\definecolor{secondary}{HTML}{990000}     % Dark red
-\definecolor{accent}{HTML}{FFCC00}        % FUTA yellow
-\definecolor{teal}{HTML}{00695C}          % 2nd semester teal
-\definecolor{gpaDark}{HTML}{001A33}       % GPA card dark
+\definecolor{primary}{HTML}{003366}
+\definecolor{secondary}{HTML}{990000}
+\definecolor{accent}{HTML}{FFCC00}
+\definecolor{teal}{HTML}{00695C}
+\definecolor{gpaDark}{HTML}{001A33}
 \definecolor{successGreen}{HTML}{28A745}
 \definecolor{warningYellow}{HTML}{FFC107}
 \definecolor{dangerRed}{HTML}{DC3545}
@@ -103,78 +103,53 @@
 % ============================================================
 % CUSTOM BOXES
 % ============================================================
-
 \newtcolorbox{inspirational}[1][]{
-    colback=inspirational,
-    colframe=primary,
+    colback=inspirational, colframe=primary,
     leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
-    arc=4pt,
-    boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable,
-    #1
+    arc=4pt, boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+    breakable, #1
 }
 
 \newtcolorbox{warningbox}[1][]{
-    colback=warningBg,
-    colframe=warningBorder,
+    colback=warningBg, colframe=warningBorder,
     leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
-    arc=4pt,
-    boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable,
-    #1
+    arc=4pt, boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+    breakable, #1
 }
 
 \newtcolorbox{successbox}[1][]{
-    colback=successGreen!15,
-    colframe=successGreen,
+    colback=successGreen!15, colframe=successGreen,
     leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
-    arc=4pt,
-    boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable,
-    #1
+    arc=4pt, boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+    breakable, #1
 }
 
 \newtcolorbox{moneybox}[1][]{
-    colback=warningYellow!25,
-    colframe=warningYellow,
-    boxrule=0.5pt,
-    arc=4pt,
+    colback=warningYellow!25, colframe=warningYellow,
+    boxrule=0.5pt, arc=4pt,
     boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable,
-    #1
+    breakable, #1
 }
 
 \newtcolorbox{gpabox}[1][]{
-    colback=gpaDark,
-    colframe=accent,
-    coltext=white,
-    boxrule=0pt,
-    leftrule=6pt,
-    arc=4pt,
+    colback=gpaDark, colframe=accent, coltext=white,
+    boxrule=0pt, leftrule=6pt, arc=4pt,
     boxsep=10pt, left=15pt, right=15pt, top=12pt, bottom=12pt,
-    breakable,
-    #1
+    breakable, #1
 }
 
 \newtcolorbox{tipbox}[1][]{
-    colback=midGray,
-    colframe=textGray,
+    colback=midGray, colframe=textGray,
     leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
-    arc=4pt,
-    boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable,
-    #1
+    arc=4pt, boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+    breakable, #1
 }
 
 \newtcolorbox{quotebox}[1][]{
-    colback=lightGray,
-    colframe=primary,
-    boxrule=0pt,
-    leftrule=3pt,
-    arc=4pt,
+    colback=lightGray, colframe=primary,
+    boxrule=0pt, leftrule=3pt, arc=4pt,
     boxsep=6pt, left=12pt, right=12pt, top=6pt, bottom=6pt,
-    breakable,
-    #1
+    breakable, #1
 }
 
 % ============================================================
@@ -184,7 +159,6 @@
 \newcommand{\highlight}[1]{\textbf{\textcolor{primary}{#1}}}
 \newcommand{\keyterm}[1]{\textbf{\textcolor{secondary}{#1}}}
 
-% Adjust TOC
 \renewcommand{\cftsecfont}{\color{primary}\bfseries}
 \renewcommand{\cftsubsecfont}{\color{textGray}}
 
@@ -198,45 +172,39 @@
 % ============================================================
 \begin{titlepage}
     \centering
-    
+
     \begin{tikzpicture}[remember picture, overlay]
         \fill[primary] (current page.north west) rectangle ([yshift=-6cm]current page.north east);
         \fill[accent] ([yshift=-6cm]current page.north west) rectangle ([yshift=-6.4cm]current page.north east);
     \end{tikzpicture}
-    
+
     \vspace*{1cm}
-    
+
     {\color{white}\Huge\bfseries FEDERAL UNIVERSITY\\[0.3em] OF TECHNOLOGY, AKURE\par}
-    
+
     \vspace{1cm}
-    
+
     {\color{accent}\rule{10cm}{2pt}\par}
-    
+
     \vspace{0.5cm}
-    
+
     {\color{white}\Large\itshape Freshers' Survival Guide\par}
-    
+
     \vspace{2cm}
-    
+
     {\color{primary}\Huge\bfseries FUTA\\[0.3em] FRESHERS'\\[0.3em] SURVIVAL GUIDE\par}
-    
+
     \vspace{0.5cm}
-    
+
     {\color{primary}\Large Complete First Semester Guide\par}
-    
+
     \vspace{0.3cm}
-    
+
     {\color{textGray}\large 2026/2027 Academic Session\par}
-    
+
     \vspace{2cm}
-    
-    \begin{tcolorbox}[
-        colback=lightGray,
-        colframe=primary,
-        width=12cm,
-        arc=6pt,
-        boxsep=10pt
-    ]
+
+    \begin{tcolorbox}[colback=lightGray, colframe=primary, width=12cm, arc=6pt, boxsep=10pt]
         \centering
         {\color{primary}\textbf{Compiled by:}}\\[0.3em]
         {\Large\bfseries Abideen Yakub Opeyemi}\\[0.2em]
@@ -245,23 +213,23 @@
         {\small\faPhone\ +234 705 037 6975}\\[0.2em]
         {\small\faEnvelope\ abideenyakub08@gmail.com}
     \end{tcolorbox}
-    
+
     \vfill
-    
+
     \begin{quotebox}
         \centering\itshape\color{primary}
         "The future belongs to those who believe in the beauty of their dreams."\\
         \textnormal{\small --- Eleanor Roosevelt}
     \end{quotebox}
-    
+
     \vspace{1cm}
-    
+
     {\color{textGray}\footnotesize This is an independent student-created resource. It is \textbf{not} an official FUTA publication.\par}
-    
+
     \vspace{0.5cm}
-    
+
     {\color{textGray}\footnotesize \copyright\ 2026 FUTA Survival Guide. All rights reserved.\par}
-    
+
 \end{titlepage}
 
 % ============================================================
@@ -269,11 +237,11 @@
 % ============================================================
 \newpage
 \tableofcontents
-\newpage
 
 % ============================================================
-% SECTION: WELCOME MESSAGE
+% SECTION: WELCOME MESSAGE (NEW PAGE)
 % ============================================================
+\newpage
 \section*{A Welcome Message}
 \addcontentsline{toc}{section}{A Welcome Message}
 
@@ -283,13 +251,13 @@ This achievement is a testament to your dedication, and you should be immensely 
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 🏆 You Are Architects of Your Future}
-    
+
     \vspace{0.5em}
-    
+
     The journey you're beginning will be one of the most defining chapters of your life. Every challenge you overcome, every concept you master, and every connection you make is building the person you will become.
-    
+
     \vspace{0.5em}
-    
+
     \quotetext{"Education is the most powerful weapon which you can use to change the world." \\ --- Nelson Mandela}
 \end{inspirational}
 
@@ -326,17 +294,17 @@ Your registration journey begins when the portal opens. On this date, your FUTA 
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 📅 Important Registration Timeline}
-    
+
     \vspace{0.5em}
-    
+
     \textbf{At the start of the session:} Undergraduate portal opens for online registrations and BIO-DATA FORM download
-    
+
     \vspace{0.3em}
-    
+
     \textbf{Shortly after:} Physical registration begins
-    
+
     \vspace{0.5em}
-    
+
     \quotetext{"Proper preparation prevents poor performance. Start your registration process early!"}
 \end{inspirational}
 
@@ -358,27 +326,27 @@ The BIO-DATA form is the most tedious part of your registration. On the back pag
 \subsection{Step-by-Step Registration Process}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 1: School Officer}},colbacktitle=primary,arc=4pt,breakable]
-Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step. The officer handles all students across all departments in your school, so expect a queue --- but the process itself is fast. Have your form filled out correctly before you get to the front of the line to avoid being sent back.
+Your school officer is general and will sign the biodata of every student in the school. This is usually the quickest step. The officer handles all students across all departments in your school, so expect a queue --- but the process itself is fast. Have your form filled out correctly before you get to the front of the line to avoid being sent back. If you can, go early in the morning before the crowd builds up. Also, make sure your passport photograph is properly attached where required.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 2: Registration Officer}},colbacktitle=primary,arc=4pt,breakable]
-Every department has its own registration officer. This person handles registration for your department specifically. They will verify that your courses are properly selected and that your bio-data matches departmental records. Since this is department-specific, the queue is usually shorter --- but the verification is more thorough. Bring all your documents here.
+Every department has its own registration officer. This person handles registration for your department specifically. They will verify that your courses are properly selected and that your bio-data matches departmental records. Since this is department-specific, the queue is usually shorter than the school officer's queue --- but the verification is more thorough. Bring all your documents here, and double-check every piece of information before they sign. Any errors here can cause problems later, so take your time.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 3: Head of Department (HOD)}},colbacktitle=primary,arc=4pt,breakable]
-You should already know your HOD's name by now. If you don't, find out immediately! This is the head of your department --- the senior academic in charge. You'll need to see them personally for their signature. Dress well, greet respectfully, and be brief. Some HODs will sign on the spot; others may ask you to return at a specific time. Always confirm the HOD's office hours before going.
+You should already know your HOD's name by now. If you don't, find out immediately! This is the head of your department --- the senior academic in charge. You'll need to see them personally for their signature. Dress well, greet respectfully, and be brief. Some HODs will sign on the spot; others may ask you to return at a specific time. Always confirm the HOD's office hours before going, and if there's a secretary, be polite to them too --- they can help you get in faster.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 4: Dean of School}},colbacktitle=primary,arc=4pt,breakable]
-The Dean is the highest authority in your faculty. You might not see them physically during registration. Some faculties will collect all students' forms in one batch, present them to the Dean, and then distribute them back the next day. Other faculties require you to submit and return later to collect the signed form. Either way, don't panic --- just follow the instructions given at the Dean's office.
+The Dean is the highest authority in your faculty. You might not see them physically during registration. Some faculties will collect all students' forms in one batch, present them to the Dean, and then distribute them back the next day. Other faculties require you to submit and return later to collect the signed form. Either way, don't panic --- just follow the instructions given at the Dean's office. The process is usually smoother than students expect because the Dean's office handles many submissions at once.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 5: Students' Affairs Division}},colbacktitle=primary,arc=4pt,breakable]
-Once you have the Dean's signature, proceed to Students' Affairs. \textbf{Dress formally for this step!} Some staff in this office are strict about appearance and will send you back if you're not dressed properly. After conquering this part, you can wear whatever you like. Students' Affairs handles your welfare as a student --- they'll also want to see your documents one more time before signing.
+Once you have the Dean's signature, proceed to Students' Affairs. \textbf{Dress formally for this step!} Some staff in this office are strict about appearance and will send you back if you're not dressed properly. After conquering this part, you can wear whatever you like. Students' Affairs handles your welfare as a student --- they'll also want to see your documents one more time before signing. Be patient here; this is often the busiest office during registration.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Step 6: Final Submission}},colbacktitle=primary,arc=4pt,breakable]
-Return to your faculty for final submission. You'll submit your file for the School Registrar. The Registrar is the highest administrative officer in the university and their signature validates your registration. This is the last step --- once submitted, your registration is officially complete. Keep a photocopy of everything you submit for your own records.
+Return to your faculty for final submission. You'll submit your file for the School Registrar. The Registrar is the highest administrative officer in the university, and their signature validates your registration. This is the last step --- once submitted, your registration is officially complete. Keep a photocopy of everything you submit for your own records, and make sure you collect any receipts or acknowledgment slips that are given.
 \end{tcolorbox}
 
 \subsection{Registration Rules \& Etiquette}
@@ -388,7 +356,7 @@ Return to your faculty for final submission. You'll submit your file for the Sch
     \item Dress as neatly as possible for every registration step
     \item Have a good haircut or hairdo --- first impressions matter
     \item No need to overdress with expensive clothes; neatness is what counts
-    \item When going to Students' Affairs, dress formally
+    \item When going to Students' Affairs, dress formally (shirt, trousers, or decent native wear for guys; appropriate formal or semi-formal for ladies)
     \item Avoid slippers, shorts, and casual flip-flops in administrative offices
 \end{itemize}
 \end{tcolorbox}
@@ -408,13 +376,13 @@ Return to your faculty for final submission. You'll submit your file for the Sch
 
 \begin{moneybox}
     \textbf{\color{primary}\Large 💰 Recommended Budget: ₦20,000 (Cash or Bank Transfer)}
-    
+
     \vspace{0.3em}
-    
+
     \textit{Actual costs may vary by faculty.}
-    
+
     \vspace{0.5em}
-    
+
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
         \item \textbf{Faculty Dues} --- Payment to your faculty
         \item \textbf{Departmental Dues} --- Payment to your department
@@ -422,17 +390,21 @@ Return to your faculty for final submission. You'll submit your file for the Sch
         \item \textbf{Faculty File} --- Official file for your faculty
         \item \textbf{Departmental File} --- Official file for your department
     \end{itemize}
-    
+
     \vspace{0.5em}
-    
+
     \textbf{📌 Important Reminders:}
-    
+
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
         \item \textit{Carry both cash and digital payment options.} Some payments may only be accepted via bank transfer, while others may require cash.
         \item \textit{Confirm with your faculty for specific requirements.} Each department may have its own additional charges.
         \item \textit{Keep receipts for every payment.} Always collect and keep receipts --- they may be required for verification later.
     \end{itemize}
 \end{moneybox}
+
+\subsection{Document Preparation}
+
+During physical registration, all your documents will be screened. If you're missing any required documents, you'll be sent back. Prepare all necessary documents in advance --- check the next section for the full document checklist.
 
 \subsection{Pro Tips for Successful Registration}
 
@@ -456,13 +428,13 @@ Prepare these documents in advance. Make at least 5 photocopies of each document
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 📋 Document Preparation Guide}
-    
+
     \vspace{0.5em}
-    
+
     \textbf{Online Registration First:} Upload clear scans of all documents to the FUTA portal
-    
+
     \vspace{0.3em}
-    
+
     \textbf{Physical Registration Second:} Bring originals and photocopies for verification
 \end{inspirational}
 
@@ -596,13 +568,13 @@ Certificate of identification from your LGA.
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 💡 Document Assistance Available}
-    
+
     \vspace{0.5em}
-    
+
     I can help you obtain JAMB Admission Letter, UTME Result Slip, and WAEC Certificate at an affordable fee.
-    
+
     \vspace{0.5em}
-    
+
     \textbf{Abideen Yakub Opeyemi (O'yemi)} --- +234 705 037 6975
 \end{inspirational}
 
@@ -616,27 +588,29 @@ The first lesson of university life is self-leadership. You are now the CEO of y
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 🚀 From Passenger to Pilot}
-    
+
     \vspace{0.5em}
-    
-    In secondary school, you were following a set path. At FUTA, you're charting your own course.
-    
+
+    In secondary school, you were following a set path. At FUTA, you're charting your own course. This shift from dependence to independence is your first and most important lesson as a university student.
+
     \vspace{0.5em}
-    
+
     \quotetext{"The greatest day in your life is when you take total responsibility for yourself." \\ --- Denis Waitley}
 \end{inspirational}
 
-\subsection*{You Are in Charge}
+\subsection{Key Principles for Success}
 
-Your lecturers are guides, not taskmasters. The drive must come from within. Nobody will chase you to class. Nobody will remind you about assignments. You are now responsible for your own learning --- embrace it.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{You Are in Charge}},colbacktitle=primary,arc=4pt,breakable]
+Your lecturers are guides, not taskmasters. The drive to attend lectures, complete assignments, and delve deeper into topics must come from within. Nobody will chase you to class. Nobody will remind you about submissions. Nobody will check if you've studied. You're now responsible for your own learning --- and that's both a privilege and a responsibility. Embrace it fully. The students who thrive at FUTA are those who take ownership of their education from day one.
+\end{tcolorbox}
 
-\subsection*{Master Your Time}
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Master Your Time}},colbacktitle=primary,arc=4pt,breakable]
+The freedom you now have is your greatest tool, or your biggest trap. You have more free time than ever before --- and nobody telling you what to do with it. Create a realistic schedule that balances academics, personal growth, and rest. Build routines. Learn to prioritize. Set aside time for lectures, study sessions, assignments, exercise, socializing, and sleep. A student with a plan will always outperform a student without one, even if the latter is naturally smarter.
+\end{tcolorbox}
 
-The freedom you now have is your greatest tool, or your biggest trap. Build a schedule. Balance academics, personal growth, and rest. The students who succeed aren't the smartest --- they're the most disciplined.
-
-\subsection*{Own Your Decisions}
-
-Every choice --- from which lectures to attend to how you spend your evenings --- shapes your FUTA experience and your future. Choose wisely, but also learn from mistakes. Nobody gets it perfect.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Own Your Decisions}},colbacktitle=primary,arc=4pt,breakable]
+Every choice --- from which lectures to attend, to how you spend your evenings, to who you surround yourself with --- shapes your FUTA experience and your future. Choose wisely, but also learn from mistakes. Nobody gets it perfect. The key is to learn fast, adjust, and keep moving forward. Don't be too hard on yourself when you slip up --- but don't ignore the lesson either. Every decision is a chance to build the person you're becoming.
+\end{tcolorbox}
 
 % ============================================================
 % SECTION 4: COURSE SYNOPSIS (NEW PAGE)
@@ -646,47 +620,47 @@ Every choice --- from which lectures to attend to how you spend your evenings --
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 💙 Don't Be Scared --- You've Done Most of This Before!}
-    
+
     \vspace{0.5em}
-    
+
     Before you panic when you see the list of courses, breathe. Here's the truth: \textbf{most of your 100 level first semester courses are things you already learned in secondary school.} Biology, Chemistry, Physics, Mathematics --- they're just at a deeper level now. You're not starting from scratch; you're building on a foundation you already have.
-    
+
     \vspace{0.5em}
-    
+
     The only truly new things will be a few introductory courses that everyone takes (like Intro to Computing, Use of English, and Engineering Drawing). These are designed to \textit{introduce} you, not to fail you. Attend every class, take notes, do your assignments --- and you'll be fine.
-    
+
     \vspace{0.5em}
-    
+
     Also --- remember we use the word \textbf{"course"} here, not "subject". Get used to that. You'll take courses; you'll pass courses.
 \end{inspirational}
 
 \begin{warningbox}
     \textbf{\color{warningText}\Large ⚠️ IMPORTANT: These Are NOT All Your Courses}
-    
+
     \vspace{0.5em}
-    
+
     The courses listed in this guide are the \textbf{common/general courses} that most 100 level students take --- but they're \textbf{not the complete list} of your courses.
-    
+
     \vspace{0.5em}
-    
+
     Some courses are \textbf{specific to your department}. Some were \textbf{not yet published when we compiled this}. Some simply \textbf{didn't reach us in time}.
-    
+
     \vspace{0.5em}
-    
+
     \textbf{So don't assume this is everything.} You'll find the full list:
-    
+
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
         \item On your \textbf{course form} during registration
         \item From your \textbf{class rep} or \textbf{departmental adviser}
         \item From \textbf{seniors in your department}
     \end{itemize}
-    
+
     \vspace{0.5em}
-    
+
     📱 \textbf{Want to connect with your senior colleagues and departmental mates?} Message me directly --- I'll connect you to the right people in your department so you never miss a course.
-    
+
     \vspace{0.5em}
-    
+
     \textbf{Abideen Yakub Opeyemi (O'yemi)} --- +234 705 037 6975
 \end{warningbox}
 
@@ -697,7 +671,7 @@ Every choice --- from which lectures to attend to how you spend your evenings --
     \textbf{\color{primary}Code} & \textbf{\color{primary}Title} & \textbf{\color{primary}Exam} & \textbf{\color{primary}Focus} \\
     \midrule
     \endhead
-    
+
     GST 111 & Communication in English & CBT & Academic skills, grammar \\
     \midrule
     COS 101 & Introduction to Computing Science & CBT & Computer fundamentals \\
@@ -732,13 +706,13 @@ Your number one goal is academic excellence. To achieve this, you need a strateg
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 🎓 P5 Principle: Proper Preparation Prevents Poor Performance}
-    
+
     \vspace{0.5em}
-    
+
     Success in FUTA isn't about being the smartest --- it's about being the most prepared, consistent, and resilient. Your daily habits determine your semester results.
-    
+
     \vspace{0.5em}
-    
+
     \quotetext{"The will to win is nothing without the will to prepare." \\ --- Juma Ikangaa}
 \end{inspirational}
 
@@ -808,12 +782,65 @@ Your number one goal is academic excellence. To achieve this, you need a strateg
 
 \subsection*{Benefits of Attending Classes}
 
-\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
-    \item \textbf{Attendance Marks:} Some courses award marks for class attendance, which contributes to your final grade.
-    \item \textbf{Better Understanding:} Lecturers explain concepts in ways that textbooks can't.
-    \item \textbf{Ask Questions:} Get immediate clarification on confusing topics directly from the expert.
-    \item \textbf{Test Structure:} Learn the exam format --- objectives, MCQs, or fill-in-the-gaps.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Attendance Marks}},colbacktitle=primary,arc=4pt,breakable]
+Some courses award marks for class attendance, which contributes to your final grade. This is essentially free marks --- you just need to show up. For some courses, attendance can be worth 5-10\% of your total grade. Missing classes casually means throwing those marks away. Don't do it.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Better Understanding}},colbacktitle=primary,arc=4pt,breakable]
+Lecturers explain concepts in ways that textbooks can't. They give real-life examples, tell stories, and highlight what really matters for exams. You learn faster when you're in the room. Some lecturers even drop hints about what will come out in the test --- hints you would completely miss if you weren't there.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Ask Questions}},colbacktitle=primary,arc=4pt,breakable]
+Get immediate clarification on confusing topics directly from the expert. Don't let a small misunderstanding compound over weeks until it becomes a big problem. Ask questions in class. If you're shy, approach the lecturer after class or during office hours. Most lecturers are happy to explain things further.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Test Structure}},colbacktitle=primary,arc=4pt,breakable]
+Learn the exam format --- whether it's objectives, MCQs, or fill-in-the-gaps (German). Lecturers usually drop hints about this before the test. Knowing the format in advance helps you prepare appropriately. For CBT courses, you need speed and accuracy. For written exams, you need to show your workings and write legibly.
+\end{tcolorbox}
+
+\subsection*{Exam and Test Strategy}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{📝 Before Tests/Exams}},colbacktitle=primary,arc=4pt,breakable]
+\begin{itemize}[leftmargin=1em, itemsep=0.3em]
+    \item Start preparation early --- don't wait till the last minute
+    \item Create a study schedule and stick to it
+    \item Practice with past questions --- this is the single most effective strategy
+    \item Get enough sleep the night before --- a tired brain doesn't think well
+    \item Prepare all necessary materials in advance (pen, pencil, calculator, ID card)
+    \item Review previous test questions from your friends --- patterns repeat
 \end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{📅 On Test/Exam Day}},colbacktitle=primary,arc=4pt,breakable]
+\begin{itemize}[leftmargin=1em, itemsep=0.3em]
+    \item Arrive early to the venue --- don't rush
+    \item Stay calm and focused --- take deep breaths if you feel anxious
+    \item Read instructions carefully --- especially for CBT where you can accidentally skip
+    \item Manage your time effectively --- don't spend too long on one question
+    \item For CBT: Practice speed and accuracy --- the timer doesn't wait
+    \item For written: Write legibly and show your workings --- partial marks are better than nothing
+    \item Answer the easy questions first, then tackle the harder ones
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{📊 After Tests/Exams}},colbacktitle=primary,arc=4pt,breakable]
+\begin{itemize}[leftmargin=1em, itemsep=0.3em]
+    \item Immediately gather the questions you remember --- write them down or send them to your group chat
+    \item These questions often reappear in the final exam, sometimes word-for-word
+    \item Don't make the same mistake twice --- analyze where you struggled
+    \item Review your performance and learn from mistakes
+    \item Start preparing for the next assessment immediately --- momentum matters
+    \item Share the questions with your coursemates --- helping others helps you remember too
+\end{itemize}
+\end{tcolorbox}
+
+\begin{inspirational}
+    \textbf{\color{primary}\Large 💡 Important Reminder}
+
+    \vspace{0.5em}
+
+    For both computer-based and written exams, immediately after your test, gather questions from your friends that you remember. These are likely to come out in the final exam. Don't miss this opportunity twice!
+\end{inspirational}
 
 % ============================================================
 % SECTION 6: BEYOND THE BOOKS (NEW PAGE)
@@ -825,27 +852,33 @@ FUTA offers more than a certificate. It offers an experience that will shape you
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 🌟 Your Education Extends Beyond the Classroom}
-    
+
     \vspace{0.5em}
-    
+
+    The most valuable lessons often happen outside lecture halls --- in student organizations, late-night discussions with roommates, and challenges you overcome together. Your degree matters, but the person you become while earning it matters even more.
+
+    \vspace{0.5em}
+
     \quotetext{"The beautiful thing about learning is that no one can take it away from you." \\ --- B.B. King}
 \end{inspirational}
 
-\subsection*{Network Intentionally}
+\subsection{Building Your Complete FUTA Experience}
 
-The friends you make here will be your professional network for life. Connect with people who challenge and inspire you. Join study groups. Attend departmental events.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Network Intentionally}},colbacktitle=primary,arc=4pt,breakable]
+The friends you make here will be your professional network for life. Connect with people who challenge and inspire you. Join study groups. Attend departmental events. Get to know your coursemates beyond the surface level. Some of the most important connections you'll ever make happen in university --- don't sleep on them.
+\end{tcolorbox}
 
-\subsection*{Get Involved}
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Get Involved}},colbacktitle=primary,arc=4pt,breakable]
+Join a club, society, or sports team. It builds character, leadership, and lifelong friendships. Don't be a ghost --- be present. Whether it's a departmental association, a religious group, or a hobby club, being part of something bigger than yourself enriches your experience. You'll learn leadership, teamwork, and how to manage multiple responsibilities --- all skills that will serve you long after graduation.
+\end{tcolorbox}
 
-Join a club, society, or sports team. It builds character, leadership, and lifelong friendships. Don't be a ghost --- be present.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Prioritize Your Well-being}},colbacktitle=primary,arc=4pt,breakable]
+Your mental and physical health are critical. Eat well, exercise, sleep, and seek help when needed. A healthy mind learns more efficiently than an exhausted one. If you're struggling with stress, anxiety, or depression, don't be silent --- talk to someone you trust, visit the health center, or reach out to a counsellor. Taking care of yourself isn't a luxury; it's a necessity.
+\end{tcolorbox}
 
-\subsection*{Prioritize Your Well-being}
-
-Your mental and physical health are critical. Eat well, exercise, sleep, and seek help when needed. A healthy mind learns more efficiently than an exhausted one.
-
-\subsection*{Develop Soft Skills}
-
-Communication, teamwork, and time management are as important as your technical knowledge. Employers look for people who can work with others.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Develop Soft Skills}},colbacktitle=primary,arc=4pt,breakable]
+Communication, teamwork, and time management are as important as your technical knowledge. Employers look for people who can work with others, express ideas clearly, and handle pressure gracefully. Use your time at FUTA to develop these skills --- participate in group projects, take on leadership roles, and practice public speaking. These soft skills will often matter more than your CGPA when you enter the workforce.
+\end{tcolorbox}
 
 % ============================================================
 % SECTION 7: NAVIGATING THE STORMS (NEW PAGE)
@@ -857,24 +890,37 @@ There will be difficult days. Challenging courses, overwhelming workloads, and p
 
 \begin{inspirational}
     \textbf{\color{primary}\Large ⚡ Storms Make Better Sailors}
-    
+
     \vspace{0.5em}
-    
-    \quotetext{"The oak fought the wind and was broken, the willow bent when it must and survived."}
+
+    Every successful FUTA graduate has faced challenges. What separates them is not the absence of storms, but their ability to navigate through them. You will face difficult moments --- a test you failed, a course you can't understand, a season of loneliness or doubt. These are not signs that you don't belong. They are signs that you're growing.
+
+    \vspace{0.5em}
+
+    \quotetext{"The oak fought the wind and was broken, the willow bent when it must and survived." \\ --- Robert Jordan}
 \end{inspirational}
 
-\subsection*{Your Support System}
+\subsection{Your Support System}
 
-\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
-    \item \textbf{FUTA Student Union Govt (FUTASUG)} --- Your representatives are here to help with academic and welfare issues.
-    \item \textbf{Departmental Associations \& Seniors} --- Connect with seniors who've walked your path.
-    \item \textbf{Lecturers \& Course Advisors} --- Most lecturers are willing to help students who show genuine interest.
-    \item \textbf{Religious Groups} --- The heads in your religious bodies are also there to help you.
-\end{itemize}
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{FUTA Student Union Govt (FUTASUG)}},colbacktitle=primary,arc=4pt,breakable]
+Your representatives are here to help with academic and welfare issues. Don't hesitate to reach out to them. From issues with lecturers to accommodation problems to general student welfare --- FUTASUG exists to support students. Get to know your departmental and faculty representatives; they can be powerful allies when you face challenges.
+\end{tcolorbox}
 
-\subsection*{Turning Setbacks into Comebacks}
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Departmental Associations \& Seniors}},colbacktitle=primary,arc=4pt,breakable]
+Connect with seniors who've walked your path. They have the answers, the past questions, and the experience. Don't be shy --- most seniors are happy to help if you approach them respectfully. Your departmental association is also a great source of support, materials, and mentorship. When you're confused about a course, a lecturer, or the system in general, seniors are often the fastest source of clarity.
+\end{tcolorbox}
 
-\textbf{Failure is Feedback:} A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something --- what matters is what they learned from it.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Lecturers \& Course Advisors}},colbacktitle=primary,arc=4pt,breakable]
+Most lecturers are willing to help students who show genuine interest. Attend office hours. Ask intelligent questions. Show effort. Course advisors especially are there to guide you through academic decisions. If you're struggling with a course, the lecturer's office is the right place to be. Don't wait until the exam is near to seek help --- show up early and consistently.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Religious Groups}},colbacktitle=primary,arc=4pt,breakable]
+The heads in your religious bodies are also there to help you. Balance your spiritual life with your academic life --- both matter. Whether you're Christian, Muslim, or of another faith, being part of a religious community on campus provides moral support, mentorship, and a sense of belonging. Campus fellowships often have senior members who can guide you through academic challenges too.
+\end{tcolorbox}
+
+\subsection{Turning Setbacks into Comebacks}
+
+\textbf{Failure is Feedback:} A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something --- what matters is what they learned from it. When you don't get the grade you wanted, don't hide from it. Look at what went wrong. Adjust your approach. Try again. The students who succeed in the long run are not the ones who never fail --- they're the ones who refuse to stay down.
 
 % ============================================================
 % SECTION 8: THE ANCHOR (NEW PAGE)
@@ -885,21 +931,40 @@ There will be difficult days. Challenging courses, overwhelming workloads, and p
 In the midst of the pressure, never underestimate the power of faith and prayer.
 
 \begin{inspirational}
-    \textbf{\color{primary}\Large 🙏 Your Spiritual "P"}
-    
+    \textbf{\color{primary}\Large 🙏 Your Spiritual "P" - The Ultimate Game Changer}
+
     \vspace{0.5em}
-    
+
+    While you're studying hard and preparing thoroughly, remember that some battles are won on your knees. Your spiritual foundation will sustain you when everything else feels unstable. Faith isn't an escape from reality --- it's the anchor that holds you steady while you navigate reality.
+
+    \vspace{0.5em}
+
     \quotetext{"You can't do without having Problems, but Prayer is a solution to Problem, and you'll be Passed."}
 \end{inspirational}
 
-\subsection*{Start Your Day Right}
-Begin each day with prayer and meditation to set the right tone.
+\subsection{Integrating Faith into Your FUTA Journey}
 
-\subsection*{Faith During Challenges}
-When facing difficult courses or personal struggles, turn to prayer for strength and guidance.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Start Your Day Right}},colbacktitle=primary,arc=4pt,breakable]
+Begin each day with prayer and meditation to set the right tone. A calm, focused morning leads to a productive, peaceful day. Even if it's just 5 minutes --- commit to starting your day with intentional spiritual focus. You'll notice the difference in how you handle challenges when your foundation is solid.
+\end{tcolorbox}
 
-\subsection*{Gratitude \& Balance}
-"Faith without works is dead" --- pray like it depends on God, work like it depends on you.
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Faith During Challenges}},colbacktitle=primary,arc=4pt,breakable]
+When facing difficult courses or personal struggles, turn to prayer for strength and guidance. You are not alone. The same God who brought you this far will see you through. Prayer doesn't always change your circumstances, but it changes you --- it gives you peace, clarity, and the strength to keep going when you feel like giving up.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Gratitude \& Balance}},colbacktitle=primary,arc=4pt,breakable]
+Regularly give thanks for the opportunity to study at FUTA. Remember that "faith without works is dead" --- pray like it depends on God, work like it depends on you. Both matter equally. Faith gives you the strength and perspective; work gives you the results. Don't neglect either one. Find the balance, and you'll thrive academically and spiritually.
+\end{tcolorbox}
+
+\subsection{Your Final Charge, Class of 2029}
+
+You are the architects of the future. The world is waiting for the solutions you will design, the technologies you will build, and the leadership you will provide. It all starts here, at FUTA.
+
+Take relentless \textbf{ACTION}. Be an unstoppable \textbf{FORCE}. Apply the \textbf{P5} principle daily. And anchor it all in Prayer.
+
+\begin{center}
+    {\Large\bfseries\color{primary} Your time is now. Make it legendary.}
+\end{center}
 
 % ============================================================
 % SECTION 9: COURSE MATERIALS (NEW PAGE)
@@ -911,9 +976,9 @@ All course materials are available on Google Drive --- past questions, lecture s
 
 \begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
     \textbf{\color{primary}\Large 📁 Access Main Materials Folder}
-    
+
     \vspace{0.5em}
-    
+
     \url{https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ}
 \end{tcolorbox}
 
@@ -930,14 +995,65 @@ Each course has its own dedicated folder with organized materials. Use the main 
 The courses listed in this guide are the \textbf{general courses} that almost all FUTA students take in their first year. Depending on your department, you may also have specific departmental courses.
 
 \begin{inspirational}
-    \textbf{\color{primary}\Large 🎯 Important Notice}
-    
+    \textbf{\color{primary}\Large 🎯 Important Notice About Your Courses}
+
     \vspace{0.5em}
-    
+
     \textbf{Some departments start their specialized courses from 100 level!} While the courses in this guide are essential for all students, you need to check your specific departmental requirements.
 \end{inspirational}
 
-Make sure to check your course form during registration to see exactly which courses apply to you. When in doubt, ask your departmental adviser or a senior.
+\subsection*{How to Know Your Exact Courses}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
+    \item \textbf{Check your course form during course registration} --- Carefully review all courses assigned to you during online registration
+    \item \textbf{Consult 200 Level Students:} Reach out to seniors in your department --- they've been through this before
+    \item \textbf{Departmental Notice Boards:} Check for course information posted by your department
+    \item \textbf{Ask Your Course Adviser:} Each department has course advisers for fresh students
+\end{itemize}
+
+\begin{inspirational}
+    \textbf{\color{primary}\Large 💡 Take Your Departmental Courses Seriously!}
+
+    \vspace{0.5em}
+
+    Your departmental courses form the foundation of your specialized knowledge. Don't make the mistake of focusing only on general courses while neglecting your core departmental subjects. These courses:
+
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
+        \item Build your technical foundation
+        \item Introduce you to your field of study
+        \item Prepare you for advanced courses
+        \item Often have higher credit units
+    \end{itemize}
+
+    \quotetext{"The expert in anything was once a beginner. Start strong with your departmental courses!"}
+\end{inspirational}
+
+\subsection*{Attend Classes to Know Your Exam Structure}
+
+Make sure to attend your departmental course classes regularly. This is how you'll discover:
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
+    \item Whether you'll be taking tests or exams
+    \item The type of examination (CBT, written, practical)
+    \item The course requirements and expectations
+    \item Important announcements about assessments
+\end{itemize}
+
+\subsection*{Need Help?}
+
+If you're unsure about your departmental courses or who to ask:
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
+    \item \textbf{Check your course form during registration}
+    \item \textbf{Reach out to me directly} --- I can help connect you with the right people
+    \item \textbf{Join your departmental WhatsApp group} --- this is where important information is shared
+    \item \textbf{Visit your department office} --- the administrative staff can guide you
+    \item \textbf{Attend departmental orientation} --- don't miss this important event
+\end{itemize}
+
+\begin{center}
+    \textbf{\color{primary} Remember: Your first year sets the tone for your entire FUTA journey. Start strong, ask questions, and build good academic habits from day one!}
+\end{center}
 
 % ============================================================
 % SECTION 11: GENIUS POINT ACADEMY (NEW PAGE)
@@ -947,17 +1063,17 @@ Make sure to check your course form during registration to see exactly which cou
 
 \begin{gpabox}
     {\color{accent}\huge\bfseries 🎓 Build a Solid First-Year Foundation With Us}
-    
+
     \vspace{0.7em}
-    
+
     {\color{white}Starting university can feel overwhelming --- new courses, new environment, new expectations. At \textbf{Genius Point Academy}, we make the transition smooth and set you up for long-term academic success.}
-    
+
     \vspace{0.7em}
-    
+
     {\color{accent}\large\bfseries Our Goal For You:}
-    
+
     \vspace{0.3em}
-    
+
     {\color{white}
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
         \item \textbf{Excel in your 100L courses} --- understand concepts deeply, not just pass exams
@@ -966,13 +1082,13 @@ Make sure to check your course form during registration to see exactly which cou
         \item \textbf{Gain confidence} --- walk into every test knowing you've prepared well
         \item \textbf{Get mentorship} --- learn from seniors who've been there and excelled
     \end{itemize}}
-    
+
     \vspace{0.5em}
-    
+
     {\color{accent}\large\bfseries What We Offer:}
-    
+
     \vspace{0.3em}
-    
+
     {\color{white}
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
         \item Tutoring for all 100L courses (MTH/MTS, PHY, CHM/CHE, BIO, GNS, etc.)
@@ -981,25 +1097,25 @@ Make sure to check your course form during registration to see exactly which cou
         \item Small-group sessions or one-on-one (your choice)
         \item Ongoing mentorship beyond the classroom
     \end{itemize}}
-    
+
     \vspace{0.7em}
-    
+
     {\color{white}We're a team of dedicated FUTA students and recent graduates who have walked the path you're on. \textbf{O'yemi} --- the author of this guide --- is also a member of the Genius Point Academy team.}
-    
+
     \vspace{0.5em}
-    
+
     {\color{accent}\large\bfseries Ready to Start?}
-    
+
     \vspace{0.3em}
-    
+
     {\color{white}Reach out directly:}
-    
+
     \vspace{0.3em}
-    
+
     {\color{accent}\textbf{\Large 📱 +234 705 037 6975}}
-    
+
     \vspace{0.3em}
-    
+
     {\color{white}\small WhatsApp: Mention "FUTA Survival Guide" when you message us.}
 \end{gpabox}
 
@@ -1011,13 +1127,13 @@ Make sure to check your course form during registration to see exactly which cou
 
 \begin{inspirational}
     \textbf{\color{primary}\Large 💪 Believe in Yourself!}
-    
+
     \vspace{0.5em}
-    
+
     No course is too difficult if you focus, stay attentive, and stay motivated. You have the ability to succeed; just put in consistent effort, stay positive, and keep your eyes on your goals.
-    
+
     \vspace{0.5em}
-    
+
     \quotetext{"You can do it! The journey of a thousand miles begins with a single step."}
 \end{inspirational}
 
@@ -1025,17 +1141,17 @@ Make sure to check your course form during registration to see exactly which cou
 
 \begin{center}
     {\Large\bfseries\color{primary} Abideen Yakub Opeyemi (Ó'YẸMÍ)}
-    
+
     \vspace{0.5em}
-    
+
     \faGraduationCap\ Department of Electrical and Electronics Engineering
-    
+
     \vspace{0.3em}
-    
+
     \faPhone\ \textbf{+234 705 037 6975}
-    
+
     \vspace{0.3em}
-    
+
     \faEnvelope\ \textbf{abideenyakub08@gmail.com}
 \end{center}
 
@@ -1061,27 +1177,27 @@ Want to boost your GPA, master difficult courses, and get mentored? Reach out at
 
 \begin{center}
     \vspace*{3cm}
-    
+
     {\color{primary}\Huge\bfseries Thank You for Reading}
-    
+
     \vspace{1cm}
-    
+
     {\color{accent}\rule{8cm}{2pt}}
-    
+
     \vspace{1cm}
-    
+
     {\Large\itshape You are a FUTArian.\\
     Your journey starts now.\\
     Make it legendary.}
-    
+
     \vspace{2cm}
-    
+
     {\color{textGray}\small This guide is an independent student-created resource.\\
     It is not officially affiliated with FUTA.\\
     For guidance purposes only.}
-    
+
     \vfill
-    
+
     {\color{primary}\copyright\ 2026 FUTA Survival Guide\\
     Compiled by Abideen Yakub Opeyemi (Ó'YẸMÍ)}
 \end{center}
