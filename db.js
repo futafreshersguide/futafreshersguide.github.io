@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — DATABASE LAYER
 // File: db.js
-// Version: 2.1.1
+// Version: 2.2.0
 // Depends on: supabase-config.js
 // ============================================================
 
@@ -356,7 +356,6 @@
                 sb().from(CONFIG.tables.calculator).delete().eq('id', id));
         },
 
-        // ✅ Added removeAll for danger-zone "Clear Calculator Logs"
         async removeAll() {
             return query(CONFIG.tables.calculator,
                 sb().from(CONFIG.tables.calculator).delete().neq('id', '00000000-0000-0000-0000-000000000000'));
@@ -629,6 +628,141 @@
         }
     };
 
+    // ---------- MANUALS ----------
+    const Manuals = {
+        async list({ session = '2025/2026', onlyAvailable = true } = {}) {
+            let b = sb().from(CONFIG.tables.manuals)
+                .select('*')
+                .eq('session', session)
+                .order('display_order', { ascending: true });
+            if (onlyAvailable) b = b.eq('is_available', true);
+            return query(CONFIG.tables.manuals, b, { silent: true });
+        },
+
+        async getByCourse(courseCode, session = '2025/2026') {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals)
+                    .select('*')
+                    .eq('course_code', courseCode)
+                    .eq('session', session)
+                    .maybeSingle());
+        },
+
+        async stats(session = '2025/2026') {
+            const res = await query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals)
+                    .select('price, is_free')
+                    .eq('session', session)
+                    .eq('is_available', true),
+                { silent: true });
+            if (!res.ok || !res.data) return { total: 0, totalCost: 0, freeCount: 0 };
+            const items = res.data;
+            const totalCost = items.reduce((sum, m) => sum + (m.is_free ? 0 : (m.price || 0)), 0);
+            const freeCount = items.filter(m => m.is_free).length;
+            return {
+                total: items.length,
+                totalCost,
+                freeCount
+            };
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).delete().eq('id', id));
+        }
+    };
+
+    // ---------- MINDSET CONTENT ----------
+    const Mindset = {
+        async list({ onlyActive = true } = {}) {
+            let b = sb().from(CONFIG.tables.mindset)
+                .select('*')
+                .order('display_order', { ascending: true });
+            if (onlyActive) b = b.eq('is_active', true);
+            return query(CONFIG.tables.mindset, b, { silent: true });
+        },
+
+        async get(key) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset)
+                    .select('*')
+                    .eq('key', key)
+                    .maybeSingle());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).delete().eq('id', id));
+        }
+    };
+
+    // ---------- GLOSSARY ----------
+    const Glossary = {
+        async list({ category = '', onlyActive = true, search = '' } = {}) {
+            let b = sb().from(CONFIG.tables.glossary)
+                .select('*')
+                .order('category')
+                .order('display_order', { ascending: true });
+            if (onlyActive) b = b.eq('is_active', true);
+            if (category) b = b.eq('category', category);
+            if (search) b = b.or(`term.ilike.%${search}%,definition.ilike.%${search}%`);
+            return query(CONFIG.tables.glossary, b, { silent: true });
+        },
+
+        async get(term) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary)
+                    .select('*')
+                    .eq('term', term)
+                    .maybeSingle());
+        },
+
+        async categories() {
+            const res = await query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary)
+                    .select('category')
+                    .eq('is_active', true),
+                { silent: true });
+            if (!res.ok) return [];
+            return [...new Set((res.data || []).map(r => r.category).filter(Boolean))].sort();
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).delete().eq('id', id));
+        }
+    };
+
     // ---------- REALTIME ----------
     function subscribe(table, callback, filter = null) {
         try {
@@ -663,6 +797,7 @@
         Auth, Profiles, Submissions, Businesses, Feedback, Calculator,
         Courses, Calendar, Settings,
         Content, Notifications, Sessions, Activity,
+        Manuals, Mindset, Glossary,
         subscribe, unsubscribe, healthCheck,
         _query: query
     };
