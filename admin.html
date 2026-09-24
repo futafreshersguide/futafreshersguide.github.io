@@ -224,7 +224,7 @@
         }
         .modal-overlay.show { display: flex; }
         .modal-box {
-            background: white; border-radius: 16px; max-width: 600px;
+            background: white; border-radius: 16px; max-width: 700px;
             width: 100%; max-height: 90vh; overflow-y: auto;
             box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
@@ -258,6 +258,7 @@
             border-color: var(--primary); background: white;
         }
         .input-group textarea { min-height: 80px; resize: vertical; }
+        .input-group textarea.code { font-family: 'Courier New', monospace; font-size: 0.82rem; }
         .input-group .hint { font-size: 0.72rem; color: var(--gray-500); margin-top: 4px; }
 
         .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -281,7 +282,6 @@
         .toast.warning { border-left-color: var(--warning); }
         @keyframes toastIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
-        /* ============ MOBILE MENU BUTTON ============ */
         .mobile-menu-btn {
             display: none; position: fixed; bottom: 20px; right: 20px;
             width: 55px; height: 55px; border-radius: 50%;
@@ -290,30 +290,16 @@
             z-index: 300; cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-
-        /* ✅ Show menu button ONLY after login AND on mobile */
-        body.app-active .mobile-menu-btn {
-            display: none;
-        }
+        body.app-active .mobile-menu-btn { display: none; }
         @media (max-width: 900px) {
-            body.app-active .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+            body.app-active .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
         }
 
         @media (max-width: 900px) {
-            .sidebar {
-                position: fixed; left: -280px; z-index: 200;
-                transition: left 0.3s ease;
-            }
+            .sidebar { position: fixed; left: -280px; z-index: 200; transition: left 0.3s ease; }
             .sidebar.open { left: 0; }
             .main { padding: 20px 15px 100px; }
-            .sidebar-overlay {
-                display: none; position: fixed; inset: 0;
-                background: rgba(0,0,0,0.5); z-index: 150;
-            }
+            .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; }
             .sidebar-overlay.show { display: block; }
         }
     </style>
@@ -350,7 +336,7 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo">
             <h2><i class="fas fa-cog"></i> FUTA Admin</h2>
-            <small>Control Center v2.0</small>
+            <small>Control Center v2.1</small>
         </div>
         <ul class="sidebar-nav">
             <li><a href="#" data-page="dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -359,6 +345,9 @@
             <li><a href="#" data-page="feedback"><i class="fas fa-comments"></i> Feedback <span class="badge-count" id="badgeUnreadFb" style="display:none;"></span></a></li>
             <li><a href="#" data-page="calculator"><i class="fas fa-calculator"></i> Calculator Logs</a></li>
             <li><a href="#" data-page="courses"><i class="fas fa-book"></i> Courses</a></li>
+            <li><a href="#" data-page="manuals"><i class="fas fa-tag"></i> Manuals</a></li>
+            <li><a href="#" data-page="mindset"><i class="fas fa-brain"></i> Mindset</a></li>
+            <li><a href="#" data-page="glossary"><i class="fas fa-book-reader"></i> Glossary</a></li>
             <li><a href="#" data-page="calendar"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
             <li><a href="#" data-page="notifications"><i class="fas fa-bullhorn"></i> Notifications</a></li>
             <li><a href="#" data-page="content"><i class="fas fa-edit"></i> Content Editor</a></li>
@@ -386,6 +375,7 @@
             <span class="datetime" id="currentDateTime"></span>
         </div>
 
+        <!-- DASHBOARD -->
         <section id="page-dashboard" class="page-section active">
             <div class="stats-grid">
                 <div class="stat-card"><div class="label"><i class="fas fa-users"></i> Total Users</div><div class="value" id="statTotalUsers">—</div></div>
@@ -420,6 +410,7 @@
             </div>
         </section>
 
+        <!-- USERS -->
         <section id="page-users" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -449,6 +440,7 @@
             </div>
         </section>
 
+        <!-- BUSINESSES -->
         <section id="page-businesses" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -474,6 +466,7 @@
             </div>
         </section>
 
+        <!-- FEEDBACK -->
         <section id="page-feedback" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -496,6 +489,7 @@
             </div>
         </section>
 
+        <!-- CALCULATOR -->
         <section id="page-calculator" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -526,6 +520,7 @@
             </div>
         </section>
 
+        <!-- COURSES -->
         <section id="page-courses" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -557,6 +552,66 @@
             </div>
         </section>
 
+        <!-- MANUALS (NEW) -->
+        <section id="page-manuals" class="page-section">
+            <div class="panel">
+                <div class="panel-head">
+                    <h3><i class="fas fa-tag"></i> Manuals & Prices</h3>
+                    <div class="panel-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openManualModal()"><i class="fas fa-plus"></i> Add Manual</button>
+                        <button class="btn btn-outline btn-sm" onclick="loadManuals()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <div class="filters">
+                    <input type="text" id="manualSearch" placeholder="Search course or manual...">
+                    <select id="manualFilterSession">
+                        <option value="2025/2026">2025/2026</option>
+                        <option value="2024/2025">2024/2025</option>
+                    </select>
+                </div>
+                <div class="table-wrap" id="manualsTable">
+                    <div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MINDSET (NEW) -->
+        <section id="page-mindset" class="page-section">
+            <div class="panel">
+                <div class="panel-head">
+                    <h3><i class="fas fa-brain"></i> Mindset Content</h3>
+                    <div class="panel-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openMindsetModal()"><i class="fas fa-plus"></i> Add Entry</button>
+                        <button class="btn btn-outline btn-sm" onclick="loadMindset()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <div class="table-wrap" id="mindsetTable">
+                    <div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GLOSSARY (NEW) -->
+        <section id="page-glossary" class="page-section">
+            <div class="panel">
+                <div class="panel-head">
+                    <h3><i class="fas fa-book-reader"></i> Glossary of Terms</h3>
+                    <div class="panel-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openGlossaryModal()"><i class="fas fa-plus"></i> Add Term</button>
+                        <button class="btn btn-outline btn-sm" onclick="loadGlossary()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <div class="filters">
+                    <input type="text" id="glossarySearch" placeholder="Search term or definition...">
+                    <select id="glossaryFilterCategory"><option value="">All Categories</option></select>
+                </div>
+                <div class="table-wrap" id="glossaryTable">
+                    <div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALENDAR -->
         <section id="page-calendar" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -581,6 +636,7 @@
             </div>
         </section>
 
+        <!-- NOTIFICATIONS -->
         <section id="page-notifications" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -604,6 +660,7 @@
             </div>
         </section>
 
+        <!-- CONTENT -->
         <section id="page-content" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -630,6 +687,7 @@
             </div>
         </section>
 
+        <!-- SESSIONS -->
         <section id="page-sessions" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -644,6 +702,7 @@
             </div>
         </section>
 
+        <!-- ACTIVITY -->
         <section id="page-activity" class="page-section">
             <div class="panel">
                 <div class="panel-head">
@@ -660,6 +719,7 @@
                         <option value="calendar_event">Calendar Events</option>
                         <option value="business">Businesses</option>
                         <option value="notification">Notifications</option>
+                        <option value="manual">Manuals</option>
                     </select>
                     <select id="actFilterAction">
                         <option value="">All Actions</option>
@@ -674,6 +734,7 @@
             </div>
         </section>
 
+        <!-- SETTINGS -->
         <section id="page-settings" class="page-section">
             <div class="panel">
                 <div class="panel-head"><h3><i class="fas fa-sliders-h"></i> Site Settings</h3></div>
@@ -726,6 +787,9 @@
     let allFeedback = [];
     let allCalculator = [];
     let allCourses = [];
+    let allManuals = [];
+    let allMindset = [];
+    let allGlossary = [];
     let allCalendar = [];
     let allNotifications = [];
     let allContent = [];
@@ -781,10 +845,8 @@
     async function checkSession() {
         const sess = await DB.Auth.getSession();
         if (!sess.ok || !sess.session) return false;
-
         const adm = await DB.Auth.getAdminProfile();
         if (!adm.ok || !adm.admin) return false;
-
         currentAdmin = adm.admin;
         enterApp();
         return true;
@@ -793,7 +855,6 @@
     function enterApp() {
         document.getElementById('loginWrap').style.display = 'none';
         document.getElementById('app').classList.add('active');
-        // ✅ Toggle body class so menu button shows only after login
         document.body.classList.remove('login-active');
         document.body.classList.add('app-active');
         document.getElementById('sbUserName').textContent = currentAdmin.full_name || 'Admin';
@@ -849,6 +910,9 @@
         else if (pageId === 'feedback') loadFeedback();
         else if (pageId === 'calculator') loadCalculator();
         else if (pageId === 'courses') loadCourses();
+        else if (pageId === 'manuals') loadManuals();
+        else if (pageId === 'mindset') loadMindset();
+        else if (pageId === 'glossary') loadGlossary();
         else if (pageId === 'calendar') loadCalendar();
         else if (pageId === 'notifications') loadNotifications();
         else if (pageId === 'content') loadContent();
@@ -884,7 +948,6 @@
 
         const recent = await DB.Submissions.list({ limit: 10 });
         renderRecentUsers(recent.data || []);
-
         const act = await DB.Activity.list({ limit: 10 });
         renderRecentActivity(act.data || []);
     }
@@ -898,13 +961,7 @@
         let html = '<table><thead><tr><th>Name</th><th>Department</th><th>Semester</th><th>Fresher</th><th>When</th></tr></thead><tbody>';
         rows.forEach(u => {
             const badge = u.semester === 'first' ? 'badge-info' : 'badge-purple';
-            html += `<tr>
-                <td><strong>${U.escapeHtml(u.name)}</strong></td>
-                <td>${U.escapeHtml(u.department)}</td>
-                <td><span class="badge ${badge}">${U.escapeHtml(u.semester)}</span></td>
-                <td>${u.is_fresher === 'yes' ? '✅' : '📚'}</td>
-                <td>${U.formatDate(u.created_at)}</td>
-            </tr>`;
+            html += `<tr><td><strong>${U.escapeHtml(u.name)}</strong></td><td>${U.escapeHtml(u.department)}</td><td><span class="badge ${badge}">${U.escapeHtml(u.semester)}</span></td><td>${u.is_fresher === 'yes' ? '✅' : '📚'}</td><td>${U.formatDate(u.created_at)}</td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -919,12 +976,7 @@
         let html = '<table><thead><tr><th>Action</th><th>Entity</th><th>Admin</th><th>When</th></tr></thead><tbody>';
         rows.forEach(a => {
             const actBadge = { create: 'badge-success', update: 'badge-warning', delete: 'badge-danger' }[a.action] || 'badge-info';
-            html += `<tr>
-                <td><span class="badge ${actBadge}">${U.escapeHtml(a.action)}</span></td>
-                <td>${U.escapeHtml(a.entity_type)}: ${U.escapeHtml(a.entity_label || '')}</td>
-                <td>${U.escapeHtml(a.admin_email || '—')}</td>
-                <td>${U.formatDate(a.created_at)}</td>
-            </tr>`;
+            html += `<tr><td><span class="badge ${actBadge}">${U.escapeHtml(a.action)}</span></td><td>${U.escapeHtml(a.entity_type)}: ${U.escapeHtml(a.entity_label || '')}</td><td>${U.escapeHtml(a.admin_email || '—')}</td><td>${U.formatDate(a.created_at)}</td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -934,7 +986,6 @@
         const search = document.getElementById('userSearch').value;
         const sem = document.getElementById('userFilterSem').value;
         const fresher = document.getElementById('userFilterFresher').value;
-
         const wrap = document.getElementById('usersTable');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
 
@@ -947,26 +998,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No users found</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Name</th><th>Dept</th><th>WhatsApp</th><th>Level</th>
-            <th>Sem</th><th>Fresher</th><th>Source</th><th>Date</th><th>Action</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Name</th><th>Dept</th><th>WhatsApp</th><th>Level</th><th>Sem</th><th>Fresher</th><th>Source</th><th>Date</th><th>Action</th></tr></thead><tbody>`;
         rows.forEach(u => {
             const badge = u.semester === 'first' ? 'badge-info' : 'badge-purple';
-            html += `<tr>
-                <td><strong>${U.escapeHtml(u.name)}</strong></td>
-                <td>${U.escapeHtml(u.department)}</td>
-                <td>${U.escapeHtml(u.whatsapp || '—')}</td>
-                <td>${U.escapeHtml(u.level || '—')}</td>
-                <td><span class="badge ${badge}">${U.escapeHtml(u.semester)}</span></td>
-                <td>${u.is_fresher === 'yes' ? '✅ Yes' : '📚 No'}</td>
-                <td>${U.escapeHtml(u.source || '—')}</td>
-                <td>${U.formatDate(u.created_at)}</td>
-                <td><div class="actions">
-                    <button class="btn btn-danger btn-xs" onclick="deleteUser('${u.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr><td><strong>${U.escapeHtml(u.name)}</strong></td><td>${U.escapeHtml(u.department)}</td><td>${U.escapeHtml(u.whatsapp || '—')}</td><td>${U.escapeHtml(u.level || '—')}</td><td><span class="badge ${badge}">${U.escapeHtml(u.semester)}</span></td><td>${u.is_fresher === 'yes' ? '✅ Yes' : '📚 No'}</td><td>${U.escapeHtml(u.source || '—')}</td><td>${U.formatDate(u.created_at)}</td><td><div class="actions"><button class="btn btn-danger btn-xs" onclick="deleteUser('${u.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -983,7 +1018,6 @@
         const search = document.getElementById('bizSearch').value;
         const status = document.getElementById('bizFilterStatus').value;
         const category = document.getElementById('bizFilterCategory').value;
-
         const wrap = document.getElementById('businessesTable');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
 
@@ -999,29 +1033,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No businesses found</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Business</th><th>Category</th><th>Owner</th><th>Phone</th>
-            <th>Location</th><th>Status</th><th>Featured</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Business</th><th>Category</th><th>Owner</th><th>Phone</th><th>Location</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(b => {
             const statusBadge = { pending: 'badge-warning', approved: 'badge-success', rejected: 'badge-danger' }[b.status] || 'badge-gray';
-            html += `<tr>
-                <td><strong>${U.escapeHtml(b.business_name)}</strong><br><small style="color:var(--gray-500);">${U.truncate(b.description, 60)}</small></td>
-                <td>${U.escapeHtml(b.category)}</td>
-                <td>${U.escapeHtml(b.owner_name || '—')}${b.owner_department ? '<br><small>' + U.escapeHtml(b.owner_department) + '</small>' : ''}</td>
-                <td>${U.escapeHtml(b.phone)}</td>
-                <td>${U.escapeHtml(b.location || '—')}</td>
-                <td><span class="badge ${statusBadge}">${U.escapeHtml(b.status)}</span></td>
-                <td>${b.is_featured ? '⭐' : '—'}</td>
-                <td><div class="actions">
-                    ${b.status !== 'approved' ? `<button class="btn btn-success btn-xs" onclick="approveBiz('${b.id}')" title="Approve"><i class="fas fa-check"></i></button>` : ''}
-                    ${b.status !== 'rejected' ? `<button class="btn btn-danger btn-xs" onclick="rejectBiz('${b.id}')" title="Reject"><i class="fas fa-times"></i></button>` : ''}
-                    <button class="btn btn-warning btn-xs" onclick="toggleFeature('${b.id}', ${!b.is_featured})" title="Toggle Featured">${b.is_featured ? '★' : '☆'}</button>
-                    <button class="btn btn-outline btn-xs" onclick="viewBiz('${b.id}')" title="View"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteBiz('${b.id}')" title="Delete"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr><td><strong>${U.escapeHtml(b.business_name)}</strong><br><small style="color:var(--gray-500);">${U.truncate(b.description, 60)}</small></td><td>${U.escapeHtml(b.category)}</td><td>${U.escapeHtml(b.owner_name || '—')}${b.owner_department ? '<br><small>' + U.escapeHtml(b.owner_department) + '</small>' : ''}</td><td>${U.escapeHtml(b.phone)}</td><td>${U.escapeHtml(b.location || '—')}</td><td><span class="badge ${statusBadge}">${U.escapeHtml(b.status)}</span></td><td>${b.is_featured ? '⭐' : '—'}</td><td><div class="actions">${b.status !== 'approved' ? `<button class="btn btn-success btn-xs" onclick="approveBiz('${b.id}')" title="Approve"><i class="fas fa-check"></i></button>` : ''}${b.status !== 'rejected' ? `<button class="btn btn-danger btn-xs" onclick="rejectBiz('${b.id}')" title="Reject"><i class="fas fa-times"></i></button>` : ''}<button class="btn btn-warning btn-xs" onclick="toggleFeature('${b.id}', ${!b.is_featured})" title="Toggle Featured">${b.is_featured ? '★' : '☆'}</button><button class="btn btn-outline btn-xs" onclick="viewBiz('${b.id}')" title="View"><i class="fas fa-eye"></i></button><button class="btn btn-danger btn-xs" onclick="deleteBiz('${b.id}')" title="Delete"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1059,7 +1074,6 @@
             <div class="input-group"><label>Phone</label><div>${U.escapeHtml(biz.phone)}</div></div>
             <div class="input-group"><label>Owner</label><div>${U.escapeHtml(biz.owner_name || '—')} ${biz.owner_department ? '(' + U.escapeHtml(biz.owner_department) + ')' : ''}</div></div>
             <div class="input-group"><label>Status</label><div>${U.escapeHtml(biz.status)}</div></div>
-            ${biz.admin_notes ? `<div class="input-group"><label>Admin Notes</label><div>${U.escapeHtml(biz.admin_notes)}</div></div>` : ''}
         `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
     };
 
@@ -1080,25 +1094,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No feedback found</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Read</th><th>Name</th><th>Email</th><th>Message</th><th>Date</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Read</th><th>Name</th><th>Email</th><th>Message</th><th>Date</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(f => {
             const readBadge = f.is_read ? 'badge-gray' : 'badge-danger';
-            html += `<tr style="${!f.is_read ? 'background:#fff7ed;' : ''}">
-                <td><span class="badge ${readBadge}">${f.is_read ? 'Read' : 'New'}</span></td>
-                <td><strong>${U.escapeHtml(f.name)}</strong></td>
-                <td>${U.escapeHtml(f.email)}</td>
-                <td>${U.escapeHtml(U.truncate(f.message, 70))}</td>
-                <td>${U.formatDate(f.created_at)}</td>
-                <td><div class="actions">
-                    <button class="btn btn-outline btn-xs" onclick="viewFeedback('${f.id}')"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-info btn-xs" onclick="replyFeedback('${f.id}')"><i class="fas fa-reply"></i></button>
-                    <button class="btn ${f.is_starred ? 'btn-warning' : 'btn-outline'} btn-xs" onclick="starFeedback('${f.id}', ${!f.is_starred})"><i class="fas fa-star"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteFeedback('${f.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr style="${!f.is_read ? 'background:#fff7ed;' : ''}"><td><span class="badge ${readBadge}">${f.is_read ? 'Read' : 'New'}</span></td><td><strong>${U.escapeHtml(f.name)}</strong></td><td>${U.escapeHtml(f.email)}</td><td>${U.escapeHtml(U.truncate(f.message, 70))}</td><td>${U.formatDate(f.created_at)}</td><td><div class="actions"><button class="btn btn-outline btn-xs" onclick="viewFeedback('${f.id}')"><i class="fas fa-eye"></i></button><button class="btn btn-info btn-xs" onclick="replyFeedback('${f.id}')"><i class="fas fa-reply"></i></button><button class="btn ${f.is_starred ? 'btn-warning' : 'btn-outline'} btn-xs" onclick="starFeedback('${f.id}', ${!f.is_starred})"><i class="fas fa-star"></i></button><button class="btn btn-danger btn-xs" onclick="deleteFeedback('${f.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1168,22 +1167,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No activity found</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>User</th><th>Dept</th><th>Level</th><th>Action</th><th>Type</th><th>Result</th><th>Source</th><th>When</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>User</th><th>Dept</th><th>Level</th><th>Action</th><th>Type</th><th>Result</th><th>Source</th><th>When</th></tr></thead><tbody>`;
         rows.forEach(c => {
             const badge = { page_visit: 'badge-gray', calculation: 'badge-success', pdf_download: 'badge-warning' }[c.action] || 'badge-info';
-            html += `<tr>
-                <td>${U.escapeHtml(c.name || 'Guest')}</td>
-                <td>${U.escapeHtml(c.department || '—')}</td>
-                <td>${U.escapeHtml(c.level || '—')}</td>
-                <td><span class="badge ${badge}">${U.escapeHtml(c.action)}</span></td>
-                <td>${U.escapeHtml(c.calculation_type || '—')}</td>
-                <td>${U.escapeHtml(c.result_value || '—')}</td>
-                <td>${U.escapeHtml(c.page_source || '—')}</td>
-                <td>${U.formatDate(c.created_at)}</td>
-            </tr>`;
+            html += `<tr><td>${U.escapeHtml(c.name || 'Guest')}</td><td>${U.escapeHtml(c.department || '—')}</td><td>${U.escapeHtml(c.level || '—')}</td><td><span class="badge ${badge}">${U.escapeHtml(c.action)}</span></td><td>${U.escapeHtml(c.calculation_type || '—')}</td><td>${U.escapeHtml(c.result_value || '—')}</td><td>${U.escapeHtml(c.page_source || '—')}</td><td>${U.formatDate(c.created_at)}</td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1208,24 +1195,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No courses found</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Code</th><th>Title</th><th>Units</th><th>Sem</th><th>Level</th><th>Exam</th><th>Active</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Code</th><th>Title</th><th>Units</th><th>Sem</th><th>Level</th><th>Exam</th><th>Manual</th><th>Active</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(c => {
-            html += `<tr>
-                <td><strong>${U.escapeHtml(c.code)}</strong></td>
-                <td>${U.escapeHtml(c.title)}</td>
-                <td>${c.units || 2}</td>
-                <td>${U.escapeHtml(c.semester)}</td>
-                <td>${U.escapeHtml(c.level)}</td>
-                <td>${U.escapeHtml(c.exam_type || '—')}</td>
-                <td>${c.is_active ? '✅' : '❌'}</td>
-                <td><div class="actions">
-                    <button class="btn btn-info btn-xs" onclick="editCourse('${c.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteCourse('${c.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            const manualInfo = c.is_manual_free ? 'Free' : (c.manual_price ? U.formatNaira(c.manual_price) : '—');
+            html += `<tr><td><strong>${U.escapeHtml(c.code)}</strong></td><td>${U.escapeHtml(c.title)}</td><td>${c.units || 2}</td><td>${U.escapeHtml(c.semester)}</td><td>${U.escapeHtml(c.level)}</td><td>${U.escapeHtml(c.exam_type || '—')}</td><td>${manualInfo}</td><td>${c.is_active ? '✅' : '❌'}</td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editCourse('${c.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteCourse('${c.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1248,9 +1221,12 @@
     };
 
     function buildCourseForm(c = {}) {
+        const topicsStr = (c.topics || []).join('\n');
+        const tipsStr = (c.tips || []).join('\n');
+        const warningsStr = (c.warnings || []).join('\n');
         return `
             <div class="form-row-2">
-                <div class="input-group"><label>Code</label><input id="cCode" value="${U.escapeHtml(c.code || '')}" placeholder="MTS 102"></div>
+                <div class="input-group"><label>Code</label><input id="cCode" value="${U.escapeHtml(c.code || '')}" placeholder="MTH 102"></div>
                 <div class="input-group"><label>Title</label><input id="cTitle" value="${U.escapeHtml(c.title || '')}" placeholder="Introductory Mathematics II"></div>
             </div>
             <div class="form-row-2">
@@ -1280,8 +1256,31 @@
                 <div class="input-group"><label>Exam Type</label><input id="cExamType" value="${U.escapeHtml(c.exam_type || '')}" placeholder="CBT / CBE / Written"></div>
                 <div class="input-group"><label>Icon (Font Awesome)</label><input id="cIcon" value="${U.escapeHtml(c.icon || 'book')}" placeholder="calculator, flask, dna..."></div>
             </div>
-            <div class="input-group"><label>Topics (one per line)</label><textarea id="cTopics" rows="4">${(c.topics || []).join('\n')}</textarea></div>
-            <div class="input-group"><label>Tips (one per line)</label><textarea id="cTips" rows="3">${(c.tips || []).join('\n')}</textarea></div>
+            <div class="input-group">
+                <label>Full Synopsis</label>
+                <textarea id="cFullSynopsis" rows="5">${U.escapeHtml(c.full_synopsis || '')}</textarea>
+                <div class="hint">Detailed course description — appears in the expanded course card on the frontend.</div>
+            </div>
+            <div class="input-group"><label>Topics (one per line)</label><textarea id="cTopics" rows="4">${topicsStr}</textarea></div>
+            <div class="input-group"><label>Tips (one per line)</label><textarea id="cTips" rows="3">${tipsStr}</textarea></div>
+            <div class="input-group">
+                <label>Warnings (one per line)</label>
+                <textarea id="cWarnings" rows="4" placeholder="SHM topic not in manual but appeared in test...">${warningsStr}</textarea>
+                <div class="hint">These will show as warning badges on the course card.</div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Manual Name</label><input id="cManualName" value="${U.escapeHtml(c.manual_name || '')}" placeholder="Tutorial Manual"></div>
+                <div class="input-group"><label>Manual Price (₦)</label><input type="number" id="cManualPrice" value="${c.manual_price || 0}" min="0"></div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Manual Year</label><input id="cManualYear" value="${U.escapeHtml(c.manual_year || '2025/2026')}"></div>
+                <div class="input-group"><label>Is Manual Free?</label>
+                    <select id="cManualFree">
+                        <option value="false" ${!c.is_manual_free ? 'selected' : ''}>No</option>
+                        <option value="true" ${c.is_manual_free ? 'selected' : ''}>Yes</option>
+                    </select>
+                </div>
+            </div>
             <div class="input-group"><label>Drive Link</label><input id="cDriveLink" value="${U.escapeHtml(c.drive_link || '')}" placeholder="https://drive.google.com/..."></div>
             <div class="form-row-2">
                 <div class="input-group"><label>Display Order</label><input type="number" id="cOrder" value="${c.display_order || 0}"></div>
@@ -1305,8 +1304,14 @@
             level: document.getElementById('cLevel').value,
             exam_type: document.getElementById('cExamType').value.trim() || null,
             icon: document.getElementById('cIcon').value.trim() || 'book',
+            full_synopsis: document.getElementById('cFullSynopsis').value.trim() || null,
             topics: document.getElementById('cTopics').value.split('\n').map(t => t.trim()).filter(Boolean),
             tips: document.getElementById('cTips').value.split('\n').map(t => t.trim()).filter(Boolean),
+            warnings: document.getElementById('cWarnings').value.split('\n').map(t => t.trim()).filter(Boolean),
+            manual_name: document.getElementById('cManualName').value.trim() || null,
+            manual_price: parseInt(document.getElementById('cManualPrice').value) || 0,
+            manual_year: document.getElementById('cManualYear').value.trim() || '2025/2026',
+            is_manual_free: document.getElementById('cManualFree').value === 'true',
             drive_link: document.getElementById('cDriveLink').value.trim() || null,
             display_order: parseInt(document.getElementById('cOrder').value) || 0,
             is_active: document.getElementById('cActive').value === 'true'
@@ -1326,11 +1331,288 @@
         else toast('Error: ' + res.error, 'error');
     };
 
+    // ---------- MANUALS ----------
+    async function loadManuals() {
+        const search = document.getElementById('manualSearch').value;
+        const session = document.getElementById('manualFilterSession').value;
+        const wrap = document.getElementById('manualsTable');
+        wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
+
+        let res = await DB.Manuals.list({ session });
+        let rows = res.data || [];
+        if (search) {
+            const q = search.toLowerCase();
+            rows = rows.filter(m =>
+                (m.course_code || '').toLowerCase().includes(q) ||
+                (m.course_title || '').toLowerCase().includes(q) ||
+                (m.manual_name || '').toLowerCase().includes(q)
+            );
+        }
+        allManuals = rows;
+
+        if (!rows.length) {
+            wrap.innerHTML = '<div class="empty-state"><i class="fas fa-tag"></i><p>No manuals found</p></div>';
+            return;
+        }
+        let html = `<table><thead><tr><th>Course</th><th>Manual</th><th>Price</th><th>Session</th><th>Available</th><th>Notes</th><th>Actions</th></tr></thead><tbody>`;
+        rows.forEach(m => {
+            const priceText = m.is_free ? '<span class="badge badge-success">Free</span>' : `<strong>${U.formatNaira(m.price)}</strong>`;
+            html += `<tr><td><strong>${U.escapeHtml(m.course_code)}</strong><br><small style="color:var(--gray-500);">${U.escapeHtml(m.course_title || '')}</small></td><td>${U.escapeHtml(m.manual_name)}</td><td>${priceText}</td><td>${U.escapeHtml(m.session)}</td><td>${m.is_available ? '✅' : '❌'}</td><td><small>${U.escapeHtml(U.truncate(m.notes || '', 40))}</small></td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editManual('${m.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteManual('${m.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
+        });
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+    }
+
+    window.openManualModal = function () {
+        openModal('Add Manual', buildManualForm(), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveManual(null)">Save</button>
+        `);
+    };
+
+    window.editManual = function (id) {
+        const m = allManuals.find(x => x.id === id);
+        if (!m) return;
+        openModal('Edit Manual: ' + m.course_code, buildManualForm(m), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveManual('${id}')">Save Changes</button>
+        `);
+    };
+
+    function buildManualForm(m = {}) {
+        return `
+            <div class="form-row-2">
+                <div class="input-group"><label>Course Code</label><input id="mCode" value="${U.escapeHtml(m.course_code || '')}" placeholder="MTH 101"></div>
+                <div class="input-group"><label>Course Title</label><input id="mTitle" value="${U.escapeHtml(m.course_title || '')}" placeholder="Introductory Mathematics I"></div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Manual Name</label><input id="mName" value="${U.escapeHtml(m.manual_name || '')}" placeholder="Tutorial Manual"></div>
+                <div class="input-group"><label>Price (₦)</label><input type="number" id="mPrice" value="${m.price || 0}" min="0"></div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Session</label><input id="mSession" value="${U.escapeHtml(m.session || '2025/2026')}"></div>
+                <div class="input-group"><label>Is Free?</label>
+                    <select id="mFree">
+                        <option value="false" ${!m.is_free ? 'selected' : ''}>No</option>
+                        <option value="true" ${m.is_free ? 'selected' : ''}>Yes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Available?</label>
+                    <select id="mAvailable">
+                        <option value="true" ${m.is_available !== false ? 'selected' : ''}>Yes</option>
+                        <option value="false" ${m.is_available === false ? 'selected' : ''}>No</option>
+                    </select>
+                </div>
+                <div class="input-group"><label>Display Order</label><input type="number" id="mOrder" value="${m.display_order || 0}"></div>
+            </div>
+            <div class="input-group"><label>Notes</label><textarea id="mNotes" rows="2">${U.escapeHtml(m.notes || '')}</textarea></div>
+        `;
+    }
+
+    window.saveManual = async function (id) {
+        const payload = {
+            course_code: document.getElementById('mCode').value.trim(),
+            course_title: document.getElementById('mTitle').value.trim(),
+            manual_name: document.getElementById('mName').value.trim(),
+            price: parseInt(document.getElementById('mPrice').value) || 0,
+            session: document.getElementById('mSession').value.trim(),
+            is_free: document.getElementById('mFree').value === 'true',
+            is_available: document.getElementById('mAvailable').value === 'true',
+            display_order: parseInt(document.getElementById('mOrder').value) || 0,
+            notes: document.getElementById('mNotes').value.trim() || null
+        };
+        if (!payload.course_code || !payload.manual_name) return toast('Course code and manual name required', 'warning');
+
+        const res = id ? await DB.Manuals.update(id, payload) : await DB.Manuals.create(payload);
+        if (res.ok) { toast('Manual saved', 'success'); closeModal(); loadManuals(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    window.deleteManual = async function (id) {
+        if (!confirm('Delete this manual?')) return;
+        const res = await DB.Manuals.remove(id);
+        if (res.ok) { toast('Manual deleted', 'success'); loadManuals(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    // ---------- MINDSET ----------
+    async function loadMindset() {
+        const wrap = document.getElementById('mindsetTable');
+        wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
+        const res = await DB.Mindset.list({ onlyActive: false });
+        const rows = res.data || [];
+        allMindset = rows;
+
+        if (!rows.length) {
+            wrap.innerHTML = '<div class="empty-state"><i class="fas fa-brain"></i><p>No mindset entries</p></div>';
+            return;
+        }
+        let html = `<table><thead><tr><th>Order</th><th>Key</th><th>Title</th><th>Subtitle</th><th>Icon</th><th>Active</th><th>Actions</th></tr></thead><tbody>`;
+        rows.forEach(m => {
+            html += `<tr><td>${m.display_order}</td><td><code style="font-size:0.75rem;">${U.escapeHtml(m.key)}</code></td><td><strong>${U.escapeHtml(m.title)}</strong></td><td><small>${U.escapeHtml(U.truncate(m.subtitle || '', 50))}</small></td><td><i class="fas fa-${U.escapeHtml(m.icon || 'brain')}"></i></td><td>${m.is_active ? '✅' : '❌'}</td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editMindset('${m.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteMindset('${m.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
+        });
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+    }
+
+    window.openMindsetModal = function () {
+        openModal('Add Mindset Entry', buildMindsetForm(), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveMindset(null)">Save</button>
+        `);
+    };
+
+    window.editMindset = function (id) {
+        const m = allMindset.find(x => x.id === id);
+        if (!m) return;
+        openModal('Edit: ' + m.title, buildMindsetForm(m), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveMindset('${id}')">Save Changes</button>
+        `);
+    };
+
+    function buildMindsetForm(m = {}) {
+        return `
+            <div class="form-row-2">
+                <div class="input-group"><label>Key (unique)</label><input id="miKey" value="${U.escapeHtml(m.key || '')}" placeholder="action_framework"></div>
+                <div class="input-group"><label>Icon (Font Awesome)</label><input id="miIcon" value="${U.escapeHtml(m.icon || 'brain')}" placeholder="bolt, fire, heart"></div>
+            </div>
+            <div class="input-group"><label>Title</label><input id="miTitle" value="${U.escapeHtml(m.title || '')}" placeholder="The ACTION Framework"></div>
+            <div class="input-group"><label>Subtitle</label><input id="miSubtitle" value="${U.escapeHtml(m.subtitle || '')}" placeholder="How to turn dreams into reality"></div>
+            <div class="input-group">
+                <label>Body (HTML allowed)</label>
+                <textarea id="miBody" rows="12" class="code">${U.escapeHtml(m.body_html || '')}</textarea>
+                <div class="hint">You can use HTML: &lt;p&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;li&gt;, inline styles, etc.</div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Display Order</label><input type="number" id="miOrder" value="${m.display_order || 0}"></div>
+                <div class="input-group"><label>Active</label>
+                    <select id="miActive">
+                        <option value="true" ${m.is_active !== false ? 'selected' : ''}>Yes</option>
+                        <option value="false" ${m.is_active === false ? 'selected' : ''}>No</option>
+                    </select>
+                </div>
+            </div>
+        `;
+    }
+
+    window.saveMindset = async function (id) {
+        const payload = {
+            key: document.getElementById('miKey').value.trim(),
+            icon: document.getElementById('miIcon').value.trim() || 'brain',
+            title: document.getElementById('miTitle').value.trim(),
+            subtitle: document.getElementById('miSubtitle').value.trim() || null,
+            body_html: document.getElementById('miBody').value.trim(),
+            display_order: parseInt(document.getElementById('miOrder').value) || 0,
+            is_active: document.getElementById('miActive').value === 'true'
+        };
+        if (!payload.key || !payload.title || !payload.body_html) return toast('Key, title, and body required', 'warning');
+
+        const res = id ? await DB.Mindset.update(id, payload) : await DB.Mindset.create(payload);
+        if (res.ok) { toast('Mindset saved', 'success'); closeModal(); loadMindset(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    window.deleteMindset = async function (id) {
+        if (!confirm('Delete this mindset entry?')) return;
+        const res = await DB.Mindset.remove(id);
+        if (res.ok) { toast('Deleted', 'success'); loadMindset(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    // ---------- GLOSSARY ----------
+    async function loadGlossary() {
+        const search = document.getElementById('glossarySearch').value;
+        const category = document.getElementById('glossaryFilterCategory').value;
+        const wrap = document.getElementById('glossaryTable');
+        wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
+
+        const res = await DB.Glossary.list({ search, category, onlyActive: false });
+        const rows = res.data || [];
+        allGlossary = rows;
+
+        const catSel = document.getElementById('glossaryFilterCategory');
+        const cats = [...new Set(rows.map(r => r.category).filter(Boolean))].sort();
+        catSel.innerHTML = '<option value="">All Categories</option>' + cats.map(c => `<option value="${U.escapeHtml(c)}" ${c === category ? 'selected' : ''}>${U.escapeHtml(c)}</option>`).join('');
+
+        if (!rows.length) {
+            wrap.innerHTML = '<div class="empty-state"><i class="fas fa-book-reader"></i><p>No glossary terms</p></div>';
+            return;
+        }
+        let html = `<table><thead><tr><th>Order</th><th>Term</th><th>Definition</th><th>Category</th><th>Active</th><th>Actions</th></tr></thead><tbody>`;
+        rows.forEach(g => {
+            html += `<tr><td>${g.display_order}</td><td><strong>${U.escapeHtml(g.term)}</strong></td><td><small>${U.escapeHtml(U.truncate(g.definition, 80))}</small></td><td><span class="badge badge-info">${U.escapeHtml(g.category || 'general')}</span></td><td>${g.is_active ? '✅' : '❌'}</td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editGlossary('${g.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteGlossary('${g.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
+        });
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+    }
+
+    window.openGlossaryModal = function () {
+        openModal('Add Glossary Term', buildGlossaryForm(), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveGlossary(null)">Save</button>
+        `);
+    };
+
+    window.editGlossary = function (id) {
+        const g = allGlossary.find(x => x.id === id);
+        if (!g) return;
+        openModal('Edit Term: ' + g.term, buildGlossaryForm(g), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveGlossary('${id}')">Save Changes</button>
+        `);
+    };
+
+    function buildGlossaryForm(g = {}) {
+        return `
+            <div class="form-row-2">
+                <div class="input-group"><label>Term</label><input id="glTerm" value="${U.escapeHtml(g.term || '')}" placeholder="German Questions"></div>
+                <div class="input-group"><label>Category</label><input id="glCategory" value="${U.escapeHtml(g.category || 'general')}" placeholder="exams, academics, mindset"></div>
+            </div>
+            <div class="input-group"><label>Definition</label><textarea id="glDefinition" rows="4">${U.escapeHtml(g.definition || '')}</textarea></div>
+            <div class="input-group"><label>Example (optional)</label><textarea id="glExample" rows="3">${U.escapeHtml(g.example || '')}</textarea></div>
+            <div class="form-row-2">
+                <div class="input-group"><label>Display Order</label><input type="number" id="glOrder" value="${g.display_order || 0}"></div>
+                <div class="input-group"><label>Active</label>
+                    <select id="glActive">
+                        <option value="true" ${g.is_active !== false ? 'selected' : ''}>Yes</option>
+                        <option value="false" ${g.is_active === false ? 'selected' : ''}>No</option>
+                    </select>
+                </div>
+            </div>
+        `;
+    }
+
+    window.saveGlossary = async function (id) {
+        const payload = {
+            term: document.getElementById('glTerm').value.trim(),
+            category: document.getElementById('glCategory').value.trim() || 'general',
+            definition: document.getElementById('glDefinition').value.trim(),
+            example: document.getElementById('glExample').value.trim() || null,
+            display_order: parseInt(document.getElementById('glOrder').value) || 0,
+            is_active: document.getElementById('glActive').value === 'true'
+        };
+        if (!payload.term || !payload.definition) return toast('Term and definition required', 'warning');
+
+        const res = id ? await DB.Glossary.update(id, payload) : await DB.Glossary.create(payload);
+        if (res.ok) { toast('Term saved', 'success'); closeModal(); loadGlossary(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    window.deleteGlossary = async function (id) {
+        if (!confirm('Delete this term?')) return;
+        const res = await DB.Glossary.remove(id);
+        if (res.ok) { toast('Deleted', 'success'); loadGlossary(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    // ---------- CALENDAR ----------
     async function loadCalendar() {
         const search = document.getElementById('calSearch').value;
         const session = document.getElementById('calFilterSession').value;
         const sem = document.getElementById('calFilterSem').value;
-
         const wrap = document.getElementById('calendarTable');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
 
@@ -1352,24 +1634,9 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No calendar events</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Title</th><th>Date</th><th>End</th><th>Session</th><th>Semester</th><th>Category</th><th>Highlight</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Title</th><th>Date</th><th>End</th><th>Session</th><th>Semester</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(e => {
-            html += `<tr>
-                <td><strong>${U.escapeHtml(e.title)}</strong></td>
-                <td>${U.formatDateShort(e.event_date)}</td>
-                <td>${e.end_date ? U.formatDateShort(e.end_date) : '—'}</td>
-                <td>${U.escapeHtml(e.session || '—')}</td>
-                <td><span class="badge badge-info">${U.escapeHtml(e.semester || '—')}</span></td>
-                <td>${U.escapeHtml(e.category || '—')}</td>
-                <td>${e.is_highlighted ? '⭐' : '—'}</td>
-                <td><div class="actions">
-                    <button class="btn btn-info btn-xs" onclick="editCalendar('${e.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteCalendar('${e.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr><td><strong>${U.escapeHtml(e.title)}</strong></td><td>${U.formatDateShort(e.event_date)}</td><td>${e.end_date ? U.formatDateShort(e.end_date) : '—'}</td><td>${U.escapeHtml(e.session || '—')}</td><td><span class="badge badge-info">${U.escapeHtml(e.semester || '—')}</span></td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editCalendar('${e.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteCalendar('${e.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1393,13 +1660,13 @@
 
     function buildCalendarForm(e = {}) {
         return `
-            <div class="input-group"><label>Title</label><input id="calTitle" value="${U.escapeHtml(e.title || '')}" placeholder="Lectures Commence"></div>
+            <div class="input-group"><label>Title</label><input id="calTitle" value="${U.escapeHtml(e.title || '')}"></div>
             <div class="form-row-2">
                 <div class="input-group"><label>Start Date</label><input type="date" id="calDate" value="${e.event_date || ''}"></div>
                 <div class="input-group"><label>End Date (optional)</label><input type="date" id="calEndDate" value="${e.end_date || ''}"></div>
             </div>
             <div class="form-row-2">
-                <div class="input-group"><label>Session</label><input id="calSession" value="${U.escapeHtml(e.session || '2026/2027')}" placeholder="2026/2027"></div>
+                <div class="input-group"><label>Session</label><input id="calSession" value="${U.escapeHtml(e.session || '2026/2027')}"></div>
                 <div class="input-group"><label>Semester</label>
                     <select id="calSem">
                         <option value="first" ${e.semester === 'first' ? 'selected' : ''}>First</option>
@@ -1409,7 +1676,7 @@
                 </div>
             </div>
             <div class="form-row-2">
-                <div class="input-group"><label>Category</label><input id="calCategory" value="${U.escapeHtml(e.category || 'academic')}" placeholder="registration, exam, break..."></div>
+                <div class="input-group"><label>Category</label><input id="calCategory" value="${U.escapeHtml(e.category || 'academic')}"></div>
                 <div class="input-group"><label>Highlight?</label>
                     <select id="calHighlighted">
                         <option value="false" ${!e.is_highlighted ? 'selected' : ''}>No</option>
@@ -1433,7 +1700,6 @@
             description: document.getElementById('calDesc').value.trim() || null
         };
         if (!payload.title || !payload.event_date) return toast('Title and date required', 'warning');
-
         const res = id ? await DB.Calendar.update(id, payload) : await DB.Calendar.create(payload);
         if (res.ok) { toast('Calendar event saved', 'success'); closeModal(); loadCalendar(); }
         else toast('Error: ' + res.error, 'error');
@@ -1445,6 +1711,7 @@
         if (res.ok) { toast('Deleted', 'success'); loadCalendar(); }
     };
 
+    // ---------- NOTIFICATIONS ----------
     async function loadNotifications() {
         const search = document.getElementById('notifSearch').value;
         const status = document.getElementById('notifFilterStatus').value;
@@ -1460,25 +1727,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-bullhorn"></i><p>No notifications</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Title</th><th>Type</th><th>Audience</th><th>Pinned</th><th>Active</th><th>Expires</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Title</th><th>Type</th><th>Audience</th><th>Pinned</th><th>Active</th><th>Expires</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(n => {
             const typeBadge = { info: 'badge-info', success: 'badge-success', warning: 'badge-warning', error: 'badge-danger', urgent: 'badge-danger' }[n.type] || 'badge-gray';
-            html += `<tr>
-                <td><strong>${U.escapeHtml(n.title)}</strong><br><small style="color:var(--gray-500);">${U.truncate(n.message, 60)}</small></td>
-                <td><span class="badge ${typeBadge}">${U.escapeHtml(n.type)}</span></td>
-                <td>${U.escapeHtml(n.target_audience)}</td>
-                <td>${n.is_pinned ? '📌' : '—'}</td>
-                <td>${n.is_active ? '✅' : '❌'}</td>
-                <td>${n.expires_at ? U.formatDateShort(n.expires_at) : 'Never'}</td>
-                <td><div class="actions">
-                    <button class="btn btn-warning btn-xs" onclick="toggleNotif('${n.id}', ${!n.is_active})" title="Toggle active">${n.is_active ? '❌' : '✅'}</button>
-                    <button class="btn btn-info btn-xs" onclick="editNotification('${n.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteNotification('${n.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr><td><strong>${U.escapeHtml(n.title)}</strong><br><small style="color:var(--gray-500);">${U.truncate(n.message, 60)}</small></td><td><span class="badge ${typeBadge}">${U.escapeHtml(n.type)}</span></td><td>${U.escapeHtml(n.target_audience)}</td><td>${n.is_pinned ? '📌' : '—'}</td><td>${n.is_active ? '✅' : '❌'}</td><td>${n.expires_at ? U.formatDateShort(n.expires_at) : 'Never'}</td><td><div class="actions"><button class="btn btn-warning btn-xs" onclick="toggleNotif('${n.id}', ${!n.is_active})">${n.is_active ? '❌' : '✅'}</button><button class="btn btn-info btn-xs" onclick="editNotification('${n.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteNotification('${n.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1503,41 +1755,31 @@
     function buildNotificationForm(n = {}) {
         const exp = n.expires_at ? n.expires_at.slice(0, 16) : '';
         return `
-            <div class="input-group"><label>Title</label><input id="nTitle" value="${U.escapeHtml(n.title || '')}" placeholder="Important Update"></div>
-            <div class="input-group"><label>Message</label><textarea id="nMessage" rows="4" placeholder="Type the notification body...">${U.escapeHtml(n.message || '')}</textarea></div>
+            <div class="input-group"><label>Title</label><input id="nTitle" value="${U.escapeHtml(n.title || '')}"></div>
+            <div class="input-group"><label>Message</label><textarea id="nMessage" rows="4">${U.escapeHtml(n.message || '')}</textarea></div>
             <div class="form-row-2">
                 <div class="input-group"><label>Type</label>
-                    <select id="nType">
-                        ${['info','success','warning','error','urgent'].map(t => `<option value="${t}" ${n.type === t ? 'selected' : ''}>${t}</option>`).join('')}
-                    </select>
+                    <select id="nType">${['info','success','warning','error','urgent'].map(t => `<option value="${t}" ${n.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
                 </div>
                 <div class="input-group"><label>Priority (1=highest)</label><input type="number" id="nPriority" value="${n.priority || 5}" min="1" max="10"></div>
             </div>
             <div class="form-row-2">
                 <div class="input-group"><label>Audience</label>
-                    <select id="nAudience">
-                        ${['all','first_sem','second_sem','100L','200L','300L','400L','500L'].map(a => `<option value="${a}" ${n.target_audience === a ? 'selected' : ''}>${a}</option>`).join('')}
-                    </select>
+                    <select id="nAudience">${['all','first_sem','second_sem','100L','200L','300L','400L','500L'].map(a => `<option value="${a}" ${n.target_audience === a ? 'selected' : ''}>${a}</option>`).join('')}</select>
                 </div>
                 <div class="input-group"><label>Pinned?</label>
-                    <select id="nPinned">
-                        <option value="false" ${!n.is_pinned ? 'selected' : ''}>No</option>
-                        <option value="true" ${n.is_pinned ? 'selected' : ''}>Yes 📌</option>
-                    </select>
+                    <select id="nPinned"><option value="false" ${!n.is_pinned ? 'selected' : ''}>No</option><option value="true" ${n.is_pinned ? 'selected' : ''}>Yes 📌</option></select>
                 </div>
             </div>
             <div class="form-row-2">
                 <div class="input-group"><label>Dismissible?</label>
-                    <select id="nDismissible">
-                        <option value="true" ${n.is_dismissible !== false ? 'selected' : ''}>Yes</option>
-                        <option value="false" ${n.is_dismissible === false ? 'selected' : ''}>No</option>
-                    </select>
+                    <select id="nDismissible"><option value="true" ${n.is_dismissible !== false ? 'selected' : ''}>Yes</option><option value="false" ${n.is_dismissible === false ? 'selected' : ''}>No</option></select>
                 </div>
                 <div class="input-group"><label>Expires At</label><input type="datetime-local" id="nExpires" value="${exp}"></div>
             </div>
             <div class="form-row-2">
-                <div class="input-group"><label>Link URL (optional)</label><input id="nLinkUrl" value="${U.escapeHtml(n.link_url || '')}" placeholder="https://..."></div>
-                <div class="input-group"><label>Link Label</label><input id="nLinkLabel" value="${U.escapeHtml(n.link_label || '')}" placeholder="Learn more"></div>
+                <div class="input-group"><label>Link URL (optional)</label><input id="nLinkUrl" value="${U.escapeHtml(n.link_url || '')}"></div>
+                <div class="input-group"><label>Link Label</label><input id="nLinkLabel" value="${U.escapeHtml(n.link_label || '')}"></div>
             </div>
         `;
     }
@@ -1556,11 +1798,7 @@
             link_label: document.getElementById('nLinkLabel').value.trim() || null
         };
         if (!payload.title || !payload.message) return toast('Title and message required', 'warning');
-
-        const res = id
-            ? await DB.Notifications.update(id, payload)
-            : await DB.Notifications.create(payload, currentAdmin.id);
-
+        const res = id ? await DB.Notifications.update(id, payload) : await DB.Notifications.create(payload, currentAdmin.id);
         if (res.ok) { toast('Notification saved', 'success'); closeModal(); loadNotifications(); }
         else toast('Error: ' + res.error, 'error');
     };
@@ -1576,6 +1814,7 @@
         if (res.ok) { toast('Deleted', 'success'); loadNotifications(); }
     };
 
+    // ---------- CONTENT ----------
     async function loadContent() {
         const search = document.getElementById('contentSearch').value;
         const page = document.getElementById('contentFilterPage').value;
@@ -1597,22 +1836,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-edit"></i><p>No content blocks</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Key</th><th>Label</th><th>Page</th><th>Category</th><th>Preview</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Key</th><th>Label</th><th>Page</th><th>Category</th><th>Preview</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(c => {
             const val = c.value || c.default_value || '';
-            html += `<tr>
-                <td><code style="font-size:0.75rem; background:var(--gray-100); padding:2px 6px; border-radius:4px;">${U.escapeHtml(c.key)}</code></td>
-                <td>${U.escapeHtml(c.label)}</td>
-                <td><span class="badge badge-info">${U.escapeHtml(c.page)}</span></td>
-                <td>${U.escapeHtml(c.category || '—')}</td>
-                <td><small>${U.escapeHtml(U.truncate(val, 60))}</small></td>
-                <td><div class="actions">
-                    <button class="btn btn-info btn-xs" onclick="editContent('${U.escapeHtml(c.key)}')"><i class="fas fa-edit"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr><td><code style="font-size:0.75rem;">${U.escapeHtml(c.key)}</code></td><td>${U.escapeHtml(c.label)}</td><td><span class="badge badge-info">${U.escapeHtml(c.page)}</span></td><td>${U.escapeHtml(c.category || '—')}</td><td><small>${U.escapeHtml(U.truncate(val, 60))}</small></td><td><div class="actions"><button class="btn btn-info btn-xs" onclick="editContent('${U.escapeHtml(c.key)}')"><i class="fas fa-edit"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1624,15 +1851,11 @@
         const val = c.value || c.default_value || '';
         const isHtml = c.content_type === 'html' || c.content_type === 'richtext';
         openModal('Edit Content: ' + c.label, `
-            <div class="input-group">
-                <label>Key</label>
-                <div><code style="font-size:0.8rem;">${U.escapeHtml(c.key)}</code></div>
-            </div>
-            ${c.description ? `<div class="input-group"><label>Description</label><div style="color:var(--gray-600); font-size:0.85rem;">${U.escapeHtml(c.description)}</div></div>` : ''}
+            <div class="input-group"><label>Key</label><div><code>${U.escapeHtml(c.key)}</code></div></div>
             <div class="input-group">
                 <label>Value ${isHtml ? '(HTML allowed)' : ''}</label>
-                <textarea id="contentValue" rows="10" style="font-family: ${isHtml ? 'monospace' : 'inherit'};">${U.escapeHtml(val)}</textarea>
-                <div class="hint">Leave empty to fall back to default: <em>${U.escapeHtml(U.truncate(c.default_value, 100))}</em></div>
+                <textarea id="contentValue" rows="10" ${isHtml ? 'class="code"' : ''}>${U.escapeHtml(val)}</textarea>
+                <div class="hint">Default: ${U.escapeHtml(U.truncate(c.default_value, 100))}</div>
             </div>
         `, `
             <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
@@ -1651,9 +1874,10 @@
     window.resetContent = async function (key) {
         if (!confirm('Reset to default value?')) return;
         const res = await DB.Content.update(key, null, currentAdmin.id);
-        if (res.ok) { toast('Reset to default', 'success'); closeModal(); loadContent(); }
+        if (res.ok) { toast('Reset', 'success'); closeModal(); loadContent(); }
     };
 
+    // ---------- SESSIONS ----------
     async function loadSessions() {
         const wrap = document.getElementById('sessionsTable');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
@@ -1665,23 +1889,9 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-graduation-cap"></i><p>No sessions</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Label</th><th>Start</th><th>End</th><th>Active</th><th>Notes</th><th>Actions</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Label</th><th>Start</th><th>End</th><th>Active</th><th>Actions</th></tr></thead><tbody>`;
         rows.forEach(s => {
-            html += `<tr style="${s.is_active ? 'background:#ecfdf5;' : ''}">
-                <td><strong>${U.escapeHtml(s.label)}</strong></td>
-                <td>${U.formatDateShort(s.start_date)}</td>
-                <td>${U.formatDateShort(s.end_date)}</td>
-                <td>${s.is_active ? '<span class="badge badge-success">ACTIVE</span>' : '<span class="badge badge-gray">inactive</span>'}</td>
-                <td>${U.escapeHtml(s.notes || '—')}</td>
-                <td><div class="actions">
-                    ${!s.is_active ? `<button class="btn btn-success btn-xs" onclick="activateSession('${s.id}')"><i class="fas fa-check"></i> Activate</button>` : ''}
-                    <button class="btn btn-info btn-xs" onclick="editSession('${s.id}')"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-danger btn-xs" onclick="deleteSession('${s.id}')"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
+            html += `<tr style="${s.is_active ? 'background:#ecfdf5;' : ''}"><td><strong>${U.escapeHtml(s.label)}</strong></td><td>${U.formatDateShort(s.start_date)}</td><td>${U.formatDateShort(s.end_date)}</td><td>${s.is_active ? '<span class="badge badge-success">ACTIVE</span>' : '<span class="badge badge-gray">inactive</span>'}</td><td><div class="actions">${!s.is_active ? `<button class="btn btn-success btn-xs" onclick="activateSession('${s.id}')"><i class="fas fa-check"></i> Activate</button>` : ''}<button class="btn btn-info btn-xs" onclick="editSession('${s.id}')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-xs" onclick="deleteSession('${s.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1728,9 +1938,9 @@
     };
 
     window.activateSession = async function (id) {
-        if (!confirm('Make this the active academic session? All other sessions will be deactivated.')) return;
+        if (!confirm('Make this the active session?')) return;
         const res = await DB.Sessions.setActive(id);
-        if (res.ok) { toast('Session activated', 'success'); loadSessions(); }
+        if (res.ok) { toast('Activated', 'success'); loadSessions(); }
         else toast('Error: ' + res.error, 'error');
     };
 
@@ -1740,6 +1950,7 @@
         if (res.ok) { toast('Deleted', 'success'); loadSessions(); }
     };
 
+    // ---------- ACTIVITY ----------
     async function loadActivity() {
         const search = document.getElementById('actSearch').value;
         const entityType = document.getElementById('actFilterType').value;
@@ -1755,20 +1966,10 @@
             wrap.innerHTML = '<div class="empty-state"><i class="fas fa-history"></i><p>No activity logged</p></div>';
             return;
         }
-
-        let html = `<table><thead><tr>
-            <th>Action</th><th>Entity</th><th>Label</th><th>Admin</th><th>When</th><th>Details</th>
-        </tr></thead><tbody>`;
+        let html = `<table><thead><tr><th>Action</th><th>Entity</th><th>Label</th><th>Admin</th><th>When</th><th>Details</th></tr></thead><tbody>`;
         rows.forEach(a => {
-            const actBadge = { create: 'badge-success', update: 'badge-warning', delete: 'badge-danger', approve: 'badge-success', reject: 'badge-danger' }[a.action] || 'badge-info';
-            html += `<tr>
-                <td><span class="badge ${actBadge}">${U.escapeHtml(a.action)}</span></td>
-                <td>${U.escapeHtml(a.entity_type)}</td>
-                <td>${U.escapeHtml(a.entity_label || '—')}</td>
-                <td>${U.escapeHtml(a.admin_email || '—')}</td>
-                <td>${U.formatDate(a.created_at)}</td>
-                <td><button class="btn btn-outline btn-xs" onclick="viewActivity('${a.id}')"><i class="fas fa-eye"></i></button></td>
-            </tr>`;
+            const actBadge = { create: 'badge-success', update: 'badge-warning', delete: 'badge-danger' }[a.action] || 'badge-info';
+            html += `<tr><td><span class="badge ${actBadge}">${U.escapeHtml(a.action)}</span></td><td>${U.escapeHtml(a.entity_type)}</td><td>${U.escapeHtml(a.entity_label || '—')}</td><td>${U.escapeHtml(a.admin_email || '—')}</td><td>${U.formatDate(a.created_at)}</td><td><button class="btn btn-outline btn-xs" onclick="viewActivity('${a.id}')"><i class="fas fa-eye"></i></button></td></tr>`;
         });
         html += '</tbody></table>';
         wrap.innerHTML = html;
@@ -1782,12 +1983,11 @@
             <div class="input-group"><label>Entity</label><div>${U.escapeHtml(a.entity_type)} — ${U.escapeHtml(a.entity_label || '')}</div></div>
             <div class="input-group"><label>Admin</label><div>${U.escapeHtml(a.admin_email || '—')}</div></div>
             <div class="input-group"><label>When</label><div>${U.formatDate(a.created_at)}</div></div>
-            <div class="input-group"><label>Changes</label>
-                <pre style="background:var(--gray-100); padding:10px; border-radius:8px; font-size:0.75rem; overflow-x:auto; max-height:300px;">${U.escapeHtml(JSON.stringify(a.changes, null, 2))}</pre>
-            </div>
+            <div class="input-group"><label>Changes</label><pre style="background:var(--gray-100); padding:10px; border-radius:8px; font-size:0.75rem; overflow-x:auto; max-height:300px;">${U.escapeHtml(JSON.stringify(a.changes, null, 2))}</pre></div>
         `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
     };
 
+    // ---------- SETTINGS ----------
     async function loadSettings() {
         const wrap = document.getElementById('settingsForm');
         wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
@@ -1796,12 +1996,7 @@
         Object.keys(settings).forEach(k => {
             const v = settings[k];
             const display = typeof v === 'object' ? JSON.stringify(v, null, 2) : String(v);
-            html += `
-                <div class="input-group">
-                    <label>${U.escapeHtml(k)}</label>
-                    <textarea rows="4" style="font-family:monospace; font-size:0.8rem;" onchange="saveSetting('${U.escapeHtml(k)}', this.value)">${U.escapeHtml(display)}</textarea>
-                </div>
-            `;
+            html += `<div class="input-group"><label>${U.escapeHtml(k)}</label><textarea rows="4" class="code" onchange="saveSetting('${U.escapeHtml(k)}', this.value)">${U.escapeHtml(display)}</textarea></div>`;
         });
         if (!html) html = '<div class="empty-state"><i class="fas fa-sliders-h"></i><p>No settings</p></div>';
         wrap.innerHTML = html;
@@ -1812,7 +2007,7 @@
         try { parsed = JSON.parse(rawValue); }
         catch { parsed = rawValue; }
         const res = await DB.Settings.set(key, parsed);
-        if (res.ok) toast('Setting saved: ' + key, 'success');
+        if (res.ok) toast('Setting saved', 'success');
         else toast('Error: ' + res.error, 'error');
     };
 
@@ -1825,12 +2020,13 @@
     };
 
     window.clearAllCalculatorLogs = async function () {
-        if (!confirm('Delete ALL calculator logs? This cannot be undone.')) return;
+        if (!confirm('Delete ALL calculator logs?')) return;
         const res = await DB.Calculator.removeAll();
-        if (res.ok) { toast('All calculator logs cleared', 'success'); loadDashboard(); }
+        if (res.ok) { toast('Calculator logs cleared', 'success'); loadDashboard(); }
         else toast('Error: ' + res.error, 'error');
     };
 
+    // ---------- MODAL ----------
     window.openModal = function (title, bodyHtml, footHtml) {
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('modalBody').innerHTML = bodyHtml;
@@ -1850,9 +2046,7 @@
         else if (type === 'businesses') { data = allBusinesses; filename = 'businesses'; }
         else if (type === 'calculator') { data = allCalculator; filename = 'calculator_usage'; }
         else return;
-
         if (!data.length) return toast('Nothing to export', 'warning');
-
         const date = new Date().toISOString().split('T')[0];
 
         if (format === 'excel') {
@@ -1906,6 +2100,14 @@
         document.getElementById('courseSearch').addEventListener('input', cof);
         document.getElementById('courseFilterSem').addEventListener('change', loadCourses);
         document.getElementById('courseFilterLevel').addEventListener('change', loadCourses);
+
+        const mf = U.debounce(loadManuals, 300);
+        document.getElementById('manualSearch').addEventListener('input', mf);
+        document.getElementById('manualFilterSession').addEventListener('change', loadManuals);
+
+        const gf = U.debounce(loadGlossary, 300);
+        document.getElementById('glossarySearch').addEventListener('input', gf);
+        document.getElementById('glossaryFilterCategory').addEventListener('change', loadGlossary);
 
         const cal = U.debounce(loadCalendar, 300);
         document.getElementById('calSearch').addEventListener('input', cal);
