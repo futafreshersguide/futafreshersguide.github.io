@@ -148,7 +148,7 @@
         .accordion-header:hover { background: #e3f2fd; }
         .accordion-header i { transition: transform 0.3s ease; color: var(--gray-500); }
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; background: white; color: var(--gray-800); font-size: 1rem; padding: 0 20px; }
-        .accordion-item.active .accordion-content { max-height: 2000px; padding: 20px; border-top: 1px solid var(--gray-200); }
+        .accordion-item.active .accordion-content { max-height: 3000px; padding: 20px; border-top: 1px solid var(--gray-200); }
         .accordion-item.active .accordion-header i { transform: rotate(180deg); color: var(--primary); }
         .accordion-item.active { box-shadow: 0 5px 15px rgba(0,0,0,0.08); transform: translateY(-2px); border-color: var(--primary); }
 
@@ -160,6 +160,45 @@
         .battle-plan-card:hover, .toc-item:hover, .course-item:hover, .document-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .battle-plan-card h4, .toc-item h3 { color: var(--primary); margin-bottom: 1rem; }
         .exam-type { background: #e3f2fd; color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; float: right; }
+
+        /* Course card badges */
+        .course-badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 10px 0; }
+        .course-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 10px; border-radius: 12px;
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .course-badge.warn { background: #fef3c7; color: #92400e; }
+        .course-badge.price { background: #dbeafe; color: #1e40af; }
+        .course-badge.free { background: #d1fae5; color: #065f46; }
+        .course-badge.exam { background: #ede9fe; color: #5b21b6; }
+
+        .course-warnings {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 0.88rem;
+            color: #78350f;
+        }
+        .course-warnings h5 {
+            color: #b45309;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+        .course-warnings ul {
+            margin-left: 1.2rem;
+            margin-top: 6px;
+        }
+        .course-warnings li {
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
 
         .document-requirement { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; margin: 8px 0; font-weight: 600; }
         .document-requirement.online { background: #d1ecf1; color: #0c5460; }
@@ -253,6 +292,93 @@
             margin-top: 0.5rem; transition: 0.3s; border: none; cursor: pointer;
         }
         .gpa-card .btn-gpa:hover { background: #128C7E; transform: translateY(-2px); }
+
+        /* Mindset page special styling */
+        .mindset-hero {
+            background: linear-gradient(135deg, #003366 0%, #990000 100%);
+            color: white; padding: 3rem 2rem; border-radius: 16px;
+            text-align: center; margin-bottom: 2rem;
+        }
+        .mindset-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .mindset-hero p { opacity: 0.9; font-size: 1.05rem; }
+        .mindset-card {
+            background: white; border-radius: 12px; padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            border-left: 6px solid var(--primary);
+            transition: 0.3s;
+        }
+        .mindset-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .mindset-card h3 {
+            color: var(--primary); font-size: 1.4rem;
+            margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;
+        }
+        .mindset-card h3 i { color: var(--accent); }
+        .mindset-card .subtitle {
+            color: var(--gray-600); font-size: 0.95rem;
+            font-style: italic; margin-bottom: 1.5rem;
+        }
+        .mindset-card .body { color: var(--gray-800); line-height: 1.7; }
+        .mindset-card .body p { margin-bottom: 1rem; }
+        .mindset-card .body strong { color: var(--primary); }
+
+        /* Manuals table styling */
+        .manuals-table-wrap { overflow-x: auto; background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .manuals-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .manuals-table th {
+            background: var(--primary); color: white;
+            padding: 12px 15px; text-align: left;
+            font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 0.5px; font-weight: 700;
+        }
+        .manuals-table th:first-child { border-top-left-radius: 8px; }
+        .manuals-table th:last-child { border-top-right-radius: 8px; }
+        .manuals-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+        .manuals-table tr:last-child td { border-bottom: none; }
+        .manuals-table tr:hover td { background: var(--gray-100); }
+        .manuals-table .price { font-weight: 800; color: var(--primary); white-space: nowrap; }
+        .manuals-table .price.free { color: var(--success); }
+        .manuals-total {
+            background: #dcfce7; border-radius: 10px; padding: 1.5rem;
+            text-align: center; margin: 1.5rem 0;
+            border-left: 5px solid var(--success);
+        }
+        .manuals-total .label { color: var(--gray-600); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .manuals-total .amount { font-size: 2.5rem; font-weight: 900; color: var(--success); margin-top: 0.5rem; }
+
+        /* Glossary styling */
+        .glossary-category { margin-bottom: 2.5rem; }
+        .glossary-category h3 {
+            color: var(--primary); font-size: 1.3rem;
+            margin-bottom: 1rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            text-transform: capitalize;
+        }
+        .glossary-item {
+            background: white; border-radius: 10px;
+            padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--accent);
+        }
+        .glossary-item .term {
+            font-weight: 800; color: var(--primary);
+            font-size: 1.05rem; margin-bottom: 0.5rem;
+        }
+        .glossary-item .definition {
+            color: var(--gray-700); font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .glossary-item .example {
+            margin-top: 0.6rem; padding: 0.6rem 0.8rem;
+            background: var(--gray-100); border-radius: 6px;
+            font-size: 0.88rem; color: var(--gray-600);
+            font-style: italic;
+        }
+        .glossary-item .example::before { content: "Example: "; font-weight: 700; font-style: normal; color: var(--gray-700); }
     </style>
 </head>
 <body>
@@ -329,7 +455,8 @@
             <li><a href="#" data-page="toc">Contents</a></li>
             <li><a href="#" data-page="registration">Registration</a></li>
             <li><a href="#" data-page="course-synopsis">Courses</a></li>
-            <li><a href="#" data-page="materials">Materials</a></li>
+            <li><a href="#" data-page="manuals">Manuals</a></li>
+            <li><a href="#" data-page="glossary">Glossary</a></li>
             <li><a href="#" data-page="calendar">📅 Calendar</a></li>
             <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> Marketplace</a></li>
             <li><a href="calculator.html" style="background: var(--success); padding: 5px 12px; border-radius: 20px; color: white !important;"><i class="fas fa-calculator"></i> GPA</a></li>
@@ -360,6 +487,7 @@
     <ul class="sidebar-links">
         <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
         <li><a href="#" data-page="message">✉️ Welcome Message</a></li>
+        <li><a href="#" data-page="mindset" style="background:#fff8e1; color:#b45309; font-weight:800;">🧠 The Mindset</a></li>
         <li><a href="#" data-page="toc">📑 Table of Contents</a></li>
         <li><a href="#" data-page="registration">📝 Registration Guide</a></li>
         <li><a href="#" data-page="documents">📁 Required Documents</a></li>
@@ -369,8 +497,10 @@
         <li><a href="#" data-page="navigating-storms">⛈️ Navigating Storms</a></li>
         <li><a href="#" data-page="anchor">⚓ The Anchor</a></li>
         <li><a href="#" data-page="course-synopsis">📚 Course Synopsis</a></li>
+        <li><a href="#" data-page="manuals" style="background:#e3f2fd; color:#003366; font-weight:800;">💰 Manuals & Prices</a></li>
         <li><a href="#" data-page="materials">📂 Course Materials</a></li>
         <li><a href="#" data-page="departmental">🏛️ Departmental Courses</a></li>
+        <li><a href="#" data-page="glossary" style="background:#e0f2f1; color:#00695c; font-weight:800;">📖 Glossary</a></li>
         <li><a href="#" data-page="calendar">📅 Academic Calendar</a></li>
         <li><a href="#" data-page="genius-point" style="background:#fff8e1; color:#b45309; font-weight:800;">📚 Genius Point Academy</a></li>
         <li><a href="marketplace.html" style="color: var(--accent);"><i class="fas fa-store"></i> FUTA Marketplace</a></li>
@@ -416,6 +546,7 @@
 
 <main id="main-content" class="hidden">
 
+    <!-- HOME -->
     <section id="home" class="content-section content-page active">
         <div class="container">
             <h2 class="section-title">Welcome to Your FUTA Journey</h2>
@@ -431,6 +562,8 @@
                     <li>Academic strategies for first-class performance</li>
                     <li>Personal development insights</li>
                     <li>Course-by-course battle plans</li>
+                    <li>Complete manual prices and buying guide</li>
+                    <li>A glossary of FUTA-specific terms</li>
                     <li>Mental and spiritual wellness guidance</li>
                     <li>Access to all course materials</li>
                     <li>Complete registration guide</li>
@@ -440,6 +573,7 @@
         </div>
     </section>
 
+    <!-- WELCOME MESSAGE -->
     <section id="message" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">A Message to FUTA Graduating Class of <span data-content="global.class_year">2029</span></h2>
@@ -459,11 +593,33 @@
                     <li>Build resilience and character</li>
                     <li>Create memories that will last a lifetime</li>
                 </ul>
-                <div class="page-nav"><a class="page-btn" data-page="home">← Previous</a><a class="page-btn" data-page="toc">Next: Table of Contents →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="home">← Previous</a><a class="page-btn" data-page="mindset">Next: The Mindset →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- THE MINDSET (NEW PAGE) -->
+    <section id="mindset" class="content-section content-page">
+        <div class="container">
+            <div class="mindset-hero">
+                <h1><i class="fas fa-brain"></i> The Mindset</h1>
+                <p>Five frameworks to shape your FUTA journey — from dream to reality</p>
+            </div>
+
+            <div id="mindsetContent">
+                <div class="loading-skeleton" style="height: 200px;"></div>
+                <div class="loading-skeleton" style="height: 200px;"></div>
+                <div class="loading-skeleton" style="height: 200px;"></div>
+            </div>
+
+            <div class="page-nav">
+                <a class="page-btn" data-page="message">← Welcome Message</a>
+                <a class="page-btn" data-page="toc">Next: Table of Contents →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOC -->
     <section id="toc" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Table of Contents</h2>
@@ -473,11 +629,13 @@
                 <div class="toc-item" data-page="great-shift"><h3>3. The Great Shift</h3><p>Embracing University Autonomy</p></div>
                 <div class="toc-item" data-page="course-synopsis"><h3>4. Course Synopsis</h3><p>Common first semester courses (see important note)</p></div>
                 <div class="toc-item" data-page="academic-playbook"><h3>5. Academic Playbook</h3><p>Course-by-Course Battle Plan for a First-Class Journey</p></div>
+                <div class="toc-item" data-page="manuals"><h3>💰 Manuals & Prices</h3><p>Course manual prices for the 2025/2026 session</p></div>
                 <div class="toc-item" data-page="beyond-books"><h3>6. Beyond the Books</h3><p>Building a Complete Life</p></div>
                 <div class="toc-item" data-page="navigating-storms"><h3>7. Navigating the Storms</h3><p>You Are Not Alone</p></div>
                 <div class="toc-item" data-page="anchor"><h3>8. The Anchor</h3><p>The Power of Prayer</p></div>
                 <div class="toc-item" data-page="materials"><h3>9. Course Materials</h3><p>Access All Study Materials</p></div>
                 <div class="toc-item" data-page="departmental"><h3>10. Departmental Courses</h3><p>Know Your Specific Courses</p></div>
+                <div class="toc-item" data-page="glossary"><h3>📖 Glossary</h3><p>FUTA-specific terms explained</p></div>
                 <div class="toc-item" data-page="calendar"><h3>11. Academic Calendar</h3><p>Key dates for the session</p></div>
                 <div class="toc-item" data-page="genius-point"><h3>📚 Genius Point Academy</h3><p>Expert Tutoring for First-Year Success</p></div>
                 <div class="toc-item" onclick="window.location.href='marketplace.html'"><h3>12. FUTA Marketplace</h3><p>Student Services & Business Directory</p></div>
@@ -487,11 +645,11 @@
                     <p>100L Second Semester Survival Guide</p>
                 </div>
             </div>
-            <div class="page-nav"><a class="page-btn" data-page="message">← Previous</a><a class="page-btn" data-page="registration">Next: Registration Guide →</a></div>
+            <div class="page-nav"><a class="page-btn" data-page="mindset">← Previous</a><a class="page-btn" data-page="registration">Next: Registration Guide →</a></div>
         </div>
     </section>
 
-    <!-- REGISTRATION (FULLY RESTORED) -->
+    <!-- REGISTRATION -->
     <section id="registration" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">1. Complete Registration Guide</h2>
@@ -760,7 +918,7 @@
         </div>
     </section>
 
-    <!-- GREAT SHIFT - FULL RESTORED -->
+    <!-- THE GREAT SHIFT -->
     <section id="great-shift" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">3. The Great Shift</h2>
@@ -797,7 +955,7 @@
         </div>
     </section>
 
-    <!-- COURSE SYNOPSIS -->
+    <!-- COURSE SYNOPSIS (with warnings + manual prices + full synopsis) -->
     <section id="course-synopsis" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">4. Course Synopsis (First Semester 100L)</h2>
@@ -860,7 +1018,7 @@
         </div>
     </section>
 
-    <!-- ACADEMIC PLAYBOOK - FULL RESTORED with Exam Strategy -->
+    <!-- ACADEMIC PLAYBOOK -->
     <section id="academic-playbook" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">5. Your Academic Playbook</h2>
@@ -956,12 +1114,60 @@
                     <p>For both computer-based and written exams, immediately after your test, gather questions from your friends that you remember. These are likely to come out in the final exam. Don't miss this opportunity twice!</p>
                 </div>
 
-                <div class="page-nav"><a class="page-btn" data-page="course-synopsis">← Previous</a><a class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="course-synopsis">← Previous</a><a class="page-btn" data-page="manuals">Next: Manuals & Prices →</a></div>
             </div>
         </div>
     </section>
 
-    <!-- BEYOND BOOKS - FULL RESTORED -->
+    <!-- MANUALS & PRICES (NEW PAGE) -->
+    <section id="manuals" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">💰 Manuals & Prices</h2>
+
+            <div class="card">
+                <div style="background:#fef3c7; border-left:5px solid #f59e0b; padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
+                    <h3 style="color:#b45309; margin-bottom:0.8rem;">📌 Important Notice</h3>
+                    <p>Manual prices change from session to session. The prices below are for the <strong><span data-content="manual_prices_session">2025/2026</span></strong> session. <strong>Always confirm the current price from the school bookshop or your department before buying.</strong></p>
+                </div>
+            </div>
+
+            <div class="manuals-table-wrap">
+                <table class="manuals-table" id="manualsTable">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Manual</th>
+                            <th>Price</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manualsTableBody">
+                        <tr><td colspan="4" style="text-align:center;padding:2rem;">Loading manuals...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="manuals-total" id="manualsTotal">
+                <div class="label">Estimated Total</div>
+                <div class="amount" id="manualsTotalAmount">—</div>
+                <p style="color:var(--gray-600); margin-top:0.5rem; font-size:0.9rem;" id="manualsTotalNote"></p>
+            </div>
+
+            <div class="inspirational-box" style="margin-top:1.5rem;">
+                <h3 style="color:var(--primary);">💡 Money-Saving Tips</h3>
+                <ul style="margin-left:1.5rem;">
+                    <li><strong>Buy in groups:</strong> Some courses have a shared manual that multiple students can read from — split the cost with coursemates.</li>
+                    <li><strong>Buy from seniors:</strong> Often cheaper, sometimes pre-annotated with study notes.</li>
+                    <li><strong>Don't skip free manuals:</strong> GET 101 / MNE 201 has a free PDF — don't pay for a printed version unless you really want one.</li>
+                    <li><strong>Budget early:</strong> Save up the total cost before resuming, so you're not caught off guard.</li>
+                </ul>
+            </div>
+
+            <div class="page-nav"><a class="page-btn" data-page="academic-playbook">← Previous</a><a class="page-btn" data-page="beyond-books">Next: Beyond Books →</a></div>
+        </div>
+    </section>
+
+    <!-- BEYOND BOOKS -->
     <section id="beyond-books" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">6. Beyond the Books</h2>
@@ -999,12 +1205,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="academic-playbook">← Previous</a><a class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="manuals">← Previous</a><a class="page-btn" data-page="navigating-storms">Next: Navigating Storms →</a></div>
             </div>
         </div>
     </section>
 
-    <!-- NAVIGATING STORMS - FULL RESTORED -->
+    <!-- NAVIGATING STORMS -->
     <section id="navigating-storms" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">7. Navigating the Storms</h2>
@@ -1049,7 +1255,7 @@
         </div>
     </section>
 
-    <!-- THE ANCHOR - FULL RESTORED -->
+    <!-- THE ANCHOR -->
     <section id="anchor" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">8. The Anchor: The Power of Prayer</h2>
@@ -1090,6 +1296,7 @@
         </div>
     </section>
 
+    <!-- MATERIALS -->
     <section id="materials" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">9. Course Materials</h2>
@@ -1111,7 +1318,7 @@
         </div>
     </section>
 
-    <!-- DEPARTMENTAL - FULL RESTORED -->
+    <!-- DEPARTMENTAL -->
     <section id="departmental" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">10. Departmental Courses Information</h2>
@@ -1160,11 +1367,30 @@
                 <div style="text-align: center; margin: 2rem 0; font-size:1.1rem; color:var(--primary);">
                     <p><strong>Remember:</strong> Your first year sets the tone for your entire FUTA journey. Start strong, ask questions, and build good academic habits from day one!</p>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="materials">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="materials">← Previous</a><a class="page-btn" data-page="glossary">Next: Glossary →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- GLOSSARY (NEW PAGE) -->
+    <section id="glossary" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">📖 Glossary of FUTA Terms</h2>
+            <div class="card">
+                <p>FUTA has its own vocabulary. This glossary explains the terms you'll hear every day — so you're never confused.</p>
+            </div>
+
+            <div id="glossaryContent">
+                <div class="loading-skeleton" style="height: 100px;"></div>
+                <div class="loading-skeleton" style="height: 100px;"></div>
+                <div class="loading-skeleton" style="height: 100px;"></div>
+            </div>
+
+            <div class="page-nav"><a class="page-btn" data-page="departmental">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
+        </div>
+    </section>
+
+    <!-- CALENDAR -->
     <section id="calendar" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📅 Academic Calendar</h2>
@@ -1175,11 +1401,12 @@
                     <div class="loading-skeleton" style="height: 80px;"></div>
                     <div class="loading-skeleton" style="height: 80px;"></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="departmental">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="glossary">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- GENIUS POINT ACADEMY -->
     <section id="genius-point" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📚 Genius Point Academy</h2>
@@ -1201,7 +1428,7 @@
 
                     <h4 style="color:var(--accent); margin-top:1.5rem; margin-bottom:0.6rem;">What We Offer</h4>
                     <ul>
-                        <li>Tutoring for all 100L courses (MTH/MTS, PHY, CHM/CHE, BIO, GNS, etc.)</li>
+                        <li>Tutoring for all 100L courses (MTH, PHY, CHM, BIO, GNS, etc.)</li>
                         <li>Step-by-step breakdown of difficult topics</li>
                         <li>Past question review and exam-focused practice</li>
                         <li>Small-group sessions or one-on-one (your choice)</li>
@@ -1228,6 +1455,7 @@
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Contact</h2>
@@ -1346,6 +1574,7 @@
         }, 1500);
     }
 
+    // ---------- CONTENT BLOCKS ----------
     async function loadContentBlocks() {
         try {
             const content = await DB.Content.getPage('index');
@@ -1388,6 +1617,7 @@
         } catch (e) {}
     }
 
+    // ---------- NOTIFICATIONS ----------
     async function loadNotifications() {
         try {
             const audience = S.get('futa_profile')?.semester_guide === 'second' ? 'second_sem' : 'first_sem';
@@ -1439,13 +1669,134 @@
         }
     }
 
+    // ---------- MINDSET PAGE ----------
+    async function loadMindset() {
+        const wrap = document.getElementById('mindsetContent');
+        if (!wrap) return;
+        try {
+            const res = await DB.Mindset.list();
+            const entries = res.ok ? res.data : [];
+            if (!entries.length) {
+                wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Mindset content coming soon.</p>';
+                return;
+            }
+            wrap.innerHTML = '';
+            entries.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'mindset-card';
+                card.innerHTML = `
+                    <h3><i class="fas fa-${U.escapeHtml(m.icon || 'brain')}"></i> ${U.escapeHtml(m.title)}</h3>
+                    ${m.subtitle ? `<div class="subtitle">${U.escapeHtml(m.subtitle)}</div>` : ''}
+                    <div class="body">${m.body_html || ''}</div>
+                `;
+                wrap.appendChild(card);
+            });
+        } catch (err) {
+            console.error('[Mindset]', err);
+            wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Could not load mindset content.</p>';
+        }
+    }
+
+    // ---------- MANUALS PAGE ----------
+    async function loadManuals() {
+        const tbody = document.getElementById('manualsTableBody');
+        const totalEl = document.getElementById('manualsTotalAmount');
+        const totalNote = document.getElementById('manualsTotalNote');
+        if (!tbody) return;
+
+        try {
+            const res = await DB.Manuals.list({ session: '2025/2026' });
+            const manuals = (res.ok && res.data) ? res.data : [];
+
+            if (!manuals.length) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#666;">No manual data available.</td></tr>';
+                totalEl.textContent = '—';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            manuals.forEach(m => {
+                const priceClass = m.is_free ? 'price free' : 'price';
+                const priceText = m.is_free ? 'Free' : U.formatNaira(m.price);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${U.escapeHtml(m.course_code)}</strong><br><small style="color:var(--gray-600);">${U.escapeHtml(m.course_title || '')}</small></td>
+                    <td>${U.escapeHtml(m.manual_name || 'Manual')}</td>
+                    <td class="${priceClass}">${priceText}</td>
+                    <td><small>${U.escapeHtml(m.notes || '')}</small></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const stats = await DB.Manuals.stats('2025/2026');
+            totalEl.textContent = U.formatNaira(stats.totalCost);
+            totalNote.textContent = `Based on ${stats.total - stats.freeCount} paid manuals. ${stats.freeCount} manual${stats.freeCount === 1 ? '' : 's'} are free.`;
+
+        } catch (err) {
+            console.error('[Manuals]', err);
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#666;">Could not load manual data.</td></tr>';
+        }
+    }
+
+    // ---------- GLOSSARY PAGE ----------
+    async function loadGlossary() {
+        const wrap = document.getElementById('glossaryContent');
+        if (!wrap) return;
+
+        try {
+            const res = await DB.Glossary.list();
+            const items = (res.ok && res.data) ? res.data : [];
+
+            if (!items.length) {
+                wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Glossary coming soon.</p>';
+                return;
+            }
+
+            // Group by category
+            const grouped = {};
+            items.forEach(item => {
+                const cat = item.category || 'general';
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(item);
+            });
+
+            let html = '';
+            Object.keys(grouped).sort().forEach(cat => {
+                html += `<div class="glossary-category">`;
+                html += `<h3><i class="fas fa-tag"></i> ${U.escapeHtml(cat.replace(/-/g, ' '))}</h3>`;
+                grouped[cat].forEach(item => {
+                    html += `
+                        <div class="glossary-item">
+                            <div class="term">${U.escapeHtml(item.term)}</div>
+                            <div class="definition">${U.escapeHtml(item.definition)}</div>
+                            ${item.example ? `<div class="example">${U.escapeHtml(item.example)}</div>` : ''}
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            });
+
+            wrap.innerHTML = html;
+        } catch (err) {
+            console.error('[Glossary]', err);
+            wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Could not load glossary.</p>';
+        }
+    }
+
+    // ---------- COURSES ----------
     const FALLBACK_COURSES = [
-        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Time Management', 'Study Skills', 'Note taking and note making', 'Scientific Word Formation', 'Parts of Speech', 'Aspects of English grammar'], tips: ['Attend all classes regularly', 'Complete all online assignments', 'Stay active on Telegram group'] },
-        { code: 'COS 101', title: 'Introduction to Computing Science', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['Computer Fundamentals', 'History of computers', 'Components of computer', 'Classification of computer', 'Uses and impact of computers', 'Programming methodology and algorithms'], tips: ['Attend theoretical and practical classes', 'Buy and study practical manuals', 'Perform well in practical tests'] },
-        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell & Molecular Biology', 'Genetics & Heredity', 'Diversity & Classification', 'Ecology & Reproduction', 'Flowering plants'], tips: ['Attend all classes regularly', 'Complete all assignments and class works', 'Read course materials thoroughly'] },
-        { code: 'MTH 101', title: 'Elementary Mathematics I', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Real numbers and mathematical induction', 'Sequence and series', 'Quadratic equation', 'Binomial theorem', 'Trigonometry'], tips: ['Attend all classes and tutorials', 'Buy and study tutorial manual thoroughly', 'Develop speed for CBT exams'] },
-        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Quantities, units and dimensions', 'Vector analysis', 'Laws of mechanics', 'Rotational dynamics', 'Simple Harmonic Motion', 'Universal gravitation', 'Work energy and power'], tips: ['Attend all classes without missing', 'Buy manuals and complete assignments', 'Focus on objective questions'] },
-        { code: 'CHM 101', title: 'General Chemistry I', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Structure & Theory', 'Nuclear & Kinetics', 'Thermodynamics & Equilibrium', 'Solutions & Electrochemistry'], tips: ['Attend all classes regularly', 'Buy tutorials manual', 'Focus on objective questions'] }
+        { code: 'MTH 101', title: 'Introductory Mathematics I', exam_type: 'CBT/CBE', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1qeYMNYPyQnnaExJq9XSO0r_pXXlKyL3i', topics: ['Set Theory', 'Real numbers and mathematical induction', 'Sequence and series', 'Quadratic equation', 'Binomial theorem', 'Trigonometry'], tips: ['Attend all classes and tutorials', 'Buy and study tutorial manual thoroughly', 'Develop speed for CBT exams'] },
+        { code: 'GST 111', title: 'Communication in English', exam_type: 'CBT/CBE', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/16BbqscwB_qbHnYVGMx-VsHXuvqo_13YV', topics: ['Academic Skills', 'Time Management', 'Study Skills', 'Scientific Word Formation', 'Parts of Speech'], tips: ['Attend all classes', 'Complete online assignments', 'Follow lecturer instructions strictly'] },
+        { code: 'FGNS 103', title: 'Information Retrieval', exam_type: 'CBT/CBE', icon: 'book', drive_link: 'https://drive.google.com/drive/folders/1sqeUsoS3B7J65vM8iIKzLQPISxfhrt5N', topics: ['History of libraries', 'Library materials', 'Study skills', 'Classification of library', 'Storage devices'], tips: ['Attend the library tour (easy marks)', 'Complete research assignments'] },
+        { code: 'PHY 101', title: 'General Physics I', exam_type: 'CBT/CBE', icon: 'atom', drive_link: 'https://drive.google.com/drive/folders/1G5lZPsOi1-l67LjxgViZGCIlsFWqXEDl', topics: ['Quantities, units and dimensions', 'Vector analysis', 'Laws of mechanics', 'Rotational dynamics', 'SHM', 'Universal gravitation'], tips: ['READ SHM TOPIC — not in manual but appeared in test', 'Read ALL topics in synopsis', 'Practice past questions'] },
+        { code: 'PHY 107', title: 'Experimental Physics I', exam_type: 'CBE Only', icon: 'vials', drive_link: 'https://drive.google.com/drive/folders/1Oxzgz1X0dOjSpkgXp8ZN8s_wRZdwJiCR', topics: ['Measurements', 'Spiral spring method', 'Compound pendulum', 'Moment of inertia', 'Refractive index experiments'], tips: ['No test or exam', 'Online practicals on Saturdays', 'Buy practical manual'] },
+        { code: 'CHM 101', title: 'Basic General Chemistry I', exam_type: 'CBT/CBE', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/1Y4sKvrgH7XwGDNIPCHMzsrBYdGXO6Xp1', topics: ['Atomic Structure & Theory', 'Nuclear & Kinetics', 'Thermodynamics & Equilibrium', 'Solutions & Electrochemistry'], tips: ['Get Fundamental Chemistry textbook', 'Attend all classes', 'Focus on objective questions'] },
+        { code: 'CHM 103', title: 'Experimental Chemistry I', exam_type: 'CBE Only', icon: 'vial', drive_link: 'https://drive.google.com/drive/folders/1jr0eRfvjZsVOiXZIbMyZ6I1ulunuks0r', topics: ['Lab procedure and apparatus', 'Recording lab data', 'Preparation of reagents', 'Stoichiometry'], tips: ['Buy the manual', 'Read beyond the manual', 'Attend all practicals'] },
+        { code: 'BIO 101', title: 'General Biology I', exam_type: 'CBT/CBE', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/11-S3HppUkfATQhO_f27idoZsY6xwNKAQ', topics: ['Cell & Molecular Biology', 'Genetics & Heredity', 'Diversity & Classification', 'Ecology & Reproduction'], tips: ['Attend all classes', 'Materials sent by lecturers', 'Fun class — enjoy it'] },
+        { code: 'BIO 103', title: 'General Biology Practical I', exam_type: 'CBE Only', icon: 'microscope', drive_link: 'https://drive.google.com/drive/folders/1ZtVc7RGT27-I_tNhxGtVUUxyA1zBys3L', topics: ['Use of microscope', 'Cell structure', 'Staining starch', 'Algae, fungi, bryophyta', 'Gymnosperms'], tips: ['Buy practical manual', 'Submit all lab reports', 'Test and exam on practicals'] },
+        { code: 'CSC 101', title: 'Introduction to Computer Science', exam_type: 'CBT/CBE', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/1JJXtrViKTS912i-QdN26Hcw0szNpsvpg', topics: ['History of computers', 'Components of computer', 'Programming methodology', 'Algorithms', 'Visual BASIC'], tips: ['Never miss practical class', 'Attendance is taken', 'Buy practical manual'] },
+        { code: 'FMEE 101', title: 'Engineering Drawing I', exam_type: 'Written', icon: 'ruler-combined', drive_link: 'https://drive.google.com/drive/folders/1f6zvKIcxIcvcLMKNf2zLD4WFjC_3nuhS', topics: ['Drawing instruments', 'Geometrical construction', 'Polygons', 'Pictorial drawing', 'Orthographic projection', 'Freehand sketching'], tips: ['Attend all classes', 'Complete class exercises immediately', 'Remember FORCE'] },
+        { code: 'GET 101', title: 'Engineers in Society', exam_type: 'CBT/CBE', icon: 'cogs', drive_link: null, topics: ['Early Development of Technology', 'Engineering Profession', 'COREN & NSE', 'HSE Management', 'Engineering Risk Analysis'], tips: ['Free PDF manual', 'German questions', 'Know every part of material'] }
     ];
 
     async function loadCourses() {
@@ -1471,17 +1822,66 @@
             return;
         }
         courses.forEach(c => {
+            // Build badges
+            const badges = [];
+            if (c.exam_type) {
+                badges.push(`<span class="course-badge exam"><i class="fas fa-file-alt"></i> ${U.escapeHtml(c.exam_type)}</span>`);
+            }
+            if (c.is_manual_free) {
+                badges.push(`<span class="course-badge free"><i class="fas fa-gift"></i> Free Manual</span>`);
+            } else if (c.manual_price) {
+                badges.push(`<span class="course-badge price"><i class="fas fa-tag"></i> ${U.formatNaira(c.manual_price)}</span>`);
+            }
+            if (c.warnings && c.warnings.length > 0) {
+                badges.push(`<span class="course-badge warn"><i class="fas fa-exclamation-triangle"></i> ${c.warnings.length} Warning${c.warnings.length > 1 ? 's' : ''}</span>`);
+            }
+
+            // Build synopsis
+            const synopsis = c.full_synopsis || (c.topics || []).join('. ');
+            const shortSynopsis = U.truncate(synopsis, 200);
+
+            // Build warnings HTML
+            let warningsHtml = '';
+            if (c.warnings && c.warnings.length > 0) {
+                warningsHtml = `
+                    <div class="course-warnings">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Important Warnings</h5>
+                        <ul>
+                            ${c.warnings.map(w => `<li>${U.escapeHtml(w)}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Build topics
             const topicsHtml = (c.topics || []).map(t => `<li style="font-size:0.85rem; color:var(--gray-600); margin-bottom:5px;">• ${U.escapeHtml(t)}</li>`).join('');
+
             const card = document.createElement('div');
             card.className = 'course-card';
             card.innerHTML = `
-                <h4 style="color:var(--primary); margin-bottom:5px;">${U.escapeHtml(c.code)} <span class="exam-type">${U.escapeHtml(c.exam_type || '')}</span></h4>
-                <p style="font-weight:bold; margin-bottom:10px;">${U.escapeHtml(c.title)}</p>
-                <ul style="list-style:none; padding:0; margin-bottom:15px;">${topicsHtml}</ul>
-                ${c.drive_link ? `<a href="${U.escapeHtml(c.drive_link)}" target="_blank" style="color:#4285F4; font-weight:bold; font-size:0.85rem; text-decoration:none;"><i class="fab fa-google-drive"></i> Access Material</a>` : ''}
+                <h4 style="color:var(--primary); margin-bottom:8px;">${U.escapeHtml(c.code)}</h4>
+                <p style="font-weight:bold; margin-bottom:10px; color:var(--gray-800);">${U.escapeHtml(c.title)}</p>
+                <div class="course-badge-row">${badges.join('')}</div>
+                <p style="font-size:0.88rem; color:var(--gray-600); margin-bottom:10px; line-height:1.5;">${U.escapeHtml(shortSynopsis)}</p>
+                <div class="accordion-container" style="margin:10px 0;">
+                    <div class="accordion-item">
+                        <div class="accordion-header" style="font-size:0.85rem; padding:12px 15px;">Full Synopsis & Details <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <p style="font-size:0.9rem; margin-bottom:12px;"><strong>Full Synopsis:</strong></p>
+                            <p style="font-size:0.88rem; line-height:1.6; margin-bottom:15px;">${U.escapeHtml(synopsis)}</p>
+                            ${topicsHtml ? `<p style="font-size:0.85rem; margin-bottom:8px;"><strong>Key Topics:</strong></p><ul style="list-style:none; padding:0; margin-bottom:10px;">${topicsHtml}</ul>` : ''}
+                            ${warningsHtml}
+                            ${c.manual_name ? `<p style="font-size:0.85rem; margin-top:10px;"><strong>Manual:</strong> ${U.escapeHtml(c.manual_name)} — ${c.is_manual_free ? 'Free' : U.formatNaira(c.manual_price || 0)} (${U.escapeHtml(c.manual_year || '')})</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+                ${c.drive_link ? `<a href="${U.escapeHtml(c.drive_link)}" target="_blank" style="color:#4285F4; font-weight:bold; font-size:0.85rem; text-decoration:none; display:inline-block; margin-top:8px;"><i class="fab fa-google-drive"></i> Access Material</a>` : ''}
             `;
             grid.appendChild(card);
         });
+
+        // Re-init accordions for the new cards
+        setupAccordions();
     }
 
     function renderBattlePlan(courses) {
@@ -1520,6 +1920,7 @@
         });
     }
 
+    // ---------- CALENDAR ----------
     async function loadCalendar() {
         try {
             const res = await DB.Calendar.list({ session: '2026/2027' });
@@ -1602,6 +2003,7 @@
         });
     }
 
+    // ---------- FORM ----------
     async function handleFormSubmit(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitBtn');
@@ -1696,6 +2098,7 @@
         document.getElementById('profileDept').textContent = userData.department;
     }
 
+    // ---------- FEEDBACK ----------
     async function handleFeedback(e) {
         e.preventDefault();
         const btn = document.getElementById('feedbackSubmitBtn');
@@ -1724,6 +2127,7 @@
         }
     }
 
+    // ---------- EDIT PROFILE ----------
     function openEditProfile() {
         document.getElementById('editName').value = userData.name || '';
         document.getElementById('editDepartment').value = userData.department || '';
@@ -1761,6 +2165,7 @@
         U.toast('Profile updated!', 'success');
     }
 
+    // ---------- NAVIGATION ----------
     function setupNavigation() {
         document.querySelectorAll('.nav-links a, .page-btn, .sidebar-links a, .toc-item').forEach(el => {
             el.addEventListener('click', function (e) {
@@ -1789,6 +2194,8 @@
 
     function setupAccordions() {
         document.querySelectorAll('.accordion-header').forEach(header => {
+            if (header.dataset.bound === 'true') return;
+            header.dataset.bound = 'true';
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const isActive = item.classList.contains('active');
@@ -1831,12 +2238,16 @@
         });
     }
 
+    // ---------- BOOT ----------
     async function boot() {
         await loadContentBlocks();
         loadAnnouncement();
         loadNotifications();
         loadCourses();
         loadCalendar();
+        loadMindset();
+        loadManuals();
+        loadGlossary();
 
         const yearEl = document.getElementById('currentYear');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
