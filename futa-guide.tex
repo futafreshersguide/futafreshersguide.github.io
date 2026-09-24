@@ -1,6 +1,7 @@
 % ============================================================
-% FUTA FRESHERS' SURVIVAL GUIDE — LaTeX Source (FULLY RESTORED)
+% FUTA FRESHERS' SURVIVAL GUIDE — LaTeX Source
 % Author: Abideen Yakub Opeyemi (Ó'YẸMÍ)
+% Version: 2.2.0
 % Compiles to: futa-guide.pdf
 % ============================================================
 
@@ -34,7 +35,7 @@
 \tcbuselibrary{skins,breakable}
 
 % ============================================================
-% COLORS
+% COLORS (matching the website theme)
 % ============================================================
 \definecolor{primary}{HTML}{003366}
 \definecolor{secondary}{HTML}{990000}
@@ -52,6 +53,7 @@
 \definecolor{warningBg}{HTML}{FEF3C7}
 \definecolor{warningBorder}{HTML}{F59E0B}
 \definecolor{warningText}{HTML}{B45309}
+\definecolor{glossaryBg}{HTML}{FEF9E7}
 
 % ============================================================
 % HYPERREF SETUP
@@ -138,17 +140,24 @@
     breakable, #1
 }
 
-\newtcolorbox{tipbox}[1][]{
-    colback=midGray, colframe=textGray,
-    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
-    arc=4pt, boxsep=8pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-    breakable, #1
-}
-
 \newtcolorbox{quotebox}[1][]{
     colback=lightGray, colframe=primary,
     boxrule=0pt, leftrule=3pt, arc=4pt,
     boxsep=6pt, left=12pt, right=12pt, top=6pt, bottom=6pt,
+    breakable, #1
+}
+
+\newtcolorbox{mindsetbox}[1][]{
+    colback=white, colframe=primary,
+    boxrule=0.5pt, leftrule=5pt, arc=4pt,
+    boxsep=10pt, left=15pt, right=15pt, top=10pt, bottom=10pt,
+    breakable, #1
+}
+
+\newtcolorbox{coursebox}[1][]{
+    colback=lightGray, colframe=primary,
+    boxrule=0.5pt, leftrule=4pt, arc=4pt,
+    boxsep=8pt, left=12pt, right=12pt, top=10pt, bottom=10pt,
     breakable, #1
 }
 
@@ -279,10 +288,188 @@ FUTA isn't just an institution --- it's an ecosystem of innovation, excellence, 
     \item Academic strategies for first-class performance
     \item Personal development insights
     \item Course-by-course battle plans
+    \item Complete manual prices and buying guide
+    \item A glossary of FUTA-specific terms
     \item Mental and spiritual wellness guidance
     \item Access to all course materials
     \item Complete registration guide
 \end{itemize}
+
+% ============================================================
+% SECTION: THE MINDSET (NEW PAGE)
+% ============================================================
+\newpage
+\section*{The Mindset}
+\addcontentsline{toc}{section}{The Mindset}
+
+\begin{center}
+    {\color{primary}\Huge\bfseries Five Frameworks}\\[0.3em]
+    {\color{textGray}\large To shape your FUTA journey --- from dream to reality}
+\end{center}
+
+\vspace{1em}
+
+% ACTION FRAMEWORK
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large ⚡ The ACTION Framework}\\[0.3em]
+    {\color{textGray}\itshape How to turn dreams into reality}
+
+    \vspace{1em}
+
+    \textbf{Action} is a powerful word. For a dream to come true, \textbf{ACTION} is needed --- the same way \textbf{FORCE} causes motion.
+
+    \vspace{1em}
+
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.5em]
+        \item \textbf{\color{primary}A --- Aspire:} Have a clear vision and desire for your dream.
+        \item \textbf{\color{primary}C --- Commit:} Dedicate yourself to making your dream a reality.
+        \item \textbf{\color{primary}T --- Tenacity:} Persist and persevere, even in the face of obstacles.
+        \item \textbf{\color{primary}I --- Initiative:} Take the first step and keep moving forward.
+        \item \textbf{\color{primary}O --- Opportunity:} Recognize and seize opportunities that align with your dream.
+        \item \textbf{\color{primary}N --- Navigate:} Adapt and adjust your approach as needed to stay on track.
+    \end{itemize}
+
+    \vspace{1em}
+
+    By taking ACTION, you'll be well on your way to turning your dreams into reality. At first it is not easy, but remember that FORCE not only causes motion --- it is also the bridge from vision to mission.
+\end{mindsetbox}
+
+% FORCE FRAMEWORK
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large 🔥 The FORCE Framework}\\[0.3em]
+    {\color{textGray}\itshape Become unstoppable}
+
+    \vspace{1em}
+
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.5em]
+        \item \textbf{\color{primary}F --- Focus:} Concentrate your efforts and attention on your goals.
+        \item \textbf{\color{primary}O --- Optimism:} Maintain a positive attitude and believe in yourself.
+        \item \textbf{\color{primary}R --- Resilience:} Bounce back from setbacks and keep moving forward.
+        \item \textbf{\color{primary}C --- Courage:} Summon the strength to take risks and face challenges head-on.
+        \item \textbf{\color{primary}E --- Endurance:} Persevere through difficulties and stay committed to your objectives.
+    \end{itemize}
+
+    \vspace{1em}
+
+    By applying FORCE to your endeavors, you'll be unstoppable. \textbf{Take ACTION and be FORCED.}
+\end{mindsetbox}
+
+% P5 PRINCIPLE
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large 🎓 The P5 Principle}\\[0.3em]
+    {\color{textGray}\itshape Proper Preparation Prevents Poor Performance --- plus the P that changes everything}
+
+    \vspace{1em}
+
+    Always remember \textbf{P5} --- not PS5.
+
+    \vspace{0.5em}
+
+    \begin{center}
+        {\color{primary}\Large\bfseries Proper Preparation Prevents Poor Performance.}
+    \end{center}
+
+    \vspace{0.5em}
+
+    In all you do, still apply \textbf{P}.
+
+    \vspace{0.5em}
+
+    \begin{successbox}
+        You can't do without having \textbf{P} --- but \textbf{P} is the solution to \textbf{P}, and you'll be \textbf{P}.
+
+        \vspace{0.5em}
+
+        Make sure you \textbf{Pray}.
+
+        \vspace{0.5em}
+
+        You can't do without having \textbf{Problem}, but \textbf{Prayer} is a solution to \textbf{Problem}, and you'll be \textbf{Passed}.
+    \end{successbox}
+
+    \vspace{0.5em}
+
+    {\color{primary}\itshape A word is enough for the wise.}
+\end{mindsetbox}
+
+% 6 vs 9
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large 🔄 The 6 and 9 Metaphor}\\[0.3em]
+    {\color{textGray}\itshape The difference between a dream and a reality}
+
+    \vspace{1em}
+
+    Academic excellence has been a dream for everyone in life. But do all dreams come true?
+
+    \vspace{0.5em}
+
+    This question has been asked many times. It's just like writing the figure \textbf{6}. You see it as 6 while others view it as 9. But 6 can turn into 9.
+
+    \vspace{0.5em}
+
+    \begin{inspirational}
+        If you're reluctant, 6 will still remain 6 --- since you're not making an attempt to change it.
+
+        \vspace{0.5em}
+
+        But if you struggle to make an attempt, 6 will actually become 9.
+    \end{inspirational}
+
+    \vspace{0.5em}
+
+    This means that for a dream to come true, \textbf{ACTION} is needed --- the same way \textbf{FORCE} causes motion.
+\end{mindsetbox}
+
+% ASK QUESTIONS
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large ❓ Ask Questions}\\[0.3em]
+    {\color{textGray}\itshape Nobody knows your mood}
+
+    \vspace{1em}
+
+    \begin{center}
+        {\color{dangerRed}\Large\bfseries NOBODY KNOWS YOUR MOOD.}\\[0.3em]
+        {\color{dangerRed}\Large\bfseries ASK QUESTIONS WHEN YOU FEEL CONFUSED.}
+    \end{center}
+
+    \vspace{1em}
+
+    Don't be silent. Don't assume. Don't guess. Ask.
+
+    \vspace{0.5em}
+
+    Your lecturers, your seniors, your coursemates, FUTASUG, Student Affairs --- they're all here to help you. But they can only help if you open your mouth.
+\end{mindsetbox}
+
+% WORD TO FRESHERS
+\begin{mindsetbox}
+    \textbf{\color{primary}\Large 💙 A Word to Freshers}\\[0.3em]
+    {\color{textGray}\itshape From the compiler}
+
+    \vspace{1em}
+
+    I want to congratulate you on your admission to the Federal University of Technology, Akure. This achievement is a testament to your hard work, dedication, and perseverance.
+
+    \vspace{0.5em}
+
+    I want to emphasize the importance of setting clear goals and priorities. Your time at FUTA is a precious opportunity to explore your passions, develop your skills, and build a strong foundation for your future. Be intentional about what you want to achieve, and make a plan to get there.
+
+    \vspace{0.5em}
+
+    FUTA offers a wide range of programs and courses that will challenge and enrich you. Take advantage of the resources available to you --- including your lecturers, classmates, and campus facilities. Don't be afraid to ask questions, seek help when needed, and explore new areas of interest.
+
+    \vspace{0.5em}
+
+    I also want to acknowledge that university life can be challenging. You may face obstacles, setbacks, and uncertainties along the way. But I urge you to remember that these experiences are an integral part of your growth and development.
+
+    \vspace{0.5em}
+
+    Don't be too hard on yourself when things don't go as planned. Instead, learn from your mistakes, and use them as opportunities for growth and improvement.
+
+    \vspace{0.5em}
+
+    Remember that you are not alone. Your fellow students, FUTASUG, lecturers, and Student Affairs are all here to help you succeed.
+\end{mindsetbox}
 
 % ============================================================
 % SECTION 1: REGISTRATION (NEW PAGE)
@@ -657,44 +844,384 @@ Every choice --- from which lectures to attend, to how you spend your evenings, 
 
     \vspace{0.5em}
 
-    📱 \textbf{Want to connect with your senior colleagues and departmental mates?} Message me directly --- I'll connect you to the right people in your department so you never miss a course.
+    \textbf{Want to connect with your senior colleagues and departmental mates?} Message me directly --- I'll connect you to the right people in your department so you never miss a course.
 
     \vspace{0.5em}
 
     \textbf{Abideen Yakub Opeyemi (O'yemi)} --- +234 705 037 6975
 \end{warningbox}
 
-\subsection*{Course List}
+\subsection*{Important Note on Course Codes (CCMAS)}
 
-\begin{longtable}{p{2.5cm} p{6cm} p{2cm} p{4cm}}
-    \toprule
-    \textbf{\color{primary}Code} & \textbf{\color{primary}Title} & \textbf{\color{primary}Exam} & \textbf{\color{primary}Focus} \\
-    \midrule
-    \endhead
+In 2025/2026, FUTA switched from the \textbf{BMAS} curriculum to the \textbf{CCMAS} (Core Curriculum and Minimum Academic Standards) framework. This means some courses have new codes.
 
-    GST 111 & Communication in English & CBT & Academic skills, grammar \\
-    \midrule
-    COS 101 & Introduction to Computing Science & CBT & Computer fundamentals \\
-    \midrule
-    BIO 101 & General Biology I & CBT & Cells, genetics, ecology \\
-    \midrule
-    BIO 107 & General Biology Practical I & CBE & Microscope work \\
-    \midrule
-    CHM 101 & General Chemistry I & CBT & Atomic theory, kinetics \\
-    \midrule
-    CHM 107 & General Chemistry Practical I & CBE & Lab work \\
-    \midrule
-    MTH 101 & Elementary Mathematics I & CBT & Calculus, algebra \\
-    \midrule
-    PHY 101 & General Physics I & CBT & Mechanics, waves \\
-    \midrule
-    PHY 107 & General Physics Practical I & CBE & Lab experiments \\
-    \midrule
-    FUTA-MEE 101 & Engineering Drawing & Written & Technical drawing \\
-    \midrule
-    FUTA-GNS 103 & Information Literacy & CBT & Library skills \\
-    \bottomrule
-\end{longtable}
+\textbf{Important --- Math codes are unchanged.} FUTA kept the \textbf{MTH} prefix. So:
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+    \item \textbf{MTH 101} is still MTH 101 (not MTS)
+    \item \textbf{MTH 102} is still MTH 102
+    \item \textbf{MTH 104} is still MTH 104
+\end{itemize}
+
+\textbf{What changed:}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+    \item Some GNS courses became \textbf{GST} courses (e.g., GST 111 / GST 112)
+    \item Some courses were merged, split, or restructured
+    \item New courses were introduced in some departments
+    \item Credit units may differ from what seniors took
+\end{itemize}
+
+\subsection*{Complete Course List with Synopsis}
+
+% MTH 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large MTH 101 --- Introductory Mathematics I}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} Tutorial Manual --- ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Elementary set theory: subsets, union, intersections, complement, and Venn diagrams. Real number system and mathematical induction: integers, rational and irrational numbers, mathematical induction. Real sequences and series. Quadratic equation and Polynomial. Binomial theorem and expansion. Circular measure. Trigonometric functions.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This is one of the courses you'll find interesting --- the lecturers always come to class.
+        \item Do not miss any of the classes.
+        \item Go to class early so you can sit at the front.
+        \item You'll be doing tutorials organized by the school --- once a week. Do not dare to miss it.
+    \end{itemize}
+\end{coursebox}
+
+% GST 111
+\begin{coursebox}
+    \textbf{\color{primary}\Large GST 111 --- Communication in English}\\[0.3em]
+    \textit{(Formerly known as GNS 101 --- the old code is now GST 111 under CCMAS)}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦2,000
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    GST 111 is English for Academic Purpose (EAP) course. The objective is to equip students with skills that are necessary for learning and studying effectively in a university and communicating in English as a Second Language.
+
+    \textbf{Topics taught include:}
+    \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
+        \item Time Management
+        \item Study Skills
+        \item Scientific Word Formation
+        \item Parts of Speech
+        \item Aspects of English Grammar
+        \item Note-taking / Note-making
+    \end{enumerate}
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item Don't miss any of this class.
+        \item There are class activities which might be tests and/or attendance which usually come unannounced.
+        \item Apart from the physical class, you'll be given assessments to do online.
+        \item All materials needed for this course will be downloaded individually. Ensure you download it yourself.
+        \item For all the assessments you do online, there are marks for them. Ensure you do them all.
+        \item Download your course materials yourself --- don't collect from your friends.
+        \item You'll all be added to a Telegram group where lectures will be taking place.
+        \item \textbf{PLEASE FOLLOW THIS COURSE LECTURER'S INSTRUCTIONS.} They are usually strict with their instructions.
+    \end{itemize}
+\end{coursebox}
+
+% FGNS 103
+\begin{coursebox}
+    \textbf{\color{primary}\Large FGNS 103 --- Information Retrieval}\\[0.3em]
+    \textit{(Formerly GNS 103 --- now FGNS 103 under CCMAS)}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Brief history of libraries; Library and education; University libraries and other types of libraries; Study skills (reference services); Types of library materials, using library resources including e-learning, e-materials, etc.; Understanding library catalogues (card, OPAC, etc.) and classification; Copyright and its implications; Database resources; Bibliographic citations and referencing. Development of modern ICT; Hardware technology; Software technology; Input devices; Storage devices; Output devices; Communication and internet services; Word processing skills (typing, etc.).
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item You'll be given research assignments which must be done.
+        \item You'll also be doing a library tour --- don't miss it. Lecturers don't joke with it.
+        \item The library tour mark is 10--20 depending on your lecturer.
+        \item There is sure a past question for this course.
+    \end{itemize}
+\end{coursebox}
+
+% PHY 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large PHY 101 --- General Physics I (Mechanics)}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    \textbf{1. Quantities, Units and Dimensions:} Space and Time, frames of reference, Invariance of physical laws, relativity of simultaneity, relativity of time intervals, relativity of length, units and dimension; standards and units, unit consistency and conversions.
+
+    \textbf{2. Kinematics and Vectors:} Vector addition, components of vectors, unit vectors, products of vectors. Displacement, time and average velocity, instantaneous velocity, average acceleration, motion with constant acceleration, freely falling bodies, position and velocity vectors, acceleration vector, projectile motion. Motion in a circle and relative velocity.
+
+    \textbf{3. Fundamental Laws of Mechanics:} Forces and interactions, Newton's first law, Newton's second law, mass and weight, Newton's third law. Statics and dynamics: application of Newton's laws, dynamics of particles, frictional forces, dynamics of circular motion. Galilean invariance, universal gravitation, gravitational potential energy, elastic potential energy, conservative and non-conservative forces.
+
+    \textbf{4. Work and Energy:} Kinetic energy and the work-energy theorem, power, momentum and impulse, conservation of momentum, collisions and momentum conservation, elastic collisions, centre of mass.
+
+    \textbf{5. Rotational Dynamics and Angular Momentum:} Angular velocity and acceleration, energy in rotational motion, parallel axis theorem, torque, torque and rotation about a moving axis.
+
+    \textbf{6. Simple Harmonic Motion and its Applications:} The simple pendulum, damped oscillations, forced oscillations and resonance.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This is the same as your secondary school physics, but a little advanced. Read it very well.
+        \item \textbf{CRITICAL: SHM (Simple Harmonic Motion) is NOT in the manual} --- but appeared in a test where every question was on SHM.
+        \item \textbf{READ ALL THE TOPICS IN THIS COURSE SYNOPSIS} --- not only the ones in the manual bought.
+        \item There are questions at the back of the manual --- study them.
+    \end{itemize}
+\end{coursebox}
+
+% PHY 107
+\begin{coursebox}
+    \textbf{\color{primary}\Large PHY 107 --- Experimental Physics I}\\[0.3em]
+    \textbf{Exam Type:} CBE (no CBT component) \\
+    \textbf{Manual:} ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Exploratory practical course. Hands-on training in the use of laboratory equipment and report writing. Six major experiments:
+    \begin{enumerate}[leftmargin=1.5em, itemsep=0.2em]
+        \item Measurements
+        \item Determination of acceleration due to gravity using spiral spring method
+        \item Determination of acceleration due to gravity using compound pendulum method
+        \item Determination of moment of inertia of a rigid body
+        \item Determination of refractive index of glass using rectangular prism
+        \item Determination of refractive index of glass using triangular prism
+    \end{enumerate}
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item You'll not be doing test and exam --- but there are online practicals on Saturday evenings.
+        \item Online practicals are posted on the Physics department Facebook page.
+        \item Buy the practical manual --- essential.
+    \end{itemize}
+\end{coursebox}
+
+% CHM 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large CHM 101 --- Basic General Chemistry I}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦3,000
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Atoms, atomic structures, atomic theory, aufbau method, Hund's rule, Pauli Exclusion principle, atomic spectra. Molecules and chemical reactions. Energetics. Chemical equation and stoichiometry. Atomic structure; Modern electronic theory of atoms. Radioactivity. Chemical kinetics, collision theory, Kinetic theory of gases. Solution, solubility and solubility product. Electrochemistry, electrode potential, half-cell equation.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item \textbf{Textbook: Fundamental Chemistry} --- this is where the questions are set. Get it.
+        \item This is secondary school topics but a little advanced.
+        \item Lecturers take attendance sometimes, especially when the class is not equipped.
+        \item Read everything in the course synopsis.
+    \end{itemize}
+\end{coursebox}
+
+% CHM 103 / CHM 107
+\begin{coursebox}
+    \textbf{\color{primary}\Large CHM 103 / CHM 107 --- Experimental Chemistry I}\\[0.3em]
+    \textbf{Exam Type:} CBE (no CBT component) \\
+    \textbf{Manual:} ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Introduction to basic laboratory procedure and apparatus in the chemistry laboratory. Recording of laboratory data. Calibration of basic laboratory equipment. Preparation and standardization of common reagents. Preparation of sulphide of metals and determination of their empirical formula. Determination of atomic weight of metals. Stoichiometry. Preparation of simple, double, and complex salts.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This course is very easy to pass.
+        \item Don't rely on the manual for your test and exam.
+        \item Find a better textbook and read all the topics in this course synopsis.
+    \end{itemize}
+\end{coursebox}
+
+% BIO 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large BIO 101 --- General Biology I}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦2,500
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    The scope of Biology and its place in human welfare including characteristics of life, concepts in biology, topical issues in biology and career opportunities. Diversity and classification of living things. Cell structure and organization; functions of cellular organelles; diversity, general reproduction, interrelationship of organisms, heredity and evolution; elements of ecology and types of habitat. Differences between plants and animals. Variation and life cycles of plants to include non-vascular plants like algae, fungi, bacteria, viruses, bryophytes and pteridophytes. Varieties and forms, life cycles and functions of flowering plants.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This is the normal biology you did in your secondary school.
+        \item You won't want to miss the class. It's usually fun.
+        \item You'll be sent the materials by the lecturers in charge.
+    \end{itemize}
+\end{coursebox}
+
+% BIO 103 / BIO 107
+\begin{coursebox}
+    \textbf{\color{primary}\Large BIO 103 / BIO 107 --- General Biology Practical I}\\[0.3em]
+    \textbf{Exam Type:} CBE (no CBT component) \\
+    \textbf{Manual:} ₦3,000
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    Introduction to Biology practical use of the microscope, cell structure, staining starch in plant tissue, algae, fungi, bryophytes and liverwort, gymnosperms, angiosperms.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item Buy the manual.
+        \item Attend practical class.
+        \item Do your class works and assignments.
+        \item You'll be doing test and exam on this course.
+    \end{itemize}
+\end{coursebox}
+
+% CSC 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large CSC 101 --- Introduction to Computer Science}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} ₦3,000
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    History of computers; functional components of a computer; characteristics of a computer system. Broad introduction to programming methodology and algorithm. Emphasis on problem-solving strategies and techniques for developing/documenting applications, including principles of structured programming, problem decomposition, programme organization, the use of procedural abstraction and basic debugging skills. Visual BASIC programming language serves as the vehicle to illustrate the many concepts.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item Not everyone will offer this course, but to whom it may concern: you'll be having a practical class and a theoretical class.
+        \item You can miss the theoretical class, but don't joke with the practical class.
+        \item Attendance will always be taken.
+        \item You'll be buying the practical manual.
+    \end{itemize}
+\end{coursebox}
+
+% FMEE 101
+\begin{coursebox}
+    \textbf{\color{primary}\Large FMEE 101 --- Engineering Drawing I}\\[0.3em]
+    \textbf{Exam Type:} Written \\
+    \textbf{Manual:} ₦3,000
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    This course is designed primarily for all students admitted into the Federal University of Technology, Akure. It provides a comprehensive knowledge and insight into engineering drawing as a basic tool of engineering.
+
+    \textbf{Topics to be covered include:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item Instruments for engineering drawing and their uses
+        \item Drawing Paper Sizes; Margins; and Title Blocks
+        \item Lettering and types of line
+        \item Geometrical construction: bisection of lines and angles and their applications
+        \item Polygon, tangency, locus of simple mechanisms
+        \item Pictorial drawing; Isometric, oblique and perspectives
+        \item Orthographic projection
+        \item Dimensioning and development of simple shapes
+        \item Assembly drawing of simple components
+        \item Conventional representation of common engineering features
+        \item Freehand sketching
+    \end{itemize}
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This course is the simplest course in FUTA --- but because some of us are lazy and don't like stress, we say it's very hard. You will enjoy it.
+        \item Attend class. Do your class works and assignments.
+        \item This course will want to chase you away --- but remember FORCE.
+    \end{itemize}
+\end{coursebox}
+
+% GET 101 / MNE 201
+\begin{coursebox}
+    \textbf{\color{primary}\Large GET 101 / MNE 201 --- Engineers in Society}\\[0.3em]
+    \textit{(The course code may be GET 101 or MNE 201 depending on your department --- check your course form.)}\\[0.3em]
+    \textbf{Exam Type:} CBT/CBE \\
+    \textbf{Manual:} \textbf{Free PDF} (no physical manual to buy)
+
+    \vspace{0.8em}
+
+    \textbf{Full Synopsis:}
+
+    \textbf{Section A: Early Development of Technology} --- What is Technology? History of Technology. Prehistoric Period. Stone Age, Bronze Age, Iron Age. Early Contributors to Technology Development: The Egyptians Empire (3000 BC -- 500 BC), The Greek Empire (600 BC -- 400 AD), The Romans Civilization Period. History of Materials Discoveries and Uses: Discovery of Fire, Stone and Wood, Uses of Animals, Solid Minerals. Revolution of the Engineering Industries (First through Fifth Industrial Revolutions). History of Engineering in the World and in Nigeria (PWD, NSTDA, ITF, RMRDC, etc.).
+
+    \textbf{Section B: Historical Development of Science, Engineering and Technology} --- Relationship between Science, Engineering, and Technology.
+
+    \textbf{Section C: Development of Engineering Profession} --- Engineering Profession. Codes of Practice and Standards. Ethics in Engineering.
+
+    \textbf{Section D: Engineering Regulation and Professional Bodies in Nigeria} --- COREN (Council for the Regulation of Engineering Practices in Nigeria). NSE (Nigerian Society of Engineers). COMEG (Council of Nigerian Mining Engineers and Geoscientists). Engineering Cadres (Engineer, Technologist, Technician, Craftsman). Engineering Registration.
+
+    \textbf{Section E: Engineering Education / Training} --- Introduction. Rationale for Training Engineering Profession. Brief History. Challenges of Engineering Education in Nigeria.
+
+    \textbf{Section F: Roles and Challenges of Engineering in National Building} --- Agricultural sector. Banking. Automobile. Educational sector. Marketing. Health sector. Community Development.
+
+    \textbf{Section G: Health, Safety \& Environmental (HSE) Management in Engineering Practice} --- HSE management phases. Compliance with standards. Engineering Code of Practice. Safety engineering principles. Bad Engineering Practices. HSE Sustainability Management.
+
+    \textbf{Section H: Engineering Risk Analysis} --- Risk management. Steps in Engineering Risk Analysis: Risk Identification, Risk Impact Assessment, Risk Prioritization, Risk Mitigation Planning. Risk Mitigation Strategies.
+
+    \vspace{0.8em}
+
+    \textbf{\color{warningText}Warnings:}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+        \item This course is free --- no manual to buy. The course material will be given as a PDF.
+        \item \textbf{German questions:} Questions where you supply accurate and rightly-spelt answers that meet the lecturer's satisfaction.
+        \item You have to know every part of this course material.
+        \item Questions come from any angle, but won't exceed the course material.
+    \end{itemize}
+\end{coursebox}
+
+\subsection*{Departmental Courses}
+
+In addition to the general courses above, some departments have specific courses that only their students take. These may include (but are not limited to):
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+    \item \textbf{EEE 101} --- Electrical Engineering
+    \item \textbf{MNE 101} --- Mining Engineering
+    \item \textbf{MCS 101} --- Mathematical Sciences
+    \item \textbf{BTH 101} --- Biotechnology
+    \item \textbf{IFS 101} --- Information Systems
+    \item \textbf{URP 101} --- Urban and Regional Planning
+\end{itemize}
+
+Check your course form during registration to see exactly which departmental courses apply to you. When in doubt, ask your class rep, your departmental adviser, or check the departmental notice boards.
 
 % ============================================================
 % SECTION 5: ACADEMIC PLAYBOOK (NEW PAGE)
@@ -716,74 +1243,10 @@ Your number one goal is academic excellence. To achieve this, you need a strateg
     \quotetext{"The will to win is nothing without the will to prepare." \\ --- Juma Ikangaa}
 \end{inspirational}
 
-\subsection*{Course-by-Course Battle Plan}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}BIO 101: General Biology I \hfill \textit{CBT/CBE}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes regularly
-    \item Complete all assignments and class works
-    \item Read course materials thoroughly
-    \item Prepare for CBT and CBE examinations
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}MTH 101: Elementary Mathematics I \hfill \textit{CBT/CBE}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes and tutorial sessions
-    \item Buy and study the tutorial manual thoroughly
-    \item Complete all assignments (online and physical)
-    \item Practice class works regularly
-    \item Develop speed and accuracy for time-limited CBT exams
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}GST 111: Use of English I \hfill \textit{CBT/CBE}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes regularly
-    \item Complete all online assignments (forum posts)
-    \item Stay active and organized on your Telegram group
-    \item Focus on application and understanding of coursework
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}PHY 101 \& 107: General Physics \hfill \textit{CBT/CBE}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes without missing
-    \item Buy manuals and complete assignments at the back
-    \item Read your coursework very well
-    \item Focus on objective questions preparation
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}CHM 101 \& 107: General Chemistry \hfill \textit{CBE/CBT}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes regularly
-    \item Buy tutorials manual
-    \item Go to tutorial classes and complete all exercises
-    \item Focus on objective questions preparation
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=lightGray, colframe=primary, arc=4pt]
-\textbf{\color{primary}MEE 101: Engineering Drawing \hfill \textit{Written}}
-\begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \item Attend all classes without missing any
-    \item Buy the practical manual
-    \item Complete class exercises as the lecturer draws
-    \item Submit drawings immediately after class
-    \item Ensure border lines and title blocks are properly done
-\end{itemize}
-\end{tcolorbox}
-
 \subsection*{Benefits of Attending Classes}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Attendance Marks}},colbacktitle=primary,arc=4pt,breakable]
-Some courses award marks for class attendance, which contributes to your final grade. This is essentially free marks --- you just need to show up. For some courses, attendance can be worth 5-10\% of your total grade. Missing classes casually means throwing those marks away. Don't do it.
+Some courses award marks for class attendance, which contributes to your final grade. This is essentially free marks --- you just need to show up. For some courses, attendance can be worth 5--10\% of your total grade. Missing classes casually means throwing those marks away. Don't do it.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=lightGray,colframe=primary,title={\color{white}\textbf{Better Understanding}},colbacktitle=primary,arc=4pt,breakable]
@@ -843,7 +1306,78 @@ Learn the exam format --- whether it's objectives, MCQs, or fill-in-the-gaps (Ge
 \end{inspirational}
 
 % ============================================================
-% SECTION 6: BEYOND THE BOOKS (NEW PAGE)
+% SECTION 6: MANUALS & PRICES (NEW PAGE)
+% ============================================================
+\newpage
+\section{Manuals \& Prices (2025/2026)}
+
+\begin{warningbox}
+    \textbf{\color{warningText}\Large 📌 Important Notice}
+
+    \vspace{0.5em}
+
+    Manual prices change from session to session. The prices below are for the \textbf{2025/2026} session. \textbf{Always confirm the current price from the school bookshop or your department before buying.}
+\end{warningbox}
+
+\vspace{1em}
+
+\begin{center}
+\begin{longtable}{p{2cm} p{5cm} p{2.5cm} p{6cm}}
+    \toprule
+    \textbf{\color{primary}Course} & \textbf{\color{primary}Manual} & \textbf{\color{primary}Price} & \textbf{\color{primary}Notes} \\
+    \midrule
+    \endhead
+
+    MTH 101 & Tutorial Manual & \textbf{₦2,500} & Essential for weekly tutorials \\
+    \midrule
+    GST 111 & Course Manual & \textbf{₦2,000} & For the physical class activities \\
+    \midrule
+    FGNS 103 & Course Manual & \textbf{₦2,500} & Library tour and research assignments \\
+    \midrule
+    PHY 101 & Course Manual & \textbf{₦2,500} & Questions at the back --- study them \\
+    \midrule
+    PHY 103 & Course Manual & \textbf{₦2,500} & Assignments given from this manual \\
+    \midrule
+    PHY 107 & Practical Manual & \textbf{₦2,500} & For the 6 major experiments \\
+    \midrule
+    CHM 101 & Course Manual & \textbf{₦3,000} & Textbook: Fundamental Chemistry \\
+    \midrule
+    CHM 103 / 107 & Practical Manual & \textbf{₦2,500} & Lab procedure guide \\
+    \midrule
+    BIO 101 & Course Manual & \textbf{₦2,500} & Lecturer sends extra materials \\
+    \midrule
+    BIO 103 / 107 & Practical Manual & \textbf{₦3,000} & Microscope and lab work \\
+    \midrule
+    CSC 101 & Practical Manual & \textbf{₦3,000} & Attendance taken in practical class \\
+    \midrule
+    FMEE 101 & Practical Manual & \textbf{₦3,000} & Class exercises drawn in real time \\
+    \midrule
+    GET 101 / MNE 201 & Free PDF & \textbf{Free} & No physical manual --- PDF only \\
+    \bottomrule
+\end{longtable}
+\end{center}
+
+\begin{successbox}
+    \begin{center}
+        \textbf{\color{primary}\Large 💰 Estimated Total Cost}\\[0.5em]
+        {\color{successGreen}\Huge\bfseries ₦32,500}\\[0.5em]
+        \textit{Based on 12 paid manuals. 1 manual is free (GET 101 / MNE 201).}
+    \end{center}
+\end{successbox}
+
+\subsection*{Money-Saving Tips}
+
+\begin{inspirational}
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
+        \item \textbf{Buy in groups:} Some courses have a shared manual that multiple students can read from --- split the cost with coursemates.
+        \item \textbf{Buy from seniors:} Often cheaper, sometimes pre-annotated with study notes.
+        \item \textbf{Don't skip free manuals:} GET 101 / MNE 201 has a free PDF --- don't pay for a printed version unless you really want one.
+        \item \textbf{Budget early:} Save up the total cost before resuming, so you're not caught off guard.
+    \end{itemize}
+\end{inspirational}
+
+% ============================================================
+% SECTION 7: BEYOND THE BOOKS (NEW PAGE)
 % ============================================================
 \newpage
 \section{Beyond the Books}
@@ -881,7 +1415,7 @@ Communication, teamwork, and time management are as important as your technical 
 \end{tcolorbox}
 
 % ============================================================
-% SECTION 7: NAVIGATING THE STORMS (NEW PAGE)
+% SECTION 8: NAVIGATING THE STORMS (NEW PAGE)
 % ============================================================
 \newpage
 \section{Navigating the Storms}
@@ -923,7 +1457,7 @@ The heads in your religious bodies are also there to help you. Balance your spir
 \textbf{Failure is Feedback:} A low score is not a label; it's data. Analyze it, learn from it, and come back stronger. Every top student has failed at something --- what matters is what they learned from it. When you don't get the grade you wanted, don't hide from it. Look at what went wrong. Adjust your approach. Try again. The students who succeed in the long run are not the ones who never fail --- they're the ones who refuse to stay down.
 
 % ============================================================
-% SECTION 8: THE ANCHOR (NEW PAGE)
+% SECTION 9: THE ANCHOR (NEW PAGE)
 % ============================================================
 \newpage
 \section{The Anchor: The Power of Prayer}
@@ -931,7 +1465,7 @@ The heads in your religious bodies are also there to help you. Balance your spir
 In the midst of the pressure, never underestimate the power of faith and prayer.
 
 \begin{inspirational}
-    \textbf{\color{primary}\Large 🙏 Your Spiritual "P" - The Ultimate Game Changer}
+    \textbf{\color{primary}\Large 🙏 Your Spiritual "P" --- The Ultimate Game Changer}
 
     \vspace{0.5em}
 
@@ -967,7 +1501,7 @@ Take relentless \textbf{ACTION}. Be an unstoppable \textbf{FORCE}. Apply the \te
 \end{center}
 
 % ============================================================
-% SECTION 9: COURSE MATERIALS (NEW PAGE)
+% SECTION 10: COURSE MATERIALS (NEW PAGE)
 % ============================================================
 \newpage
 \section{Course Materials}
@@ -987,7 +1521,7 @@ All course materials are available on Google Drive --- past questions, lecture s
 Each course has its own dedicated folder with organized materials. Use the main folder link above to browse all courses.
 
 % ============================================================
-% SECTION 10: DEPARTMENTAL COURSES (NEW PAGE)
+% SECTION 11: DEPARTMENTAL COURSES (NEW PAGE)
 % ============================================================
 \newpage
 \section{Departmental Courses Information}
@@ -1028,17 +1562,6 @@ The courses listed in this guide are the \textbf{general courses} that almost al
     \quotetext{"The expert in anything was once a beginner. Start strong with your departmental courses!"}
 \end{inspirational}
 
-\subsection*{Attend Classes to Know Your Exam Structure}
-
-Make sure to attend your departmental course classes regularly. This is how you'll discover:
-
-\begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
-    \item Whether you'll be taking tests or exams
-    \item The type of examination (CBT, written, practical)
-    \item The course requirements and expectations
-    \item Important announcements about assessments
-\end{itemize}
-
 \subsection*{Need Help?}
 
 If you're unsure about your departmental courses or who to ask:
@@ -1056,7 +1579,131 @@ If you're unsure about your departmental courses or who to ask:
 \end{center}
 
 % ============================================================
-% SECTION 11: GENIUS POINT ACADEMY (NEW PAGE)
+% SECTION 12: GLOSSARY (NEW PAGE)
+% ============================================================
+\newpage
+\section{Glossary of FUTA Terms}
+
+FUTA has its own vocabulary. This glossary explains the terms you'll hear every day --- so you're never confused.
+
+\subsection*{Exams}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large German Questions}\\[0.3em]
+    A FUTA-specific term for exam questions where students must supply accurate and rightly-spelt answers that meet the lecturer's satisfaction. Unlike multiple-choice or matching questions, you write out the full answer.
+
+    \vspace{0.5em}
+
+    \textit{Example:} A question that says "Define photosynthesis" and expects a full written definition with correct spelling.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large CBT}\\[0.3em]
+    Computer-Based Test. A test taken on a computer, usually with multiple-choice questions. Speed and accuracy matter because the timer runs continuously.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Most 100L courses have CBT tests --- practice with timed sessions to build speed.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large CBE}\\[0.3em]
+    Computer-Based Examination. Similar to CBT but typically for end-of-semester exams. Often practical-based.
+
+    \vspace{0.5em}
+
+    \textit{Example:} PHY 107 and BIO 103 use CBE --- practical content is tested via computer.
+\end{tcolorbox}
+
+\subsection*{Academics}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large CCMAS}\\[0.3em]
+    Core Curriculum and Minimum Academic Standards. The national curriculum FUTA adopted in 2025/2026, replacing BMAS. It restructured some course codes and content across Nigerian universities.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Some courses changed codes --- for example, GNS 101 became GST 111. MTH codes stayed the same.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large CGPA}\\[0.3em]
+    Cumulative Grade Point Average. The running average of all your grades from 100 level to your current level. This is what determines your degree classification.
+
+    \vspace{0.5em}
+
+    \textit{Example:} A CGPA of 4.50--5.00 puts you in First Class range.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large GPA}\\[0.3em]
+    Grade Point Average. The average of your grades for a single semester. Your CGPA is the running average of all your GPAs.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Strong GPAs every semester compound into a strong CGPA.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large SIWES}\\[0.3em]
+    Students' Industrial Work Experience Scheme. A mandatory internship program for engineering and technology students, usually done in 300 level or 400 level.
+
+    \vspace{0.5em}
+
+    \textit{Example:} You'll spend several months in an industry to gain practical experience.
+\end{tcolorbox}
+
+\subsection*{Campus Life}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large HOD}\\[0.3em]
+    Head of Department. The senior academic in charge of your department. You'll need their signature during registration.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Your HOD signs the back page of your BIO-DATA form.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large FUTASUG}\\[0.3em]
+    Federal University of Technology Akure Student Union Government. The elected student body that represents student interests on campus.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Reach out to FUTASUG for academic and welfare issues.
+\end{tcolorbox}
+
+\subsection*{Mindset}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large P5}\\[0.3em]
+    Proper Preparation Prevents Poor Performance. The study principle that success comes from consistency and preparation, not last-minute effort.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Start reading from week one --- P5 in action.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large FORCE}\\[0.3em]
+    Focus, Optimism, Resilience, Courage, Endurance. A framework for becoming unstoppable in your academic journey.
+
+    \vspace{0.5em}
+
+    \textit{Example:} When MEE 101 tries to chase you away --- remember FORCE.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=glossaryBg,colframe=accent,arc=4pt,breakable]
+    \textbf{\color{primary}\large ACTION}\\[0.3em]
+    Aspire, Commit, Tenacity, Initiative, Opportunity, Navigate. A framework for turning dreams into reality.
+
+    \vspace{0.5em}
+
+    \textit{Example:} Take ACTION daily --- one small step toward your goals.
+\end{tcolorbox}
+
+% ============================================================
+% SECTION 13: GENIUS POINT ACADEMY (NEW PAGE)
 % ============================================================
 \newpage
 \section{Genius Point Academy}
@@ -1091,7 +1738,7 @@ If you're unsure about your departmental courses or who to ask:
 
     {\color{white}
     \begin{itemize}[leftmargin=1.5em, itemsep=0.3em]
-        \item Tutoring for all 100L courses (MTH/MTS, PHY, CHM/CHE, BIO, GNS, etc.)
+        \item Tutoring for all 100L courses (MTH, PHY, CHM, BIO, GNS, etc.)
         \item Step-by-step breakdown of difficult topics
         \item Past question review and exam-focused practice
         \item Small-group sessions or one-on-one (your choice)
@@ -1120,7 +1767,7 @@ If you're unsure about your departmental courses or who to ask:
 \end{gpabox}
 
 % ============================================================
-% SECTION 12: CONTACT (NEW PAGE)
+% SECTION 14: CONTACT (NEW PAGE)
 % ============================================================
 \newpage
 \section{Contact \& Support}
