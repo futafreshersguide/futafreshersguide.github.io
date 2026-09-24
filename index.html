@@ -28,7 +28,6 @@
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* NOTIFICATIONS */
         #notifContainer {
             position: fixed; top: 80px; right: 20px; z-index: 550;
             display: flex; flex-direction: column; gap: 12px;
@@ -80,7 +79,6 @@
         #announcementBanner.success { background: #d4edda; color: #155724; }
         #announcementBanner.error { background: #f8d7da; color: #721c24; }
 
-        /* WELCOME */
         .compact-welcome {
             background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), var(--primary) center/cover no-repeat;
             min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 15px;
@@ -136,7 +134,6 @@
         .submit-btn-compact:disabled { opacity: 0.6; cursor: not-allowed; }
         .footer-credit { font-size: 0.7rem; color: var(--gray-500); margin-top: 12px; font-weight: 700; }
 
-        /* CONTENT */
         .content-section { padding: 4rem 0; min-height: 80vh; }
         .section-title { text-align: center; margin-bottom: 2.5rem; color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 1.8rem; }
         .card { background: white; border-radius: 12px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); padding: 2.5rem; margin-bottom: 2rem; }
@@ -234,7 +231,6 @@
             .card { padding: 1.5rem; }
         }
 
-        /* 🆕 Genius Point Academy card */
         .gpa-card {
             background: linear-gradient(135deg, #003366 0%, #001a33 100%);
             color: white; border-radius: 12px; padding: 2rem;
@@ -264,7 +260,6 @@
 <div id="announcementBanner"></div>
 <div id="notifContainer"></div>
 
-<!-- WELCOME -->
 <section id="welcome" class="compact-welcome">
     <div class="compact-card">
         <h1>FUTA Survival Guide</h1>
@@ -325,7 +320,6 @@
     </div>
 </section>
 
-<!-- NAVBAR -->
 <nav class="navbar hidden" id="navbar">
     <div class="container nav-container">
         <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
@@ -360,7 +354,6 @@
     </div>
 </nav>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
     <h3>FUTA Survival Guide</h3>
@@ -389,7 +382,6 @@
     </div>
 </div>
 
-<!-- EDIT PROFILE MODAL -->
 <div class="modal hidden" id="editProfileModal" style="display: none;">
     <div class="modal-content">
         <div class="modal-header">
@@ -422,7 +414,6 @@
     </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <main id="main-content" class="hidden">
 
     <section id="home" class="content-section content-page active">
@@ -480,14 +471,14 @@
                 <div class="toc-item" data-page="registration"><h3>1. Registration Guide</h3><p>Complete Step-by-Step Registration Process</p></div>
                 <div class="toc-item" data-page="documents"><h3>2. Required Documents</h3><p>All Documents Needed for Registration</p></div>
                 <div class="toc-item" data-page="great-shift"><h3>3. The Great Shift</h3><p>Embracing University Autonomy</p></div>
-                <div class="toc-item" data-page="course-synopsis"><h3>4. Course Synopsis</h3><p>All Your First Semester Courses</p></div>
+                <div class="toc-item" data-page="course-synopsis"><h3>4. Course Synopsis</h3><p>Common first semester courses (see important note)</p></div>
                 <div class="toc-item" data-page="academic-playbook"><h3>5. Academic Playbook</h3><p>Course-by-Course Battle Plan for a First-Class Journey</p></div>
                 <div class="toc-item" data-page="beyond-books"><h3>6. Beyond the Books</h3><p>Building a Complete Life</p></div>
                 <div class="toc-item" data-page="navigating-storms"><h3>7. Navigating the Storms</h3><p>You Are Not Alone</p></div>
                 <div class="toc-item" data-page="anchor"><h3>8. The Anchor</h3><p>The Power of Prayer</p></div>
                 <div class="toc-item" data-page="materials"><h3>9. Course Materials</h3><p>Access All Study Materials</p></div>
                 <div class="toc-item" data-page="departmental"><h3>10. Departmental Courses</h3><p>Know Your Specific Courses</p></div>
-                <div class="toc-item" data-page="calendar"><h3>11. Academic Calendar</h3><p>Key dates for 2026/2027 session</p></div>
+                <div class="toc-item" data-page="calendar"><h3>11. Academic Calendar</h3><p>Key dates for the session</p></div>
                 <div class="toc-item" data-page="genius-point"><h3>📚 Genius Point Academy</h3><p>Expert Tutoring for First-Year Success</p></div>
                 <div class="toc-item" onclick="window.location.href='marketplace.html'"><h3>12. FUTA Marketplace</h3><p>Student Services & Business Directory</p></div>
                 <div class="toc-item" data-page="contact"><h3>13. Contact</h3><p>Get in Touch</p></div>
@@ -500,18 +491,17 @@
         </div>
     </section>
 
-    <!-- REGISTRATION — FULL DETAIL -->
     <section id="registration" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">1. Complete Registration Guide</h2>
             <div class="card">
-                <h3 style="color:var(--primary);">Your Registration Journey Begins <span data-content="reg.physical_start_date">November 24, 2025</span></h3>
+                <h3 style="color:var(--primary);">Your Registration Journey Begins <span data-content="reg.physical_start_date">at the start of the session</span></h3>
                 <p>On this date, your FUTA journey officially begins. The registration process is your first major challenge, and this guide will help you navigate it successfully.</p>
 
                 <div class="inspirational-box">
                     <h3 style="color:var(--primary);">📅 Important Registration Timeline</h3>
-                    <p><strong data-content="reg.portal_open_date">November 17, 2025</strong>: <span data-content="reg.portal_open_desc">Undergraduate portal opens for online registrations and BIO-DATA FORM download</span></p>
-                    <p><strong data-content="reg.physical_start_date">November 24, 2025</strong>: <span data-content="reg.physical_start_desc">Physical registration begins</span></p>
+                    <p><strong data-content="reg.portal_open_date">When the portal opens</strong>: <span data-content="reg.portal_open_desc">Undergraduate portal opens for online registrations and BIO-DATA FORM download</span></p>
+                    <p><strong data-content="reg.physical_start_date">Shortly after</strong>: <span data-content="reg.physical_start_desc">Physical registration begins</span></p>
                     <p class="quote">"Proper preparation prevents poor performance. Start your registration process early!"</p>
                 </div>
 
@@ -633,7 +623,6 @@
         </div>
     </section>
 
-    <!-- DOCUMENTS — FULL DETAIL -->
     <section id="documents" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">2. Required Documents for Registration</h2>
@@ -789,18 +778,36 @@
         </div>
     </section>
 
-    <!-- COURSE SYNOPSIS (with CCMAS note + GPA promo card) -->
+    <!-- COURSE SYNOPSIS (with the new IMPORTANT warning) -->
     <section id="course-synopsis" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">4. Course Synopsis (First Semester 100L)</h2>
 
-            <!-- CCMAS-friendly intro -->
             <div class="card">
                 <div style="background:#e3f2fd; border-left:5px solid var(--primary); padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
                     <h3 style="color:var(--primary); margin-bottom:0.8rem;">💙 Don't Be Scared — You've Done Most of This Before!</h3>
                     <p>Before you panic when you see the list of courses, breathe. Here's the truth: <strong>most of your 100 level first semester courses are things you already learned in secondary school.</strong> Biology, Chemistry, Physics, Mathematics — they're just at a deeper level now. You're not starting from scratch; you're building on a foundation you already have.</p>
                     <p style="margin-top:0.8rem;">The only truly new things will be a few introductory courses that everyone takes (like Intro to Computing, Use of English, and Engineering Drawing). These are designed to <em>introduce</em> you, not to fail you. Attend every class, take notes, do your assignments — and you'll be fine.</p>
                     <p style="margin-top:0.8rem;">Also — remember we use the word <strong>"course"</strong> here, not "subject". Get used to that. You'll take courses; you'll pass courses.</p>
+                </div>
+
+                <!-- 🆕 IMPORTANT: Not all courses warning -->
+                <div style="background:#fef3c7; border-left:5px solid #f59e0b; padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
+                    <h3 style="color:#b45309; margin-bottom:0.8rem;">⚠️ IMPORTANT: These Are NOT All Your Courses</h3>
+                    <p>The courses listed in this guide are the <strong>common/general courses</strong> that most 100 level students take — but they're <strong>not the complete list</strong> of your courses.</p>
+                    <p style="margin-top:0.6rem;">Some courses are <strong>specific to your department</strong>. Some were <strong>not yet published when we compiled this</strong>. Some simply <strong>didn't reach us in time</strong>.</p>
+                    <p style="margin-top:0.6rem;"><strong>So don't assume this is everything.</strong> You'll find the full list:</p>
+                    <ul style="margin-left:1.5rem; margin-top:0.4rem;">
+                        <li>On your <strong>course form</strong> during registration</li>
+                        <li>From your <strong>class rep</strong> or <strong>departmental adviser</strong></li>
+                        <li>From <strong>seniors in your department</strong></li>
+                    </ul>
+                    <p style="margin-top:0.8rem;">📱 <strong>Want to connect with your senior colleagues and departmental mates?</strong> Message me directly — I'll connect you to the right people in your department so you never miss a course.</p>
+                    <div style="margin-top:1rem;">
+                        <button onclick="contactGeniusPoint()" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Connect Me With My Seniors
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -812,7 +819,6 @@
                 <div class="loading-skeleton" style="height: 220px;"></div>
             </div>
 
-            <!-- Genius Point Academy promo card -->
             <div class="gpa-card">
                 <h3>📚 Need Extra Help? Genius Point Academy Has You Covered</h3>
                 <p>If you want to build a <strong>solid first-year foundation</strong> and set yourself up for a strong CGPA, our classes at <strong>Genius Point Academy</strong> are designed exactly for you.</p>
@@ -836,7 +842,6 @@
         </div>
     </section>
 
-    <!-- ACADEMIC PLAYBOOK — full detail, now AFTER course synopsis -->
     <section id="academic-playbook" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">5. Your Academic Playbook</h2>
@@ -1027,7 +1032,6 @@
         </div>
     </section>
 
-    <!-- 🆕 GENIUS POINT ACADEMY — dedicated section -->
     <section id="genius-point" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📚 Genius Point Academy</h2>
@@ -1090,7 +1094,6 @@
                     <p>Don't hesitate to reach out if you have questions or need clarification.</p>
                 </div>
 
-                <!-- 🆕 GPA mention in contact -->
                 <div class="inspirational-box" style="text-align:left; background:#fff8e1; border-left:5px solid #f59e0b;">
                     <h3 style="color:#b45309;">📚 Also: I'm Part of Genius Point Academy</h3>
                     <p>Alongside this guide, I'm a tutor and team member at <strong>Genius Point Academy</strong> — where we help 100L students build a solid foundation and crush their first year.</p>
@@ -1159,7 +1162,6 @@
     let userData = {};
     let pageContent = {};
 
-    // 🆕 Genius Point Academy WhatsApp contact
     window.contactGeniusPoint = function () {
         const p = S.get('futa_profile') || {};
         const name = p.full_name || 'a FUTA Student';
@@ -1171,7 +1173,8 @@
         msg += `I saw this on the FUTA Survival Guide.\n\n`;
         msg += `I'd like to talk about:\n`;
         msg += `• Building a solid first-year foundation\n`;
-        msg += `• Improving my GPA\n\n`;
+        msg += `• Improving my GPA\n`;
+        msg += `• Getting connected with my departmental seniors\n\n`;
         msg += `Name: ${name}\n`;
         if (dept) msg += `Department: ${dept}\n`;
         if (level) msg += `Level: ${level}\n`;
