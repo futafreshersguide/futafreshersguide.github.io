@@ -145,7 +145,7 @@
         .accordion-header:hover { background: #e0f2f1; }
         .accordion-header i { transition: transform 0.3s ease; color: var(--gray-500); }
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; background: white; color: var(--gray-800); font-size: 1rem; padding: 0 20px; }
-        .accordion-item.active .accordion-content { max-height: 2500px; padding: 20px; border-top: 1px solid var(--gray-200); }
+        .accordion-item.active .accordion-content { max-height: 3000px; padding: 20px; border-top: 1px solid var(--gray-200); }
         .accordion-item.active .accordion-header i { transform: rotate(180deg); color: var(--secondary); }
         .accordion-item.active { box-shadow: 0 5px 15px rgba(0,0,0,0.08); transform: translateY(-2px); border-color: var(--secondary); }
 
@@ -157,6 +157,38 @@
         .battle-plan-card:hover, .toc-item:hover, .course-item:hover, .document-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .battle-plan-card h4, .toc-item h3 { color: var(--secondary); margin-bottom: 1rem; }
         .exam-type { background: #e0f2f1; color: var(--secondary); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; float: right; }
+
+        .course-badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 10px 0; }
+        .course-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 10px; border-radius: 12px;
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .course-badge.warn { background: #fef3c7; color: #92400e; }
+        .course-badge.price { background: #dbeafe; color: #1e40af; }
+        .course-badge.free { background: #d1fae5; color: #065f46; }
+        .course-badge.exam { background: #ede9fe; color: #5b21b6; }
+
+        .course-warnings {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 0.88rem;
+            color: #78350f;
+        }
+        .course-warnings h5 {
+            color: #b45309;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+        .course-warnings ul { margin-left: 1.2rem; margin-top: 6px; }
+        .course-warnings li { margin-bottom: 6px; line-height: 1.5; }
 
         .btn { display: inline-block; background: var(--secondary); color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: all 0.3s ease; text-decoration: none; text-align: center; }
         .btn:hover { opacity: 0.9; transform: translateY(-2px); color: white; }
@@ -243,6 +275,90 @@
         }
         .gpa-card .btn-gpa:hover { background: #128C7E; transform: translateY(-2px); }
 
+        .mindset-hero {
+            background: linear-gradient(135deg, #00695c 0%, #003d34 100%);
+            color: white; padding: 3rem 2rem; border-radius: 16px;
+            text-align: center; margin-bottom: 2rem;
+        }
+        .mindset-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .mindset-hero p { opacity: 0.9; font-size: 1.05rem; }
+        .mindset-card {
+            background: white; border-radius: 12px; padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            border-left: 6px solid var(--secondary);
+            transition: 0.3s;
+        }
+        .mindset-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .mindset-card h3 {
+            color: var(--secondary); font-size: 1.4rem;
+            margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;
+        }
+        .mindset-card h3 i { color: var(--accent); }
+        .mindset-card .subtitle {
+            color: var(--gray-600); font-size: 0.95rem;
+            font-style: italic; margin-bottom: 1.5rem;
+        }
+        .mindset-card .body { color: var(--gray-800); line-height: 1.7; }
+        .mindset-card .body p { margin-bottom: 1rem; }
+        .mindset-card .body strong { color: var(--secondary); }
+
+        .manuals-table-wrap { overflow-x: auto; background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .manuals-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .manuals-table th {
+            background: var(--secondary); color: white;
+            padding: 12px 15px; text-align: left;
+            font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 0.5px; font-weight: 700;
+        }
+        .manuals-table th:first-child { border-top-left-radius: 8px; }
+        .manuals-table th:last-child { border-top-right-radius: 8px; }
+        .manuals-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+        .manuals-table tr:last-child td { border-bottom: none; }
+        .manuals-table tr:hover td { background: var(--gray-100); }
+        .manuals-table .price { font-weight: 800; color: var(--secondary); white-space: nowrap; }
+        .manuals-table .price.free { color: var(--success); }
+        .manuals-total {
+            background: #d1fae5; border-radius: 10px; padding: 1.5rem;
+            text-align: center; margin: 1.5rem 0;
+            border-left: 5px solid var(--success);
+        }
+        .manuals-total .label { color: var(--gray-600); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .manuals-total .amount { font-size: 2.5rem; font-weight: 900; color: var(--success); margin-top: 0.5rem; }
+
+        .glossary-category { margin-bottom: 2.5rem; }
+        .glossary-category h3 {
+            color: var(--secondary); font-size: 1.3rem;
+            margin-bottom: 1rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            text-transform: capitalize;
+        }
+        .glossary-item {
+            background: white; border-radius: 10px;
+            padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--accent);
+        }
+        .glossary-item .term {
+            font-weight: 800; color: var(--secondary);
+            font-size: 1.05rem; margin-bottom: 0.5rem;
+        }
+        .glossary-item .definition {
+            color: var(--gray-700); font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .glossary-item .example {
+            margin-top: 0.6rem; padding: 0.6rem 0.8rem;
+            background: var(--gray-100); border-radius: 6px;
+            font-size: 0.88rem; color: var(--gray-600);
+            font-style: italic;
+        }
+        .glossary-item .example::before { content: "Example: "; font-weight: 700; font-style: normal; color: var(--gray-700); }
+
         @media (max-width: 768px) {
             .nav-container { flex-direction: row !important; flex-wrap: wrap !important; }
             .menu-btn { display: block !important; order: 1 !important; font-size: 1.8rem !important; padding: 5px 10px !important; }
@@ -327,11 +443,11 @@
         <div class="logo">2nd Semester Guide <span class="semester-badge">2026/2027</span></div>
         <ul class="nav-links">
             <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="mindset">🧠 Mindset</a></li>
             <li><a href="#" data-page="strategy">Strategy</a></li>
             <li><a href="#" data-page="courses">Courses</a></li>
-            <li><a href="#" data-page="playbook">Playbook</a></li>
-            <li><a href="#" data-page="planning">Planning</a></li>
-            <li><a href="#" data-page="read-recall">READ RECALL</a></li>
+            <li><a href="#" data-page="manuals">Manuals</a></li>
+            <li><a href="#" data-page="glossary">Glossary</a></li>
             <li><a href="#" data-page="calendar">📅 Calendar</a></li>
             <li><a href="marketplace.html" style="color:var(--accent);"><i class="fas fa-store"></i> Market</a></li>
             <li><a href="calculator.html" style="background:white; color:var(--secondary); padding:5px 12px; border-radius:20px; font-weight:bold;"><i class="fas fa-calculator"></i> GPA</a></li>
@@ -360,6 +476,7 @@
     <h3>2nd Semester Guide</h3>
     <ul class="sidebar-links">
         <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
+        <li><a href="#" data-page="mindset" style="background:#e0f2f1; color:#00695c; font-weight:800;">🧠 The Mindset</a></li>
         <li><a href="#" data-page="strategy">🎯 U-H-P & P.A.S.S</a></li>
         <li><a href="#" data-page="courses">📚 Course Breakdown</a></li>
         <li><a href="#" data-page="playbook">🎓 Academic Playbook</a></li>
@@ -367,6 +484,8 @@
         <li><a href="#" data-page="balance">⚖️ Academic Balance</a></li>
         <li><a href="#" data-page="read-recall">🧠 READ RECALL</a></li>
         <li><a href="#" data-page="textbooks">📖 Textbooks</a></li>
+        <li><a href="#" data-page="manuals" style="background:#e0f2f1; color:#00695c; font-weight:800;">💰 Manuals & Prices</a></li>
+        <li><a href="#" data-page="glossary" style="background:#e0f2f1; color:#00695c; font-weight:800;">📖 Glossary</a></li>
         <li><a href="#" data-page="calendar">📅 Academic Calendar</a></li>
         <li><a href="#" data-page="genius-point" style="background:#e0f2f1; color:#00695c; font-weight:800;">📚 Genius Point Academy</a></li>
         <li><a href="#" data-page="contact">📞 Contact</a></li>
@@ -413,6 +532,7 @@
 
 <main id="main-content" class="hidden">
 
+    <!-- HOME -->
     <section id="home" class="content-section content-page active">
         <div class="container">
             <h2 class="section-title">Welcome Back! 100 Level Second Semester</h2>
@@ -438,18 +558,42 @@
 
                 <h3 style="color:var(--secondary);">Inside this Guide:</h3>
                 <div class="accordion-container">
+                    <div class="accordion-item"><div class="accordion-header">The Mindset — ACTION, FORCE, P5 & More <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Five frameworks to shape your FUTA journey. ACTION, FORCE, the P5 Principle, the 6vs9 metaphor, and "Nobody Knows Your Mood" — these are the mental tools that separate top students from the rest.</div></div>
                     <div class="accordion-item"><div class="accordion-header">The U-H-P & P.A.S.S Strategies for Success <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Proven frameworks that top-performing students use to stay organized, focused, and ahead of their coursework. We'll break down each letter and show you how to apply them practically.</div></div>
                     <div class="accordion-item"><div class="accordion-header">Detailed Course Breakdowns <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Comprehensive analysis of all second semester 100L courses (MTS, PHY, CHE, BIO, GNS, MEE, CSC) with specific tips, exam formats, and study strategies. Each course is explained with its exam format (CBT, CBE, or written) so you know exactly how to prepare.</div></div>
-                    <div class="accordion-item"><div class="accordion-header">Free Google Drive Study Materials & Textbooks <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Direct access to past questions, lecture slides, practical manuals, and recommended textbooks organized by course. Everything is hosted on Google Drive for easy access — just click a course to open its specific folder.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Complete Manual Prices & Buying Guide <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Every course manual with its current price, so you can budget properly before resuming. Plus money-saving tips and a total cost calculator.</div></div>
+                    <div class="accordion-item"><div class="accordion-header">Glossary of FUTA Terms <i class="fas fa-chevron-down"></i></div><div class="accordion-content">FUTA-specific vocabulary explained — from "German questions" to "CGPA" to "SIWES". Never be confused by a strange term again.</div></div>
                     <div class="accordion-item"><div class="accordion-header">Effective Planning & Balance <i class="fas fa-chevron-down"></i></div><div class="accordion-content">Step-by-step guidance on creating a realistic study schedule that balances academics with personal life, including the Eisenhower Matrix and SMART goals framework.</div></div>
                     <div class="accordion-item"><div class="accordion-header">READ RECALL Method <i class="fas fa-chevron-down"></i></div><div class="accordion-content">A powerful 10-step memorization technique that will transform how you study and retain information. This isn't just theory — it's the exact method top students use.</div></div>
                 </div>
 
-                <div class="page-nav"><div></div><a class="page-btn" data-page="strategy">Next: Strategy →</a></div>
+                <div class="page-nav"><div></div><a class="page-btn" data-page="mindset">Next: The Mindset →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- THE MINDSET (loaded from Supabase) -->
+    <section id="mindset" class="content-section content-page">
+        <div class="container">
+            <div class="mindset-hero">
+                <h1><i class="fas fa-brain"></i> The Mindset</h1>
+                <p>Five frameworks to shape your FUTA journey — from dream to reality</p>
+            </div>
+
+            <div id="mindsetContent">
+                <div class="loading-skeleton" style="height: 200px;"></div>
+                <div class="loading-skeleton" style="height: 200px;"></div>
+                <div class="loading-skeleton" style="height: 200px;"></div>
+            </div>
+
+            <div class="page-nav">
+                <a class="page-btn" data-page="home">← Home</a>
+                <a class="page-btn" data-page="strategy">Next: Strategy →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRATEGY -->
     <section id="strategy" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">The Strategic Approach: U-H-P & P.A.S.S</h2>
@@ -508,12 +652,12 @@
 
                 <p class="quote">"Remember: Effective planning is the foundation for turning your goals into reality. The difference between successful students and struggling ones is rarely intelligence; it's almost always preparation and consistency."</p>
 
-                <div class="page-nav"><a class="page-btn" data-page="home">← Previous</a><a class="page-btn" data-page="courses">Next: Course Breakdown →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="mindset">← Previous</a><a class="page-btn" data-page="courses">Next: Course Breakdown →</a></div>
             </div>
         </div>
     </section>
 
-    <!-- COURSES (with CCMAS intro + warning + GPA card) -->
+    <!-- COURSES -->
     <section id="courses" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Course-by-Course Breakdown</h2>
@@ -522,7 +666,7 @@
 
                 <div style="background:#e0f2f1; border-left:5px solid var(--secondary); padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
                     <h3 style="color:var(--secondary); margin-bottom:0.8rem;">💙 Don't Be Scared — You've Got This!</h3>
-                    <p>By now, you've already completed your first semester. You know how FUTA works, you know your lecturers, and you know your study rhythm. This semester isn't new — it's just the next step. <strong>Most of your 2nd semester courses are built on what you already learned in 1st semester.</strong> MTS 102 builds on MTH 101. CHE 102 builds on CHM 101. BIO 102 builds on BIO 101. You're not starting over; you're going deeper.</p>
+                    <p>By now, you've already completed your first semester. You know how FUTA works, you know your lecturers, and you know your study rhythm. This semester isn't new — it's just the next step. <strong>Most of your 2nd semester courses are built on what you already learned in 1st semester.</strong> MTH 102 builds on MTH 101. CHE 102 builds on CHM 101. BIO 102 builds on BIO 101. You're not starting over; you're going deeper.</p>
                     <p style="margin-top:0.8rem;">And remember — we say <strong>"course"</strong>, not "subject." That's the language of university. Get used to it.</p>
                 </div>
 
@@ -545,7 +689,7 @@
                 </div>
 
                 <div id="courseCodesNote">
-                    <strong>📝 Quick Note on Course Codes:</strong> Some of your 2nd semester courses may use newer CCMAS codes (e.g., <strong>MTS 102</strong> instead of the older MTH 102). The content is the same — only the codes are newer. This means past questions for these new codes are still limited, but the equivalent older materials (MTH 102, etc.) still apply. We've bundled them in each course folder. Read the full CCMAS explainer on the <a href="index.html" style="color:var(--secondary); font-weight:bold;">First Semester Guide</a>.
+                    <strong>📝 Quick Note on Course Codes:</strong> Some of your 2nd semester courses may use newer CCMAS codes. The content is the same — only the codes are newer. This means past questions for these new codes are still limited, but the equivalent older materials still apply. We've bundled them in each course folder. Read the full CCMAS explainer on the <a href="index.html" style="color:var(--secondary); font-weight:bold;">First Semester Guide</a>.
                 </div>
 
                 <div class="course-grid" id="courseGrid">
@@ -561,7 +705,7 @@
                         <strong>🎯 What We Help 2nd Semester Students With:</strong>
                         <ul>
                             <li>Building on your 1st semester foundation</li>
-                            <li>Mastering 2nd semester courses (CHE 102, BIO 102, MTS 102, etc.)</li>
+                            <li>Mastering 2nd semester courses (CHE 102, BIO 102, MTH 102, etc.)</li>
                             <li>Improving your CGPA strategically</li>
                             <li>Past questions + exam-focused practice</li>
                             <li>One-on-one mentorship for personalized help</li>
@@ -578,7 +722,7 @@
         </div>
     </section>
 
-    <!-- ACADEMIC PLAYBOOK (2nd sem - full) -->
+    <!-- PLAYBOOK -->
     <section id="playbook" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Academic Playbook</h2>
@@ -663,6 +807,7 @@
         </div>
     </section>
 
+    <!-- PLANNING -->
     <section id="planning" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Plan Effectively</h2>
@@ -688,6 +833,7 @@
         </div>
     </section>
 
+    <!-- BALANCE -->
     <section id="balance" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Balancing Academic and Extracurricular Activities</h2>
@@ -722,7 +868,7 @@
                 <div class="accordion-container">
                     <div class="accordion-item">
                         <div class="accordion-header">S - Specific <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Instead of "I want to do well in MTS 102," say "I want to score at least 70% in MTS 102 by completing all tutorial questions and practicing 5 past questions weekly."</div>
+                        <div class="accordion-content">Instead of "I want to do well in MTH 102," say "I want to score at least 70% in MTH 102 by completing all tutorial questions and practicing 5 past questions weekly."</div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">M - Measurable <i class="fas fa-chevron-down"></i></div>
@@ -734,11 +880,11 @@
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">R - Relevant <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Ensure your goals align with your broader academic objectives. If you're in Engineering, focus more on MTS and MEE courses than on GNS. If you're in Sciences, prioritize BIO, CHE, and PHY.</div>
+                        <div class="accordion-content">Ensure your goals align with your broader academic objectives. If you're in Engineering, focus more on MTH and MEE courses than on GNS. If you're in Sciences, prioritize BIO, CHE, and PHY.</div>
                     </div>
                     <div class="accordion-item">
                         <div class="accordion-header">T - Time-bound <i class="fas fa-chevron-down"></i></div>
-                        <div class="accordion-content">Every goal needs a deadline. "I will complete all MTS 102 topics by week 10" is more effective than "I will complete them sometime before exams."</div>
+                        <div class="accordion-content">Every goal needs a deadline. "I will complete all MTH 102 topics by week 10" is more effective than "I will complete them sometime before exams."</div>
                     </div>
                 </div>
 
@@ -747,6 +893,7 @@
         </div>
     </section>
 
+    <!-- READ RECALL -->
     <section id="read-recall" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">How to Read and Remember: The READ RECALL Method</h2>
@@ -773,6 +920,7 @@
         </div>
     </section>
 
+    <!-- TEXTBOOKS -->
     <section id="textbooks" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Recommended Textbooks</h2>
@@ -780,11 +928,11 @@
                 <p style="margin-bottom: 1.5rem;">While lecture notes and online materials are essential, having access to recommended textbooks provides deeper understanding and additional practice problems. The textbooks listed below are those most frequently referenced by FUTA lecturers and used by successful students. Many of these are available as PDFs in the Google Drive folder linked below.</p>
 
                 <div class="documents-grid" id="textbooksGrid">
-                    <div class="document-card"><h4 style="color:var(--secondary);">MTS 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's materials</li><li>Bunday Mathematics</li><li>Tutorial manual</li></ul></div>
+                    <div class="document-card"><h4 style="color:var(--secondary);">MTH 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's materials</li><li>Bunday Mathematics</li><li>Tutorial manual</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">CHE 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Fundamental Chemistry</li><li>Tutorial manual</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">PHY 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Basic Physics</li><li>Hidden Facts in Physics</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">BIO 102 / 104</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's slides</li><li>Practical manual</li></ul></div>
-                    <div class="document-card"><h4 style="color:var(--secondary);">MTS 104</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's materials</li><li>Apollo's Mathematics</li></ul></div>
+                    <div class="document-card"><h4 style="color:var(--secondary);">MTH 104</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's materials</li><li>Apollo's Mathematics</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">MEE 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>MEE 102 manual</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">CSC 102</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Lecturer's slides</li><li>Practical manual</li></ul></div>
                     <div class="document-card"><h4 style="color:var(--secondary);">GNS 102/106</h4><ul style="font-size:0.9rem; padding-left:1.2rem;"><li>Online materials</li><li>Lecture slides</li></ul></div>
@@ -806,11 +954,78 @@
                     </a>
                 </div>
 
-                <div class="page-nav"><a class="page-btn" data-page="read-recall">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="read-recall">← Previous</a><a class="page-btn" data-page="manuals">Next: Manuals & Prices →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- MANUALS & PRICES -->
+    <section id="manuals" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">💰 Manuals & Prices</h2>
+
+            <div class="card">
+                <div style="background:#fef3c7; border-left:5px solid #f59e0b; padding:1.5rem; border-radius:10px; margin-bottom:1.5rem;">
+                    <h3 style="color:#b45309; margin-bottom:0.8rem;">📌 Important Notice</h3>
+                    <p>Manual prices change from session to session. The prices below are for the <strong>2025/2026</strong> session. <strong>Always confirm the current price from the school bookshop or your department before buying.</strong></p>
+                </div>
+            </div>
+
+            <div class="manuals-table-wrap">
+                <table class="manuals-table" id="manualsTable">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Manual</th>
+                            <th>Price</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manualsTableBody">
+                        <tr><td colspan="4" style="text-align:center;padding:2rem;">Loading manuals...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="manuals-total" id="manualsTotal">
+                <div class="label">Estimated Total</div>
+                <div class="amount" id="manualsTotalAmount">—</div>
+                <p style="color:var(--gray-600); margin-top:0.5rem; font-size:0.9rem;" id="manualsTotalNote"></p>
+            </div>
+
+            <div class="inspirational-box" style="margin-top:1.5rem;">
+                <h3 style="color:var(--secondary);">💡 Money-Saving Tips</h3>
+                <ul style="margin-left:1.5rem;">
+                    <li><strong>Buy in groups:</strong> Some courses have a shared manual that multiple students can read from — split the cost with coursemates.</li>
+                    <li><strong>Buy from seniors:</strong> Often cheaper, sometimes pre-annotated with study notes.</li>
+                    <li><strong>Don't skip free manuals:</strong> Some courses have a free PDF — don't pay for a printed version unless you really want one.</li>
+                    <li><strong>Budget early:</strong> Save up the total cost before resuming, so you're not caught off guard.</li>
+                </ul>
+            </div>
+
+            <div class="page-nav"><a class="page-btn" data-page="textbooks">← Previous</a><a class="page-btn" data-page="glossary">Next: Glossary →</a></div>
+        </div>
+    </section>
+
+    <!-- GLOSSARY -->
+    <section id="glossary" class="content-section content-page">
+        <div class="container">
+            <h2 class="section-title">📖 Glossary of FUTA Terms</h2>
+            <div class="card">
+                <p>FUTA has its own vocabulary. This glossary explains the terms you'll hear every day — so you're never confused.</p>
+            </div>
+
+            <div id="glossaryContent">
+                <div class="loading-skeleton" style="height: 100px;"></div>
+                <div class="loading-skeleton" style="height: 100px;"></div>
+                <div class="loading-skeleton" style="height: 100px;"></div>
+            </div>
+
+            <div class="page-nav"><a class="page-btn" data-page="manuals">← Previous</a><a class="page-btn" data-page="calendar">Next: Calendar →</a></div>
+        </div>
+    </section>
+
+    <!-- CALENDAR -->
     <section id="calendar" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📅 2nd Semester Calendar</h2>
@@ -820,11 +1035,12 @@
                     <div class="loading-skeleton" style="height: 80px;"></div>
                     <div class="loading-skeleton" style="height: 80px;"></div>
                 </div>
-                <div class="page-nav"><a class="page-btn" data-page="textbooks">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
+                <div class="page-nav"><a class="page-btn" data-page="glossary">← Previous</a><a class="page-btn" data-page="genius-point">Next: Genius Point Academy →</a></div>
             </div>
         </div>
     </section>
 
+    <!-- GENIUS POINT ACADEMY -->
     <section id="genius-point" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">📚 Genius Point Academy</h2>
@@ -837,7 +1053,7 @@
                         <strong>What We Help 2nd Semester Students With:</strong>
                         <ul>
                             <li><strong>Boost your CGPA strategically</strong> — understand what matters most</li>
-                            <li><strong>Master difficult 2nd semester courses</strong> — CHE 102, BIO 102, MTS 102, MTS 104, and more</li>
+                            <li><strong>Master difficult 2nd semester courses</strong> — CHE 102, BIO 102, MTH 102, MTH 104, and more</li>
                             <li><strong>Solve past questions effectively</strong> — we provide materials + guidance</li>
                             <li><strong>Prepare for CBT, CBE, and written exams</strong> — different strategies for each</li>
                             <li><strong>Get mentored by seniors</strong> — people who've actually walked your path</li>
@@ -873,6 +1089,7 @@
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="content-section content-page">
         <div class="container">
             <h2 class="section-title">Contact & Support</h2>
@@ -1051,19 +1268,133 @@
         }
     }
 
+    // ---------- MINDSET ----------
+    async function loadMindset() {
+        const wrap = document.getElementById('mindsetContent');
+        if (!wrap) return;
+        try {
+            const res = await DB.Mindset.list();
+            const entries = res.ok ? res.data : [];
+            if (!entries.length) {
+                wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Mindset content coming soon.</p>';
+                return;
+            }
+            wrap.innerHTML = '';
+            entries.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'mindset-card';
+                card.innerHTML = `
+                    <h3><i class="fas fa-${U.escapeHtml(m.icon || 'brain')}"></i> ${U.escapeHtml(m.title)}</h3>
+                    ${m.subtitle ? `<div class="subtitle">${U.escapeHtml(m.subtitle)}</div>` : ''}
+                    <div class="body">${m.body_html || ''}</div>
+                `;
+                wrap.appendChild(card);
+            });
+        } catch (err) {
+            console.error('[Mindset]', err);
+            wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Could not load mindset content.</p>';
+        }
+    }
+
+    // ---------- MANUALS ----------
+    async function loadManuals() {
+        const tbody = document.getElementById('manualsTableBody');
+        const totalEl = document.getElementById('manualsTotalAmount');
+        const totalNote = document.getElementById('manualsTotalNote');
+        if (!tbody) return;
+
+        try {
+            const res = await DB.Manuals.list({ session: '2025/2026' });
+            const manuals = (res.ok && res.data) ? res.data : [];
+
+            if (!manuals.length) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#666;">No manual data available.</td></tr>';
+                totalEl.textContent = '—';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            manuals.forEach(m => {
+                const priceClass = m.is_free ? 'price free' : 'price';
+                const priceText = m.is_free ? 'Free' : U.formatNaira(m.price);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${U.escapeHtml(m.course_code)}</strong><br><small style="color:var(--gray-600);">${U.escapeHtml(m.course_title || '')}</small></td>
+                    <td>${U.escapeHtml(m.manual_name || 'Manual')}</td>
+                    <td class="${priceClass}">${priceText}</td>
+                    <td><small>${U.escapeHtml(m.notes || '')}</small></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const stats = await DB.Manuals.stats('2025/2026');
+            totalEl.textContent = U.formatNaira(stats.totalCost);
+            totalNote.textContent = `Based on ${stats.total - stats.freeCount} paid manuals. ${stats.freeCount} manual${stats.freeCount === 1 ? '' : 's'} are free.`;
+
+        } catch (err) {
+            console.error('[Manuals]', err);
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#666;">Could not load manual data.</td></tr>';
+        }
+    }
+
+    // ---------- GLOSSARY ----------
+    async function loadGlossary() {
+        const wrap = document.getElementById('glossaryContent');
+        if (!wrap) return;
+
+        try {
+            const res = await DB.Glossary.list();
+            const items = (res.ok && res.data) ? res.data : [];
+
+            if (!items.length) {
+                wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Glossary coming soon.</p>';
+                return;
+            }
+
+            const grouped = {};
+            items.forEach(item => {
+                const cat = item.category || 'general';
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(item);
+            });
+
+            let html = '';
+            Object.keys(grouped).sort().forEach(cat => {
+                html += `<div class="glossary-category">`;
+                html += `<h3><i class="fas fa-tag"></i> ${U.escapeHtml(cat.replace(/-/g, ' '))}</h3>`;
+                grouped[cat].forEach(item => {
+                    html += `
+                        <div class="glossary-item">
+                            <div class="term">${U.escapeHtml(item.term)}</div>
+                            <div class="definition">${U.escapeHtml(item.definition)}</div>
+                            ${item.example ? `<div class="example">${U.escapeHtml(item.example)}</div>` : ''}
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            });
+
+            wrap.innerHTML = html;
+        } catch (err) {
+            console.error('[Glossary]', err);
+            wrap.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">Could not load glossary.</p>';
+        }
+    }
+
+    // ---------- COURSES ----------
     const FALLBACK_COURSES = [
-        { code: 'MTS 102', title: 'Introductory Mathematics II', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1wjHXcRECQRb0ubIWQpBRJCrYKLqOkdxg', topics: ['Functions of real variables', 'Limits and continuity', 'Differentiation', 'Integration'], tips: ['Attend all classes', 'Study tutorials', 'Manage time effectively'] },
-        { code: 'MTS 104', title: 'Introductory Applied Mathematics', exam_type: 'CBT', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7', topics: ['Vectors', 'Coordinate geometry', 'Conic sections', 'Dynamics I & II'], tips: ['3-unit course', 'Arrive early', 'Read materials'] },
-        { code: 'MEE 102', title: 'Engineering Workshop', exam_type: 'CBT', icon: 'cogs', drive_link: 'https://drive.google.com/drive/folders/1Tm8klewBc9wvcPuqLuNQUNRZFf2ZpVQF', topics: ['General safety', 'Workshop measurements', 'Engineering materials', 'Machining'], tips: ['Wear blue lab coat', 'Buy the manual'] },
-        { code: 'PHY 102', title: 'General Physics II', exam_type: 'CBT', icon: 'fire', drive_link: 'https://drive.google.com/drive/folders/1rt62SVxQ8QThNwhcKTzhF8imHRkE4jrN', topics: ['Electrostatics', 'Electric fields', 'Current electricity', 'Magnetic fields'], tips: ['Practice questions', 'Buy manual'] },
+        { code: 'MTH 102', title: 'Introductory Mathematics II', exam_type: 'CBT/CBE', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1wjHXcRECQRb0ubIWQpBRJCrYKLqOkdxg', topics: ['Functions of real variables', 'Limits and continuity', 'Differentiation', 'Integration'], tips: ['Attend all classes', 'Study tutorials', 'Manage time effectively'] },
+        { code: 'MTH 104', title: 'Introductory Applied Mathematics', exam_type: 'CBT/CBE', icon: 'calculator', drive_link: 'https://drive.google.com/drive/folders/1u5QUXLTNyzQInVsq6rIilbxgoKIgi-s7', topics: ['Vectors', 'Coordinate geometry', 'Conic sections', 'Dynamics I & II'], tips: ['3-unit course', 'Arrive early', 'Read materials'] },
+        { code: 'MEE 102', title: 'Engineering Workshop', exam_type: 'CBT/CBE', icon: 'cogs', drive_link: 'https://drive.google.com/drive/folders/1Tm8klewBc9wvcPuqLuNQUNRZFf2ZpVQF', topics: ['General safety', 'Workshop measurements', 'Engineering materials', 'Machining'], tips: ['Wear blue lab coat', 'Buy the manual'] },
+        { code: 'PHY 102', title: 'General Physics II', exam_type: 'CBT/CBE', icon: 'fire', drive_link: 'https://drive.google.com/drive/folders/1rt62SVxQ8QThNwhcKTzhF8imHRkE4jrN', topics: ['Electrostatics', 'Electric fields', 'Current electricity', 'Magnetic fields'], tips: ['Practice questions', 'Buy manual'] },
         { code: 'PHY 108', title: 'General Physics Practical II', exam_type: 'CBE Only', icon: 'vials', drive_link: 'https://drive.google.com/drive/folders/1mcND2jeXemL3NcZh4yXqkvCInj7WEXVJ', topics: ['Resistor arrangements', 'Wheatstone bridge', 'Specific heat capacity', 'Latent heat'], tips: ['Practical manual required', 'No CBT'] },
-        { code: 'CSC 102', title: 'Introduction to Computer', exam_type: 'CBT', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/19JVqvYQhr9lc1z8LfHgTSq_2tdl3b7vf', topics: ['Computers overview', 'Hardware and software', 'Programming languages', 'Visual Basic'], tips: ['Read slides', 'Buy manual'] },
-        { code: 'BIO 102', title: 'General Biology II', exam_type: 'CBT', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/1N2xzuPmM-Oty_bYMePSew1Z26GkPK1jv', topics: ['Animal kingdom', 'Protozoans', 'Arthropods', 'Ecology'], tips: ['Extensive slides', 'Know characteristics'] },
+        { code: 'CSC 102', title: 'Introduction to Computer', exam_type: 'CBT/CBE', icon: 'laptop-code', drive_link: 'https://drive.google.com/drive/folders/19JVqvYQhr9lc1z8LfHgTSq_2tdl3b7vf', topics: ['Computers overview', 'Hardware and software', 'Programming languages', 'Visual Basic'], tips: ['Read slides', 'Buy manual'] },
+        { code: 'BIO 102', title: 'General Biology II', exam_type: 'CBT/CBE', icon: 'dna', drive_link: 'https://drive.google.com/drive/folders/1N2xzuPmM-Oty_bYMePSew1Z26GkPK1jv', topics: ['Animal kingdom', 'Protozoans', 'Arthropods', 'Ecology'], tips: ['Extensive slides', 'Know characteristics'] },
         { code: 'BIO 104', title: 'Practical Biology II', exam_type: 'CBE Only', icon: 'microscope', drive_link: 'https://drive.google.com/drive/folders/1FTyWrbkWCsQyBkHQu5b_r2gsP0PG4jNk', topics: ['Protozoa', 'Worms', 'Arthropods', 'Mammals'], tips: ['Review BIO 102', 'Buy manual'] },
-        { code: 'CHE 102', title: 'General Chemistry II', exam_type: 'CBT', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/143I5Bv1eD-Xu8cHvy7CmeLaRFSotDwmW', topics: ['Organic chemistry', 'Hydrocarbons', 'Functional groups'], tips: ['Challenging course', 'Study tutorials'] },
+        { code: 'CHE 102', title: 'General Chemistry II', exam_type: 'CBT/CBE', icon: 'flask', drive_link: 'https://drive.google.com/drive/folders/143I5Bv1eD-Xu8cHvy7CmeLaRFSotDwmW', topics: ['Organic chemistry', 'Hydrocarbons', 'Functional groups'], tips: ['Challenging course', 'Study tutorials'] },
         { code: 'CHE 104', title: 'Practical Chemistry II', exam_type: 'CBE Only', icon: 'vial', drive_link: 'https://drive.google.com/drive/folders/1riZnl__fhcNN11HI4rQGUkrx4GaHYexP', topics: ['Separation techniques', 'Solutions', 'Qualitative analysis'], tips: ['Buy manual', 'No CBT'] },
-        { code: 'GNS 102', title: 'Use of English II', exam_type: 'CBT', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/19mYRy9HH3fBJ27rAqS2X9y3r5tKqTFLk', topics: ['Reading comprehension', 'Writing process', 'Report structuring'], tips: ['Complete assignments'] },
-        { code: 'GNS 106', title: 'Philosophy, Logic & Science', exam_type: 'CBT', icon: 'book', drive_link: 'https://drive.google.com/drive/folders/1uKJY-ntTQKmn9dXKtSeT9thn-5-6KWuQ', topics: ['Philosophy', 'Logic', 'Fallacies', 'Ethics'], tips: ['Read and understand thoroughly'] }
+        { code: 'GNS 102', title: 'Use of English II', exam_type: 'CBT/CBE', icon: 'language', drive_link: 'https://drive.google.com/drive/folders/19mYRy9HH3fBJ27rAqS2X9y3r5tKqTFLk', topics: ['Reading comprehension', 'Writing process', 'Report structuring'], tips: ['Complete assignments'] },
+        { code: 'GNS 106', title: 'Philosophy, Logic & Science', exam_type: 'CBT/CBE', icon: 'book', drive_link: 'https://drive.google.com/drive/folders/1uKJY-ntTQKmn9dXKtSeT9thn-5-6KWuQ', topics: ['Philosophy', 'Logic', 'Fallacies', 'Ethics'], tips: ['Read and understand thoroughly'] }
     ];
 
     async function loadCourses() {
@@ -1085,22 +1416,62 @@
             return;
         }
         courses.forEach(c => {
+            const badges = [];
+            if (c.exam_type) {
+                badges.push(`<span class="course-badge exam"><i class="fas fa-file-alt"></i> ${U.escapeHtml(c.exam_type)}</span>`);
+            }
+            if (c.is_manual_free) {
+                badges.push(`<span class="course-badge free"><i class="fas fa-gift"></i> Free Manual</span>`);
+            } else if (c.manual_price) {
+                badges.push(`<span class="course-badge price"><i class="fas fa-tag"></i> ${U.formatNaira(c.manual_price)}</span>`);
+            }
+            if (c.warnings && c.warnings.length > 0) {
+                badges.push(`<span class="course-badge warn"><i class="fas fa-exclamation-triangle"></i> ${c.warnings.length} Warning${c.warnings.length > 1 ? 's' : ''}</span>`);
+            }
+
+            const synopsis = c.full_synopsis || (c.topics || []).join('. ');
+            const shortSynopsis = U.truncate(synopsis, 200);
+
+            let warningsHtml = '';
+            if (c.warnings && c.warnings.length > 0) {
+                warningsHtml = `
+                    <div class="course-warnings">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Important Warnings</h5>
+                        <ul>${c.warnings.map(w => `<li>${U.escapeHtml(w)}</li>`).join('')}</ul>
+                    </div>
+                `;
+            }
+
             const topicsHtml = (c.topics || []).map(t => `<li style="font-size:0.85rem; color:var(--gray-600); margin-bottom:5px;">• ${U.escapeHtml(t)}</li>`).join('');
-            const tipsHtml = (c.tips || []).map(t => `<li>${U.escapeHtml(t)}</li>`).join('');
+
             const card = document.createElement('div');
             card.className = 'battle-plan-card';
             card.innerHTML = `
-                <h4>${U.escapeHtml(c.code)} <span class="exam-type">${U.escapeHtml(c.exam_type || '')}</span></h4>
-                <p style="font-weight:bold; color:var(--secondary); margin-bottom:5px;">${U.escapeHtml(c.title)}</p>
-                <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:10px;"><strong>Topics:</strong> ${topicsHtml ? '' : U.escapeHtml((c.topics || []).join(', '))}</p>
-                ${topicsHtml ? `<ul style="list-style:none; padding:0; margin-bottom:10px;">${topicsHtml}</ul>` : ''}
-                ${tipsHtml ? `<ul style="list-style:none; padding:0; font-size:0.85rem; color:var(--gray-700); margin-bottom:15px;">${tipsHtml}</ul>` : ''}
-                ${c.drive_link ? `<a href="${U.escapeHtml(c.drive_link)}" target="_blank" style="font-size:0.85rem; color:#4285F4; font-weight:bold; text-decoration:none;"><i class="fab fa-google-drive"></i> ${U.escapeHtml(c.code)} Materials</a>` : ''}
+                <h4>${U.escapeHtml(c.code)}</h4>
+                <p style="font-weight:bold; color:var(--secondary); margin-bottom:8px;">${U.escapeHtml(c.title)}</p>
+                <div class="course-badge-row">${badges.join('')}</div>
+                <p style="font-size:0.88rem; color:var(--gray-600); margin-bottom:10px; line-height:1.5;">${U.escapeHtml(shortSynopsis)}</p>
+                <div class="accordion-container" style="margin:10px 0;">
+                    <div class="accordion-item">
+                        <div class="accordion-header" style="font-size:0.85rem; padding:12px 15px;">Full Synopsis & Details <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content">
+                            <p style="font-size:0.9rem; margin-bottom:12px;"><strong>Full Synopsis:</strong></p>
+                            <p style="font-size:0.88rem; line-height:1.6; margin-bottom:15px;">${U.escapeHtml(synopsis)}</p>
+                            ${topicsHtml ? `<p style="font-size:0.85rem; margin-bottom:8px;"><strong>Key Topics:</strong></p><ul style="list-style:none; padding:0; margin-bottom:10px;">${topicsHtml}</ul>` : ''}
+                            ${warningsHtml}
+                            ${c.manual_name ? `<p style="font-size:0.85rem; margin-top:10px;"><strong>Manual:</strong> ${U.escapeHtml(c.manual_name)} — ${c.is_manual_free ? 'Free' : U.formatNaira(c.manual_price || 0)} (${U.escapeHtml(c.manual_year || '')})</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+                ${c.drive_link ? `<a href="${U.escapeHtml(c.drive_link)}" target="_blank" style="font-size:0.85rem; color:#4285F4; font-weight:bold; text-decoration:none; display:inline-block; margin-top:8px;"><i class="fab fa-google-drive"></i> ${U.escapeHtml(c.code)} Materials</a>` : ''}
             `;
             grid.appendChild(card);
         });
+
+        setupAccordions();
     }
 
+    // ---------- CALENDAR ----------
     async function loadCalendar() {
         try {
             const res = await DB.Calendar.list({ session: '2026/2027', semester: 'second' });
@@ -1169,6 +1540,7 @@
         });
     }
 
+    // ---------- FORM ----------
     async function handleFormSubmit(e) {
         e.preventDefault();
         const submitBtn = document.getElementById('submitBtn');
@@ -1340,6 +1712,8 @@
 
     function setupAccordions() {
         document.querySelectorAll('.accordion-header').forEach(header => {
+            if (header.dataset.bound === 'true') return;
+            header.dataset.bound = 'true';
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const isActive = item.classList.contains('active');
@@ -1386,6 +1760,9 @@
         loadAnnouncement();
         loadCourses();
         loadCalendar();
+        loadMindset();
+        loadManuals();
+        loadGlossary();
 
         const yearEl = document.getElementById('currentYear');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
