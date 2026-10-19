@@ -12,10 +12,13 @@
     <style>
         html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         html, body { max-width: 100vw !important; overflow-x: hidden !important; }
+        
+        /* Mobile font sizing */
         @media (max-width: 768px) {
             body, p, span, a, input, select, textarea, button, li, .radio-label, .text-sm, .text-xs {
-                font-size: 16px !important; line-height: 1.6 !important;
+                font-size: 15px !important; line-height: 1.5 !important;
             }
+            h1 { font-size: 1.5rem !important; margin-bottom: 4px !important; }
         }
 
         :root {
@@ -38,7 +41,7 @@
         /* ============================================================
            ACCORDION
            ============================================================ */
-        .accordion-container { display: flex; flex-direction: column; gap: 15px; }
+        .accordion-container { display: flex; flex-direction: column; gap: 12px; }
         .accordion-item {
             background: white; border-radius: 12px; overflow: hidden;
             border: 1px solid var(--gray-200);
@@ -46,7 +49,7 @@
             transition: all 0.3s ease;
         }
         .accordion-header {
-            padding: 18px 20px; font-weight: 800; color: var(--primary);
+            padding: 16px 20px; font-weight: 800; color: var(--primary);
             background: #f8fafc;
             display: flex; justify-content: space-between; align-items: center;
             cursor: pointer; user-select: none; font-size: 1.05rem;
@@ -61,7 +64,7 @@
             background: white; padding: 0 20px;
         }
         .accordion-item.active .accordion-content {
-            max-height: 2500px; padding: 25px 20px;
+            max-height: 3500px; padding: 20px;
             border-top: 1px solid var(--gray-200);
         }
         .accordion-item.active .accordion-header i.fa-chevron-down {
@@ -72,12 +75,18 @@
             border-color: #bfdbfe;
         }
 
+        /* Mobile stacking for inputs */
+        @media (max-width: 500px) {
+            .row-stack { flex-direction: column; gap: 8px !important; }
+            .row-stack input, .row-stack select { width: 100% !important; }
+        }
+
         /* ============================================================
            NAV
            ============================================================ */
         .nav-bar {
             background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
-            padding: 1rem 2rem; display: flex; justify-content: space-between;
+            padding: 1rem 1.5rem; display: flex; justify-content: space-between;
             align-items: center; flex-wrap: wrap; gap: 1rem;
             position: sticky; top: 0; z-index: 100;
         }
@@ -85,40 +94,38 @@
             display: flex; align-items: center; gap: 10px;
             color: white; font-weight: bold; font-size: 1.2rem;
         }
-        .nav-links { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        .nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
         .nav-btn {
             background: rgba(255, 255, 255, 0.15); color: white; padding: 8px 16px;
-            border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
             transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.2);
             display: inline-flex; align-items: center; gap: 8px;
         }
         .nav-btn:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
         .nav-btn.marketplace-btn { background: var(--accent); color: var(--primary); border: none; }
-        .nav-btn.marketplace-btn:hover { background: #e6b800; }
         .nav-btn.admin-btn { background: rgba(0, 0, 0, 0.2); }
         .menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
         @media (max-width: 768px) {
-            .nav-bar { padding: 1rem; flex-direction: row; }
             .nav-logo { flex: 1; font-size: 1.1rem; }
             .menu-btn { display: block; order: 2; }
-            .nav-links { display: none; width: 100%; flex-direction: column; order: 3; margin-top: 10px; gap: 10px; }
+            .nav-links { display: none; width: 100%; flex-direction: column; order: 3; margin-top: 10px; gap: 8px; }
             .nav-links.show { display: flex; }
             .nav-btn { width: 100%; justify-content: center; padding: 12px; }
         }
 
         /* ============================================================
-           PAGE DISCLAIMER (single light line)
+           HERO (Compact)
            ============================================================ */
-        .page-disclaimer {
-            background: #f1f5f9; border: 1px solid var(--gray-200);
-            color: var(--gray-600); font-size: 0.82rem;
-            padding: 10px 16px; border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex; align-items: center; gap: 10px;
-            line-height: 1.5;
+        .compact-hero {
+            background: var(--primary);
+            color: white;
+            padding: 20px 16px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
         }
-        .page-disclaimer i { color: var(--gray-500); flex-shrink: 0; }
+        .compact-hero h1 { font-size: 1.6rem; font-weight: 900; margin: 0 0 4px 0; line-height: 1.2; }
+        .compact-hero p { font-size: 0.85rem; color: #93c5fd; margin: 0; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
 
         /* ============================================================
            MODAL (result)
@@ -148,22 +155,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Modal header */
         .modal-head {
-            padding: 20px 24px;
+            padding: 16px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             display: flex; justify-content: space-between; align-items: center;
             flex-shrink: 0;
         }
-        .modal-head h2 { font-size: 1.15rem; font-weight: 800; margin: 0; }
+        .modal-head h2 { font-size: 1.1rem; font-weight: 800; margin: 0; }
         .modal-head-actions { display: flex; gap: 8px; align-items: center; }
 
         .modal-head-btn {
             background: rgba(255,255,255,0.15); color: white;
             border: 1px solid rgba(255,255,255,0.25);
             padding: 7px 12px; border-radius: 8px;
-            font-size: 0.78rem; font-weight: 700;
+            font-size: 0.75rem; font-weight: 700;
             cursor: pointer; transition: 0.2s;
             display: inline-flex; align-items: center; gap: 6px;
         }
@@ -171,42 +177,39 @@
 
         .modal-close-btn {
             background: rgba(255,255,255,0.15); color: white;
-            border: none; width: 34px; height: 34px; border-radius: 50%;
+            border: none; width: 32px; height: 32px; border-radius: 50%;
             font-size: 1.1rem; cursor: pointer; transition: 0.2s;
             display: flex; align-items: center; justify-content: center;
         }
         .modal-close-btn:hover { background: rgba(255,255,255,0.3); }
 
-        /* Modal scroll body */
         .modal-body {
             overflow-y: auto;
             flex: 1;
             padding: 0;
         }
 
-        /* Big result block */
         .result-hero {
-            padding: 32px 24px 24px;
+            padding: 28px 20px 20px;
             text-align: center;
             background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
             border-bottom: 1px solid var(--gray-200);
         }
         .result-hero .label {
-            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px;
-            font-weight: 800; color: var(--gray-500); margin-bottom: 10px;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+            font-weight: 800; color: var(--gray-500); margin-bottom: 8px;
         }
         .result-hero .value {
-            font-size: 3.4rem; font-weight: 900; color: var(--primary);
+            font-size: 3.2rem; font-weight: 900; color: var(--primary);
             line-height: 1; letter-spacing: -1px;
         }
         .result-hero .suffix {
-            font-size: 1rem; color: var(--gray-500); font-weight: 600;
+            font-size: 0.95rem; color: var(--gray-500); font-weight: 600;
             margin-top: 6px;
         }
 
-        /* Sticky download bar */
         .result-actions {
-            padding: 16px 24px;
+            padding: 14px 20px;
             background: white;
             border-bottom: 1px solid var(--gray-200);
             display: flex; gap: 10px;
@@ -215,7 +218,7 @@
         .btn-download {
             flex: 1;
             background: var(--primary); color: white;
-            border: none; padding: 14px 18px;
+            border: none; padding: 12px 18px;
             border-radius: 10px; font-weight: 800; font-size: 0.95rem;
             cursor: pointer; transition: 0.2s;
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -226,16 +229,15 @@
         .btn-secondary-modal {
             background: var(--gray-100); color: var(--gray-700);
             border: 1px solid var(--gray-300);
-            padding: 14px 20px; border-radius: 10px;
+            padding: 12px 20px; border-radius: 10px;
             font-weight: 700; font-size: 0.95rem;
             cursor: pointer; transition: 0.2s;
         }
         .btn-secondary-modal:hover { background: var(--gray-200); }
 
-        /* Breakdown list */
-        .breakdown-section { padding: 20px 24px; }
+        .breakdown-section { padding: 20px; }
         .breakdown-section h4 {
-            color: var(--gray-700); font-size: 0.85rem;
+            color: var(--gray-700); font-size: 0.8rem;
             text-transform: uppercase; letter-spacing: 1px;
             font-weight: 800; margin-bottom: 16px;
             display: flex; align-items: center; gap: 8px;
@@ -262,17 +264,16 @@
         }
         .breakdown-list li strong { color: var(--primary); flex-shrink: 0; }
 
-        /* Footer disclaimer (one line) */
         .modal-footer-note {
-            padding: 14px 24px 22px;
+            padding: 12px 20px 20px;
             text-align: center;
-            font-size: 0.75rem; color: var(--gray-500);
-            line-height: 1.5;
+            font-size: 0.7rem; color: var(--gray-400); /* Faded */
+            line-height: 1.4;
             border-top: 1px solid var(--gray-100);
         }
 
         /* ============================================================
-           PDF (hidden offscreen — matched to modal visuals)
+           PDF (hidden offscreen)
            ============================================================ */
         #pdf-wrapper {
             position: fixed !important;
@@ -376,12 +377,8 @@
             border-top: 1px solid var(--gray-200);
             text-align: center;
             font-size: 9px;
-            color: var(--gray-500);
+            color: var(--gray-400); /* Faded */
             line-height: 1.6;
-        }
-        .pdf-footer .notice {
-            color: var(--gray-600); font-weight: 600;
-            margin-bottom: 4px;
         }
 
         /* ============================================================
@@ -432,12 +429,12 @@
                 height: 100vh;
                 max-width: 100%;
             }
-            .result-hero { padding: 24px 20px 20px; }
+            .result-hero { padding: 20px 16px 16px; }
             .result-hero .value { font-size: 2.6rem; }
-            .result-actions { padding: 12px 20px; }
-            .breakdown-section { padding: 16px 20px; }
-            .modal-footer-note { padding: 12px 20px 18px; }
-            .modal-head { padding: 16px 20px; }
+            .result-actions { padding: 12px 16px; }
+            .breakdown-section { padding: 16px; }
+            .modal-footer-note { padding: 12px 16px 16px; }
+            .modal-head { padding: 16px; }
             .modal-head h2 { font-size: 1rem; }
             .btn-download { font-size: 0.9rem; padding: 12px; }
             .btn-secondary-modal { font-size: 0.9rem; padding: 12px 16px; }
@@ -462,119 +459,106 @@
 
     <div id="notifContainer"></div>
 
-    <div class="max-w-4xl mx-auto mt-8 px-4">
+    <!-- Compact Hero -->
+    <div class="compact-hero">
+        <h1>Academic Evaluation Tool</h1>
+        <p>Aggregate • GPA • CGPA Calculator</p>
+    </div>
 
-        <!-- Page-level disclaimer (single line, subtle) -->
-        <div class="page-disclaimer">
-            <i class="fas fa-info-circle"></i>
-            <span>Independent student tool. Estimates for personal guidance — verify final results with official FUTA channels.</span>
-        </div>
+    <div class="max-w-4xl mx-auto mt-6 px-4">
 
-        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden mb-8">
-            <div class="bg-blue-900 px-8 py-6 text-white text-center">
-                <h1 class="text-3xl font-extrabold tracking-tight mb-2">Academic Evaluation Tool</h1>
-                <p class="text-blue-200 text-sm font-medium">Aggregate • GPA • CGPA Calculator</p>
+        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden mb-8 p-4 md:p-6">
+
+            <!-- Student Name (Optional) -->
+            <div class="mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-sm font-bold text-blue-900 mb-1">Student Identification (Optional)</label>
+                <input type="text" id="student-name" class="w-full border border-slate-300 rounded-lg p-3 outline-none focus:border-blue-500 input-focus-ring transition text-sm" placeholder="Enter Full Name (e.g., Doe, John)">
+                <p class="text-xs text-slate-500 mt-2"><i class="fas fa-info-circle mr-1"></i> Name appears on the PDF report.</p>
             </div>
 
-            <div class="p-6 md:p-8">
+            <!-- Accordions -->
+            <div class="accordion-container">
 
-                <div class="mb-6 bg-blue-50 p-5 rounded-xl border border-blue-200">
-                    <h3 class="text-blue-900 font-bold mb-2"><i class="fas fa-lightbulb text-amber-500 mr-2"></i>How to Use This Tool</h3>
-                    <ul class="list-disc ml-5 text-sm text-blue-800 space-y-1">
-                        <li>Scroll down and click on any calculator (<strong>Admission Aggregate</strong>, <strong>Semester GPA</strong>, or <strong>Cumulative CGPA</strong>) to expand it.</li>
-                        <li>Enter your details, tap <strong>Calculate</strong>, and download a clean PDF report of your result.</li>
-                        <li>Click the <strong>Menu icon (<i class="fas fa-bars"></i>)</strong> at the top to switch between guides, the marketplace, or admin.</li>
-                    </ul>
-                </div>
-
-                <div class="mb-8 bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <label class="block text-sm font-bold text-blue-900 mb-2">Student Identification (Optional)</label>
-                    <input type="text" id="student-name" class="w-full border border-slate-300 rounded-lg p-3 outline-none focus:border-blue-500 input-focus-ring transition" placeholder="Enter Full Name (e.g., Doe, John)">
-                    <p class="text-xs text-slate-500 mt-2"><i class="fas fa-info-circle mr-1"></i> Your name appears on the PDF report for personal reference only.</p>
-                </div>
-
-                <div class="accordion-container">
-
-                    <!-- AGGREGATE -->
-                    <div class="accordion-item" id="acc-aggregate">
-                        <div class="accordion-header" onclick="toggleAccordion('aggregate')">
-                            <span><i class="fas fa-percentage mr-2"></i> 1. Admission Aggregate</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="mb-6 flex gap-3 items-start bg-amber-50 p-4 rounded-lg border border-amber-200 text-amber-800 text-sm">
-                                <i class="fas fa-info-circle mt-0.5"></i>
-                                <p><strong>How it works:</strong> FUTA uses a 75:25 screening ratio. Your UTME score is weighted at 75%, and your 5 core O'Level subjects are weighted at 25%.</p>
-                            </div>
-                            <div class="space-y-6">
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-2">JAMB UTME Score</label>
-                                    <input type="number" id="jamb-score" class="w-full border border-slate-300 rounded-lg p-3 outline-none focus:border-blue-500 input-focus-ring" placeholder="Score out of 400" max="400" min="0">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-3">Core O'Level Subjects (5 Required)</label>
-                                    <div class="space-y-3" id="olevel-container"></div>
-                                </div>
-                                <button onclick="calculateAggregateAndShowPopup()" class="w-full mt-6 bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
-                                    <i class="fas fa-calculator mr-2"></i> Calculate Aggregate Score
-                                </button>
-                            </div>
-                        </div>
+                <!-- AGGREGATE -->
+                <div class="accordion-item active" id="acc-aggregate">
+                    <div class="accordion-header" onclick="toggleAccordion('aggregate')">
+                        <span><i class="fas fa-percentage mr-2"></i> 1. Admission Aggregate</span>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-
-                    <!-- GPA -->
-                    <div class="accordion-item" id="acc-gpa">
-                        <div class="accordion-header" onclick="toggleAccordion('gpa')">
-                            <span><i class="fas fa-chart-bar mr-2"></i> 2. Semester GPA</span>
-                            <i class="fas fa-chevron-down"></i>
+                    <div class="accordion-content">
+                        <div class="mb-5 flex gap-3 items-start bg-amber-50 p-3 rounded-lg border border-amber-200 text-amber-800 text-xs">
+                            <i class="fas fa-info-circle mt-0.5"></i>
+                            <p><strong>How it works:</strong> FUTA uses a 75:25 screening ratio. Your UTME score is weighted at 75%, and your 5 core O'Level subjects are weighted at 25%.</p>
                         </div>
-                        <div class="accordion-content">
-                            <div class="mb-6 flex gap-3 items-start bg-blue-50 p-4 rounded-lg border border-blue-200 text-blue-800 text-sm">
-                                <i class="fas fa-check-circle mt-0.5"></i>
-                                <p><strong>How it works:</strong> GPA is calculated by dividing Total Credit Points (TCP) by Total Load Units (TLU).</p>
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">JAMB UTME Score</label>
+                                <input type="number" id="jamb-score" class="w-full border border-slate-300 rounded-lg p-3 outline-none focus:border-blue-500 input-focus-ring" placeholder="Score out of 400" max="400" min="0">
                             </div>
-                            <div id="gpa-rows" class="space-y-3 mb-6"></div>
-                            <div class="flex justify-center mb-8 border-t border-dashed border-slate-300 pt-4">
-                                <button onclick="addGPARow()" class="flex items-center gap-1 text-blue-600 text-sm font-bold hover:text-blue-800 transition bg-blue-50 px-4 py-2 rounded-full">
-                                    <i class="fas fa-plus text-xs"></i> Add Another Course
-                                </button>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Core O'Level Subjects (5 Required)</label>
+                                <div class="space-y-3" id="olevel-container"></div>
                             </div>
-                            <button onclick="calculateGPAAndShowPopup()" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
-                                <i class="fas fa-calculator mr-2"></i> Calculate GPA
+                            <button onclick="calculateAggregateAndShowPopup()" class="w-full mt-4 bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
+                                <i class="fas fa-calculator mr-2"></i> Calculate Aggregate Score
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- CGPA -->
-                    <div class="accordion-item" id="acc-cgpa">
-                        <div class="accordion-header" onclick="toggleAccordion('cgpa')">
-                            <span><i class="fas fa-chart-line mr-2"></i> 3. Cumulative CGPA</span>
-                            <i class="fas fa-chevron-down"></i>
+                <!-- GPA -->
+                <div class="accordion-item" id="acc-gpa">
+                    <div class="accordion-header" onclick="toggleAccordion('gpa')">
+                        <span><i class="fas fa-chart-bar mr-2"></i> 2. Semester GPA</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mb-5 flex gap-3 items-start bg-blue-50 p-3 rounded-lg border border-blue-200 text-blue-800 text-xs">
+                            <i class="fas fa-check-circle mt-0.5"></i>
+                            <p><strong>How it works:</strong> GPA is calculated by dividing Total Credit Points (TCP) by Total Load Units (TLU).</p>
                         </div>
-                        <div class="accordion-content">
-                            <div class="mb-6 flex gap-3 items-start bg-emerald-50 p-4 rounded-lg border border-emerald-200 text-emerald-800 text-sm">
-                                <i class="fas fa-exclamation-triangle mt-0.5"></i>
-                                <p><strong>Crucial Rule:</strong> Never calculate CGPA by averaging GPAs. Sum all historical TCP and divide by historical TLU.</p>
-                            </div>
-                            <div id="cgpa-rows" class="space-y-3 mb-6"></div>
-                            <div class="flex justify-center mb-8 border-t border-dashed border-slate-300 pt-4">
-                                <button onclick="addCGPARow()" class="flex items-center gap-1 text-blue-600 text-sm font-bold hover:text-blue-800 transition bg-blue-50 px-4 py-2 rounded-full">
-                                    <i class="fas fa-plus text-xs"></i> Add Past Semester
-                                </button>
-                            </div>
-                            <button onclick="calculateCGPAAndShowPopup()" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
-                                <i class="fas fa-calculator mr-2"></i> Calculate CGPA
+                        <div id="gpa-rows" class="space-y-3 mb-5"></div>
+                        <div class="flex justify-center mb-6 border-t border-dashed border-slate-300 pt-4">
+                            <button onclick="addGPARow()" class="flex items-center gap-1 text-blue-600 text-sm font-bold hover:text-blue-800 transition bg-blue-50 px-4 py-2 rounded-full">
+                                <i class="fas fa-plus text-xs"></i> Add Another Course
                             </button>
                         </div>
+                        <button onclick="calculateGPAAndShowPopup()" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
+                            <i class="fas fa-calculator mr-2"></i> Calculate GPA
+                        </button>
                     </div>
-
                 </div>
+
+                <!-- CGPA -->
+                <div class="accordion-item" id="acc-cgpa">
+                    <div class="accordion-header" onclick="toggleAccordion('cgpa')">
+                        <span><i class="fas fa-chart-line mr-2"></i> 3. Cumulative CGPA</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mb-5 flex gap-3 items-start bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-emerald-800 text-xs">
+                            <i class="fas fa-exclamation-triangle mt-0.5"></i>
+                            <p><strong>Crucial Rule:</strong> Never calculate CGPA by averaging GPAs. Sum all historical TCP and divide by historical TLU.</p>
+                        </div>
+                        <div id="cgpa-rows" class="space-y-3 mb-5"></div>
+                        <div class="flex justify-center mb-6 border-t border-dashed border-slate-300 pt-4">
+                            <button onclick="addCGPARow()" class="flex items-center gap-1 text-blue-600 text-sm font-bold hover:text-blue-800 transition bg-blue-50 px-4 py-2 rounded-full">
+                                <i class="fas fa-plus text-xs"></i> Add Past Semester
+                            </button>
+                        </div>
+                        <button onclick="calculateCGPAAndShowPopup()" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-lg hover:bg-green-700 active:bg-green-800 transition shadow-md hover:shadow-lg">
+                            <i class="fas fa-calculator mr-2"></i> Calculate CGPA
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="text-center mt-6 text-slate-500 text-xs">
+        <!-- Footer Info (moved down, understated) -->
+        <div class="text-center mt-6 text-slate-400 text-xs space-y-1 pb-6">
             <p><i class="fas fa-heart text-red-400 mr-1"></i> Independent Student Tool | Not Officially Affiliated with FUTA</p>
-            <p class="mt-1">Designed & Provided by O'yemi | For guidance purposes only</p>
+            <p>Designed & Provided by O'yemi | For guidance purposes only</p>
         </div>
     </div>
 
@@ -638,8 +622,6 @@
 
         // ---------- DATA ----------
         const olevelGrades = { "A1": 80, "B2": 72, "B3": 67, "C4": 62, "C5": 57, "C6": 52 };
-
-        let currentCalculation = null;
 
         // ---------- PROFILE HELPERS ----------
         function getProfile() {
@@ -723,7 +705,6 @@
             document.body.appendChild(overlay);
             document.body.style.overflow = 'hidden';
 
-            // Wire up close
             const close = () => {
                 overlay.remove();
                 document.body.style.overflow = '';
@@ -735,7 +716,6 @@
             overlay.querySelector('#modalCloseX').addEventListener('click', close);
             overlay.querySelector('#modalCloseBottom').addEventListener('click', close);
 
-            // Wire up downloads (both buttons)
             overlay.querySelector('#modalTopDownload').addEventListener('click', () => downloadPDF(payload));
             overlay.querySelector('#modalBottomDownload').addEventListener('click', (e) => {
                 const btn = e.currentTarget;
@@ -747,17 +727,15 @@
                 });
             });
 
-            // Auto scroll to top of modal body (safety)
             setTimeout(() => {
                 const body = overlay.querySelector('#modalBody');
                 if (body) body.scrollTop = 0;
             }, 50);
 
-            // Focus trap: focus the close button
             setTimeout(() => overlay.querySelector('#modalCloseX')?.focus(), 100);
         }
 
-        // ---------- BUILD BREAKDOWN HTML (used by modal) ----------
+        // ---------- BUILD BREAKDOWN HTML ----------
         function buildBreakdownHTML(type, data) {
             if (type === 'aggregate') {
                 let subjectsHtml = '';
@@ -825,7 +803,7 @@
             return '';
         }
 
-        // ---------- BUILD PDF HTML (from same payload) ----------
+        // ---------- BUILD PDF HTML ----------
         function buildPDFHTML(payload) {
             const studentName = payload.studentName || 'Anonymous Student';
             const dateStr = new Date().toLocaleString('en-NG', {
@@ -937,8 +915,6 @@
             document.getElementById('pdf-date').textContent = pdfParts.date;
 
             const element = document.getElementById('pdf-container');
-            const wrapper = document.getElementById('pdf-wrapper');
-
             element.style.display = 'block';
 
             const cleanName = (payload.studentName || 'student').replace(/[^a-z0-9]/gi, '_').toLowerCase();
@@ -1128,16 +1104,18 @@
         window.addGPARow = function () {
             const container = document.getElementById('gpa-rows');
             const row = document.createElement('div');
-            row.className = "flex gap-3 gpa-row";
+            row.className = "flex gap-3 gpa-row row-stack mb-2";
             row.innerHTML = `
                 <input type="text" placeholder="Course Code" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <input type="number" placeholder="Units" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-unit" min="1" max="6">
-                <select class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm gpa-grade bg-white">
-                    <option value="-1">Grade</option>
-                    <option value="5">A</option><option value="4">B</option>
-                    <option value="3">C</option><option value="2">D</option>
-                    <option value="1">E</option><option value="0">F</option>
-                </select>
+                <div class="flex gap-3 flex-1">
+                    <input type="number" placeholder="Units" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm gpa-unit" min="1" max="6">
+                    <select class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm gpa-grade bg-white">
+                        <option value="-1">Grade</option>
+                        <option value="5">A</option><option value="4">B</option>
+                        <option value="3">C</option><option value="2">D</option>
+                        <option value="1">E</option><option value="0">F</option>
+                    </select>
+                </div>
             `;
             container.appendChild(row);
         };
@@ -1145,11 +1123,13 @@
         window.addCGPARow = function () {
             const container = document.getElementById('cgpa-rows');
             const row = document.createElement('div');
-            row.className = "flex gap-3 cgpa-row";
+            row.className = "flex gap-3 cgpa-row row-stack mb-2";
             row.innerHTML = `
                 <input type="text" placeholder="Level/Semester" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <input type="number" placeholder="TCP" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tcp">
-                <input type="number" placeholder="TLU" class="border border-slate-300 rounded-lg p-3 flex-1 w-1/4 outline-none focus:border-blue-500 text-sm cgpa-tlu">
+                <div class="flex gap-3 flex-1">
+                    <input type="number" placeholder="TCP" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm cgpa-tcp">
+                    <input type="number" placeholder="TLU" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm cgpa-tlu">
+                </div>
             `;
             container.appendChild(row);
         };
@@ -1214,10 +1194,10 @@
             olevelCont.innerHTML = '';
             for (let i = 1; i <= 5; i++) {
                 const row = document.createElement('div');
-                row.className = 'flex gap-3 olevel-row';
+                row.className = 'flex gap-3 olevel-row row-stack mb-2';
                 row.innerHTML = `
-                    <input type="text" placeholder="Subject ${i} (e.g. Physics)" class="border border-slate-300 rounded-lg p-3 w-2/3 text-sm outline-none focus:border-blue-500 olevel-subj">
-                    <select class="border border-slate-300 rounded-lg p-3 w-1/3 text-sm outline-none focus:border-blue-500 olevel-grade bg-white">
+                    <input type="text" placeholder="Subject ${i} (e.g. Physics)" class="border border-slate-300 rounded-lg p-3 flex-2 w-2/3 text-sm outline-none focus:border-blue-500 olevel-subj">
+                    <select class="border border-slate-300 rounded-lg p-3 flex-1 w-1/3 text-sm outline-none focus:border-blue-500 olevel-grade bg-white">
                         <option value="-1">Grade</option>
                         ${Object.entries(olevelGrades).map(([grade, val]) => `<option value="${val}">${grade}</option>`).join('')}
                     </select>
@@ -1225,7 +1205,7 @@
                 olevelCont.appendChild(row);
             }
 
-            for (let i = 0; i < 6; i++) addGPARow();
+            for (let i = 0; i < 4; i++) addGPARow();
             for (let i = 0; i < 2; i++) addCGPARow();
 
             loadNotifications();
