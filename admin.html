@@ -325,7 +325,7 @@
             <div id="loginError" class="login-error"></div>
         </form>
         <div class="login-back">
-            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Guide</a>
+            <a href="first-semester.html"><i class="fas fa-arrow-left"></i> Back to Guide</a>
         </div>
     </div>
 </div>
@@ -353,6 +353,7 @@
             <li><a href="#" data-page="content"><i class="fas fa-edit"></i> Content Editor</a></li>
             <li><a href="#" data-page="sessions"><i class="fas fa-graduation-cap"></i> Sessions</a></li>
             <li><a href="#" data-page="activity"><i class="fas fa-history"></i> Activity Log</a></li>
+            <li><a href="#" data-page="tutors"><i class="fas fa-chalkboard-teacher"></i> Tutors / Genius Point</a></li> 
             <li><a href="#" data-page="settings"><i class="fas fa-sliders-h"></i> Settings</a></li>
         </ul>
         <div class="sidebar-footer">
@@ -735,8 +736,27 @@
         </section>
 
         <!-- SETTINGS -->
-        <section id="page-settings" class="page-section">
+        <!-- TUTORS / GENIUS POINT -->
+        <section id="page-tutors" class="page-section">
             <div class="panel">
+                <div class="panel-head">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Tutors / Genius Point Academy</h3>
+                    <div class="panel-actions">
+                        <button class="btn btn-primary btn-sm" onclick="openTutorModal()"><i class="fas fa-plus"></i> Add Tutor</button>
+                        <button class="btn btn-outline btn-sm" onclick="loadTutors()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <p style="color: var(--gray-500); margin-bottom: 15px; font-size: 0.88rem;">
+                    These tutors appear in the Genius Point Academy chooser on the landing page and in the semester guides. Only <strong>active</strong> tutors are shown publicly.
+                </p>
+                <div class="table-wrap" id="tutorsTable">
+                    <div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="page-settings" class="page-section">            <div class="panel">
                 <div class="panel-head"><h3><i class="fas fa-sliders-h"></i> Site Settings</h3></div>
                 <p style="color: var(--gray-500); margin-bottom: 15px;">Manage global settings. Changes take effect immediately.</p>
                 <div id="settingsForm">
@@ -793,8 +813,9 @@
     let allCalendar = [];
     let allNotifications = [];
     let allContent = [];
-    let allSessions = [];
+        let allSessions = [];
     let allActivity = [];
+    let allTutors = [];
 
     function toast(msg, type = 'info', dur = 3000) {
         const wrap = document.getElementById('toasts');
@@ -916,8 +937,9 @@
         else if (pageId === 'calendar') loadCalendar();
         else if (pageId === 'notifications') loadNotifications();
         else if (pageId === 'content') loadContent();
-        else if (pageId === 'sessions') loadSessions();
+                else if (pageId === 'sessions') loadSessions();
         else if (pageId === 'activity') loadActivity();
+        else if (pageId === 'tutors') loadTutors();
         else if (pageId === 'settings') loadSettings();
         window.scrollTo(0, 0);
     }
@@ -1985,6 +2007,160 @@
             <div class="input-group"><label>When</label><div>${U.formatDate(a.created_at)}</div></div>
             <div class="input-group"><label>Changes</label><pre style="background:var(--gray-100); padding:10px; border-radius:8px; font-size:0.75rem; overflow-x:auto; max-height:300px;">${U.escapeHtml(JSON.stringify(a.changes, null, 2))}</pre></div>
         `, `<button class="btn btn-outline" onclick="closeModal()">Close</button>`);
+    };
+
+    // ---------- TUTORS / GENIUS POINT ----------
+    async function loadTutors() {
+        const wrap = document.getElementById('tutorsTable');
+        wrap.innerHTML = '<div class="loading"><i class="fas fa-circle-notch"></i>Loading...</div>';
+        const res = await DB.Tutors.list({ onlyActive: false });
+        const rows = res.ok ? (res.data || []) : [];
+        allTutors = rows;
+
+        if (!rows.length) {
+            wrap.innerHTML = '<div class="empty-state"><i class="fas fa-chalkboard-teacher"></i><p>No tutors yet. Click <strong>Add Tutor</strong> to create the first one.</p></div>';
+            return;
+        }
+
+        let html = `<table><thead><tr>
+            <th>Order</th><th>Tutor</th><th>Role</th><th>WhatsApp</th><th>Active</th><th>Actions</th>
+        </tr></thead><tbody>`;
+
+        rows.forEach(t => {
+            html += `<tr>
+                <td>${t.display_order ?? 0}</td>
+                <td>
+                    <strong>${U.escapeHtml(t.alias)}</strong><br>
+                    <small style="color:var(--gray-500);">${U.escapeHtml(t.full_name)}</small>
+                </td>
+                <td><small>${U.escapeHtml(t.role || '—')}</small></td>
+                <td><code style="font-size:0.75rem;">${U.escapeHtml(t.whatsapp)}</code></td>
+                <td>${t.is_active ? '✅' : '❌'}</td>
+                <td><div class="actions">
+                    <button class="btn btn-warning btn-xs" onclick="toggleTutorActive('${t.id}', ${!t.is_active})" title="Toggle active">${t.is_active ? '❌' : '✅'}</button>
+                    <button class="btn btn-info btn-xs" onclick="editTutor('${t.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-xs" onclick="deleteTutor('${t.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                </div></td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
+    }
+
+    window.openTutorModal = function () {
+        openModal('Add Tutor', buildTutorForm(), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveTutor(null)">Save</button>
+        `);
+    };
+
+    window.editTutor = function (id) {
+        const t = allTutors.find(x => x.id === id);
+        if (!t) return;
+        openModal('Edit Tutor: ' + t.alias, buildTutorForm(t), `
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveTutor('${id}')">Save Changes</button>
+        `);
+    };
+
+    function buildTutorForm(t = {}) {
+        const template = t.wa_template ||
+            "Hello {alias}! I'm {student_name}, a {level} student in {department}. I found you through the FUTA Survival Guide and I'd like to ask about Genius Point Academy tutoring.";
+        return `
+            <div class="form-row-2">
+                <div class="input-group">
+                    <label>Alias (display name) *</label>
+                    <input id="tAlias" value="${U.escapeHtml(t.alias || '')}" placeholder="O'yemi">
+                </div>
+                <div class="input-group">
+                    <label>Full Name *</label>
+                    <input id="tFullName" value="${U.escapeHtml(t.full_name || '')}" placeholder="Abideen Yakub">
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group">
+                    <label>WhatsApp Number *</label>
+                    <input id="tWhatsapp" value="${U.escapeHtml(t.whatsapp || '')}" placeholder="07050376975 or 2347050376975">
+                    <div class="hint">Any format works (0705..., +234705..., 234705...). Saved in international format.</div>
+                </div>
+                <div class="input-group">
+                    <label>Icon (Font Awesome)</label>
+                    <input id="tIcon" value="${U.escapeHtml(t.avatar_icon || 'user-graduate')}" placeholder="user-graduate, square-root-variable, flask...">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Role / Tagline</label>
+                <input id="tRole" value="${U.escapeHtml(t.role || '')}" placeholder="Maths & Physics Tutor">
+            </div>
+            <div class="input-group">
+                <label>Short Bio</label>
+                <textarea id="tBio" rows="2">${U.escapeHtml(t.bio || '')}</textarea>
+            </div>
+            <div class="input-group">
+                <label>WhatsApp Message Template</label>
+                <textarea id="tTemplate" rows="4" class="code">${U.escapeHtml(template)}</textarea>
+                <div class="hint">
+                    Placeholders: <code>{alias}</code>, <code>{student_name}</code>, <code>{level}</code>, <code>{department}</code>.
+                    Filled from the visitor's saved profile when they tap "Chat".
+                </div>
+            </div>
+            <div class="form-row-2">
+                <div class="input-group">
+                    <label>Display Order</label>
+                    <input type="number" id="tOrder" value="${t.display_order ?? 0}">
+                    <div class="hint">Lower = appears first.</div>
+                </div>
+                <div class="input-group">
+                    <label>Active</label>
+                    <select id="tActive">
+                        <option value="true" ${t.is_active !== false ? 'selected' : ''}>Yes (visible)</option>
+                        <option value="false" ${t.is_active === false ? 'selected' : ''}>No (hidden)</option>
+                    </select>
+                </div>
+            </div>
+        `;
+    }
+
+    window.saveTutor = async function (id) {
+        const payload = {
+            alias: document.getElementById('tAlias').value.trim(),
+            full_name: document.getElementById('tFullName').value.trim(),
+            whatsapp: document.getElementById('tWhatsapp').value.trim(),
+            role: document.getElementById('tRole').value.trim() || null,
+            bio: document.getElementById('tBio').value.trim() || null,
+            avatar_icon: document.getElementById('tIcon').value.trim() || 'user-graduate',
+            wa_template: document.getElementById('tTemplate').value.trim() || null,
+            display_order: parseInt(document.getElementById('tOrder').value) || 0,
+            is_active: document.getElementById('tActive').value === 'true'
+        };
+
+        if (!payload.alias || !payload.full_name || !payload.whatsapp) {
+            return toast('Alias, full name, and WhatsApp number are required', 'warning');
+        }
+
+        const res = id ? await DB.Tutors.update(id, payload) : await DB.Tutors.create(payload);
+        if (res.ok) {
+            toast('Tutor saved', 'success');
+            closeModal();
+            loadTutors();
+        } else {
+            toast('Error: ' + res.error, 'error');
+        }
+    };
+
+    window.toggleTutorActive = async function (id, val) {
+        const res = await DB.Tutors.update(id, { is_active: val });
+        if (res.ok) { toast(val ? 'Activated' : 'Deactivated', 'success'); loadTutors(); }
+        else toast('Error: ' + res.error, 'error');
+    };
+
+    window.deleteTutor = async function (id) {
+        const t = allTutors.find(x => x.id === id);
+        if (!t) return;
+        if (!confirm(`Delete tutor "${t.alias}" permanently?`)) return;
+        const res = await DB.Tutors.remove(id);
+        if (res.ok) { toast('Tutor deleted', 'success'); loadTutors(); }
+        else toast('Error: ' + res.error, 'error');
     };
 
     // ---------- SETTINGS ----------
