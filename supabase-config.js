@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — SUPABASE CONFIGURATION
 // File: supabase-config.js
-// Version: 2.2.0
+// Version: 2.3.0
 // Load this BEFORE db.js on every page
 // ============================================================
 
@@ -18,10 +18,10 @@
         supabaseAnonKey: SUPABASE_ANON_KEY,
         formSubmitEmail: 'helpinghandshallneverfall@gmail.com',
         adminEmail: 'helpinghandshallneverfall@gmail.com',
-        version: '2.2.0',
+        version: '2.3.0',
         sessionKey: 'futa_guide_session',
         profileCacheKey: 'futa_guide_admin_profile',
-        debug: false, // ✅ Off for production. Set true only when debugging.
+        debug: false,
         tables: {
             admins: 'admins',
             profiles: 'profiles',
@@ -39,7 +39,8 @@
             activity: 'activity_log',
             manuals: 'manuals',
             mindset: 'mindset_content',
-            glossary: 'glossary'
+            glossary: 'glossary',
+            tutors: 'tutors'                    // ⬅️ NEW
         }
     };
 
@@ -159,6 +160,29 @@
             a.click();
             a.remove();
             setTimeout(() => URL.revokeObjectURL(url), 1000);
+        },
+
+        // Normalise a phone number to WhatsApp wa.me format (digits only, with country code)
+        normaliseWhatsApp(phone) {
+            if (!phone) return '';
+            let digits = String(phone).replace(/\D/g, '');
+            // 0705... → 234705...
+            if (digits.length === 11 && digits.startsWith('0')) {
+                digits = '234' + digits.slice(1);
+            }
+            // 705... (10 digits, no leading 0) → 234705...
+            if (digits.length === 10 && !digits.startsWith('234')) {
+                digits = '234' + digits;
+            }
+            return digits;
+        },
+
+        // Fill a message template with placeholder values
+        fillTemplate(template, vars) {
+            if (!template) return '';
+            return template.replace(/\{(\w+)\}/g, (m, key) =>
+                vars[key] !== undefined && vars[key] !== null ? vars[key] : ''
+            );
         },
 
         toast(message, type = 'info', duration = 3000) {
