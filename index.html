@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>FUTA Freshers' Survival Guide | 2026/2027</title>
+    <title>FUTA Freshers' Survival Guide</title>
     <meta name="description" content="The complete independent survival guide for FUTA 100-level students. Registration, courses, manuals, GPA calculator, marketplace, and expert tutoring.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -28,7 +28,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: var(--light); color: var(--dark); line-height: 1.6; }
 
-        /* ---------- NOTIFICATIONS (same pattern as other pages) ---------- */
+        /* ---------- NOTIFICATIONS ---------- */
         #notifContainer {
             position: fixed; top: 80px; right: 20px; z-index: 900;
             display: flex; flex-direction: column; gap: 12px;
@@ -299,7 +299,7 @@
         .access-cta i { transition: transform 0.3s; }
         .access-card:hover .access-cta i { transform: translateX(4px); }
 
-        /* ---------- GENIUS POINT CONTACT MODAL ---------- */
+        /* ---------- TUTOR CHOOSER MODAL ---------- */
         .tutor-modal-overlay {
             position: fixed; inset: 0; background: rgba(15,23,42,0.65);
             display: none; align-items: center; justify-content: center;
@@ -386,7 +386,7 @@
         .tutor-loading i { animation: spin 1s linear infinite; margin-right: 8px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ---------- FOUNDER / TRUST ---------- */
+        /* ---------- FOUNDER ---------- */
         .founder {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white; border-radius: 20px;
@@ -480,7 +480,7 @@
         <i class="fas fa-graduation-cap"></i>
         <div>
             FUTA Survival Guide
-            <small>2026/2027 SESSION</small>
+            <small><span data-session-label>Current Session</span></small>
         </div>
     </a>
     <div class="nav-quick">
@@ -620,7 +620,7 @@
             <div class="access-cta">Browse Marketplace <i class="fas fa-arrow-right"></i></div>
         </a>
 
-        <a href="first-semester.html" class="access-card glossary" onclick="event.preventDefault(); sessionStorage.setItem('futa_open_glossary','1'); window.location.href='first-semester.html';">
+        <a href="first-semester.html#glossary" class="access-card glossary">
             <div class="access-icon"><i class="fas fa-book-reader"></i></div>
             <h3>FUTA Glossary</h3>
             <p>Every FUTA-specific term explained — German questions, CGPA, SIWES, carryover, and more. Never be confused again.</p>
@@ -678,7 +678,7 @@
         <div class="footer-col">
             <h4>Resources</h4>
             <a href="#" id="footerGeniusLink">Genius Point Academy</a>
-            <a href="first-semester.html">Glossary of Terms</a>
+            <a href="first-semester.html#glossary">Glossary of Terms</a>
             <a href="first-semester.html">Academic Calendar</a>
             <a href="first-semester.html">Course Materials</a>
         </div>
@@ -725,6 +725,24 @@
 
     const U = window.FUTA_UTILS;
     const S = window.FUTA_STORAGE;
+
+    // ---------- ACTIVE SESSION (dynamic, session-agnostic) ----------
+    async function loadActiveSession() {
+        let label = 'Current Session';
+        try {
+            const res = await DB.Sessions.getActive();
+            if (res.ok && res.data && res.data.label) {
+                label = res.data.label;
+            }
+        } catch (e) {
+            console.warn('[Session] Could not fetch active session:', e);
+        }
+        document.querySelectorAll('[data-session-label]').forEach(el => {
+            el.textContent = label;
+        });
+        // Cache for other pages to reuse
+        try { S.set('futa_active_session_label', label); } catch {}
+    }
 
     // ---------- LIVE STATS ----------
     async function loadStats() {
@@ -898,14 +916,10 @@
         if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         wireEvents();
+        loadActiveSession();
         loadStats();
         loadAnnouncement();
         loadNotifications();
-
-        // If user clicked "Glossary" card, forward to first-semester and open glossary page
-        if (sessionStorage.getItem('futa_open_glossary') === '1') {
-            sessionStorage.removeItem('futa_open_glossary');
-        }
 
         if (window.FUTA_CONFIG?.debug) console.log('[Landing] Boot complete');
     });
