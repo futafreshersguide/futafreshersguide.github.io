@@ -407,4 +407,469 @@
         async upcoming(limit = 5) {
             const today = new Date().toISOString().slice(0, 10);
             return query(CONFIG.tables.calendar,
-               
+                sb().from(CONFIG.tables.calendar)
+                    .select('*').gte('event_date', today)
+                    .order('event_date', { ascending: true }).limit(limit));
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.calendar,
+                sb().from(CONFIG.tables.calendar).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.calendar,
+                sb().from(CONFIG.tables.calendar).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.calendar,
+                sb().from(CONFIG.tables.calendar).delete().eq('id', id));
+        }
+    };
+
+    // ---------- SETTINGS ----------
+    const Settings = {
+        async get(key) {
+            const res = await query(CONFIG.tables.settings,
+                sb().from(CONFIG.tables.settings).select('*').eq('key', key).maybeSingle());
+            return res.ok && res.data ? res.data.value : null;
+        },
+
+        async getAll() {
+            const res = await query(CONFIG.tables.settings,
+                sb().from(CONFIG.tables.settings).select('*'));
+            if (!res.ok) return {};
+            return (res.data || []).reduce((acc, row) => {
+                acc[row.key] = row.value;
+                return acc;
+            }, {});
+        },
+
+        async set(key, value) {
+            return query(CONFIG.tables.settings,
+                sb().from(CONFIG.tables.settings)
+                    .upsert({ key, value, updated_at: new Date().toISOString() })
+                    .select().single());
+        }
+    };
+
+    // ---------- CONTENT BLOCKS ----------
+    const Content = {
+        async getPage(page) {
+            const res = await query(CONFIG.tables.content,
+                sb().rpc('get_page_content', { p_page: page }), { silent: true });
+            if (!res.ok) return {};
+            return (res.data || []).reduce((acc, row) => {
+                acc[row.key] = row.value;
+                return acc;
+            }, {});
+        },
+
+        async listAll({ page = '', category = '', search = '' } = {}) {
+            let b = sb().from(CONFIG.tables.content)
+                .select('*')
+                .order('page').order('category').order('display_order');
+            if (page) b = b.eq('page', page);
+            if (category) b = b.eq('category', category);
+            if (search) b = b.or(`key.ilike.%${search}%,label.ilike.%${search}%,description.ilike.%${search}%`);
+            return query(CONFIG.tables.content, b);
+        },
+
+        async update(key, value, adminId) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content)
+                    .update({ value, updated_by: adminId, updated_at: new Date().toISOString() })
+                    .eq('key', key).select().single());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content).insert(payload).select().single());
+        },
+
+        async remove(key) {
+            return query(CONFIG.tables.content,
+                sb().from(CONFIG.tables.content).delete().eq('key', key));
+        }
+    };
+
+    // ---------- NOTIFICATIONS ----------
+    const Notifications = {
+        async listActive({ audience = 'all' } = {}) {
+            const now = new Date().toISOString();
+            let b = sb().from(CONFIG.tables.notifications).select('*')
+                .eq('is_active', true)
+                .lte('publish_at', now)
+                .or(`expires_at.is.null,expires_at.gt.${now}`);
+            if (audience && audience !== 'all') {
+                b = b.in('target_audience', ['all', audience]);
+            }
+            b = b.order('is_pinned', { ascending: false })
+                 .order('priority', { ascending: true })
+                 .order('publish_at', { ascending: false });
+            return query(CONFIG.tables.notifications, b, { silent: true });
+        },
+
+        async listAll({ search = '', onlyActive = false } = {}) {
+            let b = sb().from(CONFIG.tables.notifications).select('*');
+            if (onlyActive) b = b.eq('is_active', true);
+            if (search) b = b.or(`title.ilike.%${search}%,message.ilike.%${search}%`);
+            b = b.order('is_pinned', { ascending: false })
+                 .order('created_at', { ascending: false });
+            return query(CONFIG.tables.notifications, b);
+        },
+
+        async create(payload, adminId) {
+            const row = {
+                title: payload.title,
+                message: payload.message,
+                type: payload.type || 'info',
+                priority: payload.priority || 5,
+                target_audience: payload.target_audience || 'all',
+                is_dismissible: payload.is_dismissible !== false,
+                is_pinned: payload.is_pinned === true,
+                is_active: payload.is_active !== false,
+                publish_at: payload.publish_at || new Date().toISOString(),
+                expires_at: payload.expires_at || null,
+                link_url: payload.link_url || null,
+                link_label: payload.link_label || null,
+                created_by: adminId
+            };
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).insert(row).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).update(payload).eq('id', id).select().single());
+        },
+
+        async toggleActive(id, active) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).update({ is_active: active }).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.notifications,
+                sb().from(CONFIG.tables.notifications).delete().eq('id', id));
+        },
+
+        async logRead(notificationId, profileId, dismissed = false) {
+            return query(CONFIG.tables.notifReads,
+                sb().from(CONFIG.tables.notifReads).insert({
+                    notification_id: notificationId,
+                    profile_id: profileId,
+                    dismissed
+                }), { silent: true });
+        },
+
+        async stats() {
+            const [total, active, pinned] = await Promise.all([
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }), { silent: true }),
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }).eq('is_active', true), { silent: true }),
+                query(CONFIG.tables.notifications, sb().from(CONFIG.tables.notifications).select('*', { count: 'exact', head: true }).eq('is_pinned', true), { silent: true })
+            ]);
+            return { total: total.data ?? 0, active: active.data ?? 0, pinned: pinned.data ?? 0 };
+        }
+    };
+
+    // ---------- SESSIONS ----------
+    const Sessions = {
+        async listAll() {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).select('*').order('start_date', { ascending: false }));
+        },
+
+        async getActive() {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).select('*').eq('is_active', true).maybeSingle());
+        },
+
+        async setActive(id) {
+            await query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update({ is_active: false })
+                    .neq('id', '00000000-0000-0000-0000-000000000000'),
+                { silent: true });
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update({ is_active: true }).eq('id', id).select().single());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.sessions,
+                sb().from(CONFIG.tables.sessions).delete().eq('id', id));
+        }
+    };
+
+    // ---------- ACTIVITY ----------
+    const Activity = {
+        async list({ entityType = '', action = '', search = '', limit = 200, offset = 0 } = {}) {
+            let b = sb().from(CONFIG.tables.activity).select('*', { count: 'exact' });
+            if (entityType) b = b.eq('entity_type', entityType);
+            if (action) b = b.eq('action', action);
+            if (search) b = b.or(`entity_label.ilike.%${search}%,admin_email.ilike.%${search}%`);
+            b = b.order('created_at', { ascending: false }).range(offset, offset + limit - 1);
+            return query(CONFIG.tables.activity, b);
+        },
+
+        async log(payload) {
+            return query(CONFIG.tables.activity,
+                sb().from(CONFIG.tables.activity).insert(payload), { silent: true });
+        }
+    };
+
+    // ---------- MANUALS ----------
+    const Manuals = {
+        async list({ session = '2025/2026', onlyAvailable = true } = {}) {
+            let b = sb().from(CONFIG.tables.manuals)
+                .select('*')
+                .eq('session', session)
+                .order('display_order', { ascending: true });
+            if (onlyAvailable) b = b.eq('is_available', true);
+            return query(CONFIG.tables.manuals, b, { silent: true });
+        },
+
+        async getByCourse(courseCode, session = '2025/2026') {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals)
+                    .select('*')
+                    .eq('course_code', courseCode)
+                    .eq('session', session)
+                    .maybeSingle());
+        },
+
+        async stats(session = '2025/2026') {
+            const res = await query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals)
+                    .select('price, is_free')
+                    .eq('session', session)
+                    .eq('is_available', true),
+                { silent: true });
+            if (!res.ok || !res.data) return { total: 0, totalCost: 0, freeCount: 0 };
+            const items = res.data;
+            const totalCost = items.reduce((sum, m) => sum + (m.is_free ? 0 : (m.price || 0)), 0);
+            const freeCount = items.filter(m => m.is_free).length;
+            return {
+                total: items.length,
+                totalCost,
+                freeCount
+            };
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.manuals,
+                sb().from(CONFIG.tables.manuals).delete().eq('id', id));
+        }
+    };
+
+    // ---------- MINDSET CONTENT ----------
+    const Mindset = {
+        async list({ onlyActive = true } = {}) {
+            let b = sb().from(CONFIG.tables.mindset)
+                .select('*')
+                .order('display_order', { ascending: true });
+            if (onlyActive) b = b.eq('is_active', true);
+            return query(CONFIG.tables.mindset, b, { silent: true });
+        },
+
+        async get(key) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset)
+                    .select('*')
+                    .eq('key', key)
+                    .maybeSingle());
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.mindset,
+                sb().from(CONFIG.tables.mindset).delete().eq('id', id));
+        }
+    };
+
+    // ---------- GLOSSARY ----------
+    const Glossary = {
+        async list({ category = '', onlyActive = true, search = '' } = {}) {
+            let b = sb().from(CONFIG.tables.glossary)
+                .select('*')
+                .order('category')
+                .order('display_order', { ascending: true });
+            if (onlyActive) b = b.eq('is_active', true);
+            if (category) b = b.eq('category', category);
+            if (search) b = b.or(`term.ilike.%${search}%,definition.ilike.%${search}%`);
+            return query(CONFIG.tables.glossary, b, { silent: true });
+        },
+
+        async get(term) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary)
+                    .select('*')
+                    .eq('term', term)
+                    .maybeSingle());
+        },
+
+        async categories() {
+            const res = await query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary)
+                    .select('category')
+                    .eq('is_active', true),
+                { silent: true });
+            if (!res.ok) return [];
+            return [...new Set((res.data || []).map(r => r.category).filter(Boolean))].sort();
+        },
+
+        async create(payload) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).insert(payload).select().single());
+        },
+
+        async update(id, payload) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).update(payload).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.glossary,
+                sb().from(CONFIG.tables.glossary).delete().eq('id', id));
+        }
+    };
+
+    // ---------- TUTORS (Genius Point Academy) ----------
+    const Tutors = {
+        // Public list (active only, ordered)
+        async list({ onlyActive = true } = {}) {
+            let b = sb().from(CONFIG.tables.tutors).select('*');
+            if (onlyActive) b = b.eq('is_active', true);
+            b = b.order('display_order', { ascending: true });
+            return query(CONFIG.tables.tutors, b, { silent: true });
+        },
+
+        async get(id) {
+            return query(CONFIG.tables.tutors,
+                sb().from(CONFIG.tables.tutors).select('*').eq('id', id).maybeSingle());
+        },
+
+        async create(payload) {
+            const row = {
+                alias: payload.alias,
+                full_name: payload.full_name,
+                whatsapp: Utils.normaliseWhatsApp(payload.whatsapp),
+                role: payload.role || null,
+                bio: payload.bio || null,
+                avatar_icon: payload.avatar_icon || 'user-graduate',
+                wa_template: payload.wa_template || null,
+                display_order: payload.display_order || 0,
+                is_active: payload.is_active !== false
+            };
+            return query(CONFIG.tables.tutors,
+                sb().from(CONFIG.tables.tutors).insert(row).select().single());
+        },
+
+        async update(id, payload) {
+            const row = {};
+            if (payload.alias !== undefined) row.alias = payload.alias;
+            if (payload.full_name !== undefined) row.full_name = payload.full_name;
+            if (payload.whatsapp !== undefined) row.whatsapp = Utils.normaliseWhatsApp(payload.whatsapp);
+            if (payload.role !== undefined) row.role = payload.role;
+            if (payload.bio !== undefined) row.bio = payload.bio;
+            if (payload.avatar_icon !== undefined) row.avatar_icon = payload.avatar_icon;
+            if (payload.wa_template !== undefined) row.wa_template = payload.wa_template;
+            if (payload.display_order !== undefined) row.display_order = payload.display_order;
+            if (payload.is_active !== undefined) row.is_active = payload.is_active;
+            return query(CONFIG.tables.tutors,
+                sb().from(CONFIG.tables.tutors).update(row).eq('id', id).select().single());
+        },
+
+        async remove(id) {
+            return query(CONFIG.tables.tutors,
+                sb().from(CONFIG.tables.tutors).delete().eq('id', id));
+        },
+
+        // Build a wa.me URL for a tutor, prefilled with the visitor's profile
+        buildWhatsAppLink(tutor, profile) {
+            if (!tutor || !tutor.whatsapp) return null;
+            const p = profile || {};
+            const vars = {
+                alias: tutor.alias || '',
+                student_name: p.full_name || 'a FUTA student',
+                level: p.level || '100L',
+                department: p.department || 'my department'
+            };
+            const template = tutor.wa_template ||
+                'Hello {alias}! I\'m {student_name}, a {level} student in {department}. I found you through the FUTA Survival Guide.';
+            const message = Utils.fillTemplate(template, vars);
+            const phone = Utils.normaliseWhatsApp(tutor.whatsapp);
+            return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        }
+    };
+
+    // ---------- REALTIME ----------
+    function subscribe(table, callback, filter = null) {
+        try {
+            const channelName = `realtime:${table}:${Date.now()}`;
+            const opts = { event: '*', schema: 'public', table };
+            if (filter) opts.filter = filter;
+            return sb()
+                .channel(channelName)
+                .on('postgres_changes', opts, (payload) => callback(payload))
+                .subscribe();
+        } catch (err) {
+            console.error('[Realtime] Subscribe failed:', err);
+            return null;
+        }
+    }
+
+    function unsubscribe(channel) {
+        try { if (channel) sb().removeChannel(channel); } catch {}
+    }
+
+    async function healthCheck() {
+        try {
+            const { error } = await sb().from(CONFIG.tables.settings).select('key').limit(1);
+            return { ok: !error, error: error?.message };
+        } catch (err) {
+            return { ok: false, error: err.message };
+        }
+    }
+
+    // ---------- EXPOSE ----------
+    global.DB = {
+        Auth, Profiles, Submissions, Businesses, Feedback, Calculator,
+        Courses, Calendar, Settings,
+        Content, Notifications, Sessions, Activity,
+        Manuals, Mindset, Glossary, Tutors,
+        subscribe, unsubscribe, healthCheck,
+        _query: query
+    };
+
+    if (CONFIG.debug) console.log('[FUTA DB] Loaded v' + CONFIG.version);
+})(window);
