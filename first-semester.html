@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FUTA Freshers' Survival Guide | Official Resource Hub</title>
+    <title>FUTA First Semester Guide</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -388,7 +388,7 @@
 
 <section id="welcome" class="compact-welcome">
     <div class="compact-card">
-        <h1>FUTA Survival Guide</h1>
+        <h1>FUTA First Semester Guide</h1>
 
         <a href="calculator.html" class="quick-gpa-btn"><i class="fas fa-calculator"></i> Aggregate & GPA Calculator</a>
         <a href="marketplace.html" class="quick-mkt-btn"><i class="fas fa-store"></i> Marketplace</a>
@@ -483,7 +483,7 @@
 
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-    <h3>FUTA Survival Guide</h3>
+    <h3>First Semester Guide</h3>
     <ul class="sidebar-links">
         <li><a href="#" data-page="home" class="active">🏠 Home</a></li>
         <li><a href="#" data-page="message">✉️ Welcome Message</a></li>
@@ -1562,26 +1562,18 @@
     let userData = {};
     let pageContent = {};
 
-    window.contactGeniusPoint = function () {
-        const p = S.get('futa_profile') || {};
-        const name = p.full_name || 'a FUTA Student';
-        const dept = p.department || '';
-        const level = p.level || '';
+   window.contactGeniusPoint = function () {
+    // Opens the 3-tutor chooser modal (shared across pages)
+    if (window._gpOpenModal) { window._gpOpenModal(); return; }
 
-        let msg = `Hello Genius Point Academy 👋\n\n`;
-        msg += `I'm interested in your tutoring classes for 100L students.\n`;
-        msg += `I saw this on the FUTA Survival Guide.\n\n`;
-        msg += `I'd like to talk about:\n`;
-        msg += `• Building a solid first-year foundation\n`;
-        msg += `• Improving my GPA\n`;
-        msg += `• Getting connected with my departmental seniors\n\n`;
-        msg += `Name: ${name}\n`;
-        if (dept) msg += `Department: ${dept}\n`;
-        if (level) msg += `Level: ${level}\n`;
-
-        const encoded = encodeURIComponent(msg);
-        window.open(`https://wa.me/2347050376975?text=${encoded}`, '_blank');
-    };
+    // Fallback if modal script hasn't loaded yet
+    const p = S.get('futa_profile') || {};
+    const name = p.full_name || 'a FUTA Student';
+    const dept = p.department || '';
+    const level = p.level || '';
+    let msg = `Hello Genius Point Academy 👋\n\nI'm ${name}${dept ? ' (' + dept + ')' : ''}${level ? ', ' + level : ''}. I'd like to know more about your tutoring classes.\n\n(Sent from the FUTA Survival Guide)`;
+    window.open(`https://wa.me/2347050376975?text=${encodeURIComponent(msg)}`, '_blank');
+};
 
     function showWelcomeToast() {
         if (S.get('futa_welcomed') === 'true') return;
@@ -2302,6 +2294,89 @@
     }
 
     document.addEventListener('DOMContentLoaded', boot);
+    // ---------- Genius Point tutor chooser (v2.3) ----------
+    async function openGpTutorModal() {
+        let overlay = document.getElementById('gpTutorModal');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'gpTutorModal';
+            overlay.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,0.65);display:none;align-items:center;justify-content:center;z-index:3000;padding:20px;backdrop-filter:blur(4px);';
+            overlay.innerHTML = `
+                <div style="background:white;border-radius:20px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,0.35);">
+                    <div style="padding:28px;background:linear-gradient(135deg,#b45309 0%,#f59e0b 100%);color:white;border-radius:20px 20px 0 0;position:relative;">
+                        <button id="gpModalClose" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.2);color:white;border:none;width:34px;height:34px;border-radius:50%;font-size:1.1rem;cursor:pointer;">&times;</button>
+                        <h3 style="font-size:1.3rem;font-weight:900;margin-bottom:6px;">🎓 Genius Point Academy</h3>
+                        <p style="font-size:0.9rem;opacity:0.92;">Pick a tutor below. Your message opens in WhatsApp pre-filled.</p>
+                    </div>
+                    <div id="gpTutorList" style="padding:24px 28px 28px;">
+                        <div style="text-align:center;padding:30px;color:#6c757d;"><i class="fas fa-circle-notch fa-spin" style="margin-right:8px;"></i> Loading tutors...</div>
+                    </div>
+                </div>`;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeGpTutorModal();
+            });
+            document.getElementById('gpModalClose').addEventListener('click', closeGpTutorModal);
+        }
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        const list = document.getElementById('gpTutorList');
+        try {
+            const res = await DB.Tutors.list();
+            const tutors = (res.ok && res.data) ? res.data : [];
+            if (!tutors.length) {
+                list.innerHTML = '<div style="text-align:center;padding:24px;color:#6c757d;">Tutor contacts are being updated. Please check back shortly.</div>';
+                return;
+            }
+            const profile = S.get('futa_profile') || S.get('futa_profile_2nd') || {};
+            list.innerHTML = '';
+            tutors.forEach(t => {
+                const href = DB.Tutors.buildWhatsAppLink(t, profile);
+                const a = document.createElement('a');
+                a.href = href || '#';
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.style.cssText = 'display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;background:#f8f9fa;border:1px solid #e9ecef;text-decoration:none;color:inherit;margin-bottom:12px;transition:0.25s;';
+                a.innerHTML = `
+                    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#b45309 0%,#f59e0b 100%);color:white;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">
+                        <i class="fas fa-${t.avatar_icon || 'user-graduate'}"></i>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-weight:800;color:#003366;font-size:1rem;">${t.alias} <span style="font-size:0.7rem;color:#adb5bd;text-transform:uppercase;margin-left:6px;">${t.full_name}</span></div>
+                        ${t.role ? `<div style="font-size:0.8rem;color:#6c757d;margin-top:2px;">${t.role}</div>` : ''}
+                        ${t.bio ? `<div style="font-size:0.78rem;color:#adb5bd;margin-top:3px;">${t.bio}</div>` : ''}
+                    </div>
+                    <i class="fab fa-whatsapp" style="color:#25D366;font-size:1.5rem;"></i>
+                `;
+                list.appendChild(a);
+            });
+        } catch (err) {
+            list.innerHTML = '<div style="text-align:center;padding:24px;color:#6c757d;">Could not load tutors. Please try again.</div>';
+        }
+    }
+
+    function closeGpTutorModal() {
+        const overlay = document.getElementById('gpTutorModal');
+        if (overlay) overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    window._gpOpenModal = openGpTutorModal;
+
+    // ---------- Dynamic session label (session-agnostic) ----------
+    async function loadActiveSession() {
+        let label = 'Current Session';
+        try {
+            const res = await DB.Sessions.getActive();
+            if (res.ok && res.data && res.data.label) label = res.data.label;
+        } catch (e) {}
+        document.querySelectorAll('[data-session-label]').forEach(el => {
+            el.textContent = label;
+        });
+    }
+    // Call once on boot
+    loadActiveSession();
 })();
 </script>
 </body>
