@@ -999,136 +999,111 @@
 
             openResultModal(payload);
         };
+// ============================================================
+// GPA
+// ============================================================
+window.calculateGPAAndShowPopup = function () {
+    const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
+    const rows = document.querySelectorAll('.gpa-row');
+    let tlu = 0, tcp = 0;
+    let courseDetails = [];
 
-        // ============================================================
-        // GPA
-        // ============================================================
-        window.calculateGPAAndShowPopup = function () {
-            const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
-            const rows = document.querySelectorAll('.gpa-row');
-            let tlu = 0, tcp = 0;
-            let courseDetails = [];
+    rows.forEach(row => {
+        // Read specifically by class to avoid mobile nesting issues
+        const courseInput = row.querySelector('input[type="text"]');
+        const unitInput = row.querySelector('.gpa-unit');
+        const gradeSelect = row.querySelector('.gpa-grade');
 
-            rows.forEach(row => {
-                const inputs = row.querySelectorAll('input, select');
-                const course = inputs[0].value.trim();
-                const unit = parseFloat(inputs[1].value);
-                const grade = parseFloat(inputs[2].value);
-                const gradeLabel = inputs[2].options[inputs[2].selectedIndex].text;
+        if (!courseInput || !unitInput || !gradeSelect) return;
 
-                if (unit > 0 && grade >= 0) {
-                    const cp = unit * grade;
-                    tlu += unit;
-                    tcp += cp;
-                    courseDetails.push({ course: course || '—', unit, grade: gradeLabel, cp });
-                }
+        const course = courseInput.value.trim();
+        const unit = parseFloat(unitInput.value);
+        const grade = parseFloat(gradeSelect.value);
+        const gradeLabel = gradeSelect.options[gradeSelect.selectedIndex].text;
+
+        if (unit > 0 && grade >= 0) {
+            const cp = unit * grade;
+            tlu += unit;
+            tcp += cp;
+            courseDetails.push({ course: course || '—', unit, grade: gradeLabel, cp });
+        }
+    });
+
+    if (courseDetails.length === 0) {
+        U.toast('Please enter at least one course with units and grade', 'warning');
+        return;
+    }
+
+    const gpa = tlu > 0 ? (tcp / tlu) : 0;
+    track('calculation', 'gpa', fmt(gpa));
+
+    const payload = {
+        type: 'gpa',
+        studentName,
+        title: 'Semester GPA',
+        bigValue: fmt(gpa),
+        bigSuffix: 'out of 5.00',
+        result: gpa,
+        breakdownHTML: buildBreakdownHTML('gpa', { tlu, tcp, courseDetails }),
+        rawData: { tlu, tcp, courseDetails }
+    };
+
+    openResultModal(payload);
+};
+
+// ============================================================
+// CGPA
+// ============================================================
+window.calculateCGPAAndShowPopup = function () {
+    const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
+    const rows = document.querySelectorAll('.cgpa-row');
+    let totalTLU = 0, totalTCP = 0;
+    let semesterDetails = [];
+
+    rows.forEach(row => {
+        // Read specifically by class
+        const semInput = row.querySelector('input[type="text"]');
+        const tcpInput = row.querySelector('.cgpa-tcp');
+        const tluInput = row.querySelector('.cgpa-tlu');
+
+        if (!semInput || !tcpInput || !tluInput) return;
+
+        const semester = semInput.value.trim();
+        const tcp = parseFloat(tcpInput.value);
+        const tlu = parseFloat(tluInput.value);
+
+        if (tcp >= 0 && tlu > 0 && !isNaN(tcp)) {
+            totalTCP += tcp;
+            totalTLU += tlu;
+            semesterDetails.push({
+                semester: semester || '—',
+                tcp, tlu,
+                gpa: fmt(tcp / tlu)
             });
+        }
+    });
 
-            if (courseDetails.length === 0) {
-                U.toast('Please enter at least one course with units and grade', 'warning');
-                return;
-            }
+    if (semesterDetails.length === 0) {
+        U.toast('Please enter at least one semester (TCP + TLU)', 'warning');
+        return;
+    }
 
-            const gpa = tlu > 0 ? (tcp / tlu) : 0;
-            track('calculation', 'gpa', fmt(gpa));
+    const cgpa = totalTLU > 0 ? (totalTCP / totalTLU) : 0;
+    track('calculation', 'cgpa', fmt(cgpa));
 
-            const payload = {
-                type: 'gpa',
-                studentName,
-                title: 'Semester GPA',
-                bigValue: fmt(gpa),
-                bigSuffix: 'out of 5.00',
-                result: gpa,
-                breakdownHTML: buildBreakdownHTML('gpa', { tlu, tcp, courseDetails }),
-                rawData: { tlu, tcp, courseDetails }
-            };
+    const payload = {
+        type: 'cgpa',
+        studentName,
+        title: 'Cumulative CGPA',
+        bigValue: fmt(cgpa),
+        bigSuffix: 'out of 5.00',
+        result: cgpa,
+        breakdownHTML: buildBreakdownHTML('cgpa', { totalTLU, totalTCP, semesterDetails }),
+        rawData: { totalTLU, totalTCP, semesterDetails }
+    };
 
-            openResultModal(payload);
-        };
-
-        // ============================================================
-        // CGPA
-        // ============================================================
-        window.calculateCGPAAndShowPopup = function () {
-            const studentName = document.getElementById('student-name').value.trim() || 'Anonymous Student';
-            const rows = document.querySelectorAll('.cgpa-row');
-            let totalTLU = 0, totalTCP = 0;
-            let semesterDetails = [];
-
-            rows.forEach(row => {
-                const inputs = row.querySelectorAll('input, select');
-                const semester = inputs[0].value.trim();
-                const tcp = parseFloat(inputs[1].value);
-                const tlu = parseFloat(inputs[2].value);
-
-                if (tcp >= 0 && tlu > 0 && !isNaN(tcp)) {
-                    totalTCP += tcp;
-                    totalTLU += tlu;
-                    semesterDetails.push({
-                        semester: semester || '—',
-                        tcp, tlu,
-                        gpa: fmt(tcp / tlu)
-                    });
-                }
-            });
-
-            if (semesterDetails.length === 0) {
-                U.toast('Please enter at least one semester (TCP + TLU)', 'warning');
-                return;
-            }
-
-            const cgpa = totalTLU > 0 ? (totalTCP / totalTLU) : 0;
-            track('calculation', 'cgpa', fmt(cgpa));
-
-            const payload = {
-                type: 'cgpa',
-                studentName,
-                title: 'Cumulative CGPA',
-                bigValue: fmt(cgpa),
-                bigSuffix: 'out of 5.00',
-                result: cgpa,
-                breakdownHTML: buildBreakdownHTML('cgpa', { totalTLU, totalTCP, semesterDetails }),
-                rawData: { totalTLU, totalTCP, semesterDetails }
-            };
-
-            openResultModal(payload);
-        };
-
-        // ============================================================
-        // ROW BUILDERS
-        // ============================================================
-        window.addGPARow = function () {
-            const container = document.getElementById('gpa-rows');
-            const row = document.createElement('div');
-            row.className = "flex gap-3 gpa-row row-stack mb-2";
-            row.innerHTML = `
-                <input type="text" placeholder="Course Code" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <div class="flex gap-3 flex-1">
-                    <input type="number" placeholder="Units" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm gpa-unit" min="1" max="6">
-                    <select class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm gpa-grade bg-white">
-                        <option value="-1">Grade</option>
-                        <option value="5">A</option><option value="4">B</option>
-                        <option value="3">C</option><option value="2">D</option>
-                        <option value="1">E</option><option value="0">F</option>
-                    </select>
-                </div>
-            `;
-            container.appendChild(row);
-        };
-
-        window.addCGPARow = function () {
-            const container = document.getElementById('cgpa-rows');
-            const row = document.createElement('div');
-            row.className = "flex gap-3 cgpa-row row-stack mb-2";
-            row.innerHTML = `
-                <input type="text" placeholder="Level/Semester" class="border border-slate-300 rounded-lg p-3 flex-2 w-1/2 outline-none focus:border-blue-500 text-sm">
-                <div class="flex gap-3 flex-1">
-                    <input type="number" placeholder="TCP" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm cgpa-tcp">
-                    <input type="number" placeholder="TLU" class="border border-slate-300 rounded-lg p-3 w-1/2 outline-none focus:border-blue-500 text-sm cgpa-tlu">
-                </div>
-            `;
-            container.appendChild(row);
-        };
+    openResultModal(payload);
+};
 
         // ============================================================
         // NOTIFICATIONS
