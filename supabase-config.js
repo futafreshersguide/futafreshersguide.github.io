@@ -1,7 +1,7 @@
 // ============================================================
 // FUTA 100L SURVIVAL GUIDE — SUPABASE CONFIGURATION
 // File: supabase-config.js
-// Version: 2.3.0
+// Version: 2.3.1 (Fixed Toast Crash)
 // Load this BEFORE db.js on every page
 // ============================================================
 
@@ -18,7 +18,7 @@
         supabaseAnonKey: SUPABASE_ANON_KEY,
         formSubmitEmail: 'helpinghandshallneverfall@gmail.com',
         adminEmail: 'helpinghandshallneverfall@gmail.com',
-        version: '2.3.0',
+        version: '2.3.1',
         sessionKey: 'futa_guide_session',
         profileCacheKey: 'futa_guide_admin_profile',
         debug: false,
@@ -40,7 +40,7 @@
             manuals: 'manuals',
             mindset: 'mindset_content',
             glossary: 'glossary',
-            tutors: 'tutors'                    // ⬅️ NEW
+            tutors: 'tutors'
         }
     };
 
@@ -162,22 +162,18 @@
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         },
 
-        // Normalise a phone number to WhatsApp wa.me format (digits only, with country code)
         normaliseWhatsApp(phone) {
             if (!phone) return '';
             let digits = String(phone).replace(/\D/g, '');
-            // 0705... → 234705...
             if (digits.length === 11 && digits.startsWith('0')) {
                 digits = '234' + digits.slice(1);
             }
-            // 705... (10 digits, no leading 0) → 234705...
             if (digits.length === 10 && !digits.startsWith('234')) {
                 digits = '234' + digits;
             }
             return digits;
         },
 
-        // Fill a message template with placeholder values
         fillTemplate(template, vars) {
             if (!template) return '';
             return template.replace(/\{(\w+)\}/g, (m, key) =>
@@ -185,6 +181,7 @@
             );
         },
 
+        // ✅ FIXED TOAST (No more AbortError)
         toast(message, type = 'info', duration = 3000) {
             const containerId = 'futa-toast-container';
             let container = document.getElementById(containerId);
@@ -193,6 +190,13 @@
                 container.id = containerId;
                 container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;pointer-events:none;';
                 document.body.appendChild(container);
+                
+                if (!document.getElementById('futa-toast-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'futa-toast-style';
+                    style.innerHTML = `@keyframes futaToastIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }`;
+                    document.head.appendChild(style);
+                }
             }
             const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
             const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
@@ -204,18 +208,14 @@
                 font-family:'Segoe UI',sans-serif; font-size:0.95rem; font-weight:600;
                 display:flex; align-items:center; gap:10px;
                 min-width:240px; max-width:340px; pointer-events:auto;
-                opacity:0; transform:translateX(40px);
-                transition:all 0.3s ease;
+                opacity:0; animation: futaToastIn 0.3s ease forwards;
             `;
             el.innerHTML = `<span style="font-size:1.1rem;">${icons[type] || icons.info}</span><span>${Utils.escapeHtml(message)}</span>`;
             container.appendChild(el);
-            requestAnimationFrame(() => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateX(0)';
-            });
+            
             setTimeout(() => {
+                el.style.transition = 'opacity 0.3s ease';
                 el.style.opacity = '0';
-                el.style.transform = 'translateX(40px)';
                 setTimeout(() => el.remove(), 300);
             }, duration);
         }
