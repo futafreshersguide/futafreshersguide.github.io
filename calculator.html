@@ -594,47 +594,58 @@
     (function () {
         'use strict';
 
-        const U = window.FUTA_UTILS;
-        const S = window.FUTA_STORAGE;
+    // 1. ADD FALLBACKS FOR MISSING UTILS & STORAGE
+    const U = window.FUTA_UTILS || {
+        toast: (msg, type) => alert(msg), // Fallback to native alert if toast is missing
+        escapeHtml: (str) => String(str).replace(/[&<>'"]/g, char => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+        }[char] || char))
+    };
+    
+    const S = window.FUTA_STORAGE || {
+        get: (key) => null,
+        set: (key, val) => {}
+    };
 
-        // ---------- HAMBURGER ----------
-        document.getElementById('menuBtn').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('show');
-        });
+    // ---------- HAMBURGER ----------
+    document.getElementById('menuBtn').addEventListener('click', () => {
+        document.getElementById('navLinks').classList.toggle('show');
+    });
 
-        // ---------- TAB SWITCHING ----------
-        window.switchTab = function(tabId) {
-            // Hide all panels
-            document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
-            // Deactivate all tabs
-            document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
-            
-            // Show selected panel and tab
-            document.getElementById('panel-' + tabId).classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('active');
+    // ---------- TAB SWITCHING ----------
+    window.switchTab = function(tabId) {
+        document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+        
+        document.getElementById('panel-' + tabId).classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+    };
+
+    // ---------- DATA ----------
+    const olevelGrades = { "A1": 80, "B2": 72, "B3": 67, "C4": 62, "C5": 57, "C6": 52 };
+
+    // ---------- PROFILE HELPERS ----------
+    function getProfile() {
+        return S.get('futa_profile_2nd') || S.get('futa_profile') || {};
+    }
+
+    function getDeptLevel() {
+        const p = getProfile();
+        return {
+            department: p.department || 'N/A',
+            level: p.level || 'N/A'
         };
+    }
 
-        // ---------- DATA ----------
-        const olevelGrades = { "A1": 80, "B2": 72, "B3": 67, "C4": 62, "C5": 57, "C6": 52 };
-
-        // ---------- PROFILE HELPERS ----------
-        function getProfile() {
-            return S.get('futa_profile_2nd') || S.get('futa_profile') || {};
-        }
-
-        function getDeptLevel() {
-            const p = getProfile();
-            return {
-                department: p.department || 'N/A',
-                level: p.level || 'N/A'
-            };
-        }
-
-        // ---------- TRACKING ----------
-        function track(action, calculationType = null, resultValue = null) {
+    // ---------- TRACKING (WRAPPED IN TRY/CATCH) ----------
+    function track(action, calculationType = null, resultValue = null) {
+        try {
+            // Abort silently if DB isn't loaded so the calculator doesn't break
+            if (!window.DB || !window.DB.Calculator) return; 
+            
             const p = getProfile();
             const { department, level } = getDeptLevel();
-            DB.Calculator.log({
+            window.DB.Calculator.log({
                 name: p.full_name || 'Guest',
                 department,
                 level,
@@ -643,13 +654,16 @@
                 result_value: resultValue,
                 page_source: 'calculator'
             });
+        } catch (e) {
+            console.warn('[Tracking Skipped]', e);
         }
+    }
 
-        // ---------- HELPERS ----------
-        function fmt(n, dp = 2) {
-            return Number(n).toFixed(dp);
-        }
-
+    // ---------- HELPERS ----------
+    function fmt(n, dp = 2) {
+        return Number(n).toFixed(dp);
+    }
+    
         // ---------- MODAL ----------
         function openResultModal(payload) {
             const existing = document.getElementById('resultModal');
