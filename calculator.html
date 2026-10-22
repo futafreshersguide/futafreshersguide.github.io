@@ -947,12 +947,11 @@
                 document.getElementById('jamb-score').focus();
                 return;
             }
-            if (jamb === 0) {
-                U.toast('Please enter your JAMB score', 'warning');
+                       if (jamb === 0) {
+                alert('Please enter your JAMB score');
                 document.getElementById('jamb-score').focus();
                 return;
             }
-
             const rows = document.querySelectorAll('.olevel-row');
             let sumOLevel = 0;
             let subjectsDetails = [];
@@ -975,11 +974,10 @@
                 }
             });
 
-            if (!anyGrade) {
-                U.toast('Please enter at least one O\'Level grade', 'warning');
+                       if (!anyGrade) {
+                alert('Please enter at least one O\'Level grade');
                 return;
             }
-
             const jambPoint = (jamb / 400) * 75;
             const oLevelPoint = (sumOLevel / 5) * 0.25;
             const total = jambPoint + oLevelPoint;
@@ -1032,7 +1030,7 @@
             });
 
             if (courseDetails.length === 0) {
-                U.toast('Please enter at least one course with units and grade', 'warning');
+                alert('Please enter at least one course with units and grade');
                 return;
             }
 
@@ -1085,7 +1083,7 @@
             });
 
             if (semesterDetails.length === 0) {
-                U.toast('Please enter at least one semester (TCP + TLU)', 'warning');
+                alert('Please enter at least one semester (TCP + TLU)');
                 return;
             }
 
